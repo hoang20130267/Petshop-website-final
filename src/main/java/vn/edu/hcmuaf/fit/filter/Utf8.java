@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit;
+package vn.edu.hcmuaf.fit.filter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
