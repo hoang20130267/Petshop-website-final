@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.beans;
 import java.io.Serializable;
 
 public class CustomerUser implements Serializable {
-    private int id;
+    private String id;
     private String username;
     private String pass;
     private boolean status;
@@ -16,7 +16,7 @@ public class CustomerUser implements Serializable {
     public CustomerUser() {
     }
 
-    public CustomerUser(int id, String username, String password, boolean status, String fullName, String email, String phone, String address, String avt) {
+    public CustomerUser(String id, String username, String password, boolean status, String fullName, String email, String phone, String address, String avt) {
         this.id = id;
         this.username = username;
         this.pass = password;
@@ -28,11 +28,11 @@ public class CustomerUser implements Serializable {
         this.avt = avt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
