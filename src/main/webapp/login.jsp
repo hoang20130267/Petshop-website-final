@@ -125,8 +125,9 @@
      <jsp:include page="layout/header.jsp"></jsp:include>
     <!-- Header Section End -->
 
+     <jsp:include page="Login/login.jsp" ></jsp:include>
 
-    <iframe src="Login/login.jsp" width="100%" height="100%" frameborder="0" > </iframe>
+<%--    <iframe src="Login/login.jsp" width="100%" height="100%" frameborder="0" > </iframe>--%>
       <!-- Footer Section Begin -->
      <jsp:include page="layout/footer.jsp"></jsp:include>
     <!-- Footer Section End -->
