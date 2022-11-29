@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx"><head>
     <meta charset="UTF-8">
@@ -121,71 +122,7 @@
       <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> LTW_nhom10@gmail.com</li>
-                                <li>Hệ thống cửa hàng thú cưng</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook" title="Our Facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram" title="Our Instagram"></i></a>
-                            </div>
-
-                            <div class="header__top__right__auth">
-                                <a href="login.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="index.jsp"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="index.jsp">Trang Chủ</a></li>
-                            <li><a href="all-products.jsp">Thú Cưng</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="products-dog.jsp">Chó</a></li>
-                                    <li><a href="products-cat.jsp">Mèo</a></li>
-                                    <li><a href="products-accessory.jsp">Phụ Kiện</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.jsp">Tin Tức</a></li>
-                            <li><a href="contact.jsp">Liên Hệ</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="./like-product.html"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
+    <jsp:include page="layout/header.jsp"></jsp:include>
     <!-- Header Section End -->
 
     <!-- Hero Section Begin -->
@@ -352,62 +289,7 @@
     <!-- Shoping Cart Section End -->
 
      <!-- Footer Section Begin -->
-     <footer class="footer spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="index.jsp"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Địa chỉ: TP.HCM, Việt Nam</li>
-                            <li>Điện thoại: +85 987.145.xxx</li>
-                            <li>Email: LTW_nhom10@gmail.com</li>
-                      </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                    <div class="footer__widget">
-                        <h6>Các liên kết hữu ích</h6>
-                        <ul>
-                            <li><a href="policy.jsp">Chính sách</a></li>
-                            <li><a href="#">Danh mục chó</a></li>
-                            <li><a href="#">Danh mục mèo</a></li>
-                            <li><a href="#">Danh mục phụ kiện</a></li>
-                            <li><a href="#">Tin tức</a></li>
-                            <li><a href="#">Liên hệ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer__widget">
-                        <h6>Tham gia cộng đồng yêu thú cưng </h6>
-                        <p>Để lại email để nhận được thông tin mới nhất về shop và thú cưng</p>
-                         <form action="#">
-                            <input type="text" placeholder="Nhập mail của bạn">
-                            <button type="submit" class="site-btn">Đăng ký</button>
-                        </form>
-                        <div class="footer__widget__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="footer__copyright">
-                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            &copy; Bản quyền trang web thuộc về <a href="" target="_blank">Pet shop </a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
-                        <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="layout/footer.jsp"></jsp:include>
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
