@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
+import vn.edu.hcmuaf.fit.services.Utils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +12,9 @@ public class CustomerUserDAO {
 
     public CustomerUserDAO(){
         users= JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from customer_user u inner join infor_user i on i.id_user = u.id where role=0")
+            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id where role=0")
                     .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
         });
-        System.out.println(users);
     }
 
     public boolean isExits(String username) {
@@ -28,7 +28,7 @@ public class CustomerUserDAO {
     public CustomerUser checkLogin(String username, String password) {
         CustomerUser cust = null;
         for (CustomerUser user : this.users) {
-            if (user.getUsername().equals(username) && user.getPass().equals(password)) {
+            if (user.getUsername().equals(username) && Utils.checkPass(user.getPassMaHoa(), Utils.maHoaMK(password))) {
                 cust = user;
                 return cust;
             }

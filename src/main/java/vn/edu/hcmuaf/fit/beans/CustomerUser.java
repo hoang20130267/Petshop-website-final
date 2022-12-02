@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class CustomerUser implements Serializable {
     private String id;
     private String username;
+    private String passMaHoa;
     private String pass;
     private boolean status;
     private String name;
@@ -16,9 +17,10 @@ public class CustomerUser implements Serializable {
     public CustomerUser() {
     }
 
-    public CustomerUser(String id, String username, String password, boolean status, String fullName, String email, String phone, String address, String avt) {
+    public CustomerUser(String id, String username, String passMaHoa, String password, boolean status, String fullName, String email, String phone, String address, String avt) {
         this.id = id;
         this.username = username;
+        this.passMaHoa = passMaHoa;
         this.pass = password;
         this.status = status;
         this.name = fullName;
@@ -98,6 +100,14 @@ public class CustomerUser implements Serializable {
 
     public void setAvt(String avt) {
         this.avt = avt;
+    }
+
+    public String getPassMaHoa() {
+        return passMaHoa;
+    }
+
+    public void setPassMaHoa(String passMaHoa) {
+        this.passMaHoa = passMaHoa;
     }
 
     @Override
