@@ -11,7 +11,7 @@ public class CustomerUserDAO {
 
     public CustomerUserDAO(){
         users= JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from customer_user u inner join infor_user i on i.id_user = u.id_user")
+            return handle.createQuery("select * from customer_user u inner join infor_user i on i.id_user = u.id where role=0")
                     .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
         });
         System.out.println(users);
