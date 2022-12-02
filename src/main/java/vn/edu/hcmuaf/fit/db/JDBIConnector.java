@@ -37,9 +37,9 @@ public class JDBIConnector {
 
     public static void main(String[] args) {
         List<CustomerUser> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from customer_user u inner join infor_user i on i.id_user = u.id_user")
+            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id where role=1")
                     .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
         });
-        System.out.println(users);
+        System.out.println(users.size());
     }
 }
