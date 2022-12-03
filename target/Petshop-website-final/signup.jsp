@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
         <link rel="stylesheet" href="css/style.css" type="text/css">
+
     </head>
 <body>
      <!-- Floatting -->
@@ -141,7 +142,8 @@
      <script src="js/mixitup.min.js"></script>
      <script src="js/owl.carousel.min.js"></script>
      <script src="js/main.js"></script>
- 
+     <script src="admin/assets/js/vendor-all.min.js"></script>
+     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
  
 </body>
 </html>
