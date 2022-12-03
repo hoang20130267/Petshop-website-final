@@ -31,7 +31,21 @@
                         </div>
                         <%} else if (user != null) {%>
                         <div class="header__top__right__auth">
-                            <a href="login.jsp"><i class="fa fa-user"></i> <%=user.getName()%> </a>
+                            <li class="dropdown pc-h-item" style="list-style-type: none;">
+                                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    <span>
+                                        <span class="user-name" style="color: #111;"><i class="fa fa-user"></i>&nbsp;&nbsp;<%=user.getName()%></span>
+                                    </span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
+                                    <a href="#!" class="dropdown-item">
+                                        <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
+                                    </a>
+                                    <a href="#!" class="dropdown-item">
+                                        <span><i data-feather="x-square"></i> Đăng xuất</span>
+                                    </a>
+                                </div>
+                            </li>
                         </div>
 
                         <%}%>
