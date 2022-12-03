@@ -13,11 +13,13 @@ public class CustomerUser implements Serializable {
     private String phone;
     private String address;
     private String avt;
+    private boolean role;
+
 
     public CustomerUser() {
     }
 
-    public CustomerUser(String id, String username, String passMaHoa, String password, boolean status, String fullName, String email, String phone, String address, String avt) {
+    public CustomerUser(String id, String username, String passMaHoa, String password, boolean status, String fullName, String email, String phone, String address, String avt, boolean role) {
         this.id = id;
         this.username = username;
         this.passMaHoa = passMaHoa;
@@ -28,6 +30,15 @@ public class CustomerUser implements Serializable {
         this.phone = phone;
         this.address = address;
         this.avt = avt;
+        this.role = role;
+    }
+
+    public boolean isRole() {
+        return role;
+    }
+
+    public void setRole(boolean role) {
+        this.role = role;
     }
 
     public String getId() {

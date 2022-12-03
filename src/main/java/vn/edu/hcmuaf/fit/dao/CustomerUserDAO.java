@@ -12,7 +12,7 @@ public class CustomerUserDAO {
 
     public CustomerUserDAO(){
         users= JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id where role=0")
+            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id")
                     .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
         });
     }

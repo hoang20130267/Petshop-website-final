@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +32,7 @@
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
 
 </head>
+<% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
 
 <body class="">
 	<!-- [ Pre-loader ] start -->
@@ -164,8 +167,8 @@
 						<a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
 							<img src="assets/images/user/avatar-2.png" alt="user-image" class="user-avtar">
 							<span>
-								<span class="user-name">Admin</span>
-								<span class="user-desc">Quản lý cấp 1</span>
+								<span class="user-name"><%=user.getName()%></span>
+<%--								<span class="user-desc">Quản lý cấp 1</span>--%>
 							</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
@@ -217,7 +220,7 @@
 								<i class="material-icons-two-tone">https</i>
 								<span>Lock Screen</span>
 							</a> -->
-							<a href="#!" class="dropdown-item">
+							<a href="LogoutController" class="dropdown-item">
 								<i class="material-icons-two-tone">chrome_reader_mode</i>
 								<span>Đăng xuất</span>
 							</a>

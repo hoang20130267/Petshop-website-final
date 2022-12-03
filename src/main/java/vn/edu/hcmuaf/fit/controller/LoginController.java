@@ -22,9 +22,15 @@ public class LoginController extends HttpServlet {
 
         CustomerUser account = LoginService.getInstance().getAccountCustomer(username, pass);
         if (account != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", account);
-            response.sendRedirect("index.jsp");
+            if(account.isRole()){
+                HttpSession session = request.getSession();
+                session.setAttribute("user", account);
+                response.sendRedirect("admin/index.jsp");
+            }else {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", account);
+                response.sendRedirect("index.jsp");
+            }
         } else {
             request.setAttribute("loginStatus", LoginService.getInstance().getStatus());
             request.getRequestDispatcher("login.jsp").forward(request, response);
