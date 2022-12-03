@@ -152,7 +152,6 @@
                             <div class="header__top__right__auth">
                                 <a href="login.jsp"><i class="fa fa-user"></i> <%=user.getName()%> </a>
                             </div>
-
                             <%}%>
                         </div>
                     </div>
