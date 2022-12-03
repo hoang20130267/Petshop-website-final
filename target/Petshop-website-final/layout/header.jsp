@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -24,10 +25,16 @@
                             <a href="#"><i class="fa fa-facebook" title="Our Facebook"></i></a>
                             <a href="#"><i class="fa fa-instagram" title="Our Instagram"></i></a>
                         </div>
-
+                        <%if (user == null) {%>
                         <div class="header__top__right__auth">
                             <a href="login.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
                         </div>
+                        <%} else if (user != null) {%>
+                        <div class="header__top__right__auth">
+                            <a href="login.jsp"><i class="fa fa-user"></i> <%=user.getName()%> </a>
+                        </div>
+
+                        <%}%>
                     </div>
                 </div>
             </div>

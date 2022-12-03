@@ -13,7 +13,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -36,15 +36,19 @@
                   <div class="mb-4">  
                   <h3>Đăng nhập</h3>
                 </div>
-                <form action="#" method="post">
+                <form action="LoginController" method="post">
                   <div class="form-group first">
                     <p> Tên đăng nhập</p>
-                    <input type="text" class="form-control" id="username">
+                    <input type="text" class="form-control" id="username" name="username">
                   </div>
                   <div class="form-group last mb-4">
                     <p>Mật khẩu</p> 
-                    <input type="password" class="form-control" id="password">                   
+                    <input type="password" class="form-control" id="password" name="password">
                   </div>
+                  <% String status = (String) request.getAttribute("loginStatus");%>
+                  <h5 style="text-align:left; color: red;">
+                    <%= status == null ? "" : status%>
+                  </h5>
                   
                   <div class="d-flex mb-5 align-items-center">
                     <!-- <label class="control control--checkbox mb-0">
@@ -55,10 +59,10 @@
                     </label> -->
                     <span class="ml-auto"><a href="forgetpass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                   </div>
-                  <a href="#" style="text-decoration: none;">
-                    <div class="button_login"> Đăng nhập</div>
-                  </a>
-                  <!-- <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary"> -->
+<%--                  <a href="#" style="text-decoration: none;">--%>
+<%--                    <div class="button_login"> Đăng nhập</div>--%>
+<%--                  </a>--%>
+                  <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary">
 
                   <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
                   

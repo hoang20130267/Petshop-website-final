@@ -1,3 +1,4 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style>
 </head>
+    <% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
 
 <body>
 
@@ -142,10 +144,16 @@
                                 <a href="#"><i class="fa fa-facebook" title="Our Facebook"></i></a>
                                 <a href="#"><i class="fa fa-instagram" title="Our Instagram"></i></a>
                             </div>
-
+                            <%if (user == null) {%>
                             <div class="header__top__right__auth">
                                 <a href="login.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
                             </div>
+                            <%} else if (user != null) {%>
+                            <div class="header__top__right__auth">
+                                <a href="login.jsp"><i class="fa fa-user"></i> <%=user.getName()%> </a>
+                            </div>
+
+                            <%}%>
                         </div>
                     </div>
                 </div>
