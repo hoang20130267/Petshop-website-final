@@ -67,9 +67,9 @@
                         <li><a href="index.jsp">Trang Chủ</a></li>
                         <li><a href="all-product">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="products-dog.jsp">Chó</a></li>
-                                <li><a href="products-cat.jsp">Mèo</a></li>
-                                <li><a href="products-accessory.jsp">Phụ Kiện</a></li>
+                                <li><a href="products-dog">Chó</a></li>
+                                <li><a href="products-cat">Mèo</a></li>
+                                <li><a href="products-accessory">Phụ Kiện</a></li>
                             </ul>
                         </li>
                         <li><a href="blog.jsp">Tin Tức</a></li>
