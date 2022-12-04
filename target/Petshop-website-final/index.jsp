@@ -283,11 +283,11 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.html">Trang Chủ</a></li>
-                            <li><a href="all-products.jsp">Thú Cưng</a>
+                            <li><a href="all-product">Thú Cưng</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="products-dog.jsp">Chó</a></li>
-                                    <li><a href="products-cat.jsp">Mèo</a></li>
-                                    <li><a href="products-accessory.jsp">Phụ Kiện</a></li>
+                                    <li><a href="products-dog">Chó</a></li>
+                                    <li><a href="products-cat">Mèo</a></li>
+                                    <li><a href="products-accessory">Phụ Kiện</a></li>
                                 </ul>
                             </li>
                             <li><a href="blog.jsp">Tin Tức</a></li>
@@ -364,7 +364,7 @@
                             <span>CỬA HÀNG THÚ CƯNG</span>
                             <h2>Chó mèo <br>và nhiều hơn thế</h2>
                             <p>Giao thú cưng tận nhà trong ngày</p>
-                            <a href="all-products.jsp" class="primary-btn">MUA NGAY</a>
+                            <a href="list-product" class="primary-btn">MUA NGAY</a>
                         </div>
                     </div>
                 </div>
@@ -380,27 +380,27 @@
                 <div class="categories__slider owl-carousel">
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-5.jpg">
-                            <h5><a href="#">Mèo Lông Xám</a></h5>
+                            <h5><a>Mèo Lông Xám</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-6.jpg">
-                            <h5><a href="#">Mèo Chân Ngắn</a></h5>
+                            <h5><a>Mèo Chân Ngắn</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-3.jpg">
-                            <h5><a href="#">Chó Poodle</a></h5>
+                            <h5><a>Chó Poodle</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-4.jpg">
-                            <h5><a href="#">Chó Shiba</a></h5>
+                            <h5><a>Chó Shiba</a></h5>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="img/categories/cat-2.jpg">
-                            <h5><a href="#">Mèo Lông Ngắn</a></h5>
+                            <h5><a>Mèo Lông Ngắn</a></h5>
                         </div>
                     </div>
                 </div>

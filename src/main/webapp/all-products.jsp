@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -179,7 +181,7 @@
              <nav class="humberger__menu__nav mobile-menu">
                  <ul>
                      <li class="active"><a href="index.jsp">Home</a></li>
-                     <li><a href="./all-products.html">Shop</a></li>
+                     <li><a href="list-product">Shop</a></li>
                      <li><a href="#">Pages</a>
                          <ul class="header__menu__dropdown">
                              <li><a href="product-details.jsp">Shop Details</a></li>
@@ -580,6 +582,25 @@
                         </div>
                     </div>
                     <div class="row" id="items">
+                            <% List<Product> list = (List<Product>) request.getAttribute("list");
+                                for (Product p : list) { %>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="product__item">
+                                            <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>">
+                                        <ul class="product__item__pic__hover">
+                                       <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                       <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                       <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                  </ul>
+                                </div>
+                                <div class="product__item__text">
+                                <h6><a href="product-details.jsp"><%= p.getProductName()%></a></h6>
+                                <h5><%=p.getPrice()%>đ</h5>
+                            </div>
+                            </div>
+                        </div>
+                            <%    }
+                            %>
 <!--                        <div class="col-lg-4 col-md-6 col-sm-6">-->
 <!--                            <div class="product__item">-->
 <!--                                <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">-->
@@ -717,9 +738,9 @@
 <!--                        </div>-->
 
                     </div>
-                    <div class="loadmore" id="loadMore">
-                        <a style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>
-                      </div>
+<%--                    <div class="loadmore" id="loadMore">--%>
+<%--                        <a style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>--%>
+<%--                      </div>--%>
 <!--                    <div class="product__pagination">-->
 <!--                        <a href="#">1</a>-->
 <!--                        <a href="#">2</a>-->
@@ -744,7 +765,7 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/list-products.js"></script>
+<%--    <script src="js/list-products.js"></script>--%>
     <script src="admin/assets/js/vendor-all.min.js"></script>
     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 

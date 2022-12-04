@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -580,6 +582,25 @@
           </div>
         </div>
         <div class="row" id="items-cat">
+            <% List<Product> list = (List<Product>) request.getAttribute("list2");
+                for (Product p : list) { %>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>">
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="product-details.jsp"><%= p.getProductName()%></a></h6>
+                        <h5><%=p.getPrice()%>đ</h5>
+                    </div>
+                </div>
+            </div>
+            <%    }
+            %>
           <!--          <div class="col-lg-4 col-md-6 col-sm-6">-->
           <!--            <div class="product__item">-->
           <!--              <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">-->
@@ -744,7 +765,7 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
-<script src="js/list-products.js"></script>
+<%--<script src="js/list-products.js"></script>--%>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 
