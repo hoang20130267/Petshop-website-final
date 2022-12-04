@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.db;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.Product;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -36,10 +37,16 @@ public class JDBIConnector {
 
 
     public static void main(String[] args) {
-        List<CustomerUser> users = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id where role=1")
-                    .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
+//        List<CustomerUser> users = JDBIConnector.get().withHandle(handle -> {
+//            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id where role=1")
+//                    .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
+//        });
+
+        Jdbi get = JDBIConnector.get();
+        List<Product> products = get.withHandle(handle -> {
+            return handle.createQuery("select * from product")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
-        System.out.println(users.size());
+        System.out.println(products);
     }
 }

@@ -65,7 +65,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="index.jsp">Trang Chủ</a></li>
-                        <li><a href="all-products.jsp">Thú Cưng</a>
+                        <li><a href="all-product">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="products-dog.jsp">Chó</a></li>
                                 <li><a href="products-cat.jsp">Mèo</a></li>
