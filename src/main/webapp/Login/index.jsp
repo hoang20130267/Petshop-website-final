@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +13,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
+
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
 

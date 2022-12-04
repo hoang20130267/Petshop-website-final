@@ -24,7 +24,106 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    
+    <style>
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-toggle {
+            white-space: nowrap;
+        }
+
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+        }
+
+        .dropdown-toggle:empty::after {
+            margin-left: 0;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            min-width: 12rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            font-size: 0.875rem;
+            color: #293240;
+            text-align: left;
+            list-style: none;
+            background-color: #00BFFF;
+            background-clip: padding-box;
+            border: 0 solid rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        .dropdown-menu-left {
+            right: auto;
+            left: 0;
+        }
+
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.65rem 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #111;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            color: #00BFFF;
+            text-decoration: none;
+            background-color: #e3e1fc;
+        }
+
+        .dropdown-item.active, .dropdown-item:active {
+            color: #00BFFF;
+            text-decoration: none;
+            background-color: #e3e1fc;
+        }
+
+        .dropdown-item.disabled, .dropdown-item:disabled {
+            color: #6c757d;
+            pointer-events: none;
+            background-color: transparent;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 0;
+            font-size: 0.76563rem;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+
+        .dropdown-item-text {
+            display: block;
+            padding: 0.65rem 1.5rem;
+            color: #293240;
+        }
+        .dropdown-toggle.arrow-none:after {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -334,7 +433,8 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
-
+ <script src="admin/assets/js/vendor-all.min.js"></script>
+ <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 
 </body>
 
