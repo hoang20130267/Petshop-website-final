@@ -220,7 +220,7 @@
 								<i class="material-icons-two-tone">https</i>
 								<span>Lock Screen</span>
 							</a> -->
-							<a href="LogoutController" class="dropdown-item">
+							<a href="AdminController" class="dropdown-item">
 								<i class="material-icons-two-tone">chrome_reader_mode</i>
 								<span>Đăng xuất</span>
 							</a>
