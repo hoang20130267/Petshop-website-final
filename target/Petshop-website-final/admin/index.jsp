@@ -45,7 +45,7 @@
 	<!-- [ Mobile header ] start -->
 	<div class="pc-mob-header pc-header">
 		<div class="pcm-logo">
-			<img src="assets/images/logo.png" alt="" class="logo logo-lg">
+			<img src="assets/images/logo.png" href="../index.jsp" alt="" class="logo logo-lg">
 		</div>
 		<div class="pcm-toolbar">
 			<a href="#!" class="pc-head-link" id="mobile-collapse">
