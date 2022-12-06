@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="icon" type="image/png" sizes="16x16"  href="img/favicons/favicon-16x16.png">
         <!-- Css Styles -->
+        <link rel="stylesheet" href="Login/css/style.css">
+
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -126,7 +128,7 @@
     <!-- Header Section End -->
 
 
-    <%-- forget password     --%>
+    <%-- forget password--%>
 
      <div class="content2">
          <div class="container">
@@ -137,13 +139,13 @@
                  <div class="col-md-6 contents">
                      <div class="row justify-content-center">
                          <div class="col-md-12">
-                             <div class="form-block fg">
+                             <div class="form-block">
                                  <div class="mb-4">
                                      <h3>Quên mật khẩu</h3>
                                  </div>
                                  <form action="#" method="post">
                                      <div class="form-group first">
-                                         <p>Email hoặc số điện thoại</p>
+                                         <p>Email hoặc sô điện thoại</p>
                                          <input type="text" class="form-control" id="username">
 
                                      </div>
