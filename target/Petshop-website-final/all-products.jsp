@@ -594,7 +594,7 @@
                                   </ul>
                                 </div>
                                 <div class="product__item__text">
-                                <h6><a href="product-details.jsp"><%= p.getProductName()%></a></h6>
+                                <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%= p.getProductName()%></a></h6>
                                 <h5><%=p.getPrice()%>đ</h5>
                             </div>
                             </div>
