@@ -41,7 +41,7 @@
                                     <a href="#!" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="LogoutController"  class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
                                 </div>
