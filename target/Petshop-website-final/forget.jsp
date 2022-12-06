@@ -178,6 +178,15 @@
      <script src="js/main.js"></script>
      <script src="admin/assets/js/vendor-all.min.js"></script>
      <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
- 
+
+
+     <!-- Jquery JS-->
+     <script src="../Login/vendor/jquery/jquery.min.js"></script>
+
+
+     <!-- Vendor JS-->
+     <script src="../Login/vendor/datepicker/moment.min.js"></script>
+     <script src="../Login/vendor/datepicker/daterangepicker.js"></script>
+
 </body>
 </html>

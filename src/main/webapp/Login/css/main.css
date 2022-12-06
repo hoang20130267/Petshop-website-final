@@ -13,6 +13,8 @@
 /* ==========================================================================
    #GRID
    ========================================================================== */
+
+
 .row {
   display: -webkit-box;
   display: -webkit-flex;
@@ -163,9 +165,9 @@ h6 {
 /* ==========================================================================
    #BACKGROUND
    ========================================================================== */
-   
- /* .bg-blue {
-  background: #00bffe;
+
+/* .bg-blue {
+ background: #00bffe;
 } */
 
 /* .bg-red {
@@ -184,12 +186,11 @@ h6 {
   background: #57b846 url();
 }   */
 
-body {
+.page-wrapper {
   background-image: url('../bg_login.jpg');
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
 }
-
 /* ==========================================================================
    #SPACING
    ========================================================================== */
@@ -412,6 +413,7 @@ input {
 }
 
 .label {
+  width: 200px;
   font-size: 16px;
   color: #555;
   text-transform: capitalize;
@@ -651,4 +653,37 @@ input {
 
 .login {
   text-decoration: none;
+}
+
+
+.button_login {
+  width:  330px ;
+  height: 54px;
+  border-radius: 30px;
+  background-color: #00bffe;
+  text-align: center;
+  color: white;
+  padding-top: 15px;
+  margin: auto;
+}
+
+.button_forgot {
+  width:  330px ;
+  height: 54px;
+  border-radius: 30px;
+  background-color: #00bffe;
+  text-align: center;
+  color: white;
+  padding-top: 15px;
+  margin: auto;
+}
+
+.button_login:hover {
+  background-color: #00bffe;
+  opacity: 80%;
+}
+
+.wrapper span {
+  display: block;
+  text-align: center;
 }
