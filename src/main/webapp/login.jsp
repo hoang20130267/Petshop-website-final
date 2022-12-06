@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="icon" type="image/png" sizes="16x16"  href="img/favicons/favicon-16x16.png">
         <!-- Css Styles -->
+        <link rel="stylesheet" href="Login/css/style.css">
+
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -160,7 +162,7 @@
                                            <input type="checkbox" checked="checked"/>
                                            <div class="control__indicator"></div>
                                          </label> -->
-                                         <span class="ml-auto"><a href="forgetpass.jsp" class="forgot-pass">Quên mật khẩu</a></span>
+                                         <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
                                      <%--                  <a href="#" style="text-decoration: none;">--%>
                                      <%--                    <div class="button_login"> Đăng nhập</div>--%>
@@ -186,7 +188,6 @@
                              </div>
                          </div>
                      </div>
-
                  </div>
 
              </div>
