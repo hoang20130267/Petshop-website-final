@@ -225,17 +225,16 @@
             <span>Danh mục</span>
           </div>
           <ul>
+<%--                                          <% List<Product> listC = (List<Product>) request.getAttribute("list5");--%>
+<%--                                              for (Product p : listC) { %>--%>
+<%--                                          <li>--%>
+<%--                                              <a href="#">--%>
+<%--                                                  <%=p.getGiong() %>--%>
+<%--                                              </a>--%>
+<%--                                          </li>--%>
+<%--                                          <% } %>--%>
             <li><a href="#">Chó Alaska</a></li>
-            <li><a href="#">Chó Beagle</a></li>
-            <li><a href="#">Chó Corgi</a></li>
-            <li><a href="#">Chó Golden Retriever</a></li>
-            <li><a href="#">Chó Husky</a></li>
-            <li><a href="#">Chó Phốc sóc</a></li>
-            <li><a href="#">Mèo Anh</a></li>
-            <li><a href="#">Mèo lông ngắn</a></li>
-            <li><a href="#">Mèo chân ngắn</a></li>
-            <li><a href="#">Mèo tai cụp</a></li>
-            <li><a href="#">Mèo tam thể</a></li>
+
           </ul>
         </div>
       </div>

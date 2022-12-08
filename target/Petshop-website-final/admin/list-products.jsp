@@ -287,7 +287,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -344,7 +345,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -399,7 +401,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -456,7 +459,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -513,7 +517,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -570,7 +575,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
@@ -625,7 +631,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
