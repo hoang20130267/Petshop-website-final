@@ -98,14 +98,14 @@
               <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                      <li class="pc-item"><a class="pc-link" href="list-products.jsp">Danh sách thú cưng</a></li>
+                      <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
                       <li class="pc-item"><a class="pc-link" href="add-product.jsp">Thêm thú cưng</a></li>
                   </ul>
               </li>
               <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                      <li class="pc-item"><a class="pc-link" href="list-accessory.jsp">Danh sách phụ kiện</a></li>
+                      <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
                       <li class="pc-item"><a class="pc-link" href="add-accessory.jsp">Thêm phụ kiện</a></li>
                   </ul>
               </li>
@@ -177,7 +177,7 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
-          <div class="row">
+          <div id="content" class="row">
             <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách thú cưng</h2>
               <% List<Product> list = (List<Product>) request.getAttribute("list");
                   for (Product p : list) { %>
@@ -190,7 +190,7 @@
                     >
                   </div> -->
                   <img
-                    src="<%=p.getImage()%>"
+                    src="../<%=p.getImage()%>"
                     alt=""
                     class="d-block mx-auto my-4"
                     height="150"
@@ -645,6 +645,8 @@
 =======
               <%    }
               %>
+<<<<<<< HEAD
+=======
 <%--            <div class="col-md-3">--%>
 <%--              <div class="white_card position-relative mb_20">--%>
 <%--                <div class="card-body">--%>
@@ -1044,6 +1046,7 @@
 <%--              </div>--%>
 <%--            </div>--%>
 >>>>>>> 6d89960fe3a8ff897b435590292866a391edc2b7
+>>>>>>> 3e4f114bf734b5008fa40be927c50e3584174056
           </div>
         </div>
         <!-- [ Main Content ] end -->
@@ -1051,6 +1054,26 @@
     </div>
 
     <!-- Required Js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function searchByName(param){
+            var txtSearch = param.value;
+            $.ajax({
+                url: "/Petshop_website_final_war/search",
+                type: "get",
+                data: {
+                    txt: txtSearch
+                },
+                success: function (data) {
+                    var row = document.getElementById("content");
+                    row.innerHTML = data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }
+    </script>
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>
     <script src="assets/js/plugins/feather.min.js"></script>

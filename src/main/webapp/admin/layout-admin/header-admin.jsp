@@ -20,10 +20,10 @@
                         <i class="material-icons-two-tone">search</i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown drp-search">
-                        <form class="px-3">
+                        <form action="search" method="get" class="px-3">
                             <div class="form-group mb-0 d-flex align-items-center">
-                                <i data-feather="search"></i>
-                                <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+                                <i data-feather="search" type="submit"></i>
+                                <input oninput="searchByName(this)" name="txt" type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
                             </div>
                         </form>
                     </div>
@@ -38,7 +38,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
                         <div class=" dropdown-header">
-                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Thêm admin mới</a></span></h5>
+                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="../index.jsp" target="_blank">Quay lại website</a></span></h5>
                         </div>
                         <a href="#!" class="dropdown-item">
                             <i class="material-icons-two-tone">account_circle</i>
