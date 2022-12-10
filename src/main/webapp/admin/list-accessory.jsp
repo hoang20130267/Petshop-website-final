@@ -205,7 +205,7 @@
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 65px;">
                         <%=p.getPrice()%>đ
-                       
+
                       </h4>
                       <ul
                         class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"

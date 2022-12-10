@@ -203,9 +203,9 @@
         <div class="row">
     <main class="main" id="top">
         <div class="container-fluid px-0" data-layout="container">
-        
+
           <!-- <div class="content"> -->
-            
+
             <form class="mb-9">
               <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
@@ -677,7 +677,7 @@
                             ></polyline>
                             <line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="d-none d-sm-inline">Số lượng</span></a
                         >
-                        
+
                         <a
                           class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
                           id="attributesTab"
@@ -1096,7 +1096,7 @@
                           aria-labelledby="attributesTab"
                         >
                           <h5 class="mb-3 text-1000">Chi tiết</h5>
-                          
+
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -1132,7 +1132,7 @@
                                 <option selected="selected">Giao hàng tiết kiệm</option>
                                 <option value="1">Giao hàng nhanh</option>
                                 <option value="2">Hỏa tốc</option>
-                                
+
                               </select>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -1156,7 +1156,7 @@
                         <div class="card-body">
                           <h4 class="card-title mb-4">Danh mục</h4>
                           <div class="row">
-                           
+
                             <div class="col-12 col-sm-6 col-xl-12">
                               <div class="mb-4">
                                 <h5 class="mb-2">Phụ kiện</h5><input class="form-control mb-3" type="text" placeholder="Phụ kiện">
@@ -1168,7 +1168,7 @@
                                   <h5>Tags</h5><a class="fw-bold fs--1" href="#!">Thêm tag mới</a>
                                 </div><select class="form-select" aria-label="category">
                                   <option value="men-cloth">Phụ kiện</option>
-                                  
+
                                 </select>
                               </div>
                             </div>
@@ -1234,7 +1234,7 @@
     <script src="bonus/tinymce/tinymce.min.js"></script>
     <script src="bonus/js/dropzone.min.js"></script>
     <script src="bonus/js/phoenix.js"></script>
-    
+
 
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>
