@@ -51,11 +51,8 @@ public class ProductDAO {
         return list;
     }
     public static void main(String[] args) {
-<<<<<<< HEAD
         new ProductDAO();
         System.out.println(new ProductDAO().searchByName("ALASKA"));
-=======
         System.out.println(new ProductDAO().listCategory);
->>>>>>> 3e4f114bf734b5008fa40be927c50e3584174056
     }
 }
