@@ -38,7 +38,6 @@ public class ProductService {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
-
     public static void main(String[] args) {
         System.out.println(getData5());
     }
