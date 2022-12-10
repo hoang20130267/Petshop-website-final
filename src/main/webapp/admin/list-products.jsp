@@ -184,11 +184,6 @@
             <div class="col-md-3">
               <div class="white_card position-relative mb_20">
                 <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
                   <img
                     src="../<%=p.getImage()%>"
                     alt=""
@@ -205,7 +200,7 @@
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 46px;">
                         <%=p.getPrice()%>đ
-                       
+
                       </h4>
                       <ul
                         class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
