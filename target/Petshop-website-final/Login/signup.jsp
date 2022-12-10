@@ -35,13 +35,13 @@
                     <h2 class="title">Đăng kí</h2>
                     <form method="POST" action="#">
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Họ</label>
                                     <input class="input--style-4" type="text" name="first_name">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Tên</label>
                                     <input class="input--style-4" type="text" name="last_name">
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Ngày sinh</label>
                                     <div class="input-group-icon">
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Giới tính</label>
                                     <div class="p-t-10">
@@ -75,13 +75,13 @@
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Email</label>
                                     <input class="input--style-4" type="email" name="email">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Số điện thoại</label>
                                     <input class="input--style-4" type="text" name="phone">
@@ -91,13 +91,13 @@
 
 
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Tên đăng nhập</label>
                                     <input class="input--style-4" type="email" name="email">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Mật khẩu</label>
                                     <input id="upass" class="input--style-4" type="password">

@@ -31,6 +31,16 @@ public class ProductService {
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
+
+    public static List<String> getData5() {
+        return JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select distinct giong from product having giong != \"null\" ")
+                    .mapTo(String.class).stream().collect(Collectors.toList());
+        });
+    }
+    public static void main(String[] args) {
+        System.out.println(getData5());
+    }
     public static List<Product> getDataProductAdmin() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId < 3000")
