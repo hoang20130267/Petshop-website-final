@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -96,14 +98,14 @@
               <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                      <li class="pc-item"><a class="pc-link" href="list-products.jsp">Danh sách thú cưng</a></li>
+                      <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
                       <li class="pc-item"><a class="pc-link" href="add-product.jsp">Thêm thú cưng</a></li>
                   </ul>
               </li>
               <li class="pc-item pc-hasmenu">
                   <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                   <ul class="pc-submenu">
-                      <li class="pc-item"><a class="pc-link" href="list-accessory.jsp">Danh sách phụ kiện</a></li>
+                      <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
                       <li class="pc-item"><a class="pc-link" href="add-accessory.jsp">Thêm phụ kiện</a></li>
                   </ul>
               </li>
@@ -177,6 +179,8 @@
         <div class="row">
           <div class="row">
             <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách thú cưng</h2>
+              <% List<Product> list = (List<Product>) request.getAttribute("list");
+                  for (Product p : list) { %>
             <div class="col-md-3">
               <div class="white_card position-relative mb_20">
                 <div class="card-body">
@@ -186,21 +190,21 @@
                     >
                   </div> -->
                   <img
-                    src="assets/images/list-product/product-1.jpg"
+                    src="../<%=p.getImage()%>"
                     alt=""
                     class="d-block mx-auto my-4"
                     height="150"
                   />
                   <div class="row my-4">
                     <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span>
+                      <span class="badge_btn_3 mb-1"><%=p.getGiong()%></span>
                       <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
-                      style="text-align: center;">Phốc sóc mặt gấu</a
+                      style="text-align: center;"><%=p.getProductName()%></a
                       >
                     </div>
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        30.000.000đ
+                        <%=p.getPrice()%>đ
                        
                       </h4>
                       <ul
@@ -239,404 +243,406 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  
-                  <img
-                    src="assets/images/list-product/product-2.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 60px;">Chó Alaska</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Alaska Giant xám trắng</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        25.000.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-3.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 55px;">Scottish Van</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Scottish Van tai cụp</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        22.000.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-4.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Munchkin</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Munchkin Bicolor</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        15.000.000đ
-                        
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-6.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 44px;">Golden Retriever</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Cún golden siêu phẩm</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        20.000.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-7.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 57px;"> Cún golden</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Cún golden ú</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        30.000.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-8.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Mèo tai cụp</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                        20.000.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/list-product/product-9.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span>
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Mèo chân ngắn tai cụp</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                       30.000.000đ
-                        
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <%    }
+              %>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  --%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-2.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 60px;">Chó Alaska</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Alaska Giant xám trắng</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        25.000.000đ--%>
+<%--                        <!-- <small class="text-muted font-14"--%>
+<%--                          ><del>$99.00</del></small--%>
+<%--                        > -->--%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-3.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 55px;">Scottish Van</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Scottish Van tai cụp</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        22.000.000đ--%>
+<%--                        <!-- <small class="text-muted font-14"--%>
+<%--                          ><del>$99.00</del></small--%>
+<%--                        > -->--%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-4.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Munchkin</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Munchkin Bicolor</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        15.000.000đ--%>
+<%--                        --%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-6.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 44px;">Golden Retriever</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Cún golden siêu phẩm</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        20.000.000đ--%>
+<%--                        <!-- <small class="text-muted font-14"--%>
+<%--                          ><del>$99.00</del></small--%>
+<%--                        > -->--%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-7.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 57px;"> Cún golden</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Cún golden ú</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        30.000.000đ--%>
+<%--                        <!-- <small class="text-muted font-14"--%>
+<%--                          ><del>$99.00</del></small--%>
+<%--                        > -->--%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-8.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Mèo tai cụp</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                        20.000.000đ--%>
+<%--                        <!-- <small class="text-muted font-14"--%>
+<%--                          ><del>$99.00</del></small--%>
+<%--                        > -->--%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-3">--%>
+<%--              <div class="white_card position-relative mb_20">--%>
+<%--                <div class="card-body">--%>
+<%--                  <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                    <span class="text-white text-center rib1-primary"--%>
+<%--                      >50% off</span--%>
+<%--                    >--%>
+<%--                  </div> -->--%>
+<%--                  <img--%>
+<%--                    src="assets/images/list-product/product-9.jpg"--%>
+<%--                    alt=""--%>
+<%--                    class="d-block mx-auto my-4"--%>
+<%--                    height="150"--%>
+<%--                  />--%>
+<%--                  <div class="row my-4">--%>
+<%--                    <div class="col">--%>
+<%--                      <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span>--%>
+<%--                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"--%>
+<%--                        >Mèo chân ngắn tai cụp</a--%>
+<%--                      >--%>
+<%--                    </div>--%>
+<%--                    <div class="col-auto">--%>
+<%--                      <h4 class="text-dark mt-0" style="margin-left: 46px;">--%>
+<%--                       30.000.000đ--%>
+<%--                        --%>
+<%--                      </h4>--%>
+<%--                      <ul--%>
+<%--                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"--%>
+<%--                      >--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i class="fas fa-star text-warning font-16 ms-n2"></i>--%>
+<%--                        </li>--%>
+<%--                        <li class="list-inline-item">--%>
+<%--                          <i--%>
+<%--                            class="fas fa-star-half text-warning font-16 ms-n2"--%>
+<%--                          ></i>--%>
+<%--                        </li>--%>
+<%--                      </ul>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="d-grid">--%>
+<%--                    <button class="btn_2">Chỉnh sửa</button>--%>
+<%--                    <button class="btn_2" style="margin-top: 3px">Xóa</button>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
           </div>
         </div>
         <!-- [ Main Content ] end -->
