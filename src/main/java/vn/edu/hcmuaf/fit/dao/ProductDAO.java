@@ -30,8 +30,22 @@ public class ProductDAO {
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
-
+    public List<Product> searchByName(String txtSearch) {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0,"%"+ txtSearch + "%")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+    public List<Product> searchByName2(String txtSearch) {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?").bind(0,"%"+ txtSearch + "%")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
     public static void main(String[] args) {
         new ProductDAO();
+        System.out.println(new ProductDAO().searchByName("ALASKA"));
     }
 }
