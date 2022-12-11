@@ -44,7 +44,7 @@ public class JDBIConnector {
 
         Jdbi get = JDBIConnector.get();
         List<Product> products = get.withHandle(handle -> {
-            return handle.createQuery("select * from product")
+            return handle.createQuery("select distinct giong from product")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         System.out.println(products);

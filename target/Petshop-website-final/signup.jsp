@@ -13,9 +13,21 @@
     
         <!-- Google Font -->
         <!-- <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet"> -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="icon" type="image/png" sizes="16x16"  href="img/favicons/favicon-16x16.png">
-        <!-- Css Styles -->
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+        <!-- Vendor CSS-->
+        <!-- <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all"> -->
+        <link href="Login/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+        <link href="Login/css/main.css" rel="stylesheet" media="all">
+
+    <%--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />--%>
+<%--        <link rel="icon" type="image/png" sizes="16x16"  href="img/favicons/favicon-16x16.png">--%>
+<%--        <!-- Css Styles -->--%>
+<%--        <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">--%>
+<%--        <link href="css/main.css" rel="stylesheet" media="all">--%>
+
+
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -126,25 +138,126 @@
      <jsp:include page="layout/header.jsp"></jsp:include>
     <!-- Header Section End -->
 
-<%--     <jsp:include page="SignUp/index.jsp" ></jsp:include>--%>
+     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+         <div class="wrapper wrapper--w680">
+             <div class="card card-4">
+                 <div class="card-body">
+                     <h2 class="title">Đăng kí</h2>
+                     <form method="POST" action="#">
+                         <div class="row row-space">
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Họ</label>
+                                     <input class="input--style-4" type="text" name="first_name">
+                                 </div>
+                             </div>
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Tên</label>
+                                     <input class="input--style-4" type="text" name="last_name">
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row row-space">
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Ngày sinh</label>
+                                     <div class="input-group-icon">
+                                         <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Giới tính</label>
+                                     <div class="p-t-10">
+                                         <label class="radio-container m-r-45">Nam
+                                             <input type="radio" checked="checked" name="gender">
+                                             <span class="checkmark"></span>
+                                         </label>
+                                         <label class="radio-container">Nữ
+                                             <input type="radio" name="gender">
+                                             <span class="checkmark"></span>
+                                         </label>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row row-space">
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Email</label>
+                                     <input class="input--style-4" type="email" name="email">
+                                 </div>
+                             </div>
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Số điện thoại</label>
+                                     <input class="input--style-4" type="text" name="phone">
+                                 </div>
+                             </div>
+                         </div>
 
-    <iframe src="SignUp/index.jsp" width="100%" height="100%" frameborder="0" > </iframe>
+
+                         <div class="row row-space">
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Tên đăng nhập</label>
+                                     <input class="input--style-4" type="email" name="email">
+                                 </div>
+                             </div>
+                             <div class="col-6">
+                                 <div class="input-group">
+                                     <label class="label">Mật khẩu</label>
+                                     <input id="upass" class="input--style-4" type="password">
+                                 </div>
+                             </div>
+                         </div>
+
+
+                             <a href="#" style="text-decoration: none;">
+                                 <div class="button_login"> Đăng kí</div>
+                             </a>
+
+                        <br>
+                         <span> <a href="login.jsp" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+<%--    <iframe src="SignUp/index.jsp" width="100%" height="100%" frameborder="0" > </iframe>--%>
       <!-- Footer Section Begin -->
      <jsp:include page="layout/footer.jsp"></jsp:include>
     <!-- Footer Section End -->
 
 
-     <!-- Js Plugins -->
-     <script src="js/jquery-3.3.1.min.js"></script>
-     <script src="js/bootstrap.min.js"></script>
-     <script src="js/jquery.nice-select.min.js"></script>
-     <script src="js/jquery-ui.min.js"></script>
-     <script src="js/jquery.slicknav.js"></script>
-     <script src="js/mixitup.min.js"></script>
-     <script src="js/owl.carousel.min.js"></script>
-     <script src="js/main.js"></script>
-     <script src="admin/assets/js/vendor-all.min.js"></script>
-     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+<%--     <!-- Js Plugins -->--%>
+<%--     <script src="js/jquery-3.3.1.min.js"></script>--%>
+<%--     <script src="js/bootstrap.min.js"></script>--%>
+<%--     <script src="js/jquery.nice-select.min.js"></script>--%>
+<%--     <script src="js/jquery-ui.min.js"></script>--%>
+<%--     <script src="js/jquery.slicknav.js"></script>--%>
+<%--     <script src="js/mixitup.min.js"></script>--%>
+<%--     <script src="js/owl.carousel.min.js"></script>--%>
+<%--     <script src="js/main.js"></script>--%>
+<%--     <script src="admin/assets/js/vendor-all.min.js"></script>--%>
+<%--     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>--%>
+
+     <!-- Jquery JS-->
+     <script src="vendor/jquery/jquery.min.js"></script>
+
+
+     <!-- Vendor JS-->
+     <script src="vendor/datepicker/moment.min.js"></script>
+     <script src="vendor/datepicker/daterangepicker.js"></script>
+
+     <!-- Main JS-->
+     <!-- <script src="js/global.js"></script> -->
+     <script src="global.js"></script>
+
  
 </body>
 </html>

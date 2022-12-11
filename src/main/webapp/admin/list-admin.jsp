@@ -123,14 +123,14 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="list-products.jsp">Danh sách thú cưng</a></li>
+                        <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
                         <li class="pc-item"><a class="pc-link" href="add-product.jsp">Thêm thú cưng</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="list-accessory.jsp">Danh sách phụ kiện</a></li>
+                        <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
                         <li class="pc-item"><a class="pc-link" href="add-accessory.jsp">Thêm phụ kiện</a></li>
                     </ul>
                 </li>
@@ -176,94 +176,7 @@
 </nav>
 <!-- [ navigation menu ] end -->
 <!-- [ Header ] start -->
-<header class="pc-header ">
-    <div class="header-wrapper">
-        <div class="page-header-title">
-            <h5 class="m-b-10" style="margin-top: 28px; font-weight: 800;">QUẢN LÝ CỬA HÀNG THÚ CƯNG</h5>
-        </div>
-        <div class="ml-auto">
-            <ul class="list-unstyled">
-                <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <i class="material-icons-two-tone">search</i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right pc-h-dropdown drp-search">
-                        <form class="px-3">
-                            <div class="form-group mb-0 d-flex align-items-center">
-                                <i data-feather="search"></i>
-                                <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <li class="dropdown pc-h-item">
-                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="assets/images/user/avatar-2.png" alt="user-image" class="user-avtar">
-                        <span>
-								<span class="user-name">Admin</span>
-								<span class="user-desc">Quản lý cấp 1</span>
-							</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
-                        <div class=" dropdown-header">
-                            <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Thêm admin mới</a></span></h5>
-                        </div>
-                        <a href="#!" class="dropdown-item">
-                            <i class="material-icons-two-tone">account_circle</i>
-                            <span>Tài khoản của tôi</span>
-                        </a>
-                        <!-- <div class="pc-level-menu">
-                            <a href="#!" class="dropdown-item">
-                                <i class="material-icons-two-tone">list_alt</i>
-                                <span class="float-right"><i class="mr-0"></i></span>
-                                <span>Level2.1</span>
-                            </a>
-                            <div class="dropdown-menu pc-h-dropdown">
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Tài khoản của tôi</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Support</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="fas fa-circle"></i>
-                                    <span>Đăng xuất</span>
-                                </a>
-                            </div>
-                        </div> -->
-                        <!-- <a href="#!" class="dropdown-item">
-                            <i class="material-icons-two-tone">settings</i>
-                            <span>Settings</span>
-                        </a> -->
-                        <!-- <a href="#!" class="dropdown-item">
-                            <i class="material-icons-two-tone">support</i>
-                            <span>Support</span>
-                        </a> -->
-                        <!-- <a href="#!" class="dropdown-item">
-                            <i class="material-icons-two-tone">https</i>
-                            <span>Lock Screen</span>
-                        </a> -->
-                        <a href="#!" class="dropdown-item">
-                            <i class="material-icons-two-tone">chrome_reader_mode</i>
-                            <span>Đăng xuất</span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</header>
+<jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
 <!-- [ Header ] end -->
 
 <!-- [ Main Content ] start -->

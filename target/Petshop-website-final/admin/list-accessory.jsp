@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -96,14 +98,14 @@
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="list-products.jsp">Danh sách thú cưng</a></li>
+                        <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
                         <li class="pc-item"><a class="pc-link" href="add-product.jsp">Thêm thú cưng</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="list-accessory.jsp">Danh sách phụ kiện</a></li>
+                        <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
                         <li class="pc-item"><a class="pc-link" href="add-accessory.jsp">Thêm phụ kiện</a></li>
                     </ul>
                 </li>
@@ -149,94 +151,7 @@
     </nav>
     <!-- [ navigation menu ] end -->
     <!-- [ Header ] start -->
-    <header class="pc-header ">
-      <div class="header-wrapper">
-              <div class="page-header-title">
-                <h5 class="m-b-10" style="margin-top: 28px; font-weight: 800;">QUẢN LÝ CỬA HÀNG THÚ CƯNG</h5>
-              </div>
-        <div class="ml-auto">
-          <ul class="list-unstyled">
-            <li class="dropdown pc-h-item">
-              <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <i class="material-icons-two-tone">search</i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right pc-h-dropdown drp-search">
-                <form class="px-3">
-                  <div class="form-group mb-0 d-flex align-items-center">
-                    <i data-feather="search"></i>
-                    <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-                  </div>
-                </form>
-              </div>
-            </li>
-            <li class="dropdown pc-h-item">
-              <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="assets/images/user/avatar-2.png" alt="user-image" class="user-avtar">
-                <span>
-                  <span class="user-name">Admin</span>
-                  <span class="user-desc">Quản lý cấp 1</span>
-                </span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
-                <div class=" dropdown-header">
-                  <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Thêm admin mới</a></span></h5>
-                </div>
-                              <a href="#!" class="dropdown-item">
-                  <i class="material-icons-two-tone">account_circle</i>
-                  <span>Tài khoản của tôi</span>
-                </a>
-                <!-- <div class="pc-level-menu">
-                  <a href="#!" class="dropdown-item">
-                    <i class="material-icons-two-tone">list_alt</i>
-                    <span class="float-right"><i class="mr-0"></i></span>
-                    <span>Level2.1</span>
-                  </a>
-                  <div class="dropdown-menu pc-h-dropdown">
-                    <a href="#!" class="dropdown-item">
-                      <i class="fas fa-circle"></i>
-                      <span>Tài khoản của tôi</span>
-                    </a>
-                    <a href="#!" class="dropdown-item">
-                      <i class="fas fa-circle"></i>
-                      <span>Settings</span>
-                    </a>
-                    <a href="#!" class="dropdown-item">
-                      <i class="fas fa-circle"></i>
-                      <span>Support</span>
-                    </a>
-                    <a href="#!" class="dropdown-item">
-                      <i class="fas fa-circle"></i>
-                      <span>Lock Screen</span>
-                    </a>
-                    <a href="#!" class="dropdown-item">
-                      <i class="fas fa-circle"></i>
-                      <span>Đăng xuất</span>
-                    </a>
-                  </div>
-                </div> -->
-                <!-- <a href="#!" class="dropdown-item">
-                  <i class="material-icons-two-tone">settings</i>
-                  <span>Settings</span>
-                </a> -->
-                <!-- <a href="#!" class="dropdown-item">
-                  <i class="material-icons-two-tone">support</i>
-                  <span>Support</span>
-                </a> -->
-                <!-- <a href="#!" class="dropdown-item">
-                  <i class="material-icons-two-tone">https</i>
-                  <span>Lock Screen</span>
-                </a> -->
-                <a href="#!" class="dropdown-item">
-                  <i class="material-icons-two-tone">chrome_reader_mode</i>
-                  <span>Đăng xuất</span>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </div>
-  
-      </div>
-    </header>
+    <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
     <!-- [ Header ] end -->
 
     <!-- [ Main Content ] start -->
@@ -262,8 +177,10 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
-          <div class="row">
+          <div id="content" class="row">
             <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách phụ kiện</h2>
+            <% List<Product> list = (List<Product>) request.getAttribute("list");
+              for (Product p : list) { %>
             <div class="col-md-3">
               <div class="white_card position-relative mb_20">
                 <div class="card-body">
@@ -273,7 +190,7 @@
                     >
                   </div> -->
                   <img
-                    src="assets/images/accessory/sp1.jpg"
+                    src="../<%=p.getImage()%>"
                     alt=""
                     class="d-block mx-auto my-4"
                     height="150"
@@ -282,13 +199,13 @@
                     <div class="col">
                       <!-- <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span> -->
                       <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
-                      style="text-align: center;">Đồ Chơi Cho Chó – Banh Có Dây</a
+                      style="text-align: center;"><%=p.getProductName()%></a
                       >
                     </div>
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 65px;">
-                        90.000đ
-                       
+                        <%=p.getPrice()%>đ
+
                       </h4>
                       <ul
                         class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
@@ -320,403 +237,15 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
+                    <button class="btn_2">Chỉnh sửa</button>
+                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  
-                  <img
-                    src="assets/images/accessory/sp2.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 60px;">Chó Alaska</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Đồ Chơi Cho Chó – Dạng Dây Thừng</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 67px;">
-                        50.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp3.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 55px;">Scottish Van</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Bàn Chải & Kem Vệ Sinh Răng Cho Chó Mèo</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 60px;">
-                        100.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp4.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Munchkin</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Bộ Lược Tắm – Chải Lông Cho Chó Mèo</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 60px;">
-                        220.000đ
-                        
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp5.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 44px;">Golden Retriever</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center; padding-bottom: 22px;"
-                        >Nệm Lông Tròn</a
-                        
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 60px;">
-                        180.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp6.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 57px;"> Cún golden</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center; padding-bottom: 22px;"
-                        >Bát Ăn Đôi Tròn Round Dog</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 67px;">
-                        45.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp7.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;"
-                        >Dụng Dịch SOS – Vệ Sinh Bàn Chân Cho Chó Mèo</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 60px;">
-                        135.000đ
-                        <!-- <small class="text-muted font-14"
-                          ><del>$99.00</del></small
-                        > -->
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="white_card position-relative mb_20">
-                <div class="card-body">
-                  <!-- <div class="ribbon1 rib1-primary">
-                    <span class="text-white text-center rib1-primary"
-                      >50% off</span
-                    >
-                  </div> -->
-                  <img
-                    src="assets/images/accessory/sp8.jpg"
-                    alt=""
-                    class="d-block mx-auto my-4"
-                    height="150"
-                  />
-                  <div class="row my-4">
-                    <div class="col">
-                      <!-- <span class="badge_btn_3 mb-1" style="margin-left: 53px;">Scottish Fold</span> -->
-                      <a href="#" class="f_w_400 color_text_3 f_s_14 d-block" style="text-align: center;padding-bottom: 22px;"
-                        >Xẻng dọn vệ sinh cho chó mèo</a
-                      >
-                    </div>
-                    <div class="col-auto">
-                      <h4 class="text-dark mt-0" style="margin-left: 67px;">
-                        30.000đ
-                        
-                      </h4>
-                      <ul
-                        class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;"
-                      >
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i class="fas fa-star text-warning font-16 ms-n2"></i>
-                        </li>
-                        <li class="list-inline-item">
-                          <i
-                            class="fas fa-star-half text-warning font-16 ms-n2"
-                          ></i>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button class="btn_2">Chi tiết</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <%    }
+            %>
+
           </div>
         </div>
         <!-- [ Main Content ] end -->
@@ -724,6 +253,26 @@
     </div>
 
     <!-- Required Js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function searchByName(param){
+            var txtSearch = param.value;
+            $.ajax({
+                url: "/Petshop_website_final_war/search-accessory",
+                type: "get",
+                data: {
+                    txt: txtSearch
+                },
+                success: function (data) {
+                    var row = document.getElementById("content");
+                    row.innerHTML = data;
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        }
+    </script>
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>
     <script src="assets/js/plugins/feather.min.js"></script>

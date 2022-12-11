@@ -1,4 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -180,7 +184,7 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="./index.jsp">Home</a></li>
                 <li><a href="all-products.jsp">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
@@ -196,7 +200,7 @@
         </nav>
         <div id="mobile-menu-wrap"><div class="slicknav_menu"><a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_collapsed" style="outline: none;"><span class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><nav class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none;">
             <ul>
-                <li class="active"><a href="./index.html" role="menuitem">Home</a></li>
+                <li class="active"><a href="./index.jsp" role="menuitem">Home</a></li>
                 <li><a href="all-products.jsp" role="menuitem">Shop</a></li>
                 <li class="slicknav_collapsed slicknav_parent"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">Pages</a>
                     <span class="slicknav_arrow">►</span></a><ul class="header__menu__dropdown slicknav_hidden" role="menu" aria-hidden="true" style="display: none;">
@@ -323,17 +327,23 @@
                             <span>Danh mục</span>
                         </div>
                         <ul>
-                            <li><a href="#">Chó Alaska</a></li>
-                            <li><a href="#">Chó Beagle</a></li>
-                            <li><a href="#">Chó Corgi</a></li>
-                            <li><a href="#">Chó Golden Retriever</a></li>
-                            <li><a href="#">Chó Husky</a></li>
-                            <li><a href="#">Chó Phốc sóc</a></li>
-                            <li><a href="#">Mèo Anh</a></li>
-                            <li><a href="#">Mèo lông ngắn</a></li>
-                            <li><a href="#">Mèo chân ngắn</a></li>
-                            <li><a href="#">Mèo tai cụp</a></li>
-                            <li><a href="#">Mèo tam thể</a></li>
+                            <% List<String> list = ProductService.getData5();
+                                for (String p : list) { %>
+                            <li>
+                                <a href="#">
+                                    <%=p%>
+                                </a>
+                            </li>
+                            <% } %>
+<%--                        <% List<Product> list = (List<Product>) request.getAttribute("list5");--%>
+<%--                            for (Product p: list) {--%>
+<%--                            %>--%>
+<%--                            <li>--%>
+<%--                                <a href="#"><%=p.getGiong()%></a>--%>
+<%--                            </li>--%>
+<%--                            <% }--%>
+<%--                            %>--%>
+
                         </ul>
                     </div>
                 </div>
