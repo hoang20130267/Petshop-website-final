@@ -78,7 +78,7 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li><a href="index.jsp">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li><a href="#">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="product-details.jsp">Shop Details</a></li>
@@ -94,7 +94,7 @@
         <div id="mobile-menu-wrap"><div class="slicknav_menu"><a href="#" aria-haspopup="true" role="button" tabindex="0" class="slicknav_btn slicknav_collapsed" style="outline: none;"><span class="slicknav_menutxt">MENU</span><span class="slicknav_icon"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><nav class="slicknav_nav slicknav_hidden" aria-hidden="true" role="menu" style="display: none;">
             <ul>
                 <li class="active"><a href="index.jsp" role="menuitem">Home</a></li>
-                <li><a href="./shop-grid.html" role="menuitem">Shop</a></li>
+                <li><a href="#" role="menuitem">Shop</a></li>
                 <li class="slicknav_collapsed slicknav_parent"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">Pages</a>
                     <span class="slicknav_arrow">►</span></a><ul class="header__menu__dropdown slicknav_hidden" role="menu" aria-hidden="true" style="display: none;">
                         <li><a href="product-details.jsp" role="menuitem" tabindex="-1">Shop Details</a></li>
@@ -126,6 +126,7 @@
      <jsp:include page="layout/header.jsp"></jsp:include>
     <!-- Header Section End -->
 
+<%--     <jsp:include page="SignUp/index.jsp" ></jsp:include>--%>
 
     <iframe src="SignUp/index.jsp" width="100%" height="100%" frameborder="0" > </iframe>
       <!-- Footer Section Begin -->

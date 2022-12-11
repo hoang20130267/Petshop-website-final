@@ -11,8 +11,9 @@ public class ProductDAO {
     private List<Product> listProductDog;
     private List<Product> listProductCat;
     private List<Product> listProductAccessory;
-
+    private Product p;
     public ProductDAO(){
+
         listProduct = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -29,6 +30,7 @@ public class ProductDAO {
             return handle.createQuery("select * from product where productId > 3000")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
+
     }
 
     public static void main(String[] args) {
