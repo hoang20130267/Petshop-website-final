@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "SignUpController", value = "/SignUp/SignUpController")
+@WebServlet(name = "SignUpController", value = "/SignUpController")
 public class SignUpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,18 +35,18 @@ public class SignUpController extends HttpServlet {
         }
         if (fullname == "" || email == "" || user == "" || passwd == "" || confirmpassword == "") {
             request.setAttribute("registerError", "Không được bỏ trống!");
-            request.getRequestDispatcher("/SignUp/index.jsp").forward(request, response);
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         } else {
             String exe = SignUpService.getInstance().checkUser(email, user);
             if (exe != null) {
                 request.setAttribute("registerError", exe);
-                request.getRequestDispatcher("/SignUp/index.jsp").forward(request, response);
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             } else if (!passwd.equals(confirmpassword)) {
                 request.setAttribute("registerError", "Mật khẩu nhập lại không đúng!");
-                request.getRequestDispatcher("/SignUp/index.jsp").forward(request, response);
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             } else {
                 SignUp users = (SignUp) request.getSession().getAttribute("Signup");
-                boolean test = ms.sendEmail(users);
+                boolean test = ms.sendEmailSignUp(users);
                 //check if the email send successfully
                 if (test) {
                     HttpSession session = request.getSession();

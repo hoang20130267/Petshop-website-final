@@ -143,15 +143,18 @@
                                  <div class="mb-4">
                                      <h3>Quên mật khẩu</h3>
                                  </div>
-                                 <form action="#" method="post">
+                                 <% String error = (String) request.getAttribute("forgotError"); %>
+                                 <form action="/Petshop_website_final_war/ForgotPasswordController" method="post">
                                      <div class="form-group first">
-                                         <p>Email hoặc sô điện thoại</p>
-                                         <input type="text" class="form-control" id="username">
-
+                                         <p>Nhập Email để nhận mã OTP:</p>
+                                         <input type="text" class="form-control" id="email" name="email">
                                      </div>
-                                     <a href="#" style="text-decoration: none;">
-                                         <div class="button_forgot">Đặt lại mật khẩu</div>
-                                     </a>
+                                     <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
+
+                                     <input class="btn btn--radius-2 btn--blue" type="submit" value="Gửi OTP">
+<%--                                     <a href="ForgotPasswordController" style="text-decoration: none;">--%>
+<%--                                         <div class="button_forgot">Gửi OTP</div>--%>
+<%--                                     </a>--%>
                                      <a href="login.jsp" class="d-block text-center my-4 text-muted" style="text-decoration: none;"> Đăng nhập</a>
                                  </form>
                              </div>

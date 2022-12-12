@@ -54,7 +54,7 @@
             <i class="fa-brands fa-instagram"></i>
         </div>
       </div>
-    
+
     <!-- Page Preloder -->
     <div id="preloder" style="display: none;">
         <div class="loader" style="display: none;"></div>
@@ -143,29 +143,26 @@
              <div class="card card-4">
                  <div class="card-body">
                      <h2 class="title">Đăng kí</h2>
-                     <form method="POST" action="#">
+                     <form method="POST" id="form-signup" action="/Petshop_website_final_war/SignUpController">
                          <div class="row row-space">
                              <div class="col-6">
                                  <div class="input-group">
-                                     <label class="label">Họ</label>
-                                     <input class="input--style-4" type="text" name="first_name">
+                                     <label class="label">Họ Tên</label>
+                                     <input class="input--style-4" type="text" id="fullname" name="fullname">
                                  </div>
                              </div>
                              <div class="col-6">
                                  <div class="input-group">
-                                     <label class="label">Tên</label>
-                                     <input class="input--style-4" type="text" name="last_name">
+                                     <label class="label">Email</label>
+                                     <input class="input--style-4" type="email" id="email" name="email">
                                  </div>
                              </div>
                          </div>
                          <div class="row row-space">
                              <div class="col-6">
                                  <div class="input-group">
-                                     <label class="label">Ngày sinh</label>
-                                     <div class="input-group-icon">
-                                         <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                     </div>
+                                     <label class="label">Tên đăng nhập</label>
+                                     <input class="input--style-4" type="text" id="user" name="user">
                                  </div>
                              </div>
                              <div class="col-6">
@@ -187,14 +184,14 @@
                          <div class="row row-space">
                              <div class="col-6">
                                  <div class="input-group">
-                                     <label class="label">Email</label>
-                                     <input class="input--style-4" type="email" name="email">
+                                     <label class="label">Mật khẩu</label>
+                                     <input id="upass" class="input--style-4" type="password" name="passwd">
                                  </div>
                              </div>
                              <div class="col-6">
                                  <div class="input-group">
                                      <label class="label">Số điện thoại</label>
-                                     <input class="input--style-4" type="text" name="phone">
+                                     <input class="input--style-4" type="text" id="phone" name="phone">
                                  </div>
                              </div>
                          </div>
@@ -203,24 +200,21 @@
                          <div class="row row-space">
                              <div class="col-6">
                                  <div class="input-group">
-                                     <label class="label">Tên đăng nhập</label>
-                                     <input class="input--style-4" type="email" name="email">
+                                     <label class="label">Nhập Lại Mật khẩu</label>
+                                     <input id="upassconfirm" class="input--style-4" type="password"
+                                            data-id="confirmpassword" name="confirmpassword">
                                  </div>
                              </div>
                              <div class="col-6">
-                                 <div class="input-group">
-                                     <label class="label">Mật khẩu</label>
-                                     <input id="upass" class="input--style-4" type="password">
+                                 <% String error = (String) request.getAttribute("registerError"); %>
+                                 <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
+                                 </p>
+                                 <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
+                                     <input class="btn btn--radius-2 btn--blue" type="submit" value="Đăng Ký">
                                  </div>
                              </div>
                          </div>
 
-
-                             <a href="#" style="text-decoration: none;">
-                                 <div class="button_login"> Đăng kí</div>
-                             </a>
-
-                        <br>
                          <span> <a href="login.jsp" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
                      </form>
                  </div>

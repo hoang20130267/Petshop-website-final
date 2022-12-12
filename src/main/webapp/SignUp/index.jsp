@@ -103,7 +103,7 @@
                             <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
                                 <input class="btn btn--radius-2 btn--blue" type="submit" value="Đăng Ký">
                             </div>
-                            <br>
+
                         </div>
                     </div>
                     <span>Bạn đã có tài khoản? <a href="../Login/index.jsp"

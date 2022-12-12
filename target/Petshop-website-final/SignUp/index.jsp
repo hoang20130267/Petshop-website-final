@@ -103,7 +103,7 @@
                             <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
                                 <input class="btn btn--radius-2 btn--blue" type="submit" value="Đăng Ký">
                             </div>
-                            <br>
+
                         </div>
                     </div>
                     <span>Bạn đã có tài khoản? <a href="../Login/index.jsp"
@@ -122,7 +122,6 @@
 <script src="vendor/select2/select2.min.js"></script>
 <script src="vendor/datepicker/moment.min.js"></script>
 <script src="vendor/datepicker/daterangepicker.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Main JS-->
 <script src="js/global.js"></script>
 
