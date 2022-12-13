@@ -50,9 +50,26 @@ public class ProductDAO {
         });
         return list;
     }
+    public List<Product> getTop9Product(){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit 9")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+    public List<Product> getNext9Product(int amount){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit ?,9")
+                    .bind(0,amount)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
     public static void main(String[] args) {
         new ProductDAO();
         System.out.println(new ProductDAO().searchByName("ALASKA"));
         System.out.println(new ProductDAO().listCategory);
+        System.out.println(new ProductDAO().getTop9Product());
     }
 }
