@@ -14,6 +14,7 @@ public class ProductDAO {
     private List<Product> listProductAccessory;
     private List<String> listCategory;
 
+
     public ProductDAO(){
         listProduct = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product")
@@ -36,8 +37,52 @@ public class ProductDAO {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+    public List<Product> searchByName(String txtSearch) {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0,"%"+ txtSearch + "%")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+    public List<Product> searchByName2(String txtSearch) {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?").bind(0,"%"+ txtSearch + "%")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+    public List<Product> getTop9Product(){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit 9")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+    public List<Product> getNext9Product(int amount){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit ?,9")
+                    .bind(0,amount)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+    public Product getProductDetail(String id) {
+        Product detail = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId = ?")
+                    .bind(0,id)
+                    .mapToBean(Product.class).first();
+        });
+        return detail;
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(new ProductDAO().listCategory);
+        new ProductDAO();
+        System.out.println(new ProductDAO().getProductDetail("1002"));
+//        System.out.println(new ProductDAO().searchByName("ALASKA"));
+//        System.out.println(new ProductDAO().listCategory);
+//        System.out.println(new ProductDAO().getTop9Product());
     }
 }

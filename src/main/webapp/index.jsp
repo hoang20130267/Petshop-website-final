@@ -335,14 +335,6 @@
                                 </a>
                             </li>
                             <% } %>
-<%--                        <% List<Product> list = (List<Product>) request.getAttribute("list5");--%>
-<%--                            for (Product p: list) {--%>
-<%--                            %>--%>
-<%--                            <li>--%>
-<%--                                <a href="#"><%=p.getGiong()%></a>--%>
-<%--                            </li>--%>
-<%--                            <% }--%>
-<%--                            %>--%>
 
                         </ul>
                     </div>

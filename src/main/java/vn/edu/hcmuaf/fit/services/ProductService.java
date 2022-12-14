@@ -15,7 +15,8 @@ public class ProductService {
     }
     public static List<Product> getData2() {
         return JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId < 2000")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang from product p INNER JOIN product_from_cate pc on p.productId = pc.product_id\n" +
+                            "where pc.cate_id = 1;")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
@@ -32,6 +33,12 @@ public class ProductService {
         });
     }
 
+    public static List<Product> getDataProductAdmin() {
+        return JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where productId < 3000")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+    }
 
     public static List<String> getData5() {
         return JDBIConnector.get().withHandle(handle -> {
@@ -39,15 +46,18 @@ public class ProductService {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+
     public static void main(String[] args) {
-        System.out.println(getData5());
+        System.out.println(getData2());
     }
 
-    public static List<Product> getDataProductAdmin() {
-        return JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId < 3000")
-                    .mapToBean(Product.class).stream().collect(Collectors.toList());
-        });
-    }
+
+//    public static List<Product> getDataProductAdmin() {
+//        return JDBIConnector.get().withHandle(handle -> {
+//            return handle.createQuery("select * from product where productId < 3000")
+//                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+//        });
+//    }
+
 
 }

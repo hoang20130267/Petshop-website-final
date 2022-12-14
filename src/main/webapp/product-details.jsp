@@ -1,6 +1,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -274,13 +275,20 @@
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
+            <% ProductDAO dao = new ProductDAO();
+                String id = request.getParameter("id");
+                Product product = dao.getProductDetail(id);
+            %>
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
-                    <h2>Chó Corgi Fluffy</h2>
+                    <h2>
+                        <%=product.getProductName()%>
+                    </h2>
                     <div class="breadcrumb__option">
                         <a href="index.jsp">Home</a>
                         <a href="index.jsp">Chó cảnh</a>
-                        <span><strong>Phốc sóc</strong></span>
+                        <span><%=product.getProductName()%><strong>
+                        </strong></span>
                     </div>
                 </div>
             </div>
@@ -297,23 +305,23 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="img/products/dog/sp6.png" alt="">
+                             src="<%=product.getImage()%>" alt="">
                     </div>
-                    <div class="product__details__pic__slider owl-carousel">
-                        <img data-imgbigurl="img/products/dog/sp6.png"
-                             src="img/products/dog/sp6.png" alt="">
-                        <img data-imgbigurl="img/products/dog/sp6.png"
-                             src="img/products/dog/sp6.png" alt="">
-                        <img data-imgbigurl="img/products/dog/sp6.png"
-                             src="img/products/dog/sp6.png" alt="">
-                        <img data-imgbigurl="img/products/dog/sp6.png"
-                             src="img/products/dog/sp6.png" alt="">
-                    </div>
+<%--                    <div class="product__details__pic__slider owl-carousel">--%>
+<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+<%--                             src="img/products/dog/sp6.png" alt="">--%>
+<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+<%--                             src="img/products/dog/sp6.png" alt="">--%>
+<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+<%--                             src="img/products/dog/sp6.png" alt="">--%>
+<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+<%--                             src="img/products/dog/sp6.png" alt="">--%>
+<%--                    </div>--%>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
-                    <h3>Chó Corgi Fluffy</h3>
+                    <h3><%=product.getProductName()%></h3>
                     <div class="product__details__rating">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -322,9 +330,8 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
-                    <div class="product__details__price">10.000.000đ</div>
-                    <p>Chó Corgi Fluffy có ngoại hình nhỏ bé và ngộ nghĩnh, đáng yêu. Chúng cũng rất năng động và thông
-                        minh nên được nhiều người ưa thích và mong muốn sở hữu.</p>
+                    <div class="product__details__price"><%=product.getPrice()%> VNĐ</div>
+                    <p><%=product.getDescription()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
@@ -335,9 +342,9 @@
                     <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
-                        <li><b>Giống: </b> <span>Corgi Fluffy</span></li>
-                        <li><b>Màu Sắc: </b> <span>Vàng & Trắng</span></li>
-                        <li><b>Cân nặng: </b> <span>2 kg</span></li>
+                        <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
+                        <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
+                        <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
                         <li><b>Chia sẻ thông tin </b>
                             <div class="share">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -356,10 +363,10 @@
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
                                aria-selected="true">Giới thiệu</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                               aria-selected="false">Thông tin</a>
-                        </li>
+<%--                        <li class="nav-item">--%>
+<%--                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"--%>
+<%--                               aria-selected="false">Thông tin</a>--%>
+<%--                        </li>--%>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
                                aria-selected="false">Đánh giá <span>(0)</span></a>
@@ -369,32 +376,17 @@
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Giới thiệu về thú cưng</h6>
-                                <p>Chó Corgi Fluffy có ngoại hình nhỏ bé và ngộ nghĩnh, đáng yêu. Chúng cũng rất năng
-                                    động và thông minh nên được nhiều người ưa thích và mong muốn sở hữu.</p>
+                                <p><%=product.getDital()%></p>
                             </div>
                         </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <h6>Thông tin thú cưng</h6>
-                                <p>Corgi được phân ra thành ba giống loại nhau là Cardigan Corgi, Pembroke Welsh Corgi
-                                    và Corgi Fluffy. Tên của chúng được đặt theo tên của xứ Wells cổ, cũng là nơi mà
-                                    Corgi được phát hiện.
-
-                                    Chó Corgi Fluffy có thân hình ngắn và thấp lùn. Bề dài khoảng 20 cm, trọng lượng
-                                    trung bình 12kg. Corgi thường được nuôi dưỡng để làm chó săn và chăn gia súc. Chúng
-                                    cắn vào gót chân cũng những con gia súc không đi theo bầy đàn. Thỉnh thoảng chúng
-                                    cắn luôn cả gót chân chủ nhân mình, rất đáng yêu!
-
-                                    Nuôi dưỡng chó Corgi Fluffy phải thuân thủ chế độ dinh dưỡng nghiêm ngặt. Bởi vì cơ
-                                    thể chúng phát triển và tăng trọng rất nhanh. Nếu người nuôi không kiểm soát ăn uống
-                                    thì rất dễ rơi vào tình trạng béo phì.</p>
-                                <p>&ensp; Giá của giống chó Corgi Fluffy trên thị trường hiện nay
-                                    Hiện nay, dòng chó Corgi Fluffy vẫn chưa được nhân giống phổ biến. Các nhà phân phối
-                                    thường phải nhập khẩu Corgi từ nước ngoài về. Vì vậy mà giá thành của giống chó này
-                                    khá cao. Sau đây sẽ là thông tin tham khảo giành cho bạn đang có ý định sở hữu một
-                                    boss Corgi Fluffy.</p>
-                            </div>
-                        </div>
+<%--                        <div class="tab-pane" id="tabs-2" role="tabpanel">--%>
+<%--                            <div class="product__details__tab__desc">--%>
+<%--                                <h6>Thông tin thú cưng</h6>--%>
+<%--                                <p>--%>
+<%--                                <%=product.getDescription()%>--%>
+<%--                                </p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Đánh giá</h6>

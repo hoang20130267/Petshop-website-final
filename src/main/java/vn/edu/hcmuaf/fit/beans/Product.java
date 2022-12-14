@@ -46,6 +46,7 @@ public class Product implements Serializable {
         this.cannang = cannang;
     }
 
+
     public int getProductId() {
         return productId;
     }
