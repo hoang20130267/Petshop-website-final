@@ -10,7 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
+<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -36,7 +36,8 @@
                         <%} else if (user != null) {%>
                         <div class="header__top__right__auth">
                             <li class="dropdown pc-h-item" style="list-style-type: none;">
-                                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
+                                   role="button" aria-haspopup="false" aria-expanded="false">
                                     <span>
                                         <span class="user-name" style="color: #111;"><i class="fa fa-user"></i>&nbsp;&nbsp;<%=user.getName()%></span>
                                     </span>
@@ -45,7 +46,7 @@
                                     <a href="#!" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
-                                    <a href="LogoutController"  class="dropdown-item">
+                                    <a href="LogoutController" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
                                 </div>
@@ -119,16 +120,21 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="hero__search">
+                <div class="hero__search" style="overflow: unset !important;">
                     <div class="hero__search__form">
                         <form action="#">
                             <!--                                <div class="hero__search__categories">-->
                             <!--                                    Tất cả các loại-->
                             <!--                                    <span class="arrow_carrot-down"></span>-->
                             <!--                                </div>-->
-                            <input type="text" placeholder="Bạn cần tìm gì ?">
+                            <input id="search-keyword" type="text" oninput="searchByName(this)" placeholder="Bạn cần tìm gì ?">
                             <button type="submit" class="site-btn">Tìm Kiếm</button>
                         </form>
+                        <div id="result-search" style="display: none">
+                            <ul class="result" style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;">
+
+                            </ul>
+                        </div>
                     </div>
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
@@ -144,3 +150,32 @@
         </div>
     </div>
 </section>
+<script>
+    <%@include file="../js/jquery-3.3.1.min.js"%>
+</script>
+<script>
+    $(document).ready(function () {
+        $("#search-keyword").focus(function () {
+            $("#result-search").css("display", "block");
+        })
+        $("#search-keyword").on("blur",function () {
+            $("#result-search").css("display", "none");
+        })
+    })
+    function searchByName(param){
+        const txtSearch = param.value;
+        $.ajax({
+            url: "/Petshop_website_final_war/search-main",
+            type: "get",
+            data: {
+                txt: txtSearch
+            },
+            success: function (data) {
+                $("#result-search .result").html(data)
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+</script>

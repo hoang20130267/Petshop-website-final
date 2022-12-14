@@ -131,16 +131,21 @@
                 </div>
             </div>
             <div class="col-lg-9">
-                <div class="hero__search">
+                <div class="hero__search" style="overflow: unset !important;">
                     <div class="hero__search__form">
                         <form action="#">
                             <!--                                <div class="hero__search__categories">-->
-                            <!--                                    Tìm kiếm sản phẩm-->
-                            <!--&lt;!&ndash;                                    <span class="arrow_carrot-down"></span>&ndash;&gt;-->
+                            <!--                                    Tất cả các loại-->
+                            <!--                                    <span class="arrow_carrot-down"></span>-->
                             <!--                                </div>-->
-                            <input type="text" placeholder="Bạn cần tìm gì ?">
+                            <input id="search-keyword" type="text" oninput="searchByName(this)" placeholder="Bạn cần tìm gì ?">
                             <button type="submit" class="site-btn">Tìm Kiếm</button>
                         </form>
+                        <div id="result-search" style="display: none">
+                            <ul class="result" style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;">
+
+                            </ul>
+                        </div>
                     </div>
                     <div class="hero__search__phone">
                         <div class="hero__search__phone__icon">
@@ -164,3 +169,32 @@
         </div>
     </div>
 </section>
+<script>
+    <%@include file="../js/jquery-3.3.1.min.js"%>
+</script>
+<script>
+    $(document).ready(function () {
+        $("#search-keyword").focus(function () {
+            $("#result-search").css("display", "block");
+        })
+        $("#search-keyword").on("blur",function () {
+            $("#result-search").css("display", "none");
+        })
+    })
+    function searchByName(param){
+        const txtSearch = param.value;
+        $.ajax({
+            url: "/Petshop_website_final_war/search-main",
+            type: "get",
+            data: {
+                txt: txtSearch
+            },
+            success: function (data) {
+                $("#result-search .result").html(data)
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+</script>

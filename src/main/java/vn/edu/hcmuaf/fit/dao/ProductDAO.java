@@ -43,7 +43,13 @@ public class ProductDAO {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
-
+    public List<Product> searchProductByName(String txtSearch) {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product where ProductName like ?").bind(0, "%" + txtSearch + "%")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
