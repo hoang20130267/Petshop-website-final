@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -192,7 +193,7 @@
                   />
                   <div class="row my-4">
                     <div class="col">
-                      <span class="badge_btn_3 mb-1"><%=p.getGiong()%></span>
+                      <span class="badge_btn_3 mb-1" style="display: flex; padding-left: 50px"><%=p.getGiong()%></span>
                       <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
                       style="text-align: center;"><%=p.getProductName()%></a
                       >
@@ -232,8 +233,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
+                      <a class="btn_2" href="update-product.jsp?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
+                      <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Xóa</a>
                   </div>
                 </div>
               </div>

@@ -130,7 +130,7 @@
         }
     </style>
     </head>
-    <% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
+
 
 <body>
 
@@ -230,6 +230,7 @@
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
+<<<<<<< HEAD
     <header class="header">
         <div class="header__top">
             <div class="container">
@@ -373,6 +374,9 @@
             </div>
         </div>
     </section>
+=======
+    <jsp:include page="layout/header-home.jsp"></jsp:include>
+>>>>>>> 65a356001fd2629769552fee0ed6c51f97ea32c6
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->

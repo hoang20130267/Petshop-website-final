@@ -9,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
+
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -43,13 +44,12 @@
                                     <a href="#!" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
-                                    <a href="LogoutController"  class="dropdown-item">
+                                    <a href="LogoutController" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
                                 </div>
                             </li>
                         </div>
-
                         <%}%>
                     </div>
                 </div>
@@ -60,13 +60,13 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="index.jsp"><img src="img/logo.png" alt=""></a>
+                    <a href="./index.html"><img src="img/logo.png" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li><a href="index.jsp">Trang Chủ</a></li>
+                        <li><a href="./index.html">Trang Chủ</a></li>
                         <li><a href="all-product">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="products-dog">Chó</a></li>
@@ -94,7 +94,10 @@
         </div>
     </div>
 </header>
-<section class="hero hero-normal">
+<!-- Header Section End -->
+
+<!-- Hero Section Begin -->
+<section class="hero">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -104,14 +107,23 @@
                         <span>Danh mục</span>
                     </div>
                     <ul>
-                        <% List<String> listC = ProductService.getData5();
-                            for (String p : listC) { %>
+                        <% List<String> list = ProductService.getData5();
+                            for (String p : list) { %>
                         <li>
                             <a href="#">
                                 <%=p%>
                             </a>
                         </li>
                         <% } %>
+                        <%--                        <% List<Product> list = (List<Product>) request.getAttribute("list5");--%>
+                        <%--                            for (Product p: list) {--%>
+                        <%--                            %>--%>
+                        <%--                            <li>--%>
+                        <%--                                <a href="#"><%=p.getGiong()%></a>--%>
+                        <%--                            </li>--%>
+                        <%--                            <% }--%>
+                        <%--                            %>--%>
+
                     </ul>
                 </div>
             </div>
@@ -120,8 +132,8 @@
                     <div class="hero__search__form">
                         <form action="#">
                             <!--                                <div class="hero__search__categories">-->
-                            <!--                                    Tất cả các loại-->
-                            <!--                                    <span class="arrow_carrot-down"></span>-->
+                            <!--                                    Tìm kiếm sản phẩm-->
+                            <!--&lt;!&ndash;                                    <span class="arrow_carrot-down"></span>&ndash;&gt;-->
                             <!--                                </div>-->
                             <input type="text" placeholder="Bạn cần tìm gì ?">
                             <button type="submit" class="site-btn">Tìm Kiếm</button>
@@ -135,6 +147,14 @@
                             <h5>+84 987.145.145</h5>
                             <span>Hỗ trợ 24/7</span>
                         </div>
+                    </div>
+                </div>
+                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg" style="background-image: url(&quot;img/hero/banner.jpg&quot;);">
+                    <div class="hero__text">
+                        <span>CỬA HÀNG THÚ CƯNG</span>
+                        <h2>Chó mèo <br>và nhiều hơn thế</h2>
+                        <p>Giao thú cưng tận nhà trong ngày</p>
+                        <a href="list-product" class="primary-btn">MUA NGAY</a>
                     </div>
                 </div>
             </div>
