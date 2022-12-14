@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.dao.ProductDAO;
 import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.*;
@@ -13,7 +14,8 @@ import java.util.List;
 public class AllProduct extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> list = ProductService.getData();
+        ProductDAO dao = new ProductDAO();
+        List<Product> list = dao.getTop9Product();
         request.setAttribute("list", list);
         request.getRequestDispatcher("all-products.jsp").forward(request,response);
     }

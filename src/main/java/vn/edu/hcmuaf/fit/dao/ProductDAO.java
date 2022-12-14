@@ -54,6 +54,7 @@ public class ProductDAO {
         });
         return list;
     }
+<<<<<<< HEAD
     public static Product getProductById(String id){
         Product p = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId = ?")
@@ -104,5 +105,28 @@ public class ProductDAO {
           updateProduct("1000", "Cho mat ngao", "deo co", "20000000", "cho ngu vcl", "cho ngu", "5kg");
 //        insertProduct("1000", "Cho mat ngu", "deo co", "10000000", "cho ngu vcl", "cho ngu", "5kg");
         System.out.println(new ProductDAO().searchByName("Cho mat ngu"));
+=======
+    public List<Product> getTop9Product(){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit 9")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+    public List<Product> getNext9Product(int amount){
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product limit ?,9")
+                    .bind(0,amount)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+    public static void main(String[] args) {
+        new ProductDAO();
+        System.out.println(new ProductDAO().searchByName("ALASKA"));
+        System.out.println(new ProductDAO().listCategory);
+        System.out.println(new ProductDAO().getTop9Product());
+>>>>>>> a0a58eccc1f6c32e65a22da9033303f94c42232e
     }
 }
