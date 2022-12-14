@@ -129,6 +129,21 @@ public class ProductDAO {
         return list;
     }
 
+    public List<Product> get8BestProduct() {
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT SUM(o.Quantity), p.ProductName, p.Price, p.Image\n" +
+                            "FROM orderdetail o join product p \n" +
+                            "ON o.ProductID = p.productId\n" +
+                            "GROUP BY ProductName\n" +
+                            "ORDER BY SUM(o.Quantity) DESC\n" +
+                            "limit 8;\n")
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+
+
 
     public Product getProductDetail(String id) {
         Product detail = JDBIConnector.get().withHandle(handle -> {
@@ -143,12 +158,10 @@ public class ProductDAO {
     public static void main(String[] args) {
         new ProductDAO();
 //        System.out.println(new ProductDAO().getProductDetail("1002"));
-        System.out.println(new ProductDAO().listProduct);
+        System.out.println(new ProductDAO().get8BestProduct());
 //        System.out.println(new ProductDAO().searchByName("ALASKA"));
 //        System.out.println(new ProductDAO().listCategory);
 //        System.out.println(new ProductDAO().getTop9Product());
-
-        new ProductDAO();
 //        System.out.println(new ProductDAO().searchByName("ALASKA"));
 //        System.out.println(new ProductDAO().listCategory);
 //        deleteProduct("1000");

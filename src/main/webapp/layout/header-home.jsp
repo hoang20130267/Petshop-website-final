@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -107,11 +109,12 @@
                         <span>Danh mục</span>
                     </div>
                     <ul>
-                        <% List<String> list = ProductService.getData5();
-                            for (String p : list) { %>
+                        <%  DetailDAO dao = new DetailDAO();
+                            List<Detail> list = dao.listCategory();
+                            for (Detail p : list) { %>
                         <li>
                             <a href="#">
-                                <%=p%>
+                                <%=p.getCatName()%>
                             </a>
                         </li>
                         <% } %>
