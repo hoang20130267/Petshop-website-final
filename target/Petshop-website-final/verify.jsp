@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="col-2">
-              <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
+              <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">7
                   <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
                 <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
 <%--                <a href="#"> <div class="btn btn--radius-2 btn--blue" type="text" >Xác Nhận</div></a>--%>

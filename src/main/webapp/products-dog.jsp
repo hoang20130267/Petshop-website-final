@@ -405,7 +405,7 @@
               <h2>Giảm Giá</h2>
           </div>
           <div class="row">
-              <div class="product__discount__slider owl-carousel">
+              <div class="product__discount__slider owl-carousel" style="z-index: -1">
                   <div class="col-lg-4">
                       <div class="product__discount__item">
                           <div class="product__discount__item__pic set-bg"
