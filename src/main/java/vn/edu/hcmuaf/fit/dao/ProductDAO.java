@@ -80,7 +80,8 @@ public class ProductDAO {
 
     public static void main(String[] args) {
         new ProductDAO();
-        System.out.println(new ProductDAO().getProductDetail("1002"));
+//        System.out.println(new ProductDAO().getProductDetail("1002"));
+        System.out.println(new ProductDAO().listProduct);
 //        System.out.println(new ProductDAO().searchByName("ALASKA"));
 //        System.out.println(new ProductDAO().listCategory);
 //        System.out.println(new ProductDAO().getTop9Product());
