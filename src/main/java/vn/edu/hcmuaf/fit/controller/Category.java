@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.services.ProductService;
+import vn.edu.hcmuaf.fit.beans.Detail;
+
+import vn.edu.hcmuaf.fit.dao.DetailDAO;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,8 +15,9 @@ import java.util.List;
 public class Category extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> list = ProductService.getData5();
-        request.setAttribute("list5", list);
+        DetailDAO dao = new DetailDAO();
+        List<Detail> list = dao.listCategory();
+        request.setAttribute("listD", list);
         request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
