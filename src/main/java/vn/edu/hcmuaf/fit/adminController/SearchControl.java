@@ -38,7 +38,7 @@ public class SearchControl extends HttpServlet {
                     "                  />\n" +
                     "                  <div class=\"row my-4\">\n" +
                     "                    <div class=\"col\">\n" +
-                    "                      <span class=\"badge_btn_3 mb-1\">"+p.getGiong()+"</span>\n" +
+                    "                      <span class=\"badge_btn_3 mb-1\" style=\"display: flex; padding-left: 50px\">"+p.getGiong()+"</span>\n" +
                     "                      <a href=\"#\" class=\"f_w_400 color_text_3 f_s_14 d-block\"\n" +
                     "                      style=\"text-align: center;\">"+p.getProductName()+"</a\n" +
                     "                      >\n" +
@@ -78,8 +78,8 @@ public class SearchControl extends HttpServlet {
                     "                    </div>\n" +
                     "                  </div>\n" +
                     "                  <div class=\"d-grid\">\n" +
-                    "                    <button class=\"btn_2\">Chỉnh sửa</button>\n" +
-                    "                    <button class=\"btn_2\" style=\"margin-top: 3px\">Xóa</button>\n" +
+                    "                    <a class=\"btn_2\" href=\"update-product.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Chỉnh sửa</a>\n" +
+                    "                    <a class=\"btn_2\" href=\"delete-product?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Xóa</a>\n" +
                     "                  </div>\n" +
                     "                </div>\n" +
                     "              </div>\n" +
