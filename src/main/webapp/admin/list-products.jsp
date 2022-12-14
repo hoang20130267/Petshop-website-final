@@ -233,8 +233,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                      <a class="btn_2" href="update-product.jsp?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center">Chỉnh sửa</a>
-                      <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center">Xóa</a>
+                      <a class="btn_2" href="update-product.jsp?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
+                      <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Xóa</a>
                   </div>
                 </div>
               </div>
