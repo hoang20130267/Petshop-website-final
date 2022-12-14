@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -230,153 +233,10 @@
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-<<<<<<< HEAD
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__left">
-                            <ul>
-                                <li><i class="fa fa-envelope"></i> LTW_nhom10@gmail.com</li>
-                                <li>Hệ thống cửa hàng thú cưng</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook" title="Our Facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram" title="Our Instagram"></i></a>
-                            </div>
-                            <%if (user == null) {%>
-                            <div class="header__top__right__auth">
-                                <a href="login.jsp"><i class="fa fa-user"></i> Đăng nhập</a>
-                            </div>
-                            <%} else if (user != null) {%>
-                            <div class="header__top__right__auth">
-                                <li class="dropdown pc-h-item" style="list-style-type: none;">
-                                    <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <span>
-                                        <span class="user-name" style="color: #111;"><i class="fa fa-user"></i>&nbsp;&nbsp;<%=user.getName()%></span>
-                                    </span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
-                                        <a href="#!" class="dropdown-item">
-                                            <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
-                                        </a>
-                                        <a href="LogoutController" class="dropdown-item">
-                                            <span><i data-feather="x-square"></i> Đăng xuất</span>
-                                        </a>
-                                    </div>
-                                </li>
-                            </div>
-                            <%}%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Trang Chủ</a></li>
-                            <li><a href="all-product">Thú Cưng</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="products-dog">Chó</a></li>
-                                    <li><a href="products-cat">Mèo</a></li>
-                                    <li><a href="products-accessory">Phụ Kiện</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.jsp">Tin Tức</a></li>
-                            <li><a href="contact.jsp">Liên Hệ</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href="like-product.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
 
-    <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Danh mục</span>
-                        </div>
-                        <ul>
-                            <% List<String> list = ProductService.getData5();
-                                for (String p : list) { %>
-                            <li>
-                                <a href="#">
-                                    <%=p%>
-                                </a>
-                            </li>
-                            <% } %>
 
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="hero__search">
-                        <div class="hero__search__form">
-                            <form action="#">
-<!--                                <div class="hero__search__categories">-->
-<!--                                    Tìm kiếm sản phẩm-->
-<!--&lt;!&ndash;                                    <span class="arrow_carrot-down"></span>&ndash;&gt;-->
-<!--                                </div>-->
-                                <input type="text" placeholder="Bạn cần tìm gì ?">
-                                <button type="submit" class="site-btn">Tìm Kiếm</button>
-                            </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+84 987.145.145</h5>
-                                <span>Hỗ trợ 24/7</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg" style="background-image: url(&quot;img/hero/banner.jpg&quot;);">
-                        <div class="hero__text">
-                            <span>CỬA HÀNG THÚ CƯNG</span>
-                            <h2>Chó mèo <br>và nhiều hơn thế</h2>
-                            <p>Giao thú cưng tận nhà trong ngày</p>
-                            <a href="list-product" class="primary-btn">MUA NGAY</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-=======
     <jsp:include page="layout/header-home.jsp"></jsp:include>
->>>>>>> 65a356001fd2629769552fee0ed6c51f97ea32c6
+
     <!-- Hero Section End -->
 
     <!-- Categories Section Begin -->
@@ -424,22 +284,26 @@
                         <h2>Thú Cưng Bán Chạy</h2>
                     </div>
                     <div class="featured__controls">
-                        <ul>
-                            <li class="active" data-filter="*">Tất Cả</li>
-                            <li data-filter=".oranges">Chó Poodle</li>
-                            <li data-filter=".fresh-meat">Chó Shiba</li>
-                            <li data-filter=".vegetables">Mèo Chân Ngắn</li>
-                            <li data-filter=".fastfood">Mèo Lông Xám</li>
-                            <li data-filter=".fastfood">Chó Bichon</li>
+<%--                        <ul>--%>
+<%--                            <li class="active" data-filter="*">Tất Cả</li>--%>
+<%--                            <li data-filter=".oranges">Chó Poodle</li>--%>
+<%--                            <li data-filter=".fresh-meat">Chó Shiba</li>--%>
+<%--                            <li data-filter=".vegetables">Mèo Chân Ngắn</li>--%>
+<%--                            <li data-filter=".fastfood">Mèo Lông Xám</li>--%>
+<%--                            <li data-filter=".fastfood">Chó Bichon</li>--%>
 
-                        </ul>
+<%--                        </ul>--%>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
+                <% ProductDAO dao = new ProductDAO();
+                    List<Product> list = dao.get8BestProduct();
+                    for (Product p: list) {
+                %>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-9.jpg">
+                        <div class="featured__item__pic set-bg" data-setbg="<%=p.getImage()%>">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -447,116 +311,117 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">BICHON TRẮNG XINH XINH</a></h6>
-                            <h5>16.000.000đ</h5>
+                            <h6><a href="#"><%=p.getProductName()%></a></h6>
+                            <h5><%=p.getPrice()%> VNĐ</h5>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Poodle Tiny màu nâu</a></h6>
-                            <h5>20.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Alaska Giant khổng lồ xám trắng</a></h6>
-                            <h5>25.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Munchkin Bicolor xám xanh lông dài</a></h6>
-                            <h5>20.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Poodle Tiny tai bướm màu trắng</a></h6>
-                            <h5>20.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Rottweiler màu đen vàng</a></h6>
-                            <h5>25.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Bully American xám trắng</a></h6>
-                            <h5>30.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Scottish Golden tai cụp</a></h6>
-                            <h5>30.000.000đ</h5>
-                        </div>
-                    </div>
-                </div>
+                <% } %>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Poodle Tiny màu nâu</a></h6>--%>
+<%--                            <h5>20.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Alaska Giant khổng lồ xám trắng</a></h6>--%>
+<%--                            <h5>25.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Munchkin Bicolor xám xanh lông dài</a></h6>--%>
+<%--                            <h5>20.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Poodle Tiny tai bướm màu trắng</a></h6>--%>
+<%--                            <h5>20.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Rottweiler màu đen vàng</a></h6>--%>
+<%--                            <h5>25.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Bully American xám trắng</a></h6>--%>
+<%--                            <h5>30.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">--%>
+<%--                    <div class="featured__item">--%>
+<%--                        <div class="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">--%>
+<%--                            <ul class="featured__item__pic__hover">--%>
+<%--                                <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                        <div class="featured__item__text">--%>
+<%--                            <h6><a href="#">Scottish Golden tai cụp</a></h6>--%>
+<%--                            <h5>30.000.000đ</h5>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
         </div>
     </section>

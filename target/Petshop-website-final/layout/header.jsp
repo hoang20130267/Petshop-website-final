@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page import="java.util.List" %>
-<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -67,7 +69,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="index.jsp">Trang Chủ</a></li>
-                        <li><a href="all-product">Thú Cưng</a>
+                        <li><a href="all-product.jsp?category=all>">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="products-dog">Chó</a></li>
                                 <li><a href="products-cat">Mèo</a></li>
@@ -104,11 +106,12 @@
                         <span>Danh mục</span>
                     </div>
                     <ul>
-                        <% List<String> listC = ProductService.getData5();
-                            for (String p : listC) { %>
+                        <%  DetailDAO dao = new DetailDAO();
+                            List<Detail> list = dao.listCategory();
+                            for (Detail p : list) { %>
                         <li>
                             <a href="#">
-                                <%=p%>
+                                <%=p.getCatName()%>
                             </a>
                         </li>
                         <% } %>
