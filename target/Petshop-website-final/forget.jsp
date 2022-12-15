@@ -155,7 +155,7 @@
 <%--                                     <a href="ForgotPasswordController" style="text-decoration: none;">--%>
 <%--                                         <div class="button_forgot">Gửi OTP</div>--%>
 <%--                                     </a>--%>
-                                     <a href="login.jsp" class="d-block text-center my-4 text-muted" style="text-decoration: none;"> Đăng nhập</a>
+                                     <a href="login.jsp" class="btn btn-pill text-white btn-block btn-primary" style="text-decoration: none;"> Đăng nhập</a>
                                  </form>
                              </div>
                          </div>

@@ -215,7 +215,7 @@
                              </div>
                          </div>
 
-                         <span> <a href="login.jsp" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
+                         <span> <a href="login.jsp" class="btn btn-pill text-white btn-block btn-primary button_login" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
                      </form>
                  </div>
              </div>

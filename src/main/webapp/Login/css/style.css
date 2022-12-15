@@ -123,7 +123,15 @@ h2 {
 .content2 .btn {
   height: 54px;
   padding-left: 30px;
-  padding-right: 30px; }
+  padding-right: 30px;
+  padding-top: 12px;
+}
+
+.content2 input {
+  display: inline-block;
+  align-items: center;
+  text-align: center;
+}
 
 .content2 .forgot-pass {
   position: relative;
