@@ -576,7 +576,7 @@
                                                         </select>
                                                         </div>
                                                     </div>
-                                                </div><button class="btn btn-phoenix-primary w-100">Xác nhận</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

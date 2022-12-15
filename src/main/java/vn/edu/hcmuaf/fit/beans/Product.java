@@ -12,7 +12,7 @@ public class Product implements Serializable {
     private int quantity;
     private int warranty;
     private boolean newProduct;
-    private String desription;
+    private String description;
     private String dital;
     private String createBy;
     private String createDate;
@@ -35,7 +35,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.warranty = warranty;
         this.newProduct = newProduct;
-        this.desription = description;
+        this.description = description;
         this.dital = dital;
         this.createBy = createBy;
         this.createDate = createDate;
@@ -119,12 +119,12 @@ public class Product implements Serializable {
         this.newProduct = newProduct;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String description) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDital() {
@@ -203,7 +203,7 @@ public class Product implements Serializable {
                 ", quantity=" + quantity +
                 ", warranty=" + warranty +
                 ", newProduct=" + newProduct +
-                ", desription='" + desription + '\'' +
+                ", desription='" + description + '\'' +
                 ", dital='" + dital + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createDate='" + createDate + '\'' +

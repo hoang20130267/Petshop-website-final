@@ -40,7 +40,7 @@
                         <div class=" dropdown-header">
                             <h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="../index.jsp" target="_blank">Quay lại website</a></span></h5>
                         </div>
-                        <a href="#!" class="dropdown-item">
+                        <a href="infor-admin.jsp" class="dropdown-item">
                             <i class="material-icons-two-tone">account_circle</i>
                             <span>Tài khoản của tôi</span>
                         </a>
