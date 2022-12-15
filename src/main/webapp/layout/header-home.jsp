@@ -43,7 +43,7 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="infor-user.jsp" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
                                     <a href="LogoutController" class="dropdown-item">

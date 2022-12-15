@@ -215,8 +215,8 @@
             </div> -->
             <ul class="breadcrumb">
               <li class="breadcrumb-item">Quản lý sản phẩm</li>
-              <li class="breadcrumb-item">Thú cưng</li>
-              <li class="breadcrumb-item">Thêm thú cưng</li>
+              <li class="breadcrumb-item">Danh sách thú cưng</li>
+              <li class="breadcrumb-item">Chỉnh sửa thú cưng</li>
             </ul>
           </div>
         </div>
@@ -573,7 +573,7 @@
                             </select>
                             </div>
                           </div>
-                        </div><button class="btn btn-phoenix-primary w-100">Xác nhận</button>
+                        </div>
                       </div>
                     </div>
                   </div>
