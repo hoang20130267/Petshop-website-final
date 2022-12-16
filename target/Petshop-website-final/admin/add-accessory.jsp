@@ -206,7 +206,7 @@
 
           <!-- <div class="content"> -->
 
-            <form class="mb-9">
+            <form action="add-accessory" method="post" class="mb-9">
               <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
                   <h2 class="mb-2">Thêm phụ kiện</h2>
@@ -218,7 +218,7 @@
                   <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
                     Xóa dữ liệu</button
                   >
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                    <button value="add-accessory" class="btn btn-primary mb-2 mb-sm-0" type="submit">
                     Đăng phụ kiện
                   </button>
                 </div>
@@ -226,14 +226,14 @@
               <h4 class="mb-3">Tên phụ kiện</h4>
               <div class="row g-5">
                 <div class="col-12 col-xl-8">
-                  <input
+                  <input name="name"
                     class="form-control mb-5"
                     type="text"
-                    placeholder="Viết tên phụ kiện tại đây..."
+                    placeholder="Viết tên phụ kiện tại đây..." required
                   />
                   <div class="mb-6">
                     <h4 class="mb-3">Chi tiết phụ kiện</h4>
-                      <textarea rows="20" cols="10" id="editor"
+                      <textarea name="description" rows="20" cols="10" id="editor" required
                       <%--                      class="tinymce"--%>
                       <%--                      name="content"--%>
                       <%--                      data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'--%>
@@ -247,27 +247,33 @@
 
                   </div>
                   <h4 class="mb-3">Thêm ảnh</h4>
-                  <div
-                    class="dropzone dropzone-multiple p-0 mb-5 dz-clickable"
-                    id="my-awesome-dropzone"
-                    data-dropzone="data-dropzone"
-                  >
-                    <div class="dz-preview d-flex flex-wrap"></div>
                     <div
-                      class="dz-message text-600"
-                      data-dz-message="data-dz-message"
+                            class="dropzone dropzone-multiple p-0 mb-5 dz-clickable"
+                            id="my-awesome-dropzone"
+                            data-dropzone="data-dropzone"
                     >
-                      kéo ảnh vào đây <span class="text-800">hoặc </span
-                      ><button class="btn btn-link p-0" type="button">
-                        tìm trong thiết bị</button
-                      ><br /><img
-                        class="mt-3 me-2"
-                        src="../../../assets/img/icons/image-icon.png"
-                        width="40"
-                        alt=""
-                      />
+                        <div class="dz-preview d-flex flex-wrap"></div>
+                        <div
+                                class="dz-message text-600"
+                                data-dz-message="data-dz-message"
+                        >
+
+                            <%--                                            <button class="btn p-0" type="button">--%>
+                            <%--                                                tìm trong thiết bị--%>
+                            <%--                                            </button--%>
+                            <%--                                            >--%>
+                            <label for="form-img-upload">Thêm ảnh </label>
+                            <input id="form-img-upload" name="pimage" type="file" required
+                                   accept="image/*"
+                                   onchange="document.getElementById('form-img').src = window.URL.createObjectURL(this.file[0])">
+                            <br/><img id="form-img"
+                        <%--                                                class="mt-3 me-2"--%>
+                                      src="#"
+                                      width="40"
+                                      alt=""
+                        />
+                        </div>
                     </div>
-                  </div>
                   <h4 class="mb-3">Danh mục</h4>
                   <div class="row g-0 border-top border-bottom border-300">
                     <div class="col-sm-4">
@@ -415,15 +421,15 @@
                                           <input name="price"
                                                  class="form-control"
                                                  type="text"
-                                                 placeholder="Đồng"
+                                                 placeholder="Đồng" required
                                           />
                                       </div>
                                       <div class="col-12 col-lg-6">
                                           <h5 class="mb-2">Giá tiền đã giảm</h5>
-                                          <input
+                                          <input name="promoPrice"
                                                   class="form-control"
                                                   type="text"
-                                                  placeholder="Đồng"
+                                                  placeholder="Đồng" required
                                           />
                                       </div>
                                   </div>
@@ -438,10 +444,10 @@
                                       <div class="row g-3">
                                           <div class="col-12 col-lg-6">
                                               <h5 class="mb-2">Số lượng</h5>
-                                              <input
+                                              <input name="quantity"
                                                       class="form-control"
                                                       type="text"
-                                                      placeholder=""
+                                                      placeholder="Ví dụ: 5" required
                                               />
                                           </div>
 
@@ -499,15 +505,15 @@
                           <h4 class="card-title mb-4">Danh mục</h4>
                           <div class="row">
 
-                            <div class="col-12 col-sm-6 col-xl-12">
-                              <div class="mb-4">
-                                <h5 class="mb-2">Phụ kiện</h5><input class="form-control mb-3" type="text" placeholder="Phụ kiện">
-                              </div>
-                            </div>
+<%--                            <div class="col-12 col-sm-6 col-xl-12">--%>
+<%--                              <div class="mb-4">--%>
+<%--                                <h5 class="mb-2">Phụ kiện</h5><input class="form-control mb-3" type="text" placeholder="Phụ kiện">--%>
+<%--                              </div>--%>
+<%--                            </div>--%>
                             <div class="col-12 col-sm-6 col-xl-12">
                               <div>
                                 <div class="d-flex flex-wrap justify-content-between mb-2">
-                                  <h5>Tags</h5><a class="fw-bold fs--1" href="#!">Thêm tag mới</a>
+                                  <h5>Tags</h5>
                                 </div><select class="form-select" aria-label="category">
                                   <option value="men-cloth">Phụ kiện</option>
 

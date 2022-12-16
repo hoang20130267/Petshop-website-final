@@ -237,8 +237,8 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                    <button class="btn_2">Chỉnh sửa</button>
-                    <button class="btn_2" style="margin-top: 3px">Xóa</button>
+                      <a class="btn_2" href="update-accessory.jsp?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
+                      <a class="btn_2" href="delete-accessory?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Xóa</a>
                   </div>
                 </div>
               </div>

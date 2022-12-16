@@ -38,15 +38,15 @@ public class SearchControlAccessory extends HttpServlet {
                     "                  />\n" +
                     "                  <div class=\"row my-4\">\n" +
                     "                    <div class=\"col\">\n" +
-                    "                      <!-- <span class=\"badge_btn_3 mb-1\">"+p.getGiong()+"</span> -->\n" +
+                    "                      <!-- <span class=\"badge_btn_3 mb-1\" style=\"margin-left: 63px;\">Chó Phốc</span> -->\n" +
                     "                      <a href=\"#\" class=\"f_w_400 color_text_3 f_s_14 d-block\"\n" +
                     "                      style=\"text-align: center;\">"+p.getProductName()+"</a\n" +
                     "                      >\n" +
                     "                    </div>\n" +
                     "                    <div class=\"col-auto\">\n" +
-                    "                      <h4 class=\"text-dark mt-0\" style=\"margin-left: 46px;\">\n" +
+                    "                      <h4 class=\"text-dark mt-0\" style=\"margin-left: 65px;\">\n" +
                     "                        "+p.getPrice()+"đ\n" +
-                    "                       \n" +
+                    "\n" +
                     "                      </h4>\n" +
                     "                      <ul\n" +
                     "                        class=\"list-inline mb-0 product-review align-self-center\" style=\"margin-left: 35px;\"\n" +
@@ -78,8 +78,8 @@ public class SearchControlAccessory extends HttpServlet {
                     "                    </div>\n" +
                     "                  </div>\n" +
                     "                  <div class=\"d-grid\">\n" +
-                    "                    <button class=\"btn_2\">Chỉnh sửa</button>\n" +
-                    "                    <button class=\"btn_2\" style=\"margin-top: 3px\">Xóa</button>\n" +
+                    "                      <a class=\"btn_2\" href=\"update-accessory.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center;\">Chỉnh sửa</a>\n" +
+                    "                      <a class=\"btn_2\" href=\"delete-accessory?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center;\">Xóa</a>\n" +
                     "                  </div>\n" +
                     "                </div>\n" +
                     "              </div>\n" +
