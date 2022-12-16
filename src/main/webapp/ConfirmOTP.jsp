@@ -52,7 +52,7 @@
             <div class="col-2">
               <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
                 <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
-                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
+                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue" style="border-radius: 30px; width: 150px; padding-left: 35px; background-color: #007bff">
                 <%--                <a href="#"> <div class="btn btn--radius-2 btn--blue" type="text" >Xác Nhận</div></a>--%>
                 <input type="text" id="role" name="role" value="register" style="display: none">
 

@@ -97,7 +97,34 @@ public class CustomerUserDAO {
             return null;
         });
     }
+
+    public List<CustomerUser> listAccount(String role) {
+        String query = "SELECT u.user_name, u.id,ifu.email, SUM(Quantity), sum(Price)\\n\" +\n" +
+                "                        \"FROM user_account u join infor_user ifu on u.id = ifu.id_user \\n\" +\n" +
+                "                        \"join orders o on o.CustomerID = ifu.id_user\\n\" +\n" +
+                "                        \"join orderdetail od on o.OrderID = od.OrderID\\n\" +\n" +
+                "                        \"\\n\"";
+        if (role == 0 ) {
+            query += "and u.role = +\"role\"+ \n";
+        }
+        String FinalQuery = query;
+        List<CustomerUser> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(FinalQuery)
+                .mapToBean(CustomerUser.class)
+                .stream()
+                .collect(Collectors.toList()));
+//        List<CustomerUser> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(
+//                "SELECT u.user_name, u.id,ifu.email, SUM(Quantity), sum(Price)\n" +
+//                        "FROM user_account u join infor_user ifu on u.id = ifu.id_user \n" +
+//                        "join orders o on o.CustomerID = ifu.id_user\n" +
+//                        "join orderdetail od on o.OrderID = od.OrderID\n" +
+//                        "\n")
+//                .mapTo(CustomerUser.class)
+//                .stream()
+//                .collect(Collectors.toList()));
+        return list;
+    }
     public static void main(String[] args) {
-        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
+//        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
+        System.out.println(new CustomerUserDAO().listAccount(1));
     }
 }
