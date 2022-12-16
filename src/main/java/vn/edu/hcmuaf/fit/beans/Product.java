@@ -3,11 +3,11 @@ package vn.edu.hcmuaf.fit.beans;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private int productId;
+    private String productId;
     private String productName;
     private boolean status;
     private String image;
-    private String price;
+    private int price;
     private double promotionalPrice;
     private int quantity;
     private int warranty;
@@ -22,10 +22,15 @@ public class Product implements Serializable {
     private String mausac;
     private String cannang;
 
+    private ProductSale sales;
+
+    private int quantityCart;
+
+
     public Product() {
     }
 
-    public Product(int productId, String productName, boolean status, String image, String price, double promotionalPrice, int quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang) {
+    public Product(String productId, String productName, boolean status, String image, int price, double promotionalPrice, int quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -44,14 +49,16 @@ public class Product implements Serializable {
         this.giong = giong;
         this.mausac = mausac;
         this.cannang = cannang;
+        this.sales =sales;
+        this.quantityCart=quantityCart;
     }
 
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -79,11 +86,11 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -189,6 +196,22 @@ public class Product implements Serializable {
 
     public void setCannang(String cannang) {
         this.cannang = cannang;
+    }
+
+    public ProductSale getSales() {
+        return sales;
+    }
+
+    public void setSales(ProductSale sales) {
+        this.sales = sales;
+    }
+
+    public int getQuantityCart() {
+        return quantityCart;
+    }
+
+    public void setQuantityCart(int quantityCart) {
+        this.quantityCart = quantityCart;
     }
 
     @Override

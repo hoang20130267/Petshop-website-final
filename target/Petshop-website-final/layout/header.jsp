@@ -2,7 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Cart" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -11,6 +14,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
+<% Cart cart = (Cart) request.getSession().getAttribute("cart"); %>
+<%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -86,9 +91,21 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="like-product.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li>
+                        <% if (user == null) {%>
+                        <a href="login.jsp">
+                            <i class="fa fa-shopping-bag"></i>
+                        </a>
+                        <%}
+                        else {%>
+                        <a href="shoping-cart.jsp">
+                            <i class="fa fa-shopping-bag"></i>
+                            <span id="header__second__cart--notice" class="header__second__cart--notice"><%=cart.getQuantity_cart()%></span>
+                        </a>
+                        <%}%>
+                        </li>
                     </ul>
-                    <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
+                    <div class="header__cart__price">Giỏ hàng: <span><%=cart != null ? format.format(cart.total()) : 0%>₫</span></div>
                 </div>
             </div>
         </div>
