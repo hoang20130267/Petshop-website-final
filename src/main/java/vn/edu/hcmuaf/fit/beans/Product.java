@@ -7,15 +7,9 @@ public class Product implements Serializable {
     private String productName;
     private boolean status;
     private String image;
-<<<<<<< HEAD
-    private String price;
+    private int price;
     private String promotionalPrice;
     private String quantity;
-=======
-    private int price;
-    private double promotionalPrice;
-    private int quantity;
->>>>>>> d1548d5ed74511511b529b1c9aef559f6e9f34a4
     private int warranty;
     private boolean newProduct;
     private String description;
@@ -36,11 +30,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-<<<<<<< HEAD
-    public Product(int productId, String productName, boolean status, String image, String price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang) {
-=======
-    public Product(String productId, String productName, boolean status, String image, int price, double promotionalPrice, int quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
->>>>>>> d1548d5ed74511511b529b1c9aef559f6e9f34a4
+    public Product(String productId, String productName, boolean status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
