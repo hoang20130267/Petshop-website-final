@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.beans.Mail;
+import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
 import vn.edu.hcmuaf.fit.dao.SignUpDAO;
 
 public class SignUpService {
@@ -15,6 +16,10 @@ public class SignUpService {
     public String checkUser(String email, String username) {
         SignUpDAO DAO = new SignUpDAO();
         return DAO.checkUser(email, username);
+    }
+
+    public String checkUser(String username){
+        return new CustomerUserDAO().checkUser(username);
     }
 
     public void insertUser(String userName, String passMaHoa, String pass, String fullName, String email, String phone){

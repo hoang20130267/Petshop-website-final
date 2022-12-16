@@ -377,11 +377,10 @@
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Tổng tiền giỏ hàng</h5>
-                    <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span>
-                    <%--                        <ul>--%>
-                    <%--                            <li>Tạm tính <span>85.000.000 Đồng</span></li>--%>
-                    <%--                            <li>Tổng tiền <span>85.000.000 Đồng</span></li>--%>
-                    <%--                        </ul>--%>
+
+                                            <ul>
+                                                <li>Tổng tiền <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
+                                            </ul>
                     <a href="checkout.jsp" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
                 </div>
             </div>
