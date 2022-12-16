@@ -215,8 +215,8 @@
             </div> -->
             <ul class="breadcrumb">
               <li class="breadcrumb-item">Quản lý sản phẩm</li>
-              <li class="breadcrumb-item">Thú cưng</li>
-              <li class="breadcrumb-item">Thêm thú cưng</li>
+              <li class="breadcrumb-item">Danh sách thú cưng</li>
+              <li class="breadcrumb-item">Chỉnh sửa thú cưng</li>
             </ul>
           </div>
         </div>
@@ -240,7 +240,8 @@
               </div>
               <div class="col-auto">
                 <input type="text" name="pid" id="pid" value="<%=request.getParameter("pid")%>" style="display:none;">
-                <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
+                <input name="id" value="<%=p.getProductId()%>" style="display:none;">
+                <button value="list-products" class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
                   Xóa dữ liệu</button
                 >
                 <button value="update-product" class="btn btn-primary mb-2 mb-sm-0" type="submit">
@@ -444,10 +445,10 @@
                           </div>
                           <div class="col-12 col-lg-6">
                             <h5 class="mb-2">Giá tiền đã giảm</h5>
-                            <input
+                            <input name="promoPrice"
                                     class="form-control"
                                     type="text"
-                                    placeholder="Đồng"
+                                    placeholder="Đồng" value="<%=p.getPromotionalPrice()%>"
                             />
                           </div>
                         </div>
@@ -462,7 +463,7 @@
                           <div class="row g-3">
                             <div class="col-12 col-lg-6">
                               <h5 class="mb-2">Số lượng</h5>
-                              <input
+                              <input name="quantity"
                                       class="form-control"
                                       type="text"
                                       placeholder="" value="<%=p.getQuantity()%>"
@@ -474,6 +475,14 @@
                                      class="form-control"
                                      type="text"
                                      placeholder="Kg" value="<%=p.getCannang()%>"
+                              />
+                            </div>
+                            <div class="col-12 col-lg-6">
+                              <h5 class="mb-2">Màu sắc</h5>
+                              <input name="mausac"
+                                     class="form-control"
+                                     type="text"
+                                     placeholder="Ví dụ: Trắng" value="<%=p.getMausac()%>" required
                               />
                             </div>
                           </div>
@@ -546,10 +555,15 @@
                             <div>
                               <div class="d-flex flex-wrap justify-content-between mb-2">
                                 <h5>Tags</h5>
-                              </div><select class="form-select" aria-label="category">
-                              <option value="men-cloth">Chó</option>
-                              <option value="women-cloth">Mèo</option>
 
+                              </div><select class="form-select" aria-label="category">
+                              <%if(p.getProductId() < 2000){%>
+                              <option selected value="men-cloth">Chó</option>
+                              <option value="women-cloth">Mèo</option>
+                              <%} else {%>
+                              <option value="men-cloth">Chó</option>
+                              <option selected value="women-cloth">Mèo</option>
+                              <%}%>
                             </select>
                             </div>
                           </div>
@@ -573,7 +587,7 @@
                             </select>
                             </div>
                           </div>
-                        </div><button class="btn btn-phoenix-primary w-100">Xác nhận</button>
+                        </div>
                       </div>
                     </div>
                   </div>

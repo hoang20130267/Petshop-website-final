@@ -202,23 +202,17 @@
     /*-------------------
 		Quantity change
 	--------------------- */
-    var proQty = $('.pro-qty');
-    proQty.prepend('<span class="dec qtybtn">-</span>');
-    proQty.append('<span class="inc qtybtn">+</span>');
-    proQty.on('click', '.qtybtn', function () {
-        var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        $button.parent().find('input').val(newVal);
-    });
+
 
 })(jQuery);
+
+function cong(id) {
+    var value = document.getElementById(`quatity-text-${id}`).value
+    document.getElementById(`quatity-text-${id}`).value = parseInt(value) + 1;
+}
+function tru(id) {
+    var value = document.getElementById(`quatity-text-${id}`).value
+    if (parseInt(value) > 1) {
+        document.getElementById(`quatity-text-${id}`).value = parseInt(value) - 1;
+    }
+}

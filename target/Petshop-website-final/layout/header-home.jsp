@@ -2,7 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
-<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Cart" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -11,7 +14,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
-
+<% Cart cart = (Cart) request.getSession().getAttribute("cart"); %>
+<%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -37,13 +41,14 @@
                         <%} else if (user != null) {%>
                         <div class="header__top__right__auth">
                             <li class="dropdown pc-h-item" style="list-style-type: none;">
-                                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#"
+                                   role="button" aria-haspopup="false" aria-expanded="false">
                                     <span>
                                         <span class="user-name" style="color: #111;"><i class="fa fa-user"></i>&nbsp;&nbsp;<%=user.getName()%></span>
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
-                                    <a href="#!" class="dropdown-item">
+                                    <a href="infor-user.jsp" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
                                     <a href="LogoutController" class="dropdown-item">
@@ -85,9 +90,22 @@
                 <div class="header__cart">
                     <ul>
                         <li><a href="like-product.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="shoping-cart.jsp"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        <li>
+                            <% if (user == null) {%>
+                            <a href="login.jsp">
+                                <i class="fa fa-shopping-bag"></i>
+                            </a>
+                            <%} else {%>
+                            <a href="shoping-cart.jsp">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span id="header__second__cart--notice"
+                                      class="header__second__cart--notice"><%=cart.getQuantity_cart()%></span>
+                            </a>
+                            <%}%>
+                        </li>
                     </ul>
-                    <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
+                    <div class="header__cart__price">Giỏ hàng: <span><%=cart != null ? format.format(cart.total()) : 0%>₫</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,7 +127,7 @@
                         <span>Danh mục</span>
                     </div>
                     <ul>
-                        <%  DetailDAO dao = new DetailDAO();
+                        <% DetailDAO dao = new DetailDAO();
                             List<Detail> list = dao.listCategory();
                             for (Detail p : list) { %>
                         <li>
@@ -138,12 +156,17 @@
                             <!--                                    Tất cả các loại-->
                             <!--                                    <span class="arrow_carrot-down"></span>-->
                             <!--                                </div>-->
-                            <input id="search-keyword" type="text" oninput="searchByName(this)" placeholder="Bạn cần tìm gì ?">
+                            <input id="search-keyword" type="text" oninput="searchByName(this)"
+                                   placeholder="Bạn cần tìm gì ?">
                             <button type="submit" class="site-btn">Tìm Kiếm</button>
                         </form>
                         <div id="result-search" style="display: none">
-                            <ul class="result" style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;">
-
+                            <ul class="result"
+                                style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;border-radius: 0px 0px 6px 6px;">
+                                <li class="search" style="margin-bottom: 10px;border: #b9b9b9">
+                                    <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">
+                                        Nhập từ khóa cần tìm...</h3>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -157,7 +180,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg" style="background-image: url(&quot;img/hero/banner.jpg&quot;);">
+                <div class="hero__item set-bg" data-setbg="img/hero/banner.jpg"
+                     style="background-image: url(&quot;img/hero/banner.jpg&quot;);">
                     <div class="hero__text">
                         <span>CỬA HÀNG THÚ CƯNG</span>
                         <h2>Chó mèo <br>và nhiều hơn thế</h2>
@@ -177,24 +201,31 @@
         $("#search-keyword").focus(function () {
             $("#result-search").css("display", "block");
         })
-        $("#search-keyword").on("blur",function () {
+        $("#search-keyword").on("blur", function () {
             $("#result-search").css("display", "none");
         })
     })
-    function searchByName(param){
+
+    function searchByName(param) {
         const txtSearch = param.value;
-        $.ajax({
-            url: "/Petshop_website_final_war/search-main",
-            type: "get",
-            data: {
-                txt: txtSearch
-            },
-            success: function (data) {
-                $("#result-search .result").html(data)
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
+        if (txtSearch.length > 0) {
+            $.ajax({
+                url: "/Petshop_website_final_war/search-main",
+                type: "get",
+                data: {
+                    txt: txtSearch
+                },
+                success: function (data) {
+                    $("#result-search .result").html(data)
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
+        } else {
+            $("#result-search .result").html(`<li class="search" style="margin-bottom: 10px;">
+       <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">Nhập từ khóa cần tìm...</h3>
+</li>`)
+        }
     }
 </script>

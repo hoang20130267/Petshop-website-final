@@ -249,11 +249,11 @@
                                 <input name="name"
                                         class="form-control mb-5"
                                         type="text"
-                                        placeholder="Viết tên thú cưng tại đây..."
+                                        placeholder="Viết tên thú cưng tại đây..." required
                                 />
                                 <div class="mb-6">
                                     <h4 class="mb-3">Chi tiết thú cưng</h4>
-                                    <textarea name="description" rows="20" cols="10" id="editor"
+                                    <textarea name="description" rows="20" cols="10" id="editor" required
                                     <%--                      class="tinymce"--%>
                                     <%--                      name="content"--%>
                                     <%--                      data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'--%>
@@ -282,7 +282,7 @@
 <%--                                            </button--%>
 <%--                                            >--%>
                                             <label for="form-img-upload">Thêm ảnh </label>
-                                            <input id="form-img-upload" name="pimage" type="file"
+                                            <input id="form-img-upload" name="pimage" type="file" required
                                             accept="image/*"
                                             onchange="document.getElementById('form-img').src = window.URL.createObjectURL(this.file[0])">
                                             <br/><img id="form-img"
@@ -440,15 +440,15 @@
                                                         <input name="price"
                                                                 class="form-control"
                                                                 type="text"
-                                                                placeholder="Đồng"
+                                                                placeholder="Đồng" required
                                                         />
                                                     </div>
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="mb-2">Giá tiền đã giảm</h5>
-                                                        <input
+                                                        <input name="promoPrice"
                                                                 class="form-control"
                                                                 type="text"
-                                                                placeholder="Đồng"
+                                                                placeholder="Đồng" required
                                                         />
                                                     </div>
                                                 </div>
@@ -463,10 +463,10 @@
                                                     <div class="row g-3">
                                                         <div class="col-12 col-lg-6">
                                                             <h5 class="mb-2">Số lượng</h5>
-                                                            <input
+                                                            <input name="quantity"
                                                                     class="form-control"
                                                                     type="text"
-                                                                    placeholder=""
+                                                                    placeholder="Ví dụ: 5" required
                                                             />
                                                         </div>
                                                         <div class="col-12 col-lg-6">
@@ -474,7 +474,15 @@
                                                             <input name="cannang"
                                                                     class="form-control"
                                                                     type="text"
-                                                                    placeholder="Kg"
+                                                                    placeholder="Kg" required
+                                                            />
+                                                        </div>
+                                                        <div class="col-12 col-lg-6">
+                                                            <h5 class="mb-2">Màu sắc</h5>
+                                                            <input name="mausac"
+                                                                   class="form-control"
+                                                                   type="text"
+                                                                   placeholder="Ví dụ: Trắng" required
                                                             />
                                                         </div>
                                                     </div>
@@ -576,7 +584,7 @@
                                                         </select>
                                                         </div>
                                                     </div>
-                                                </div><button class="btn btn-phoenix-primary w-100">Xác nhận</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

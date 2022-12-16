@@ -3,16 +3,16 @@ package vn.edu.hcmuaf.fit.beans;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    private int productId;
+    private String productId;
     private String productName;
     private boolean status;
     private String image;
-    private String price;
-    private double promotionalPrice;
-    private int quantity;
+    private int price;
+    private String promotionalPrice;
+    private String quantity;
     private int warranty;
     private boolean newProduct;
-    private String desription;
+    private String description;
     private String dital;
     private String createBy;
     private String createDate;
@@ -22,10 +22,15 @@ public class Product implements Serializable {
     private String mausac;
     private String cannang;
 
+    private ProductSale sales;
+
+    private int quantityCart;
+
+
     public Product() {
     }
 
-    public Product(int productId, String productName, boolean status, String image, String price, double promotionalPrice, int quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang) {
+    public Product(String productId, String productName, boolean status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -35,7 +40,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.warranty = warranty;
         this.newProduct = newProduct;
-        this.desription = description;
+        this.description = description;
         this.dital = dital;
         this.createBy = createBy;
         this.createDate = createDate;
@@ -44,14 +49,16 @@ public class Product implements Serializable {
         this.giong = giong;
         this.mausac = mausac;
         this.cannang = cannang;
+        this.sales =sales;
+        this.quantityCart=quantityCart;
     }
 
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -79,27 +86,27 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getPromotionalPrice() {
+    public String getPromotionalPrice() {
         return promotionalPrice;
     }
 
-    public void setPromotionalPrice(double promotionalPrice) {
+    public void setPromotionalPrice(String promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -119,12 +126,12 @@ public class Product implements Serializable {
         this.newProduct = newProduct;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String description) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDital() {
@@ -191,6 +198,22 @@ public class Product implements Serializable {
         this.cannang = cannang;
     }
 
+    public ProductSale getSales() {
+        return sales;
+    }
+
+    public void setSales(ProductSale sales) {
+        this.sales = sales;
+    }
+
+    public int getQuantityCart() {
+        return quantityCart;
+    }
+
+    public void setQuantityCart(int quantityCart) {
+        this.quantityCart = quantityCart;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -203,7 +226,7 @@ public class Product implements Serializable {
                 ", quantity=" + quantity +
                 ", warranty=" + warranty +
                 ", newProduct=" + newProduct +
-                ", desription='" + desription + '\'' +
+                ", desription='" + description + '\'' +
                 ", dital='" + dital + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createDate='" + createDate + '\'' +

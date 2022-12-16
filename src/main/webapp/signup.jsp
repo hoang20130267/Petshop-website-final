@@ -207,15 +207,15 @@
                              </div>
                              <div class="col-6">
                                  <% String error = (String) request.getAttribute("registerError"); %>
-                                 <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
+                                 <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; padding-bottom: 5px; text-align: center"><%= error == null ? "" : error%>
                                  </p>
-                                 <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
-                                     <input class="btn btn--radius-2 btn--blue" type="submit" value="Đăng Ký">
+                                 <div class="p-t-15">
+                                     <input class="btn btn-pill text-white btn-primary button_login" type="submit" value="Đăng Ký" style="border-radius: 30px; width: 250px; margin-left:20px ">
                                  </div>
                              </div>
                          </div>
 
-                         <span> <a href="login.jsp" class="btn btn-pill text-white btn-block btn-primary button_login" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
+                         <span> <a href="login.jsp" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
                      </form>
                  </div>
              </div>
