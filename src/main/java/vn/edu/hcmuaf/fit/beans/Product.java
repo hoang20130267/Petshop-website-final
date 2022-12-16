@@ -8,8 +8,8 @@ public class Product implements Serializable {
     private boolean status;
     private String image;
     private int price;
-    private double promotionalPrice;
-    private int quantity;
+    private String promotionalPrice;
+    private String quantity;
     private int warranty;
     private boolean newProduct;
     private String description;
@@ -30,7 +30,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, boolean status, String image, int price, double promotionalPrice, int quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
+    public Product(String productId, String productName, boolean status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -94,19 +94,19 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public double getPromotionalPrice() {
+    public String getPromotionalPrice() {
         return promotionalPrice;
     }
 
-    public void setPromotionalPrice(double promotionalPrice) {
+    public void setPromotionalPrice(String promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
