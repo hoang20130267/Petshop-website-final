@@ -66,6 +66,37 @@ public class CustomerUserDAO {
             return null;
         });
     }
+
+    public String checkUser(String username){
+        String result=null;
+        String user=null;
+        try {
+            user = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT user_name FROM user_account WHERE user_name = ?")
+                    .bind(0,username).mapTo(String.class).first());
+        }catch (Exception e){
+        }
+        if (user != null) {
+            result = "Username đã tồn tại!";
+        }
+        return result;
+    }
+
+    public void updateInforUser(String id, String fullname,String phone, String address, String newpass){
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update user_account set pass = ? ,passMaHoa=? where id =?")
+                    .bind(0,newpass)
+                    .bind(1,Utils.maHoaMK(newpass))
+                    .bind(2, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name=? ,phone=? , address=? where id_user =?")
+                    .bind(0,fullname)
+                    .bind(1,phone)
+                    .bind(2,address)
+                    .bind(3,id)
+                    .execute();
+            return null;
+        });
+    }
     public static void main(String[] args) {
         System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
     }
