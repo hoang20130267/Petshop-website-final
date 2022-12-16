@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -131,7 +132,9 @@
         }
     </style>
 </head>
-
+<%
+    CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+%>
 <body>
 
 <!-- Floatting -->
@@ -539,13 +542,26 @@
                 <div class="row" id="items">
                     <% List<Product> list = (List<Product>) request.getAttribute("list");
                         for (Product p : list) { %>
+
                     <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" >
                                 <ul class="product__item__pic__hover">
+
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <%if (user != null) {
+                                    Product product = new ProductDAO().getProductDetail(p.getProductId());%>
+                                    <%if (product.getQuantity() > 0) {%>
+                                    <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
+                                            class="fa fa-shopping-cart"></i></a></li>
+                                    <%}%>
+                                    <%
+                                    } else {%>
+                                    <li><a class="shopnow2" href="login.jsp"><i
+                                            class="fa fa-shopping-cart"></i></a></li>
+                                      <%  }
+                                    %>
                                 </ul>
                             </div>
                             <div class="product__item__text">
@@ -555,9 +571,7 @@
                             </div>
                         </div>
                     </div>
-                    <% }
-                    %>
-
+                    <%}%>
                 </div>
 
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
@@ -592,6 +606,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script>
+    $(document).ready(function (){
+        addcart();
+    })
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
         $.ajax({
@@ -607,6 +624,27 @@
             error: function (xhr) {
                 //Do Something to handle error
             }
+        });
+    }
+    function addcart() {
+        $(".shopnow2").each(function (e) {
+           $(this).on("click",function (e){
+               e.preventDefault();
+               const idAdd = this.id;
+               $.ajax({
+                   url: "AddCartController",
+                   type: "get",
+                   data: {
+                       idAdd: idAdd,
+                   },
+                   success: function (data) {
+                       $(".header__second__cart--notice").each(function () {
+                           $(this).text(data)
+                       })
+                       $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
+                   }
+               })
+           })
         });
     }
 </script>

@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.services.LoginService;
 
@@ -29,6 +30,7 @@ public class LoginController extends HttpServlet {
             }else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
+                session.setAttribute("cart", new Cart());
                 response.sendRedirect("index.jsp");
             }
         } else {

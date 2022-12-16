@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.ProductSale;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -145,13 +146,27 @@ public class ProductDAO {
 
 
 
-    public Product getProductDetail(String id) {
-        Product detail = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId = ?")
-                    .bind(0,id)
-                    .mapToBean(Product.class).first();
-        });
-        return detail;
+    public Product getProductDetail(String Id){
+        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
+                        "p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy," +
+                        "p.UpdateDate,p.giong,p.mausac,p.cannang FROM product p WHERE p.`Status`=1 AND p.productId=?;")
+                .bind(0,Id)
+                .mapToBean(Product.class)
+                .one());
+        ProductSale sale=null;
+        try {
+            sale= JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT DISTINCT ad.Id_adver,ad.Id_product,ad.name_adver,ad.discount,ad.Img,ad.Desription,ad.date_start,date_end\n" +
+                            "FROM adver ad\n" +
+                            "WHERE ad.date_end > DATE(NOW()) AND ad.Id_product=?;")
+                    .bind(0,Id)
+                    .mapToBean(ProductSale.class)
+                    .one()
+            );
+        }catch (Exception e){
+
+        }
+        product.setSales(sale);
+        return product;
     }
 
 
