@@ -13,8 +13,7 @@ import java.util.List;
 public class ListUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String role = request.getParameter("role");
-        List<CustomerUser> list = new CustomerUserDAO().listAccount(role);
+        List<CustomerUser> list = new CustomerUserDAO().listUser();
         request.setAttribute("list", list);
         request.getRequestDispatcher("list-user.jsp").forward(request,response);
     }

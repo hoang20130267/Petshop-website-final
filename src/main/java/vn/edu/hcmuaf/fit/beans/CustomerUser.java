@@ -15,22 +15,27 @@ public class CustomerUser implements Serializable {
     private String avt;
     private boolean role;
 
+    private int price;
+
+    private int quantity;
 
     public CustomerUser() {
     }
 
-    public CustomerUser(String id, String username, String passMaHoa, String password, boolean status, String fullName, String email, String phone, String address, String avt, boolean role) {
+    public CustomerUser(String id, String username, String passMaHoa, String pass, boolean status, String name, String email, String phone, String address, String avt, boolean role, int price, int quantity) {
         this.id = id;
         this.username = username;
         this.passMaHoa = passMaHoa;
-        this.pass = password;
+        this.pass = pass;
         this.status = status;
-        this.name = fullName;
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.avt = avt;
         this.role = role;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public boolean isRole() {
@@ -121,18 +126,39 @@ public class CustomerUser implements Serializable {
         this.passMaHoa = passMaHoa;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "CustomerUser{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + pass + '\'' +
+                ", passMaHoa='" + passMaHoa + '\'' +
+                ", pass='" + pass + '\'' +
                 ", status=" + status +
-                ", fullName='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", avt='" + avt + '\'' +
+                ", role=" + role +
+                ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }
+
