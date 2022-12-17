@@ -151,11 +151,11 @@
                                      </div>
                                      <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
 
-                                     <input class="btn btn--radius-2 btn--blue" type="submit" value="Gửi OTP">
+                                     <input class="btn btn--radius-2 btn--blue" style="width: 200px; margin-left: 120px" type="submit" value="Gửi OTP">
 <%--                                     <a href="ForgotPasswordController" style="text-decoration: none;">--%>
 <%--                                         <div class="button_forgot">Gửi OTP</div>--%>
 <%--                                     </a>--%>
-                                     <a href="login.jsp" class="d-block text-center my-4 text-muted" style="text-decoration: none;"> Đăng nhập</a>
+                                     <a href="login.jsp" class="btn btn-pill text-white btn-primary" style="width: 300px;margin-left: 70px; display:inline-block;text-decoration: none;"> Đăng nhập</a>
                                  </form>
                              </div>
                          </div>
