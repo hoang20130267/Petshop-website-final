@@ -2,6 +2,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -217,7 +219,7 @@
     </div>
 </div>
 <!-- Humberger End -->
-
+<% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <!-- Header Section Begin -->
 <jsp:include page="layout/header.jsp"></jsp:include>
 <!-- Header Section End -->
@@ -567,7 +569,7 @@
                             <div class="product__item__text">
                                 <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%= p.getProductName()%>
                                 </a></h6>
-                                <h5><%=p.getPrice()%>đ</h5>
+                                <h5><%=format.format(p.getPrice())%>đ</h5>
                             </div>
                         </div>
                     </div>
