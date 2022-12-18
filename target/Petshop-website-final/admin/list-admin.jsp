@@ -1,3 +1,6 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -248,16 +251,19 @@
                                     <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Xóa admin</th>
                                 </tr>
                                 </thead>
+                                <% List<CustomerUser> list = new CustomerUserDAO().ListAdmin();
+                                    for ( CustomerUser c: list) {
+                                %>
                                 <tbody class="list" id="table-latest-review-body"><tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                     <td class="fs--1 align-middle ps-0 py-3">
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">001</p>
+                                        <p class="mb-0 text-1100 fw-bold"><%=c.getId()%></p>
                                     </td>
                                     <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
                                         <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Sĩ Hoàng</p>
+                                        <p class="mb-0 ms-3 text-1100 fw-bold"><%=c.getName()%></p>
                                     </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">sihoang@gmail.com</a></td>
+                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com"><%=c.getEmail()%></a></td>
                                     <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
 
                                     <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
@@ -266,123 +272,127 @@
                                 </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                     <td class="fs--1 align-middle ps-0 py-3">
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">002</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Ngọc Huy</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">ngochuy@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td> -->
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">003</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Huy Hoàng</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">huyhoang@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">1</td> -->
+                                        <%  } %>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">8 tiếng trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">004</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Đinh Huy Hoàng</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">dinhhuyhoang@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td> -->
+<%--                                        --%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">002</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Ngọc Huy</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">ngochuy@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">4 tiếng trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">005</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Hoàng Trung Hiếu</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">hoanghieu@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td> -->
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">003</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Huy Hoàng</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">huyhoang@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">1</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">15 phút trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">006</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Vỹ Khang</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">vykhang@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">8 tiếng trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">004</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Đinh Huy Hoàng</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">dinhhuyhoang@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">10 tiếng trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">007</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Huy Hiệp</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">huyhiep@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">4 tiếng trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">005</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Hoàng Trung Hiếu</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">hoanghieu@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">008</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Minh Hiếu</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">minhiu@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td> -->
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">15 phút trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">006</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Vỹ Khang</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">vykhang@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">009</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Trung Hiếu</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">trunghieu@gmail.com</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">10 tiếng trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">007</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Huy Hiệp</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">huyhiep@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->--%>
 
-                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">40 phút trước</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">008</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Minh Hiếu</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">minhiu@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td> -->--%>
+
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
+<%--                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                    <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                        <p class="mb-0 text-1100 fw-bold">009</p>--%>
+<%--                                    </td>--%>
+<%--                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                        <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>--%>
+<%--                                        <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Trung Hiếu</p>--%>
+<%--                                    </a></td>--%>
+<%--                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">trunghieu@gmail.com</a></td>--%>
+<%--                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->--%>
+
+<%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>--%>
+<%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">40 phút trước</td>--%>
+<%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
                                 </tr>
                             </table>
                         </div>

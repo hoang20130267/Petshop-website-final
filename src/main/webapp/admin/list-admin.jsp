@@ -251,7 +251,7 @@
                                     <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Xóa admin</th>
                                 </tr>
                                 </thead>
-                                <% List<CustomerUser> list = new CustomerUserDAO().ListAdmin()
+                                <% List<CustomerUser> list = new CustomerUserDAO().ListAdmin();
                                     for ( CustomerUser c: list) {
                                 %>
                                 <tbody class="list" id="table-latest-review-body"><tr class="hover-actions-trigger btn-reveal-trigger position-static">

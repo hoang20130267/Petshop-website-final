@@ -5,6 +5,7 @@ import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class CustomerUserDAO {
@@ -15,6 +16,25 @@ public class CustomerUserDAO {
             return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id")
                     .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
         });
+    }
+
+    public String taoIDCustomerAdminUser() {
+        String numbers = "0123456789";
+        StringBuilder stringBuilder = new StringBuilder("Ad");
+        Random rd = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            int index = rd.nextInt(numbers.length());
+            char rdC = numbers.charAt(index);
+            stringBuilder.append(rdC);
+        }
+        List<String> listId = JDBIConnector.get().withHandle(
+                handle -> handle.createQuery("SELECT id FROM user_account")
+                        .mapTo(String.class)
+                        .stream()
+                        .collect(Collectors.toList()));
+        if (listId.contains(stringBuilder.toString())) return taoIDCustomerAdminUser();
+        else return stringBuilder.toString();
     }
 
     public boolean isExits(String username) {
@@ -117,6 +137,26 @@ public class CustomerUserDAO {
                 "FROM user_account u join infor_user ifu\n" +
                 "on u.id=ifu.id_user\n" +
                 "WHERE u.role=1;").mapToBean(CustomerUser.class).stream().collect(Collectors.toList())));
+    }
+
+    public void insertAdmin(String userName, String pass, String fullName, String email, String phone,String address) {
+        String id = taoIDCustomerAdminUser();
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, 1, 1)")
+                    .bind(0, id)
+                    .bind(1, userName)
+                    .bind(2, Utils.maHoaMK(pass))
+                    .bind(3, pass)
+                    .execute();
+            handle.createUpdate("INSERT INTO infor_user(id_user,name, email, phone, address) VALUES (?, ?, ?,?,?)")
+                    .bind(0, id)
+                    .bind(1, fullName)
+                    .bind(2, email)
+                    .bind(3, phone)
+                    .bind(4,address)
+                    .execute();
+            return null;
+        });
     }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
