@@ -74,11 +74,11 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="./index.html">Trang Chủ</a></li>
-                        <li><a href="all-product">Thú Cưng</a>
+                        <li><a href="all-product?category=all">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="products-dog">Chó</a></li>
-                                <li><a href="products-cat">Mèo</a></li>
-                                <li><a href="products-accessory">Phụ Kiện</a></li>
+                                <li><a href="all-product?category=dog">Chó</a></li>
+                                <li><a href="all-product?category=cat">Mèo</a></li>
+                                <li><a href="all-product?category=accessory">Phụ Kiện</a></li>
                             </ul>
                         </li>
                         <li><a href="blog.jsp">Tin Tức</a></li>
