@@ -96,7 +96,7 @@
     });
 
 
-    $('.hero__categories__all').on('click', function(){
+    $('.hero__categories__all').on('click', function () {
         $('.hero__categories ul').slideToggle(400);
     });
 
@@ -173,12 +173,12 @@
         max: maxPrice,
         values: [minPrice, maxPrice],
         slide: function (event, ui) {
-            minamount.val(ui.values[0]+' triệu');
-            maxamount.val(ui.values[1]+' triệu');
+            minamount.val(ui.values[0] + ' triệu');
+            maxamount.val(ui.values[1] + ' triệu');
         }
     });
-    minamount.val(  rangeSlider.slider("values", 0)+' triệu');
-    maxamount.val( rangeSlider.slider("values", 1)+ ' triệu');
+    minamount.val(rangeSlider.slider("values", 0) + ' triệu');
+    maxamount.val(rangeSlider.slider("values", 1) + ' triệu');
 
     /*--------------------------
         Select
@@ -199,20 +199,5 @@
         }
     });
 
-    /*-------------------
-		Quantity change
-	--------------------- */
-
 
 })(jQuery);
-
-function cong(id) {
-    var value = document.getElementById(`quatity-text-${id}`).value
-    document.getElementById(`quatity-text-${id}`).value = parseInt(value) + 1;
-}
-function tru(id) {
-    var value = document.getElementById(`quatity-text-${id}`).value
-    if (parseInt(value) > 1) {
-        document.getElementById(`quatity-text-${id}`).value = parseInt(value) - 1;
-    }
-}
