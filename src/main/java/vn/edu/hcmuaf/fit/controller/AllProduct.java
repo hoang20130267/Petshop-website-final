@@ -15,9 +15,14 @@ public class AllProduct extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getTop9Product();
+        String category = request.getParameter("category");
+        List<Product> list = dao.getTop9Product(category);
         request.setAttribute("list", list);
         request.getRequestDispatcher("all-products.jsp").forward(request,response);
+
+        System.out.println(category);
+        System.out.println(dao.getTop9Product(category));
+
     }
 
     @Override

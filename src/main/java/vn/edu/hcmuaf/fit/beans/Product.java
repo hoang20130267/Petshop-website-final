@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private String productId;
     private String productName;
-    private boolean status;
+    private int status;
     private String image;
     private int price;
     private String promotionalPrice;
@@ -26,11 +26,13 @@ public class Product implements Serializable {
 
     private int quantityCart;
 
+    private String cate_id;
+
 
     public Product() {
     }
 
-    public Product(String productId, String productName, boolean status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang,ProductSale sales,int quantityCart) {
+    public Product(String productId, String productName, int status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, String cate_id) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -49,10 +51,10 @@ public class Product implements Serializable {
         this.giong = giong;
         this.mausac = mausac;
         this.cannang = cannang;
-        this.sales =sales;
-        this.quantityCart=quantityCart;
+        this.sales = sales;
+        this.quantityCart = quantityCart;
+        this.cate_id = cate_id;
     }
-
 
     public String getProductId() {
         return productId;
@@ -70,11 +72,11 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public boolean isStatus() {
+    public int isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -210,6 +212,14 @@ public class Product implements Serializable {
         return quantityCart;
     }
 
+    public String getCate_id() {
+        return cate_id;
+    }
+
+    public void setCate_id(String cate_id) {
+        this.cate_id = cate_id;
+    }
+
     public void setQuantityCart(int quantityCart) {
         this.quantityCart = quantityCart;
     }
@@ -217,16 +227,16 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "Product{" +
-                "productId=" + productId +
+                "productId='" + productId + '\'' +
                 ", productName='" + productName + '\'' +
                 ", status=" + status +
                 ", image='" + image + '\'' +
                 ", price=" + price +
-                ", promotionalPrice=" + promotionalPrice +
-                ", quantity=" + quantity +
+                ", promotionalPrice='" + promotionalPrice + '\'' +
+                ", quantity='" + quantity + '\'' +
                 ", warranty=" + warranty +
                 ", newProduct=" + newProduct +
-                ", desription='" + description + '\'' +
+                ", description='" + description + '\'' +
                 ", dital='" + dital + '\'' +
                 ", createBy='" + createBy + '\'' +
                 ", createDate='" + createDate + '\'' +
@@ -235,6 +245,9 @@ public class Product implements Serializable {
                 ", giong='" + giong + '\'' +
                 ", mausac='" + mausac + '\'' +
                 ", cannang='" + cannang + '\'' +
+                ", sales=" + sales +
+                ", quantityCart=" + quantityCart +
+                ", cate_id='" + cate_id + '\'' +
                 '}';
     }
 }

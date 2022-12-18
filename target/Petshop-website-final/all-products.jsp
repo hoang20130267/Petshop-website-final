@@ -542,7 +542,8 @@
                     </div>
                 </div>
                 <div class="row" id="items">
-                    <% List<Product> list = (List<Product>) request.getAttribute("list");
+                    <%  String category = request.getParameter("category");
+                        List<Product> list = new ProductDAO().getTop9Product(category);
                         for (Product p : list) { %>
 
                     <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
