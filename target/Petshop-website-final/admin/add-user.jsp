@@ -164,54 +164,82 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
-        <div class="row">
-            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm user mới</h2>
-                        <hr>
-                        <form>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputEmail4">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Mật khẩu">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputEmail4">Tên</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Tên">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Họ</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Họ">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 position-relative">
-                                    <label for="validationTooltip03" class="form-label">Địa chỉ</label>
-                                    <input type="text" class="form-control" id="validationTooltip03" required placeholder="Ví dụ : Đại học Nông Lâm TPHCM,...">
-                                    <div class="invalid-tooltip">
-                                        Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng địa chỉ
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group col-md-6">
-                                    <label class="form-label" for="inputPassword4">Số điện thoại</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="+84">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-check" style="margin-top: 10px;">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này làm user</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn  btn-primary" style="margin-left: 450px; padding:10px 40px 10px 40px; font-size: large;">Thêm người dùng</button>
-                        </form>
-        </div>
-        <!-- [ Main Content ] end -->
+		<div class="row">
+			<h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm người dùng mới</h2>
+			<hr>
+			<% String error = (String) request.getAttribute("addUsererror"); %>
+			<p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
+			<form method="post" action="AddUserCustomerController">
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label class="form-label" for="inputEmail4">Tài khoản</label>
+						<input type="text" class="form-control" id="username" name="username"
+							   placeholder="Tên tài khoản">
+					</div>
+					<div class="form-group col-md-6">
+						<label class="form-label" for="inputPassword4">Email</label>
+						<input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="validationTooltip04" class="form-label">Địa chỉ</label>
+						<input type="text" class="form-control" id="validationTooltip05" name="address" required
+							   placeholder="+84">
+
+					</div>
+					<div class="form-group col-md-6">
+						<label class="form-label" for="inputEmail4">Họ và tên</label>
+						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-md-3 position-relative">
+						<label class="form-label" for="inputPassword4">Mật khẩu</label>
+						<input type="password" class="form-control" id="inputPassword4" name="passwd"
+							   placeholder="Mật khẩu">
+					</div>
+					<div class="col-md-3 position-relative">
+						<label class="form-label">Nhập lại mật khẩu</label>
+						<input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
+							   placeholder="Nhập lại mật khẩu">
+					</div>
+					<div class="col-md-3 position-relative">
+						<label for="validationTooltip05" class="form-label">Số điện thoại</label>
+						<input type="text" class="form-control" id="phone" name="phone"
+							   placeholder="Địa chỉ">
+						<%--            <div class="invalid-tooltip">--%>
+						<%--              Bạn chưa chọn vị trí cho người này--%>
+						<%--            </div>--%>
+					</div>
+					<div class="col-md-3 position-relative">
+						<label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
+						<select class="form-select" id="validationTooltip04" name="status" required>
+							<option>Mở khóa</option>
+							<option>Khóa</option>
+						</select>
+						<%--            <div class="invalid-tooltip">--%>
+						<%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
+						<%--            </div>--%>
+					</div>
+				</div>
+				<%--        <div class="form-group">--%>
+				<%--          <div class="form-check" style="margin-top: 10px;">--%>
+				<%--            <input class="form-check-input" type="checkbox" id="gridCheck">--%>
+				<%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
+				<%--          </div>--%>
+				<%--        </div>--%>
+				<p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
+
+					<button type="submit" class="btn  btn-primary"
+							style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+						Thêm admin
+					</button>
+			</form>
+		</div>
+
+		<!-- [ Main Content ] end -->
     </div>
 </div>
 

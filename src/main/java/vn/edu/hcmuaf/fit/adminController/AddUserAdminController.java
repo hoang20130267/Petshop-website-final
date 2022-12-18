@@ -25,8 +25,16 @@ public class AddUserAdminController extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
+        int status;
 
-        String exe = SignUpService.getInstance().checkUser(username);
+        if(request.getParameter("status").equals("Mở khóa")){
+            status=1;
+        }else {
+            status=0;
+        }
+        System.out.println(status);
+
+        String exe = SignUpService.getInstance().checkUser(email,username);
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addAdminerror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
@@ -38,7 +46,7 @@ public class AddUserAdminController extends HttpServlet {
                 request.setAttribute("addAdminerror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
             } else {
-                new CustomerUserDAO().insertAdmin(username,passwd,fullname,email,phone,address);
+                new CustomerUserDAO().insertAdmin(username,passwd,fullname,email,phone,address,status);
                 response.sendRedirect("list-admin.jsp");
             }
 
