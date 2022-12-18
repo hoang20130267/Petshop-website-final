@@ -18,11 +18,10 @@ public class DeleteCartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idP = request.getParameter("id");
+        String idP = request.getParameter("idP");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        System.out.println(cart);
+        System.out.println(idP);
         cart.getData().remove(idP);
-        System.out.println(cart);
         request.getSession().setAttribute("cart", cart);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
     }

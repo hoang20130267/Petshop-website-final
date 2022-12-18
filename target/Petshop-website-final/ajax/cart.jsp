@@ -51,10 +51,11 @@
                         <%}%>
                         <td class="shoping__cart__quantity">
                             <div class="quantity">
-                                <div class="pro-qty" id="quantity-<%=cart.getData().get(id).getProductId()%>">
+                                <div class="pro-qty" id="quatity-<%=cart.getData().get(id).getProductId()%>">
                                     <span onclick="tru(<%=i%>)"
                                           class="dec qtybtn control<%=cart.getData().get(id).getProductId()%>">-</span>
-                                    <input type="text" value="<%=cart.getData().get(id).getQuantityCart()%>"
+                                    <input type="text" class="value-input"
+                                           value="<%=cart.getData().get(id).getQuantityCart()%>"
                                            id="quatity-text-<%=i%>">
                                     <span onclick="cong(<%=i%>)"
                                           class="inc qtybtn control<%=cart.getData().get(id).getProductId()%>">+</span>

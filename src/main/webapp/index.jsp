@@ -6,6 +6,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -134,6 +136,7 @@
     </style>
     </head>
     <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
+    <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 
 <body>
 
@@ -314,7 +317,7 @@
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#"><%=p.getProductName()%></a></h6>
-                            <h5><%=p.getPrice()%> VNĐ</h5>
+                            <h5><%=format.format(p.getPrice())%>đ</h5>
                         </div>
                     </div>
                 </div>

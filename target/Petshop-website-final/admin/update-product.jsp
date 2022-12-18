@@ -557,10 +557,10 @@
                                 <h5>Tags</h5>
 
                               </div><select class="form-select" aria-label="category">
-                              <%if(p.getProductId() < 2000){%>
+                              <%if(p.getProductId()!=null){%>
                               <option selected value="men-cloth">Chó</option>
                               <option value="women-cloth">Mèo</option>
-                              <%} else {%>
+
                               <option value="men-cloth">Chó</option>
                               <option selected value="women-cloth">Mèo</option>
                               <%}%>
