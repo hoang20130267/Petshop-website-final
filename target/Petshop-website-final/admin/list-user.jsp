@@ -278,7 +278,7 @@
                             <p class="mb-0 ms-3 text-1100 fw-bold"><%=c.getUsername()%></p>
                           </a></td>
                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com"><%=c.getEmail()%></a></td>
-                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td>
+                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center"><%=c.getQuantity()%></td>
                         <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">60.000.000đ</td>
                         <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>
                         <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
