@@ -2,6 +2,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -216,7 +218,7 @@
     </div>
 </div>
 <!-- Humberger End -->
-
+<% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <!-- Header Section Begin -->
 <jsp:include page="layout/header.jsp"></jsp:include>
 <!-- Header Section End -->
@@ -283,7 +285,7 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
-                    <div class="product__details__price"><%=product.getPrice()%> VNĐ</div>
+                    <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
                     <p><%=product.getDescription()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
