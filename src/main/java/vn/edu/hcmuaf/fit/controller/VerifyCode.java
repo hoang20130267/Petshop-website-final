@@ -27,7 +27,7 @@ public class VerifyCode extends HttpServlet {
             if (code.length() != 6) {
                 String error = "Mã xác nhận phải điền đủ 6 số";
                 request.setAttribute("errorCode", error);
-                request.getRequestDispatcher("../verify.jsp").forward(request, response);
+                request.getRequestDispatcher("verify.jsp").forward(request, response);
             } else {
                 if (code.equals(user.getCode())) {
                     SignUpService.getInstance().insertUser(user.getUserName(), user.getPassMaHoa(), user.getPasswd(), user.getFullName(), user.getEmail(), user.getPhone());

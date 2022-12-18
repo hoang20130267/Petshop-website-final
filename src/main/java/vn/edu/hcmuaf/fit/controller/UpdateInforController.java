@@ -13,7 +13,7 @@ import java.io.IOException;
 public class UpdateInforController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     @Override
@@ -25,14 +25,19 @@ public class UpdateInforController extends HttpServlet {
         String newpassconfirm = request.getParameter("newpassconfirm");
 
         CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
-        if(newpass.equals(newpassconfirm)){
-            new CustomerUserDAO().updateInforUser(user.getId(),fullname,phone,address,newpass);
+        if (newpass != "") {
+            if (newpass.equals(newpassconfirm)) {
+                new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass);
+                request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
+                request.getRequestDispatcher("infor-user.jsp").forward(request, response);
+            } else {
+                request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
+                request.getRequestDispatcher("infor-user.jsp").forward(request, response);
+            }
+        }else {
+            new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address);
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-user.jsp").forward(request, response);
-        }else {
-            request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
-            request.getRequestDispatcher("infor-user.jsp").forward(request, response);
         }
-
     }
 }

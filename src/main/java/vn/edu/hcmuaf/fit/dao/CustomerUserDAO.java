@@ -118,6 +118,17 @@ public class CustomerUserDAO {
             return null;
         });
     }
+    public void updateInforUser(String id, String fullname,String phone, String address){
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update infor_user set name=? ,phone=? , address=? where id_user =?")
+                    .bind(0,fullname)
+                    .bind(1,phone)
+                    .bind(2,address)
+                    .bind(3,id)
+                    .execute();
+            return null;
+        });
+    }
 
     public List<CustomerUser> listUser() {
         String query = "SELECT u.user_name, u.id,ifu.email, SUM(od.Price) as Price, SUM(od.Quantity) AS Quantity \n" +

@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-<<<<<<< HEAD
-Built-By: ADMIN
-Build-Jdk: Oracle OpenJDK version 18.0.1
-=======
 Built-By: Nguyen Ngoc Huy
 Build-Jdk: 18.0.2
->>>>>>> 8a6e1a0ab5340491e39aeabac5cef4c1d7e733ed
 
