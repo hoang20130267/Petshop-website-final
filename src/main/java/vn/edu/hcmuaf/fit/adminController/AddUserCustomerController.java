@@ -1,6 +1,5 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 
@@ -9,8 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AddUserAdminController", value = "/admin/AddUserAdminController")
-public class AddUserAdminController extends HttpServlet {
+@WebServlet(name = "AddUserCustomerController", value = "/AddUserCustomerController")
+public class AddUserCustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -27,27 +26,27 @@ public class AddUserAdminController extends HttpServlet {
         String address = request.getParameter("address");
         int status;
 
-        if(request.getParameter("status").equals("Mở khóa")){
-            status=1;
-        }else {
-            status=0;
+        if (request.getParameter("status").equals("Mở khóa")) {
+            status = 1;
+        } else {
+            status = 0;
         }
         System.out.println(status);
 
-        String exe = SignUpService.getInstance().checkUser(email,username);
+        String exe = SignUpService.getInstance().checkUser(email, username);
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
-            request.setAttribute("addAdminerror", "Không được bỏ trống!");
+            request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
         } else {
             if (exe != null) {
-                request.setAttribute("addAdminerror", exe);
+                request.setAttribute("addUsererror", exe);
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
             } else if (!passwd.equals(passconfirm)) {
-                request.setAttribute("addAdminerror", "Mật khẩu nhập lại không đúng!");
+                request.setAttribute("addUsererror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
             } else {
-                new CustomerUserDAO().insertAdmin(username,passwd,fullname,email,phone,address,status);
-                response.sendRedirect("list-admin.jsp");
+                new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
+                response.sendRedirect("list-user.jsp");
             }
 
         }

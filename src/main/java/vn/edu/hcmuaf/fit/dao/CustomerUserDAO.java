@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
 
@@ -139,14 +140,36 @@ public class CustomerUserDAO {
                 "WHERE u.role=1;").mapToBean(CustomerUser.class).stream().collect(Collectors.toList())));
     }
 
-    public void insertAdmin(String userName, String pass, String fullName, String email, String phone,String address) {
+    public void insertAdmin(String userName, String pass, String fullName, String email, String phone,String address,int status) {
         String id = taoIDCustomerAdminUser();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, 1, 1)")
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, ?, 1)")
                     .bind(0, id)
                     .bind(1, userName)
                     .bind(2, Utils.maHoaMK(pass))
                     .bind(3, pass)
+                    .bind(4, status)
+                    .execute();
+            handle.createUpdate("INSERT INTO infor_user(id_user,name, email, phone, address) VALUES (?, ?, ?,?,?)")
+                    .bind(0, id)
+                    .bind(1, fullName)
+                    .bind(2, email)
+                    .bind(3, phone)
+                    .bind(4,address)
+                    .execute();
+            return null;
+        });
+    }
+
+    public void insertCustomer(String userName, String pass, String fullName, String email, String phone,String address,int status) {
+        String id = new SignUpDAO().taoIDCustomerUser();
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, ?, 0)")
+                    .bind(0, id)
+                    .bind(1, userName)
+                    .bind(2, Utils.maHoaMK(pass))
+                    .bind(3, pass)
+                    .bind(4, status)
                     .execute();
             handle.createUpdate("INSERT INTO infor_user(id_user,name, email, phone, address) VALUES (?, ?, ?,?,?)")
                     .bind(0, id)
