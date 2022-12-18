@@ -318,7 +318,7 @@
                             <%}%>
                             <td class="shoping__cart__quantity">
                                 <div class="quantity">
-                                    <div class="pro-qty" id="quantity-<%=cart.getData().get(id).getProductId()%>">
+                                    <div class="pro-qty" id="quatity-<%=cart.getData().get(id).getProductId()%>">
                                         <span onclick="tru(<%=i%>)"
                                               class="dec qtybtn control<%=cart.getData().get(id).getProductId()%>">-</span>
                                         <input type="text" class="value-input"
@@ -378,9 +378,10 @@
                 <div class="shoping__checkout">
                     <h5>Tổng tiền giỏ hàng</h5>
 
-                                            <ul>
-                                                <li>Tổng tiền <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
-                                            </ul>
+                    <ul>
+                        <li>Tổng tiền <span
+                                class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
+                    </ul>
                     <a href="checkout.jsp" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
                 </div>
             </div>
@@ -400,14 +401,15 @@
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
+<script>
+    <%@include file="js/main.js"%>
+</script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 <script>
     function deleteProduct() {
         $(".pro-qty").each(function () {
-            const id = $(this).attr("id").substring(9);
-            console.log(id)
+            const id = $(this).attr("id").substring(8);
             $("#delete" + id).click(function (e) {
                 e.preventDefault();
                 $.ajax({
@@ -428,37 +430,57 @@
 
     function update() {
         $(".pro-qty").each(function () {
-            const id = $(this).attr("id").substring(9);
-            $(this).children(".control" + id).each(function (e) {
+            const id = $(this).attr("id").substring(8);
+            console.log(id)
+            $(this).children(".control" + id).each(function () {
                 $(this).click(function (e) {
                     e.preventDefault();
-                    const amount = $("#quantity-" + id + " .value-input").val();
+                    const amount = $("#quatity-" + id + " .value-input").val();
+                    console.log(id + "-" + amount)
                     if (parseInt(amount) < 1) {
                         alert("Không được nhỏ hơn 1!")
                     } else {
                         $.ajax({
                             url: "IncDecQuantityController",
-                            type: "post",
+                            type: "GET",
                             data: {
                                 idUpdate: id,
-                                amount: amount,
+                                amount: amount
                             },
                             success: function (data) {
                                 $(".shoping-cart").html(data);
                                 update();
                                 deleteProduct();
                             }
+                            , error: function () {
+                                alert("error");
+                            }
                         })
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     }
+
 
     $(document).ready(function () {
         update();
         deleteProduct();
     })
+
+    function cong(id) {
+        const value = $(`#quatity-text-` + id).val();
+        $(`#quatity-text-` + id).val(parseInt(value) + 1);
+        console.log($(`#quatity-text-` + id).val())
+    }
+
+    function tru(id) {
+        const value = $(`#quatity-text-` + id).val();
+        if (parseInt(value) > 1) {
+            $(`#quatity-text-` + id).val(parseInt(value) - 1);
+        }
+        console.log($(`#quatity-text-` + id).val())
+    }
 </script>
 </body>
 
