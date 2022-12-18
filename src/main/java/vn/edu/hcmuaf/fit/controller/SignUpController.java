@@ -51,7 +51,7 @@ public class SignUpController extends HttpServlet {
                 if (test) {
                     HttpSession session = request.getSession();
                     session.setAttribute("authcode", users);
-                    response.sendRedirect("../verify.jsp");
+                    response.sendRedirect("verify.jsp");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
                 }

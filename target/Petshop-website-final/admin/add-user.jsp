@@ -185,7 +185,7 @@
 					<div class="form-group col-md-6">
 						<label for="validationTooltip04" class="form-label">Địa chỉ</label>
 						<input type="text" class="form-control" id="validationTooltip05" name="address" required
-							   placeholder="+84">
+							   placeholder="Địa chỉ">
 
 					</div>
 					<div class="form-group col-md-6">
@@ -208,7 +208,7 @@
 					<div class="col-md-3 position-relative">
 						<label for="validationTooltip05" class="form-label">Số điện thoại</label>
 						<input type="text" class="form-control" id="phone" name="phone"
-							   placeholder="Địa chỉ">
+							   placeholder="+84">
 						<%--            <div class="invalid-tooltip">--%>
 						<%--              Bạn chưa chọn vị trí cho người này--%>
 						<%--            </div>--%>
@@ -231,7 +231,6 @@
 				<%--          </div>--%>
 				<%--        </div>--%>
 				<p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-
 					<button type="submit" class="btn  btn-primary"
 							style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
 						Thêm admin
