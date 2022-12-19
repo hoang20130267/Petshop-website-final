@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.beans.ProductSale;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -101,7 +100,7 @@ public class ProductDAO {
         });
     }
     public static void insertAccessory(String id, String name, String image, String price, String promoPrice,
-                                     String description,String quantity) {
+                                       String description,String quantity) {
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity) values(?,?,?,?,?,?,?)")
                     .bind(0, id)
@@ -116,7 +115,7 @@ public class ProductDAO {
     }
 
     public static void updateProduct(String id, String name, String image, String price, String promoPrice,
-                                     String description,String quantity, String giong, String mausac, String cannang) {
+                                     String description, String quantity, String giong, String mausac, String cannang) {
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("update product set ProductName = ?, Image = ?, Price = ?, PromotionalPrice = ?, Description = ?, Quantity = ?, giong = ?, mausac = ?, cannang = ? where productId = ?")
                     .bind(9, id)
@@ -133,7 +132,7 @@ public class ProductDAO {
         });
     }
     public static void updateAccessory(String id, String name, String image, String price, String promoPrice,
-                                     String description,String quantity) {
+                                       String description, String quantity) {
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("update product set ProductName = ?, Image = ?, Price = ?, PromotionalPrice = ?, Description = ?, Quantity = ? where productId = ?")
                     .bind(6, id)

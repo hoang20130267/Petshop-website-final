@@ -78,7 +78,7 @@ public class SearchControl extends HttpServlet {
                     "                    </div>\n" +
                     "                  </div>\n" +
                     "                  <div class=\"d-grid\">\n" +
-                    "                    <a class=\"btn_2\" href=\"update-product.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Chỉnh sửa</a>\n" +
+                    "                    <a class=\"btn_2\" href=\"edit-product.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Chỉnh sửa</a>\n" +
                     "                    <a class=\"btn_2\" href=\"delete-product?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Xóa</a>\n" +
                     "                  </div>\n" +
                     "                </div>\n" +
