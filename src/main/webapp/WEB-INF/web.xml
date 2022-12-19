@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <context-param>
+    <param-name>tempproduct.dir</param-name>
+    <param-value>Petshop_website_final_war/img/products</param-value>
+  </context-param>
+  <context-param>
+    <param-name>saveproduct.dir</param-name>
+    <param-value>Petshop-website-final/src/main/webapp/img/products</param-value>
+  </context-param>
 </web-app>
