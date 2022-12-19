@@ -36,35 +36,34 @@
 
 <body>
 <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-  <div class="wrapper wrapper--w680">
-    <div class="card card-4">
-      <div class="card-body">
-        <h2 class="title">Xác Nhận Email</h2>
-          <% String error = (String) request.getAttribute("errorCode"); %>
-        <form method="POST" id="form-signup" action="VerifyCode">
-          <div class="row row-space">
-            <div class="col-12">
-              <div class="input-group">
-                <label class="label">Nhập OTP:</label>
-                <input id="code" type="text" name="authcode">
-              </div>
-            </div>
-            <div class="col-2">
-              <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">7
-                  <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
-                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
-<%--                <a href="#"> <div class="btn btn--radius-2 btn--blue" type="text" >Xác Nhận</div></a>--%>
-                <input type="text" id="role" name="role" value="register" style="display: none">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body" style="width:460px">
+                <h2 class="title">Xác Nhận Email</h2>
 
-              </div> <br>
-            </div>
+                <form method="POST" id="form-signup" action="VerifyCode">
+                    <div class="row row-space">
+                        <div>
+                            <div class="input-group" style="width:390px">
+                                <label style="width:100px;margin-right: 10px;">Nhập OTP:</label>
+                                <input id="code" type="text" name="authcode" style="width:250px; border: solid 3px #000000 ;height: 45px; border-radius: 30px; padding:10px">
+                            </div>
+                        </div>
+                        <div>
+                            <div style="padding-top: 28px; padding-left: 30px;width:300px">                  <h5 class="error" style="color: red; font-size: 16px"></h5>
+                                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
 
-          </div>
-          <span>Bạn đã có tài khoản? <a href="../Login/index.jsp" style="text-decoration: none; color: #00BFFF">Đăng nhập</a></span>
-        </form>
-      </div>
+                                <input type="text" id="role" name="role" value="register" style="display: none">
+
+                            </div> <br>
+                        </div>
+
+                    </div>
+                    <span>Bạn đã có tài khoản? <a href="../Login/index.jsp" style="text-decoration: none; color: #00BFFF">Đăng nhập</a></span>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Jquery JS-->
@@ -79,7 +78,11 @@
 <!-- Main JS-->
 <script src="SignUp/js/global.js"></script>
 
-</body>
+
+
+
+
+<div id="eJOY__extension_root" class="eJOY__extension_root_class" style="all: unset;"></div><iframe id="nr-ext-rsicon" style="position: absolute; display: none; width: 50px; height: 50px; z-index: 2147483647; border-style: none; background: transparent;"></iframe></body>
 
 </html>
 <!-- end document-->

@@ -146,12 +146,44 @@ public class ProductDAO {
         });
     }
 
-    public List<Product> getTop9Product() {
+    public List<Product> getTop9Product(String category) {
+        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 \n";
+        if ( category.equals("dog")) {
+            query += "AND pfc.cate_id=1 \n";
+        }
+        if (category.equals("cat")) {
+            query += "AND pfc.cate_id=2 \n";
+        }
+        if (category.equals("accessory")) {
+            query += "AND pfc.cate_id=3 \n";
+        }
+        if (category == "all") {
+            query = query;
+        }
+        String Finalquery = query + "limit 9; \n";
+
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product limit 9")
+            return handle.createQuery(Finalquery)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
+    }
+
+    public String test(String category) {
+        String query = "select * from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 \n";
+        if ( category == "dog") {
+            query += "AND cate_id=1 \n";
+        }
+        if (category == "cat") {
+            query += "AND cate_id=2 \n";
+        }
+        if (category == "accessory") {
+            query += "AND cate_id=3 \n";
+        }
+        String Finalquery = query + "limit 9 \n";
+        return Finalquery;
     }
 
     public List<Product> getNext9Product(int amount) {
@@ -185,7 +217,6 @@ public class ProductDAO {
                     .mapToBean(Product.class).first();
         });
         return detail;
-
 
 
 //    public Product getProductDetail(String Id){
@@ -227,6 +258,10 @@ public class ProductDAO {
 //        insertAccessory("3041", "Chuong", "deo co", "100000", "1000", "cho ngu", "5");
 //        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
 //        System.out.println(new ProductDAO().searchByName2("chuong"));
+    }
+    public static void main(String[] args){
+        System.out.println(new ProductDAO().getTop9Product("cat"));
+//        System.out.println(new ProductDAO().test("dog"));
     }
 }
 

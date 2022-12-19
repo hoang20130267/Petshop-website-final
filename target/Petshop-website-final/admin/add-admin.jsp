@@ -202,9 +202,10 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                               placeholder="Mật khẩu">
+                        <label for="validationTooltip05" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="validationTooltip05" name="phone" required
+                               placeholder="+84">
+
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Họ và tên</label>
@@ -213,7 +214,12 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-6 position-relative">
+                    <div class="col-md-3 position-relative">
+                        <label class="form-label" for="inputPassword4">Mật khẩu</label>
+                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                               placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-3 position-relative">
                         <label class="form-label">Nhập lại mật khẩu</label>
                         <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
                                placeholder="Nhập lại mật khẩu">
@@ -221,7 +227,6 @@
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
                         <select class="form-select" id="validationTooltip04" name="address" required>
-                            <option selected disabled value="">Chọn...</option>
                             <option>TP.HCM</option>
                             <option>Hà Nội</option>
                         </select>
@@ -230,9 +235,11 @@
                         <%--            </div>--%>
                     </div>
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip05" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="validationTooltip05" name="phone" required
-                               placeholder="+84">
+                        <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
+                        <select class="form-select" id="validationTooltip04" name="status" required>
+                            <option>Mở khóa</option>
+                            <option>Khóa</option>
+                        </select>
                         <%--            <div class="invalid-tooltip">--%>
                         <%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
                         <%--            </div>--%>
@@ -244,7 +251,6 @@
                 <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
                 <%--          </div>--%>
                 <%--        </div>--%>
-                <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
 
                     <button type="submit" class="btn  btn-primary"
                             style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
