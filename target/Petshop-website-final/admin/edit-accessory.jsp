@@ -68,6 +68,18 @@
       href="bonus/css/skin.min.css"
     />
     <script type="text/javascript" src="<%=request.getContextPath()%>/libraries/ckeditor/ckeditor.js"></script>
+    <style>
+        .input-file::-webkit-file-upload-button {
+            background: #00BFFF;
+            border-radius: 50px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 8px 25px;
+            margin-right: 3px;
+            transition: all 0.3s;
+        }
+    </style>
 </head>
 
 <body class="">
@@ -208,7 +220,7 @@
 
           <!-- <div class="content"> -->
 
-            <form action="edit-accessory" method="post" class="mb-9">
+            <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
                     <% Product p = null;
                             if (request.getParameter("pid") != null)
                             p = ProductService.getInstance().getProductDetail(request.getParameter("pid"));
@@ -217,7 +229,7 @@
                 <div class="col-auto">
                     <%if (request.getParameter("pid") != null) {%>
 
-                    <h2 class="mb-2">Chỉnh sửa thú cưng</h2>
+                    <h2 class="mb-2">Chỉnh sửa phụ kiện</h2>
                     <%} else {%>
                     <h2 class="mb-2">Thêm phụ kiện</h2>
                     <%}%>
@@ -230,11 +242,11 @@
                         Xóa dữ liệu</button
                     >
                     <%if (request.getParameter("pid") != null) {%>
-                    <button value="edit-product" class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                         Sửa phụ kiện
                     </button>
                     <%} else {%>
-                    <button value="edit-product" class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                         Đăng phụ kiện
                     </button>
                     <%}%>
@@ -246,7 +258,7 @@
               <h4 class="mb-3">Tên phụ kiện</h4>
               <div class="row g-5">
                 <div class="col-12 col-xl-8">
-                  <input name="name"
+                  <input name="name" id="name"
                     class="form-control mb-5"
                     type="text"
                     placeholder="Viết tên phụ kiện tại đây..." value="<%=(p != null) ? p.getProductName() : ""%>" required
@@ -265,33 +277,39 @@
                     <div
                             class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
                             id="my-awesome-dropzone"
-                            data-dropzone="data-dropzone"
-                    >
-                        <div class="dz-preview d-flex flex-wrap">
-                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
-                                <img class="dz-image img-product-review" src="" alt="" data-dz-thumbnail="">
-                                <a id="remove" class="dz-remove text-400 remove" href="" data-dz-remove="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                    </svg>
-                                </a>
+                            data-dropzone="data-dropzone">
+
+                        <% int i = 0;
+                            if (p != null) {
+                                if (p.getImage() != null) {%>
+                        <div class="image-container">
+                            <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
+                                <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
+                                    <img class="img-product-review dz-image" src="<%=p.getImage()%>">
+                                    <div class="control">
+                                        <a id="remove<%=i%>" class="dz-remove text-400 remove" href="" data-dz-remove="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="dz-message text-600" data-dz-message="data-dz-message">
-                            <input type="file" id="image" name="files" class="input-file"/>
-                            <br/>
-                            <%if(p == null) {%>
-                            <img id="form-img" src="" width="50" alt=""/>
-                            <%} else {%>
-                            <br/>
-                            Hình ảnh hiện tại
-                            <br/>
-                            <img id="form-img" src="<%=p.getImage()%>" width="80" alt=""/>
-                            <%}%>
-                        </div>
+                        <%i++;
+                        }
+                        }%>
 
+                        <div class="image-container">
+                            <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
+                                <input type="file" id="image<%=i%>" name="files" class="input-file"/>
+                                <br>
+                                <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
+                            </div>
+                        </div>
                     </div>
+                    <input type="text" id="deletedFile" value="" style="display: none">
                   <h4 class="mb-3">Danh mục</h4>
                   <div class="row g-0 border-top border-bottom border-300">
                     <div class="col-sm-4">
@@ -436,7 +454,7 @@
                                   <div class="row g-3">
                                       <div class="col-12 col-lg-6">
                                           <h5 class="mb-2">Giá tiền gốc</h5>
-                                          <input name="price"  value="<%=(p != null) ? p.getPrice() : ""%>"
+                                          <input id="price" name="price"  value="<%=(p != null) ? p.getPrice() : ""%>"
                                                  class="form-control"
                                                  type="text"
                                                  placeholder="Đồng" required
@@ -444,7 +462,7 @@
                                       </div>
                                       <div class="col-12 col-lg-6">
                                           <h5 class="mb-2">Giá tiền đã giảm</h5>
-                                          <input name="promoPrice"  value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                          <input id="promoPrice" name="promoPrice"  value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
                                                   class="form-control"
                                                   type="text"
                                                   placeholder="Đồng" required
@@ -462,7 +480,7 @@
                                       <div class="row g-3">
                                           <div class="col-12 col-lg-6">
                                               <h5 class="mb-2">Số lượng</h5>
-                                              <input name="quantity"  value="<%=(p != null) ? p.getQuantity() : ""%>"
+                                              <input id="quantity" name="quantity"  value="<%=(p != null) ? p.getQuantity() : ""%>"
                                                       class="form-control"
                                                       type="text"
                                                       placeholder="Ví dụ: 5" required
@@ -503,15 +521,8 @@
 
                                       <div class="col-12 col-lg-6">
                                           <h5 class="mb-2 text-1000">ID thú cưng</h5>
-                                          <%if (request.getParameter("pid") != null) {%>
-                                          <input name="pid" value="<%=p.getProductId()%>"
-                                                 class="form-control"
-                                                 type="text"
-                                                 placeholder="Số ID"
-                                          />
-                                          <%}else {%>
-                                          <p name="pid" class="form-control"><%=p.getProductId()%></p>
-                                          <%}%>
+                                          <p name="pid" class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%></p>
+
                                       </div>
                                   </div>
                               </div>
@@ -595,9 +606,178 @@
 
 
 <!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
+    <script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
-<script src="assets/js/pages/dashboard-sale.js"></script>
+    <script src="assets/js/pages/dashboard-sale.js"></script>
 </body>
+<script>
+    const idProduct = $("#pid").val();
+    if (idProduct.length > 0) {
+        $(".remove").each(function () {
+            const id = this.id.substring(6);
+            removeFilesData(id)
+        })
+    } else {
+        removeFilesData(1)
+    }
+    function reloadUpLoadFile() {
+        $(".input-file").each(function () {
+            $(this).on('change', function (e) {
+                const idName = $(this).attr("id");
+                const id = idName.substring(5);
+                const value = $(this).val();
+                let name = "";
+                if (value.indexOf("\\") != -1)
+                    name = value.substring(value.lastIndexOf("\\") + 1);
+                else
+                    name = value.substring(value.lastIndexOf("/") + 1);
+                uploadFile(id, name, e)
+            })
+        });
+    }
+    $(".input-file").each(function () {
+        $(this).on('change', function (e) {
+            const idName = $(this).attr("id");
+            const id = idName.substring(5);
+            const value = $(this).val();
+            let name = "";
+            if (value.indexOf("\\") != -1)
+                name = value.substring(value.lastIndexOf("\\") + 1);
+            else
+                name = value.substring(value.lastIndexOf("/") + 1);
+            console.log(id +", " + name + ", ")
+            uploadFile(id, name, e)
+        })
+    });
+    function uploadFile(id, name, event) {
+        event.stopPropagation();
+        event.preventDefault();
+        const files = event.target.files;
+        const data = new FormData();
+        $.each(files, function (key, value) {
+            data.append(key, value);
+        });
+        postFilesData(id, name, data);
+    }
+    function removeFilesData(idDelete) {
+        $("#remove" + idDelete).on("click", function (e) {
+            e.preventDefault();
+            const id = this.id.substring(6);
+            const src = $("#container" + id + " .img-product-review").attr("src");
+            let imageName = "";
+            if (src.indexOf("\\") != -1)
+                imageName = src.substring(src.lastIndexOf("\\") + 1);
+            else
+                imageName = src.substring(src.lastIndexOf("/") + 1);
+            $("#container" + id).parent().remove();
+            const value = $("#deletedFile").val();
+            if (value.length > 0)
+                $("#deletedFile").val($("#deletedFile").val() + imageName + ",");
+            else
+                $("#deletedFile").val(imageName + ",");
+            console.log($("#deletedFile").val());
+        });
+    }
+    function postFilesData(id, name, data) {
+        let bool = false;
+        $(".img-product-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf(name) != -1) {
+                bool = true;
+            }
+        })
+        if (bool === false) {
+            $.ajax({
+                url: '/Petshop_website_final_war/UpDownImageProductController',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (data, textStatus, jqXHR) {
+                    //success
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#container" + id).empty()
+                    $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
+                                                <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
+                                                <div class="control">
+                                                <a id="remove`+ id +`" class="dz-remove text-400 remove" href="" data-dz-remove="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                </a>
+                                                </div>
+                                            </div>`)
+                    $("#my-awesome-dropzone").append(`<div class="image-container">
 
+                                        <div id="container`+ id +`" class="dz-message text-600" data-dz-message="data-dz-message">
+                                            <input type="file" id="image`+ id +`" name="files" class="input-file"/>
+                                            <br>
+                                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
+                                        </div>
+                                    </div>`)
+                    let value = $("#deletedFile").val();
+                    if (value.indexOf(name) !== -1) {
+                        value = value.replace(name + ",", "");
+                        $("#deletedFile").val(value);
+                    }
+                    console.log($("#deletedFile").val());
+                    reloadUpLoadFile();
+                    removeFilesData(id);
+                }
+            });
+        } else {
+            alert("Bạn đã upload ảnh này rồi !")
+        }
+    }
+</script>
+<script>
+    $("button[type='submit']").click(function (e) {
+        e.preventDefault();
+
+        const id = $("#pid").val();
+        const name = $("#name").val();
+        const quantity = $("#quantity").val();
+        const price = $("#price").val();
+        const promo = $("#promoprice").val();
+        const descripsion = CKEDITOR.instances.editor.getData();
+        const imageLink = $(".img-product-review").attr("src").substring(61);
+        console.log(imageLink);
+        let imgFile = []
+        $(".img-product-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf("\\") != -1)
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
+            else
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
+        })
+        const removed = $("#deletedFile").val();
+        const oldImg = removed.substring(0, removed.length - 1);
+        $.ajax({
+            url: "/Petshop_website_final_war/admin/edit-accessory",
+            type: "GET",
+            data: {
+                quantity: quantity,
+                oldImg: oldImg,
+                id: id,
+                name: name,
+                price: price,
+                promo : promo,
+                image : imageLink,
+                descripsion : descripsion,
+                imgFile: imgFile,
+            },
+            success: function () {
+                if (id.length < 1)
+                    alert("Thêm sản phẩm thành công");
+                else
+                    alert("Cập nhật sản phẩm thành công");
+                window.location.href = "list-accessory"
+            }
+        })
+    })
+</script>
 </html>
