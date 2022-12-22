@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class ProductDAO {
@@ -82,13 +83,14 @@ public class ProductDAO {
         });
     }
 
-    public static void insertProduct(String id, String name, String image, String price, String promoPrice,
-                                     String description,String quantity, String giong, String mausac, String cannang) {
+    public static void insertProduct(String name, String image, String price, String promoPrice,
+                                     String description,String quantity, String giong, String mausac, String cannang, String cate) {
+        String id = taoIDProduct();
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity, giong, mausac, cannang) values(?,?,?,?,?,?,?,?,?,?)")
+            handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity, giong, mausac, cannang) values(?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, image)
+                    .bind(2, "img/products/"+image)
                     .bind(3, price)
                     .bind(4, promoPrice)
                     .bind(5, description)
@@ -97,20 +99,31 @@ public class ProductDAO {
                     .bind(8, mausac)
                     .bind(9, cannang)
                     .execute();
+            handle.createUpdate("insert into product_from_cate values (?,?)")
+                    .bind(0,id)
+                    .bind(1,cate)
+                    .execute();
+            return true;
         });
     }
-    public static void insertAccessory(String id, String name, String image, String price, String promoPrice,
-                                       String description,String quantity) {
+    public static void insertAccessory(String name, String image, String price, String promoPrice,
+                                       String description,String quantity, String cate) {
+        String id = taoIDProduct();
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity) values(?,?,?,?,?,?,?)")
+            handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity) values(?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, image)
+                    .bind(2, "img/products/"+image)
                     .bind(3, price)
                     .bind(4, promoPrice)
                     .bind(5, description)
                     .bind(6, quantity)
                     .execute();
+            handle.createUpdate("insert into product_from_cate values (?,?)")
+                    .bind(0,id)
+                    .bind(1,cate)
+                    .execute();
+            return true;
         });
     }
 
@@ -213,11 +226,47 @@ public class ProductDAO {
     public Product getProductDetail(String id) {
         Product detail = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId = ?")
-                    .bind(0,id)
+                    .bind(0, id)
                     .mapToBean(Product.class).first();
         });
         return detail;
+    }
+        public static String taoIDProduct() {
+            String numbers = "0123456789";
+            StringBuilder stringBuilder = new StringBuilder("P");
+            Random rd = new Random();
 
+            for (int i = 0; i < 4; i++) {
+                int index = rd.nextInt(numbers.length());
+                char rdC = numbers.charAt(index);
+                stringBuilder.append(rdC);
+            }
+            List<String> listId = JDBIConnector.get().withHandle(
+                    handle -> handle.createQuery("SELECT productId FROM product")
+                            .mapTo(String.class)
+                            .stream()
+                            .collect(Collectors.toList()));
+            if (listId.contains(stringBuilder.toString())) return taoIDProduct();
+            else return stringBuilder.toString();
+        }
+    public static String taoIDCate() {
+        String numbers = "0123456789";
+        StringBuilder stringBuilder = new StringBuilder("D");
+        Random rd = new Random();
+
+        for (int i = 0; i < 2; i++) {
+            int index = rd.nextInt(numbers.length());
+            char rdC = numbers.charAt(index);
+            stringBuilder.append(rdC);
+        }
+        List<String> listId = JDBIConnector.get().withHandle(
+                handle -> handle.createQuery("SELECT CatId FROM product_category")
+                        .mapTo(String.class)
+                        .stream()
+                        .collect(Collectors.toList()));
+        if (listId.contains(stringBuilder.toString())) return taoIDCate();
+        else return stringBuilder.toString();
+    }
 
 //    public Product getProductDetail(String Id){
 //        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
@@ -258,7 +307,6 @@ public class ProductDAO {
 //        insertAccessory("3041", "Chuong", "deo co", "100000", "1000", "cho ngu", "5");
 //        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
 //        System.out.println(new ProductDAO().searchByName2("chuong"));
-    }
     public static void main(String[] args){
         System.out.println(new ProductDAO().getTop9Product("cat"));
 //        System.out.println(new ProductDAO().test("dog"));
