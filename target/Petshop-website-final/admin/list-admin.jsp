@@ -269,8 +269,7 @@
                                     <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
                                     <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
                                     <td class="last-order align-middle white-space-nowrap text-700 text-center"><i class="fa-thin fa-trash-can"></i></td>
-                                </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
+                                </tr></tr>
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
 
                                         <%  } %>
@@ -393,7 +392,7 @@
 <%--                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">Hà Nội</td>--%>
 <%--                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">40 phút trước</td>--%>
 <%--                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></td>--%>
-                                </tr>
+                                </tbody>
                             </table>
                         </div>
                         <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
