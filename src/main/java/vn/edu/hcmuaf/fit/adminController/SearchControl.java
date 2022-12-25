@@ -31,7 +31,7 @@ public class SearchControl extends HttpServlet {
                     "                    >\n" +
                     "                  </div> -->\n" +
                     "                  <img\n" +
-                    "                    src=\"../"+p.getImage()+"\"\n" +
+                    "                    src=\""+p.getImage()+"\"\n" +
                     "                    alt=\"\"\n" +
                     "                    class=\"d-block mx-auto my-4\"\n" +
                     "                    height=\"150\"\n" +
