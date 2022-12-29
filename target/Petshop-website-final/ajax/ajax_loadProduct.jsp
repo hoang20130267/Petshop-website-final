@@ -12,6 +12,7 @@
 <%CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");%>
 <% List<Product> list = (List<Product>) request.getAttribute("listnext9");
     for (Product p : list) { %>
+
 <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
     <div class="product__item">
         <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" style="background-image: url(<%=p.getImage()%>);">

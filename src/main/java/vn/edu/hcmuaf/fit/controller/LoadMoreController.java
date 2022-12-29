@@ -17,8 +17,9 @@ public class LoadMoreController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String amount = request.getParameter("amount");
+        String category = request.getParameter("category");
         int amount_int = Integer.parseInt(amount);
-        List<Product> list = new ProductDAO().getNext9Product(amount_int);
+        List<Product> list = new ProductDAO().getNext9Product(amount_int,category);
         request.setAttribute("listnext9", list);
         request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);
     }
