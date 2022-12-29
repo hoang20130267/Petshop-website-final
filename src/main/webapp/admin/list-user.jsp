@@ -279,12 +279,12 @@
                           </a></td>
                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com"><%=c.getEmail()%></a></td>
                         <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center"><%=c.getQuantity()%></td>
-                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">60.000.000đ</td>
+                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=c.getPrice()%>đ</td>
                         <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>
                         <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
                         <td class="last-order align-middle white-space-nowrap text-700 text-end">12/09/2021</td>
-                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                        <td class="fs--1 align-middle ps-0 py-3">
+                      </tr>
+                        </tr>
                             <%  } %>
                           <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
 <%--                          <p class="mb-0 text-1100 fw-bold">022</p>--%>
@@ -419,7 +419,7 @@
 <%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
 <%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">1 ngày trước</td>--%>
 <%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">04/07/2021</td>--%>
-                      </tr></tbody>
+                    </tbody>
                   </table>
                 </div>
                 <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
