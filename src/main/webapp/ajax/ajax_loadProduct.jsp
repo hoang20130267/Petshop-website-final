@@ -12,6 +12,7 @@
 <%CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");%>
 <% List<Product> list = (List<Product>) request.getAttribute("listnext9");
     for (Product p : list) { %>
+
 <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
     <div class="product__item">
         <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" style="background-image: url(<%=p.getImage()%>);">
@@ -20,7 +21,7 @@
                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                 <%if (user != null) {
                     Product product = new ProductDAO().getProductDetail(p.getProductId());%>
-                <%if (product.getQuantity() > 0) {%>
+                <%if (Integer.parseInt(product.getQuantity())> 0) {%>
                 <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
                         class="fa fa-shopping-cart"></i></a></li>
                 <%}%>

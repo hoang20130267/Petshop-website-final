@@ -569,7 +569,7 @@
                     <%  String category = request.getParameter("category");
                         List<Product> list = new ProductDAO().getTop9Product(category);
                         for (Product p : list) { %>
-
+                    <input id="category" type="text" style="display: none" value="<%=category%>" name="category">
                     <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" >
@@ -639,11 +639,13 @@
     })
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
+        var category = $('#category').val();
         $.ajax({
             url: "/Petshop_website_final_war/loadMore",
             type: "get", //send it through get method
             data: {
-                amount: amount
+                amount: amount,
+                category: category,
             },
             success: function (data) {
                 var row = document.getElementById("items");
