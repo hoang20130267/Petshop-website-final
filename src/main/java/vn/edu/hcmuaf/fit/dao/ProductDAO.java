@@ -199,9 +199,24 @@ public class ProductDAO {
         return Finalquery;
     }
 
-    public List<Product> getNext9Product(int amount) {
+    public List<Product> getNext9Product(int amount, String category) {
+        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 \n";
+        if ( category.equals("dog")) {
+            query += "AND pfc.cate_id=1 \n";
+        }
+        if (category.equals("cat")) {
+            query += "AND pfc.cate_id=2 \n";
+        }
+        if (category.equals("accessory")) {
+            query += "AND pfc.cate_id=3 \n";
+        }
+        if (category == "all") {
+            query = query;
+        }
+        String Finalquery = query + "limit ?,9; \n";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product limit ?,9")
+            return handle.createQuery(Finalquery)
                     .bind(0, amount)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });

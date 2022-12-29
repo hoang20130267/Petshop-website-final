@@ -46,7 +46,7 @@
                         <div>
                             <div class="input-group" style="width:390px">
                                 <label style="width:100px;margin-right: 10px;">Nhập OTP:</label>
-                                <input id="code" type="text" name="authcode" style="width:250px; border: solid 3px #000000 ;height: 30px; border-radius: 30px; padding:10px">
+                                <input id="code" type="text" name="authcode" style="width:250px; border: solid 3px #000000 ;height: 45px; border-radius: 30px; padding:10px">
                             </div>
                         </div>
                         <div>
