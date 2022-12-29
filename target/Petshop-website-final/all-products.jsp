@@ -255,8 +255,20 @@
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
                         <ul>
-                            <li><a href="#">Chó Alaska</a></li>
-                            <li><a href="#">Chó Beagle</a></li>
+                            <li>
+                                <label for="cat0" name="option1">
+                                <input type="radio" class="form-cate" id="cat0">
+                                    Chó Alaska
+                                </label>
+                            </li>
+
+                            <li>
+                                <label for="cat1" name="option1">
+                                    <input type="radio" class="form-cate" id="cat1">
+                                    Mèo Anh lông ngắn
+                                </label>
+                            </li>
+                           <%-- <li><a href="#">Chó Beagle</a></li>
                             <li><a href="#">Chó Corgi</a></li>
                             <li><a href="#">Chó Golden Retriever</a></li>
                             <li><a href="#">Chó Husky</a></li>
@@ -265,27 +277,96 @@
                             <li><a href="#">Mèo lông ngắn</a></li>
                             <li><a href="#">Mèo chân ngắn</a></li>
                             <li><a href="#">Mèo tai cụp</a></li>
-                            <li><a href="#">Mèo tam thể</a></li>
+                            <li><a href="#">Mèo tam thể</a></li>--%>
                         </ul>
                     </div>
                     <div class="sidebar__item">
-                        <h4>Giá Tiền</h4>
-                        <div class="price-range-wrap">
-                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                 data-min="5" data-max="100">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            </div>
-                            <div class="range-slider">
-                                <div class="price-input">
-                                    <input type="text" id="minamount">
-                                    <input type="text" id="maxamount">
-                                </div>
-                            </div>
-                        </div>
+                        <h4>Khoảng giá</h4>
+
+                        <input type="radio" id="a1" class="checkGia" name="checkGia" value="-1">
+                        <label for="a1">Tất cả</label><br>
+
+                        <input type="radio" id="a2" class="checkGia" name="checkGia"  value="0-5000000">
+                        <label for="a2">Dưới 5,000,000đ</label><br>
+
+
+                        <input type="radio" id="a3" class="checkGia" name="checkGia" value="5000000-10000000">
+                        <label for="a3">5,000,000đ - 10,000,000đ</label><br>
+
+
+                        <input type="radio" id="a4" class="checkGia" name="checkGia" value="10000000-15000000">
+                        <label for="a4">10,000,000đ - 15,000,000đ</label><br>
+
+
+                        <input type="radio" id="a5" class="checkGia" name="checkGia" value="15000000-20000000">
+                        <label for="a5">15,000,000đ - 20,000,000đ</label><br>
+
+
+                        <input type="radio" id="a6" class="checkGia" name="checkGia" value="20000000-200000000">
+                        <label for="a6">Trên 20,000,000đ</label><br>
+
+<%--                            <ul id="khoanggia" class="product__filter-ckeckbox">--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg0">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg0"--%>
+<%--                                               name="optradio"--%>
+<%--                                               value="-1"><span>Tất cả</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg1">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"--%>
+<%--                                               value="0-5000000"><span>Dưới 5,000,000đ</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg2">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"--%>
+<%--                                               value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg3">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"--%>
+<%--                                               value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg4">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"--%>
+<%--                                               value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                                <li class="product__filter-item">--%>
+<%--                                    <label class="form-check-label" for="kg5">--%>
+<%--                                        <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"--%>
+<%--                                               value="20000000-100000000"><span>Trên 20,000,000đ</span>--%>
+<%--                                    </label>--%>
+<%--                                </li>--%>
+<%--                                <bR>--%>
+<%--                            </ul>--%>
+
+<%--                        <div class="price-range-wrap">--%>
+<%--                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"--%>
+<%--                                 data-min="5" data-max="100">--%>
+<%--                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>--%>
+<%--                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>--%>
+<%--                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>--%>
+<%--                            </div>--%>
+<%--                            <div class="range-slider">--%>
+<%--                                <div class="price-input">--%>
+<%--                                    <input type="text" id="minamount">--%>
+<%--                                    <input type="text" id="maxamount">--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
-                    <div class="sidebar__item sidebar__item__color--option">
+            <%--        <div class="sidebar__item sidebar__item__color--option">
                         <h4>Màu sắc</h4>
                         <div class="sidebar__item__color sidebar__item__color--white">
                             <label for="white">
@@ -323,99 +404,43 @@
                                 <input type="radio" id="green">
                             </label>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Rất Lớn
-                                <input type="radio" id="large">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                Lớn
-                                <input type="radio" id="medium">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                Vừa
-                                <input type="radio" id="small">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                Nhỏ
-                                <input type="radio" id="tiny">
-                            </label>
-                        </div>
+                            <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
+                            <label for="age1">Trên 10kg</label><br>
+                            <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
+                            <label for="age2">5kg-10kg</label><br>
+                            <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
+                            <label for="age3">3kg-5kg</label><br>
+                            <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
+                            <label for="age4">2kg-3kg</label><br>
+                            <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
+                            <label for="age5">3kg-5kg</label><br>
+<%--                            <label for="large">--%>
+<%--                                5kg - 10kg--%>
+<%--                                <input type="radio" id="large" value="5-100">--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                        <div class="sidebar__item__size">--%>
+<%--                            <label for="medium">--%>
+<%--                                3kg - 5kg--%>
+<%--                                <input type="radio" id="medium" value="3-5">--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                        <div class="sidebar__item__size">--%>
+<%--                            <label for="small">--%>
+<%--                                2kg-3kg--%>
+<%--                                <input type="radio" id="small" value="2-3">--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
+<%--                        <div class="sidebar__item__size">--%>
+<%--                            <label for="tiny">--%>
+<%--                                dưới 2kg--%>
+<%--                                <input type="radio" id="tiny" value="0-2">--%>
+<%--                            </label>--%>
+<%--                        </div>--%>
                     </div>
-                    <!--                        <div class="sidebar__item">-->
-                    <!--                            <div class="latest-product__text">-->
-                    <!--                                <h4>Sản Phẩm Vừa Xem</h4>-->
-                    <!--                                <div class="latest-product__slider owl-carousel">-->
-                    <!--                                    <div class="latest-prdouct__slider__item">-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-1.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-2.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-3.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                    </div>-->
-                    <!--                                    <div class="latest-prdouct__slider__item">-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-1.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-2.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                        <a href="#" class="latest-product__item">-->
-                    <!--                                            <div class="latest-product__item__pic">-->
-                    <!--                                                <img src="img/latest-product/lp-3.jpg" alt="">-->
-                    <!--                                            </div>-->
-                    <!--                                            <div class="latest-product__item__text">-->
-                    <!--                                                <h6>Crab Pool Security</h6>-->
-                    <!--                                                <span>$30.00</span>-->
-                    <!--                                            </div>-->
-                    <!--                                        </a>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -431,8 +456,8 @@
                                          data-setbg="img/products/dog/sp1.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
                                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
@@ -520,11 +545,10 @@
                                 <span>Sắp xếp</span>
                                 <select>
                                     <option value="0">Mặc Định</option>
-                                    <option value="0">Bán Chạy</option>
-                                    <option value="0">Phổ Biến</option>
-                                    <option value="0">Giá Tăng Dần</option>
-                                    <option value="0">Giá Giảm Dần</option>
-
+                                    <option value="1">Bán Chạy</option>
+                                    <option value="2">Phổ Biến</option>
+                                    <option value="3">Giá Tăng Dần</option>
+                                    <option value="4">Giá Giảm Dần</option>
                                 </select>
                             </div>
                         </div>
@@ -578,6 +602,7 @@
                 </div>
 
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
+                <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
 <%--                    <a onclick="loadmore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>--%>
 
                 <!--                    <div class="product__pagination">-->
@@ -651,6 +676,41 @@
         });
     }
 </script>
+
+<script>
+    $(document).ready(function () {
+        $("input[type='radio']").each(function () {
+            this.addEventListener("change", function (e) {
+                filter(e);
+            })
+        })
+        $("#dropdownSelect").change(function (e) {
+            filter(e);
+        })
+    });
+
+    function filter(e) {
+        e.preventDefault();
+        const category = $("#category").val();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const orderby = $("#dropdownSelect").find(':selected').val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        $.ajax({
+            type: 'post',
+            url: "FilterProductController",
+            data: {
+                price: price,
+                orderby: orderby,
+                category: category,
+                size: size
+            },
+            success: function (data) {
+                $("#products").html(data);
+            }
+        });
+    }
+</script>
+
 
 </body>
 

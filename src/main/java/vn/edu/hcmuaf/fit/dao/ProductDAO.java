@@ -15,8 +15,6 @@ public class ProductDAO {
     private List<String> listCategoryAdmin;
 
 
-
-
     public ProductDAO() {
         listProduct = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product")
@@ -43,6 +41,7 @@ public class ProductDAO {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+
     public List<Product> searchProductByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where ProductName like ?").bind(0, "%" + txtSearch + "%")
@@ -50,6 +49,7 @@ public class ProductDAO {
         });
         return list;
     }
+
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
@@ -83,7 +83,7 @@ public class ProductDAO {
     }
 
     public static void insertProduct(String id, String name, String image, String price, String promoPrice,
-                                     String description,String quantity, String giong, String mausac, String cannang) {
+                                     String description, String quantity, String giong, String mausac, String cannang) {
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity, giong, mausac, cannang) values(?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
@@ -99,8 +99,9 @@ public class ProductDAO {
                     .execute();
         });
     }
+
     public static void insertAccessory(String id, String name, String image, String price, String promoPrice,
-                                       String description,String quantity) {
+                                       String description, String quantity) {
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity) values(?,?,?,?,?,?,?)")
                     .bind(0, id)
@@ -131,6 +132,7 @@ public class ProductDAO {
                     .execute();
         });
     }
+
     public static void updateAccessory(String id, String name, String image, String price, String promoPrice,
                                        String description, String quantity) {
         JDBIConnector.get().withHandle(handle -> {
@@ -149,7 +151,7 @@ public class ProductDAO {
     public List<Product> getTop9Product(String category) {
         String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 \n";
-        if ( category.equals("dog")) {
+        if (category.equals("dog")) {
             query += "AND pfc.cate_id=1 \n";
         }
         if (category.equals("cat")) {
@@ -173,7 +175,7 @@ public class ProductDAO {
     public String test(String category) {
         String query = "select * from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 \n";
-        if ( category == "dog") {
+        if (category == "dog") {
             query += "AND cate_id=1 \n";
         }
         if (category == "cat") {
@@ -209,16 +211,57 @@ public class ProductDAO {
     }
 
 
-
     public Product getProductDetail(String id) {
         Product detail = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId = ?")
-                    .bind(0,id)
+                    .bind(0, id)
                     .mapToBean(Product.class).first();
         });
         return detail;
+    }
 
-
+    public List<Product> Filter(String price, String category, String size, String order_by) {
+        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 \n";
+        if (category.equals("dog")) {
+            query += "AND pfc.cate_id=1 \n";
+        }
+        if (category.equals("cat")) {
+            query += "AND pfc.cate_id=2 \n";
+        }
+        if (category.equals("accessory")) {
+            query += "AND pfc.cate_id=3 \n";
+        }
+        if (category == "all") {
+            query = query;
+        }
+        if (price != null) {
+            if (!price.equals("-1"))
+            {
+                String[] splited = price.split("-");
+                query += " AND p.price >= " + Double.parseDouble(splited[0]) + " AND p.price <= " + Double.parseDouble(splited[1]);
+            }
+        }
+        if (order_by != null) {
+            switch (order_by) {
+                case "0" -> query += query;
+                case "1" -> query += " ORDER BY p.ProductName ASC";
+                case "2" -> query += " ORDER BY p.ProductName DESC";
+                case "3" -> query += "ORDER BY p.price ASC";
+                case "4" -> query += "ORDER BY p.price DESC";
+            }
+        }
+        String Finalquery = query + "limit 9; \n";
+        List<Product> filter = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery(Finalquery)
+                    .bind(0, category)
+                    .bind(1,price)
+                    .bind(2,size)
+                    .bind(3,order_by)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return filter;
+    }
 //    public Product getProductDetail(String Id){
 //        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
 //                        "p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy," +
@@ -242,28 +285,12 @@ public class ProductDAO {
 //        return product;
 //    }
 
-
-//    public static void main(String[] args) {
-//        new ProductDAO();
-//        System.out.println(new ProductDAO().getProductDetail("1002"));
-//        System.out.println(new ProductDAO().get8BestProduct());
-//        System.out.println(new ProductDAO().searchByName("ALASKA"));
-//        System.out.println(new ProductDAO().listCategory);
-//        System.out.println(new ProductDAO().getTop9Product());
-//        System.out.println(new ProductDAO().searchByName("ALASKA"));
-//        System.out.println(new ProductDAO().listCategory);
-//        deleteProduct("3041");
-//        updateProduct("1000", "Cho mat ngao", "deo co", "20000000","1000", "cho ngu vcl", "5","alaska","trang", "5kg");
-//        insertProduct("1000", "Cho mat ngu", "deo co", "100000", "1000", "cho ngu", "5","alaska","trang", "5kg");
-//        insertAccessory("3041", "Chuong", "deo co", "100000", "1000", "cho ngu", "5");
-//        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
-//        System.out.println(new ProductDAO().searchByName2("chuong"));
-    }
-    public static void main(String[] args){
-        System.out.println(new ProductDAO().getTop9Product("cat"));
+        public static void main (String[]args){
+            System.out.println(new ProductDAO().getTop9Product("cat"));
 //        System.out.println(new ProductDAO().test("dog"));
+        }
     }
-}
+
 
 
 
