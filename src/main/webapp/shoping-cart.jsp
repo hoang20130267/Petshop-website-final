@@ -302,7 +302,7 @@
                             for (String id : cart.getData().keySet()) {%>
                         <tr>
                             <td class="shoping__cart__item">
-                                <img src="<%=cart.getData().get(id).getImage()%>" alt="">
+                                <img src="<%=cart.getData().get(id).getImage()%>" alt="" style="width: 85px; height: 85px; object-fit: cover;">
                                 <h5><%=cart.getData().get(id).getProductName()%>
                                 </h5>
                             </td>
