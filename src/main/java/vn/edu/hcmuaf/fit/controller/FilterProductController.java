@@ -23,8 +23,8 @@ public class FilterProductController extends HttpServlet {
         String orderby = request.getParameter("orderby");
         String category = request.getParameter("category");
         String size = request.getParameter("size");
-        List<Product> test = ProductService.getInstance().Filter(category,price,size,orderby);
-        request.setAttribute("test", test);
+//        List<Product> test = ProductService.getInstance().Filter(category,price,size,orderby);
+//        request.setAttribute("test", test);
         request.getRequestDispatcher("ajax/ajax_LoadProduct.jsp").forward(request, response);
 
     }
