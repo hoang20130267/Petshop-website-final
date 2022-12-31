@@ -15,13 +15,18 @@ public class AllProduct extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductDAO dao = new ProductDAO();
+        String price = request.getParameter("price");
+        String orderby = request.getParameter("orderby");
         String category = request.getParameter("category");
-        List<Product> list = dao.getTop9Product(category);
+        String size = request.getParameter("size");
+        String amount = request.getParameter("amount");
+        int amount_int = 0;
+        List<Product> list = dao.getFullProduct( amount_int,  category, price,  size,  orderby);
         request.setAttribute("list", list);
+        request.setAttribute("numb", list.size());
         request.getRequestDispatcher("all-products.jsp").forward(request,response);
-
         System.out.println(category);
-        System.out.println(dao.getTop9Product(category));
+        System.out.println(dao.getFullProduct( amount_int,  category, price,  size,  orderby));
 
     }
 

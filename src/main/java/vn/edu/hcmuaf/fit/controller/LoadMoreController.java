@@ -18,8 +18,11 @@ public class LoadMoreController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String amount = request.getParameter("amount");
         String category = request.getParameter("category");
+        String price = request.getParameter("price");
+        String orderby = request.getParameter("orderby");
+        String size = request.getParameter("size");
         int amount_int = Integer.parseInt(amount);
-        List<Product> list = new ProductDAO().getNext9Product(amount_int,category);
+        List<Product> list = new ProductDAO().getNext9Product(amount_int,category,price, size, orderby);
         request.setAttribute("listnext9", list);
         request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);
     }

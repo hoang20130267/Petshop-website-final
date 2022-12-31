@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.beans.Detail;
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.controller.Category;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -159,9 +161,9 @@ public class ProductDAO {
         });
     }
 
-    public List<Product> getTop9Product(String category) {
-        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
-                "WHERE p.`Status` = 1 \n";
+    public List<Product> getFullProduct(int amount, String category,String price, String size, String order_by) {
+        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price, p.cannang from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 ";
         if ( category.equals("dog")) {
             query += "AND pfc.cate_id=1 \n";
         }
@@ -174,7 +176,27 @@ public class ProductDAO {
         if (category == "all") {
             query = query;
         }
-        String Finalquery = query + "limit 9; \n";
+        if (price != null) {
+            if (!price.equals("-1")) {
+                String[] splited = price.split("-");
+                query += " AND p.price >= " + Double.parseDouble(splited[0]) + " AND p.price <= " + Double.parseDouble(splited[1]);
+            }
+
+        }
+        if (size != null) {
+            String[] splited = size.split("-");
+            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+        }
+        if (order_by != null) {
+            switch (order_by) {
+                case "0" -> query += "\n ";
+                case "1" -> query += " ORDER BY p.price ASC \n";
+                case "2" -> query += " ORDER BY p.price DESC \n";
+                case "3" -> query += " ORDER BY p.ProductName ASC \n";
+                case "4" -> query += " ORDER BY p.ProductName DESC \n";
+            }
+        }
+        String Finalquery = query;
 
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(Finalquery)
@@ -183,25 +205,11 @@ public class ProductDAO {
         return list;
     }
 
-    public String test(String category) {
-        String query = "select * from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
-                "WHERE p.`Status` = 1 \n";
-        if ( category == "dog") {
-            query += "AND cate_id=1 \n";
-        }
-        if (category == "cat") {
-            query += "AND cate_id=2 \n";
-        }
-        if (category == "accessory") {
-            query += "AND cate_id=3 \n";
-        }
-        String Finalquery = query + "limit 9 \n";
-        return Finalquery;
-    }
 
-    public List<Product> getNext9Product(int amount, String category) {
-        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
-                "WHERE p.`Status` = 1 \n";
+
+    public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
+        String query = "select distinct p.productId,p.ProductName,p.Image,p.Price, p.cannang from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+                "WHERE p.`Status` = 1 ";
         if ( category.equals("dog")) {
             query += "AND pfc.cate_id=1 \n";
         }
@@ -214,12 +222,33 @@ public class ProductDAO {
         if (category == "all") {
             query = query;
         }
+        if (price != null) {
+            if (!price.equals("-1")) {
+                String[] splited = price.split("-");
+                query += " AND p.price >= " + Double.parseDouble(splited[0]) + " AND p.price <= " + Double.parseDouble(splited[1]);
+            }
+
+        }
+        if (size != null) {
+            String[] splited = size.split("-");
+            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+        }
+        if (order_by != null) {
+            switch (order_by) {
+                case "0" -> query += "\n ";
+                case "1" -> query += " ORDER BY p.price ASC \n";
+                case "2" -> query += " ORDER BY p.price DESC \n";
+                case "3" -> query += " ORDER BY p.ProductName ASC \n";
+                case "4" -> query += " ORDER BY p.ProductName DESC \n";
+            }
+        }
         String Finalquery = query + "limit ?,9; \n";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(Finalquery)
                     .bind(0, amount)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
+        System.out.println(amount);
         return list;
     }
 
@@ -283,6 +312,8 @@ public class ProductDAO {
         else return stringBuilder.toString();
     }
 
+
+
 //    public Product getProductDetail(String Id){
 //        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
 //                        "p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy," +
@@ -323,7 +354,10 @@ public class ProductDAO {
 //        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
 //        System.out.println(new ProductDAO().searchByName2("chuong"));
     public static void main(String[] args){
-        System.out.println(new ProductDAO().getTop9Product("cat"));
+//        System.out.println(new ProductDAO().getTop9Product("cat"));
+        // int amount, String category,String price, String size, String order_by
+//        System.out.println(new ProductDAO().Test(9,"cat","20000000-200000000","0-2","3"));
+          System.out.println(new ProductDAO().getNext9Product(0,"dog","10000000-150000000","2-5","2"));
 //        System.out.println(new ProductDAO().test("dog"));
     }
 }
