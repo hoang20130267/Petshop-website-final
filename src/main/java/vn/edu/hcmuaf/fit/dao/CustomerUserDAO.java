@@ -118,13 +118,19 @@ public class CustomerUserDAO {
             return null;
         });
     }
-    public void updateInforUser(String id, String fullname,String phone, String address){
+    public void updateInforUser(String id, String fullname,String phone, String address, String newpass, String avt){
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("update infor_user set name=? ,phone=? , address=? where id_user =?")
+            handle.createUpdate("update user_account set pass = ? ,passMaHoa=? where id =?")
+                    .bind(0,newpass)
+                    .bind(1,Utils.maHoaMK(newpass))
+                    .bind(2, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name=?, phone=? , address=?, avt=? where id_user =?")
                     .bind(0,fullname)
                     .bind(1,phone)
                     .bind(2,address)
-                    .bind(3,id)
+                    .bind(3,"img/user/"+avt)
+                    .bind(4,id)
                     .execute();
             return null;
         });
