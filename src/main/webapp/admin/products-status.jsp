@@ -114,6 +114,23 @@
                         </ul>
                     </li>
                     <li class="pc-item pc-caption">
+                        <label>Quản lý danh mục</label>
+                    </li>
+                    <li class="pc-item">
+                        <a href="list-category.jsp" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Danh sách danh mục</span></a>
+                    </li>
+                    <li class="pc-item pc-hasmenu">
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                                data-feather="file-minus"></i></span><span
+                                class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
+                        <ul class="pc-submenu">
+                            <li class="pc-item"><a class="pc-link" href="#">Danh mục sản phẩm</a></li>
+                            <li class="pc-item"><a class="pc-link" href="#">Danh mục tin tức</a></li>
+                        </ul>
+                    </li>
+                    <li class="pc-item pc-caption">
                         <label>Tài khoản</label>
                     </li>
                     <li class="pc-item pc-hasmenu">
@@ -126,8 +143,8 @@
                     <li class="pc-item pc-hasmenu">
                         <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="user"></i></span><span class="pc-mtext">Người dùng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
-                            <li class="pc-item"><a class="pc-link" href="list-user.jsp">Danh sách người dùng</a></li>
-                            <li class="pc-item"><a class="pc-link" href="add-user.jsp">Thêm người dùng</a></li>
+                            <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
+                            <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                         </ul>
                     </li>
                     <li class="pc-item pc-caption">

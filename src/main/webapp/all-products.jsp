@@ -584,6 +584,7 @@
             success: function (data) {
                 var row = document.getElementById("items");
                 row.innerHTML += data;
+                addcart();
             },
             error: function (xhr) {
                 //Do Something to handle error

@@ -8,18 +8,76 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DetailService {
+    private static DetailService detailService;
 
-        public static List<Detail> getData() {
-            return JDBIConnector.get().withHandle(handle -> {
-                return handle.createQuery("SELECT * FROM product_category")
-                        .mapToBean(Detail.class).stream().collect(Collectors.toList());
-            });
+    public static DetailService getInstance() {
+        if (detailService == null) {
+            detailService = new DetailService();
         }
+        return detailService;
+    }
 
+<<<<<<< HEAD
         public static List<Detail> listProCateClassify(String category) {
             DetailDAO dao = new DetailDAO();
             return dao.listProCateClassify(category);
         }
+=======
+    public static List<Detail> getData() {
+        return JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("SELECT * FROM product_category")
+                    .mapToBean(Detail.class).stream().collect(Collectors.toList());
+        });
+    }
+
+    public List<Detail> listCategoryProduct() {
+        return new DetailDAO().listCategoryProduct();
+    }
+
+    public List<Detail> listCategoryBlog() {
+        return new DetailDAO().listCategoryBlog();
+    }
+
+    public Detail getCateProductById(String id) {
+        return new DetailDAO().getCateProductById(id);
+    }
+
+    public Detail getCateBlogById(String id) {
+        return new DetailDAO().getCateBlogById(id);
+    }
+
+    public List<Detail> listCategoryParentPd() {
+        return new DetailDAO().listCategoryParentPd();
+    }
+
+    public List<Detail> listCategoryParentBl() {
+        return new DetailDAO().listCategoryParentBl();
+    }
+
+    public void insertCateProduct(String idAdmin, String name, String CateParent) {
+        new DetailDAO().insertCateProduct(idAdmin, name, CateParent);
+    }
+
+    public void insertCateBlog(String idAdmin, String name, String CateParent) {
+        new DetailDAO().insertCateBlog(idAdmin, name, CateParent);
+    }
+
+    public void updateCateProduct(String idcate, String idAdmin, String name, String CateParent, String status) {
+        new DetailDAO().updateCateProduct(idcate, idAdmin, name, CateParent, status);
+    }
+
+    public void updateCateBlog(String idcate, String idAdmin, String name, String CateParent, String status) {
+        new DetailDAO().updateCateBlog(idcate, idAdmin, name, CateParent, status);
+    }
+
+    public void removeCateProduct(String id) {
+        new DetailDAO().removeCateProduct(id);
+    }
+
+    public void removeCateBlog(String id) {
+        new DetailDAO().removeCateBlog(id);
+    }
+>>>>>>> a109375ad11273109dbbdf2969e561acbf4b7074
 
     public static void main(String[] args) {
         getData();

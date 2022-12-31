@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,6 +115,23 @@
 						</ul>
 					</li>
 					<li class="pc-item pc-caption">
+						<label>Quản lý danh mục</label>
+					</li>
+					<li class="pc-item">
+						<a href="list-category.jsp" class="pc-link "><span class="pc-micon"><i
+								class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Danh sách danh mục</span></a>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+																				data-feather="file-minus"></i></span><span
+								class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
+								data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
+							<li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
 						<label>Tài khoản</label>
 					</li>
 					<li class="pc-item pc-hasmenu">
@@ -165,32 +184,45 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
 		<div class="row">
-			<h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm người dùng mới</h2>
+			<%if (request.getParameter("idUser") != null) {%>
+			<h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa người dùng</h2>
 			<hr>
+			<% }else{ %>
+			<h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm người dùng
+				mới</h2>
+			<hr>
+			<% } %>
 			<% String error = (String) request.getAttribute("addUsererror"); %>
 			<p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-			<form method="post" action="AddUserCustomerController">
+					<% CustomerUser users = null;
+            if(request.getParameter("idUser") != null)
+                    users = UserService.getInstance().getUserDetail(request.getParameter("idUser"));
+            %>
+			<form method="post" action="EditUserCustomerController">
+			<input type="text" id="id" name="id"
+				   value="<%=(users != null) ? request.getParameter("idUser") : ""%>"
+				   style="display: none">
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label class="form-label" for="inputEmail4">Tài khoản</label>
-						<input type="text" class="form-control" id="username" name="username"
+						<input type="text" class="form-control" id="username" name="username" value="<%=(users != null) ? users.getUsername() : ""%>"
 							   placeholder="Tên tài khoản">
 					</div>
 					<div class="form-group col-md-6">
 						<label class="form-label" for="inputPassword4">Email</label>
-						<input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
+						<input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email" value="<%=(users != null) ? users.getEmail() : ""%>">
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="validationTooltip04" class="form-label">Địa chỉ</label>
 						<input type="text" class="form-control" id="validationTooltip05" name="address" required
-							   placeholder="Địa chỉ">
+							   placeholder="Địa chỉ" value="<%=(users != null) ? users.getAddress() : ""%>">
 
 					</div>
 					<div class="form-group col-md-6">
 						<label class="form-label" for="inputEmail4">Họ và tên</label>
-						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" <%=(users != null) ? users.getName() : ""%>>
 					</div>
 
 				</div>
@@ -198,17 +230,17 @@
 					<div class="col-md-3 position-relative">
 						<label class="form-label" for="inputPassword4">Mật khẩu</label>
 						<input type="password" class="form-control" id="inputPassword4" name="passwd"
-							   placeholder="Mật khẩu">
+							   placeholder="Mật khẩu" value="<%=(users != null) ? users.getPass() : ""%>">
 					</div>
 					<div class="col-md-3 position-relative">
 						<label class="form-label">Nhập lại mật khẩu</label>
 						<input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
-							   placeholder="Nhập lại mật khẩu">
+							   placeholder="Nhập lại mật khẩu" value="<%=(users != null) ? users.getPass() : ""%>">
 					</div>
 					<div class="col-md-3 position-relative">
 						<label for="validationTooltip05" class="form-label">Số điện thoại</label>
 						<input type="text" class="form-control" id="phone" name="phone"
-							   placeholder="+84">
+							   placeholder="+84" value="<%=(users != null) ? users.getPhone() : ""%>">
 						<%--            <div class="invalid-tooltip">--%>
 						<%--              Bạn chưa chọn vị trí cho người này--%>
 						<%--            </div>--%>
@@ -216,8 +248,15 @@
 					<div class="col-md-3 position-relative">
 						<label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
 						<select class="form-select" id="validationTooltip04" name="status" required>
-							<option>Mở khóa</option>
+							<% if(request.getParameter("idUser") != null) {
+								if(users.isStatus() == false) {%>
+							<option selected>Mở khóa</option>
 							<option>Khóa</option>
+							<%} else {%>
+							<option>Mở khóa</option>
+							<option selected>Khóa</option>
+							<% }
+							} %>
 						</select>
 						<%--            <div class="invalid-tooltip">--%>
 						<%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
@@ -231,10 +270,17 @@
 				<%--          </div>--%>
 				<%--        </div>--%>
 				<p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
+						<%if (request.getParameter("idUser") != null) {%>
 					<button type="submit" class="btn  btn-primary"
 							style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-						Thêm admin
+						Sửa người dùng
 					</button>
+						<%} else {%>
+					<button type="submit" class="btn  btn-primary"
+							style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+						Thêm người dùng
+					</button>
+						<%}%>
 			</form>
 		</div>
 

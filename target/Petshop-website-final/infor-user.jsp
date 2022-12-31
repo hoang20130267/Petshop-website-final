@@ -135,6 +135,54 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .avatar-wrapper {
+            position: relative;
+            height: 200px;
+            width: 200px;
+            margin: 50px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 1px 1px 15px -5px black;
+            transition: all .3s ease;
+        }
+        .avatar-wrapper :hover{
+             transform: scale(1.05);
+             cursor: pointer;
+         }
+        .avatar-wrapper :hover .profile-pic{
+             opacity: .5;
+         }
+        .profile-pic {
+            height: 100%;
+            width: 100%;
+            transition: all .3s ease;
+        }
+        .profile-pic:after{
+             font-family: FontAwesome;
+             content: "\f007";
+             top: 0; left: 0;
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             font-size: 190px;
+             background: #ecf0f1;
+             color: #34495e;
+             text-align: center;
+        }
+        .input-file {
+            color: transparent;
+            margin-left: 230px;
+            margin-bottom: 50px;
+
+        }
+        .input-file::before {
+            background: #00BFFF;
+            border-radius: 50px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
     </style>
 
 
@@ -281,15 +329,40 @@
 %>
 <!-- Shoping Cart Section Begin -->
 <div class="container rounded bg-white mt-5 mb-5">
-    <form method="post" action="UpdateInforController" class="infor_user">
+    <form method="post" enctype="multipart/form-data" class="infor_user">
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <%if (user.getAvt() != null) {%>
-                    <img class="rounded-circle mt-5" width="150px" src="<%=user.getAvt()%>">
+                    <% int i = 0;
+                        if (user.getAvt() != null) {
+                        %>
+                    <div class="image-container">
+                        <div id="container<%=i%>">
+                            <div class="avatar-wrapper">
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <div id="container<%=i%>">
+                            <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+                        </div>
+                    </div>
                     <%} else {%>
-                    <img class="rounded-circle mt-5" width="150px" src="img/user.png">
+                    <div class="image-container">
+                        <div id="container<%=i%>">
+                            <div class="avatar-wrapper">
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/img/user.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <div id="container<%=i%>">
+                            <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+                        </div>
+                    </div>
                     <%}%>
+                    <input type="text" id="deletedFile" value="" style="display: none">
                     <span class="font-weight-bold"><%=user.getName()%></span>
                     <span class="text-black-50"><%=user.getEmail()%></span><span> </span>
                 </div>
@@ -303,14 +376,14 @@
                         </p>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Username</label><input type="text"
+                        <div class="col-md-6"><label class="labels">Username</label><input type="text" id="username"
                                                                                            class="form-control"
                                                                                            name="username"
                                                                                            placeholder="Nhập username"
                                                                                            value="<%=user.getUsername()%>"
                         readonly>
                         </div>
-                        <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text"
+                        <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text" id="fullname"
                                                                                             class="form-control"
                                                                                             name="fullname"
                                                                                             value="<%=user.getName()%>"
@@ -318,7 +391,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email</label><input type="email"
+                        <div class="col-md-12"><label class="labels">Email</label><input type="email" id="email"
                                                                                          class="form-control"
                                                                                          name="email"
                                                                                          placeholder="Nhập email tại đây"
@@ -326,10 +399,10 @@
                         readonly>
                         </div>
                         <div class="col-md-12"><label class="labels" style="padding-top: 10px">Số điện
-                            thoại</label><input
+                            thoại</label><input id="phone"
                                 type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại tại đây"
                                 value="<%=user.getPhone()%>"></div>
-                        <div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input
+                        <div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input id="address"
                                 type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
                                 value="<%=user.getAddress()%>">
                         </div>
@@ -341,17 +414,17 @@
                     <div class="d-flex justify-content-between align-items-center experience"><span>Đổi mật khẩu</span>
                     </div>
                     <br>
-                    <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="password"
+                    <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="password" id="newpass"
                                                                                                  class="form-control"
                                                                                                  name="newpass"
                                                                                                  placeholder="Nhập mật khẩu"
-                                                                                                 value=""></div>
+                                                                                                 value="<%=user.getPass()%>"></div>
                     <br>
-                    <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="password"
+                    <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="password" id="newpassconfirm"
                                                                                                  class="form-control"
                                                                                                  name="newpassconfirm"
                                                                                                  placeholder="Nhập lại mật khẩu"
-                                                                                                 value=""></div>
+                                                                                                 value="<%=user.getPass()%>"></div>
                     <% String errorpass = (String) request.getAttribute("passError"); %>
                     <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= errorpass == null ? "" : errorpass%>
                     </p>
@@ -381,7 +454,126 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+<script>
+    function reloadUpLoadFile() {
+        $(".input-file").each(function () {
+            $(this).on('change', function (e) {
+                const idName = $(this).attr("id");
+                const id = idName.substring(5);
+                const value = $(this).val();
+                let name = "";
+                if (value.indexOf("\\") != -1)
+                    name = value.substring(value.lastIndexOf("\\") + 1);
+                else
+                    name = value.substring(value.lastIndexOf("/") + 1);
+                uploadFile(id, name, e)
+            })
+        });
+    }
+    $(".input-file").each(function () {
+        $(this).on('change', function (e) {
+            const idName = $(this).attr("id");
+            const id = idName.substring(5);
+            const value = $(this).val();
+            let name = "";
+            if (value.indexOf("\\") != -1)
+                name = value.substring(value.lastIndexOf("\\") + 1);
+            else
+                name = value.substring(value.lastIndexOf("/") + 1);
+            console.log(id +", " + name + ", ")
+            uploadFile(id, name, e)
+        })
+    });
+    function uploadFile(id, name, event) {
+        event.stopPropagation();
+        event.preventDefault();
+        const files = event.target.files;
+        const data = new FormData();
+        $.each(files, function (key, value) {
+            data.append(key, value);
+        });
+        postFilesData(id, name, data);
+    }
+    function postFilesData(id, name, data) {
+        let bool = false;
+        $(".img-avt-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf(name) != -1) {
+                bool = true;
+            }
+        })
+        if (bool === false) {
+            $.ajax({
+                url: '/Petshop_website_final_war/UpDownImageAvatarUserController',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (data, textStatus, jqXHR) {
+                    //success
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#container" + id).empty()
+                    $("#container" + id).prepend(`<div class="avatar-wrapper">
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/img/user/` + name + `" />
+                            </div>`)
+                    let value = $("#deletedFile").val();
+                    if (value.indexOf(name) !== -1) {
+                        value = value.replace(name + ",", "");
+                        $("#deletedFile").val(value);
+                    }
+                    console.log($("#deletedFile").val());
+                    reloadUpLoadFile();
+                }
+            });
+        } else {
+        }
+    }
+</script>
+<script>
+    $("button[type='submit']").click(function (e) {
+        e.preventDefault();
 
-
+        const username = $("#username").val();
+        const fullname = $("#fullname").val();
+        const phone = $("#phone").val();
+        const address = $("#address").val();
+        const newpass = $("#newpass").val();
+        const newpassconfirm = $("#newpassconfirm").val();
+        const imageLink = $(".img-avt-review").attr("src").substring(57);
+        console.log(imageLink);
+        let imgFile = []
+        $(".img-avt-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf("\\") != -1)
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
+            else
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
+        })
+        const removed = $("#deletedFile").val();
+        const oldImg = removed.substring(0, removed.length - 1);
+        $.ajax({
+            url: "/Petshop_website_final_war/UpdateInforController",
+            type: "GET",
+            data: {
+                oldImg: oldImg,
+                username: username,
+                fullname: fullname,
+                phone : phone,
+                avt : imageLink,
+                address : address,
+                newpass : newpass,
+                newpassconfirm : newpassconfirm,
+                imgFile: imgFile,
+            },
+            success: function () {
+                    alert("Cập nhật thông tin thành công");
+                window.location.href = "infor-user.jsp"
+            }
+        })
+    })
+</script>
 </body>
 </html>

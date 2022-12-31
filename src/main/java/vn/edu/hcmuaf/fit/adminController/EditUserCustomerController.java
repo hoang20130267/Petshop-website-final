@@ -8,8 +8,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "AddUserCustomerController", value = "/AddUserCustomerController")
-public class AddUserCustomerController extends HttpServlet {
+@WebServlet(name = "EditUserCustomerController", value = "/admin/EditUserCustomerController")
+public class EditUserCustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -17,6 +17,7 @@ public class AddUserCustomerController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String passwd = request.getParameter("passwd");
@@ -34,6 +35,7 @@ public class AddUserCustomerController extends HttpServlet {
         System.out.println(status);
 
         String exe = SignUpService.getInstance().checkUser(email, username);
+        if(id == null) {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
@@ -45,10 +47,13 @@ public class AddUserCustomerController extends HttpServlet {
                 request.setAttribute("addUsererror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
             } else {
-                new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
-                response.sendRedirect("list-user.jsp");
+                    new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
+                    response.sendRedirect("list-user.jsp");
             }
-
+        }
+        }else{
+            new CustomerUserDAO().updateCustomer(id, username, passwd, fullname, email, phone, address, status);
+            response.sendRedirect("list-user.jsp");
         }
     }
 }
