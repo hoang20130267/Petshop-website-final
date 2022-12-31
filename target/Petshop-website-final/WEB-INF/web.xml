@@ -12,4 +12,12 @@
     <param-name>saveproduct.dir</param-name>
     <param-value>Petshop-website-final/src/main/webapp/img/products</param-value>
   </context-param>
+  <context-param>
+    <param-name>tempavataruser.dir</param-name>
+    <param-value>Petshop_website_final_war/img/user</param-value>
+  </context-param>
+  <context-param>
+    <param-name>saveavataruser.dir</param-name>
+    <param-value>Petshop-website-final/src/main/webapp/img/user</param-value>
+  </context-param>
 </web-app>
