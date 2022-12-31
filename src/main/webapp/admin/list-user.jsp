@@ -289,8 +289,8 @@
                         <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=c.getPrice()%>đ</td>
                         <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
                         <td class="last-order align-middle white-space-nowrap text-700 text-end">
-                            <button class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</button>
-                            <button class="btn_2 edit btn btn-primary" style="background-color: crimson">Xóa</button>
+                            <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                            <a class="btn_2 edit btn btn-primary" style="background-color: crimson; color: white">Xóa</a>
                         </td>
                       </tr>
                         </tr>

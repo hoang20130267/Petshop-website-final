@@ -203,8 +203,7 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <%if (request.getParameter("idUser") != null) {%>
-            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa admin
-                mới</h2>
+            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa admin</h2>
             <hr>
             <% }else{ %>
             <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm admin
