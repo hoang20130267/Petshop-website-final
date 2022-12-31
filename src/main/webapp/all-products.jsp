@@ -4,6 +4,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -226,8 +229,6 @@
 
 <!-- Hero Section Begin -->
 <!-- Hero Section End -->
-
-
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
@@ -255,34 +256,19 @@
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
                         <ul>
+                            <%  String category1 = request.getParameter("category");
+                                List<Detail> listD = new DetailService().listProCateClassify(category1);
+                                for (Detail p1 : listD) {
+                            %>
                             <li>
-                                <label for="cat0" name="option1">
-                                <input type="radio" class="form-cate" id="cat0">
-                                    Chó Alaska
-                                </label>
+                                <input type="radio" id="<%=p1.getCatID()%>" name="age" class="checkcate" value="<%=p1.getCatID()%>">
+                                <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
                             </li>
-
-                            <li>
-                                <label for="cat1" name="option1">
-                                    <input type="radio" class="form-cate" id="cat1">
-                                    Mèo Anh lông ngắn
-                                </label>
-                            </li>
-                           <%-- <li><a href="#">Chó Beagle</a></li>
-                            <li><a href="#">Chó Corgi</a></li>
-                            <li><a href="#">Chó Golden Retriever</a></li>
-                            <li><a href="#">Chó Husky</a></li>
-                            <li><a href="#">Chó Phốc sóc</a></li>
-                            <li><a href="#">Mèo Anh</a></li>
-                            <li><a href="#">Mèo lông ngắn</a></li>
-                            <li><a href="#">Mèo chân ngắn</a></li>
-                            <li><a href="#">Mèo tai cụp</a></li>
-                            <li><a href="#">Mèo tam thể</a></li>--%>
+                            <% } %>
                         </ul>
                     </div>
                     <div class="sidebar__item">
                         <h4>Khoảng giá</h4>
-
                         <input type="radio" id="a1" class="checkGia" name="checkGia" value="-1">
                         <label for="a1">Tất cả</label><br>
 
@@ -305,106 +291,8 @@
                         <input type="radio" id="a6" class="checkGia" name="checkGia" value="20000000-200000000">
                         <label for="a6">Trên 20,000,000đ</label><br>
 
-<%--                            <ul id="khoanggia" class="product__filter-ckeckbox">--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg0">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg0"--%>
-<%--                                               name="optradio"--%>
-<%--                                               value="-1"><span>Tất cả</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg1">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"--%>
-<%--                                               value="0-5000000"><span>Dưới 5,000,000đ</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg2">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"--%>
-<%--                                               value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg3">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"--%>
-<%--                                               value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg4">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"--%>
-<%--                                               value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                                <li class="product__filter-item">--%>
-<%--                                    <label class="form-check-label" for="kg5">--%>
-<%--                                        <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"--%>
-<%--                                               value="20000000-100000000"><span>Trên 20,000,000đ</span>--%>
-<%--                                    </label>--%>
-<%--                                </li>--%>
-<%--                                <bR>--%>
-<%--                            </ul>--%>
-
-<%--                        <div class="price-range-wrap">--%>
-<%--                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"--%>
-<%--                                 data-min="5" data-max="100">--%>
-<%--                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>--%>
-<%--                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>--%>
-<%--                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>--%>
-<%--                            </div>--%>
-<%--                            <div class="range-slider">--%>
-<%--                                <div class="price-input">--%>
-<%--                                    <input type="text" id="minamount">--%>
-<%--                                    <input type="text" id="maxamount">--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                     </div>
-            <%--        <div class="sidebar__item sidebar__item__color--option">
-                        <h4>Màu sắc</h4>
-                        <div class="sidebar__item__color sidebar__item__color--white">
-                            <label for="white">
-                                Trắng
-                                <input type="radio" id="white">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--gray">
-                            <label for="gray">
-                                Xám
-                                <input type="radio" id="gray">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--red">
-                            <label for="red">
-                                Xám Trắng
-                                <input type="radio" id="red">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--black">
-                            <label for="black">
-                                Vàng
-                                <input type="radio" id="black">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--blue">
-                            <label for="blue">
-                                Đen
-                                <input type="radio" id="blue">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--green">
-                            <label for="green">
-                                Xám Nhạt
-                                <input type="radio" id="green">
-                            </label>
-                        </div>
-                    </div>--%>
+
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
                             <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
@@ -416,7 +304,7 @@
                             <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
                             <label for="age4">2kg-3kg</label><br>
                             <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
-                            <label for="age5">3kg-5kg</label><br>
+                            <label for="age5">dưới 2kg</label><br>
 <%--                            <label for="large">--%>
 <%--                                5kg - 10kg--%>
 <%--                                <input type="radio" id="large" value="5-100">--%>
@@ -441,6 +329,13 @@
 <%--                            </label>--%>
 <%--                        </div>--%>
                     </div>
+
+                    <div class="sidebar__item">
+                        <button class="btn btn-dark " id="filter">
+                            Lọc sản phẩm
+                        </button>
+                    </div>
+
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -543,66 +438,63 @@
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
                                 <span>Sắp xếp</span>
-                                <select>
-                                    <option value="0">Mặc Định</option>
-                                    <option value="1">Bán Chạy</option>
-                                    <option value="2">Phổ Biến</option>
-                                    <option value="3">Giá Tăng Dần</option>
-                                    <option value="4">Giá Giảm Dần</option>
+                                <select id="dropdownSelect">
+                                    <option selected value="0">Mặc Định</option>
+                                    <option value="1">Giá Tăng Dần</option>
+                                    <option value="2">Giá Giảm Dần</option>
+                                    <option value="3">A - Z</option>
+                                    <option value="4">Z - A</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>50</span> Sản Phẩm</h6>
+                                <h6><span><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="row" id="items">
-                    <%  String category = request.getParameter("category");
-                        List<Product> list = new ProductDAO().getTop9Product(category);
-                        for (Product p : list) { %>
-                    <input id="category" type="text" style="display: none" value="<%=category%>" name="category">
-                    <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
-                        <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" >
-                                <ul class="product__item__pic__hover">
+<%--                    <%  String category = request.getParameter("category");--%>
+<%--                        List<Product> list = new ProductDAO().getTop9Product(category);--%>
+<%--                        for (Product p : list) { %>--%>
+<%--                    <input id="category" type="text" style="display: none" value="<%=category%>" name="category">--%>
 
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <%if (user != null) {
-                                    Product product = new ProductDAO().getProductDetail(p.getProductId());%>
-                                    <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
-                                    <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
-                                            class="fa fa-shopping-cart"></i></a></li>
-                                    <%}%>
-                                    <%
-                                    } else {%>
-                                    <li><a class="shopnow2" href="login.jsp"><i
-                                            class="fa fa-shopping-cart"></i></a></li>
-                                      <%  }
-                                    %>
-                                </ul>
-                            </div>
-                            <div class="product__item__text">
-                                <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%= p.getProductName()%>
-                                </a></h6>
-                                <h5><%=format.format(p.getPrice())%>đ</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <%}%>
+<%--                    <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">--%>
+<%--                        <div class="product__item">--%>
+<%--                            <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" >--%>
+<%--                                <ul class="product__item__pic__hover">--%>
+
+<%--                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                    <%if (user != null) {--%>
+<%--                                    Product product = new ProductDAO().getProductDetail(p.getProductId());%>--%>
+<%--                                    <%if (Integer.parseInt(product.getQuantity()) > 0) {%>--%>
+<%--                                    <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i--%>
+<%--                                            class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                    <%}%>--%>
+<%--                                    <%--%>
+<%--                                    } else {%>--%>
+<%--                                    <li><a class="shopnow2" href="login.jsp"><i--%>
+<%--                                            class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                      <%  }--%>
+<%--                                    %>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                            <div class="product__item__text">--%>
+<%--                                <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%= p.getProductName()%>--%>
+<%--                                </a></h6>--%>
+<%--                                <h5><%=format.format(p.getPrice())%>đ</h5>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <%}%>--%>
                 </div>
 
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
+                <input type="text" id="page" value="0" style="display: none;" />
 <%--                    <a onclick="loadmore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>--%>
 
                 <!--                    <div class="product__pagination">-->
@@ -633,19 +525,61 @@
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+
+<script>
+    // $(document).ready(function (){
+    //     loadProduct();
+    // })
+    // function loadProduct() {
+    //     e.preventDefault();
+    //     const category = $("#category").val();
+    //     const price = $("input[type='radio']:checked.checkGia").val();
+    //     const orderby = $("#dropdownSelect").find(':selected').val();
+    //     const size = $("input[type='radio']:checked.checkSize").val();
+    //     $.ajax({
+    //         type: 'post',
+    //         url: "AllProduct",
+    //         data: {
+    //             price: price,
+    //             orderby: orderby,
+    //             category: category,
+    //             size: size
+    //         },
+    //         success: function (data) {
+    //             $("#products").html(data);
+    //         }
+    //     });
+    // }
+</script>
 <script>
     $(document).ready(function (){
+        loadMore();
         addcart();
+        $(document).ready(function () {
+            $("#filter").each(function () {
+                this.addEventListener("click", function (e) {
+                    filter(e);
+                })
+            })
+        });
+
     })
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
-        var category = $('#category').val();
+        const category = $("#category").val();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const orderby = $("#dropdownSelect").find(':selected').val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        console.log(amount);
         $.ajax({
             url: "/Petshop_website_final_war/loadMore",
             type: "get", //send it through get method
             data: {
                 amount: amount,
                 category: category,
+                orderby: orderby,
+                price: price,
+                size: size
             },
             success: function (data) {
                 var row = document.getElementById("items");
@@ -677,40 +611,36 @@
            })
         });
     }
-</script>
-
-<script>
-    $(document).ready(function () {
-        $("input[type='radio']").each(function () {
-            this.addEventListener("change", function (e) {
-                filter(e);
-            })
-        })
-        $("#dropdownSelect").change(function (e) {
-            filter(e);
-        })
-    });
 
     function filter(e) {
         e.preventDefault();
+        var amount = 0;
         const category = $("#category").val();
         const price = $("input[type='radio']:checked.checkGia").val();
         const orderby = $("#dropdownSelect").find(':selected').val();
         const size = $("input[type='radio']:checked.checkSize").val();
+        console.log(amount);
         $.ajax({
             type: 'post',
             url: "FilterProductController",
             data: {
+                amount: amount,
                 price: price,
                 orderby: orderby,
                 category: category,
                 size: size
             },
             success: function (data) {
-                $("#products").html(data);
+                $("#items").html(data);
+                $(".filter__found h6 span").text($("#numb").val());
             }
         });
     }
+</script>
+<script>
+
+
+
 </script>
 
 

@@ -42,3 +42,4 @@
 </div>
 <% }
 %>
+<input type="text" id="numb" value="<%=request.getAttribute("numb")%>" style="display: none">

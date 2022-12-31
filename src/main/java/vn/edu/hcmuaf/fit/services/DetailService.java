@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.beans.Detail;
+import vn.edu.hcmuaf.fit.dao.DetailDAO;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -15,6 +16,10 @@ public class DetailService {
             });
         }
 
+        public static List<Detail> listProCateClassify(String category) {
+            DetailDAO dao = new DetailDAO();
+            return dao.listProCateClassify(category);
+        }
 
     public static void main(String[] args) {
         getData();
