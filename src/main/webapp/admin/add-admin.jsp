@@ -136,8 +136,8 @@
                             class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
                             data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục sản phẩm</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục tin tức</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-caption">

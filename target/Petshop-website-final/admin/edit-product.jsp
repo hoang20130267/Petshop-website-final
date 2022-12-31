@@ -187,8 +187,9 @@
                             class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
                             data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục sản phẩm</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục tin tức</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a>
+                        </li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-caption">
@@ -253,20 +254,11 @@
         <div class="row">
             <main class="main" id="top">
                 <div class="container-fluid px-0" data-layout="container">
-
-                    <!-- <div class="content"> -->
-<%--                    <%--%>
-<%--                        ProductDAO dao = new ProductDAO();--%>
-<%--                        String pid = request.getParameter("pid");--%>
-<%--                        Product p = dao.getProductById(pid);--%>
-<%--                    %>--%>
-
                     <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
                             <% Product p = null;
                             if (request.getParameter("pid") != null)
                             p = ProductService.getInstance().getProductDetail(request.getParameter("pid"));
                             %>
-
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
                                 <%if (request.getParameter("pid") != null) {%>
@@ -281,7 +273,8 @@
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
-                                    Xóa dữ liệu</button
+                                    Xóa dữ liệu
+                                </button
                                 >
                                 <%if (request.getParameter("pid") != null) {%>
                                 <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
@@ -294,17 +287,17 @@
                                 <%}%>
                             </div>
                         </div>
-
-                                <input type="text" id="pid" name="pid"
-                                       value="<%=(p != null) ? request.getParameter("pid") : ""%>"
-                                       style="display: none">
+                        <input type="text" id="pid" name="pid"
+                               value="<%=(p != null) ? request.getParameter("pid") : ""%>"
+                               style="display: none">
                         <h4 class="mb-3">Tên thú cưng</h4>
                         <div class="row g-5">
                             <div class="col-12 col-xl-8">
                                 <input name="name" id="name"
-                                        class="form-control mb-5"
-                                        type="text"
-                                        placeholder="Viết tên thú cưng tại đây..." value="<%=(p != null) ? p.getProductName() : ""%>" required
+                                       class="form-control mb-5"
+                                       type="text"
+                                       placeholder="Viết tên thú cưng tại đây..."
+                                       value="<%=(p != null) ? p.getProductName() : ""%>" required
                                 />
                                 <div class="mb-6">
                                     <h4 class="mb-3">Chi tiết thú cưng</h4>
@@ -314,46 +307,58 @@
                                     <script>
                                         CKEDITOR.replace('editor');
                                     </script>
-                                                      </div>
-                                    <h4 class="mb-3">Thêm ảnh</h4>
-                                    <div
-                                            class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
-                                            id="my-awesome-dropzone"
-                                            data-dropzone="data-dropzone">
+                                </div>
+                                <h4 class="mb-3">Thêm ảnh</h4>
+                                <div
+                                        class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
+                                        id="my-awesome-dropzone"
+                                        data-dropzone="data-dropzone">
 
-                                        <% int i = 0;
-                                            if (p != null) {
+                                    <% int i = 0;
+                                        if (p != null) {
                                             if (p.getImage() != null) {%>
                                     <div class="image-container">
-                                        <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
-                                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
+                                        <div id="container<%=i%>" class="dz-message text-600"
+                                             data-dz-message="data-dz-message">
+                                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
+                                                 style="height:80px;width:80px;">
                                                 <img class="img-product-review dz-image" src="<%=p.getImage()%>">
                                                 <div class="control">
-                                                <a id="remove<%=i%>" class="dz-remove text-400 remove" href="" data-dz-remove="">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </a>
+                                                    <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
+                                                       data-dz-remove="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                             height="16px" viewBox="0 0 24 24" fill="none"
+                                                             stroke="currentColor" stroke-width="2"
+                                                             stroke-linecap="round" stroke-linejoin="round"
+                                                             class="feather feather-x">
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                        <%i++;
+                                    <%
+                                                i++;
                                             }
-                                        }%>
+                                        }
+                                    %>
 
                                     <div class="image-container">
 
-                                        <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
-                                            <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+                                        <div id="container<%=i%>" class="dz-message text-600"
+                                             data-dz-message="data-dz-message">
+                                            <input type="file" id="image<%=i%>" name="files" class="input-file"
+                                                   accept="image/*"/>
                                             <br>
-                                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
+                                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png"
+                                                 width="40" alt="">
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                                 <input type="text" id="deletedFile" value="" style="display: none">
-                                    <h4 class="mb-3">Danh mục</h4>
+                                <h4 class="mb-3">Danh mục</h4>
                                 <div class="row g-0 border-top border-bottom border-300">
                                     <div class="col-sm-4">
                                         <div
@@ -387,7 +392,8 @@
                                                     ></path>
                                                     <line x1="7" y1="7" x2="7.01" y2="7"></line>
                                                 </svg>
-                                                <sapn class="d-none d-sm-inline">Giá bán</sapn> </a
+                                                <sapn class="d-none d-sm-inline">Giá bán</sapn>
+                                            </a
                                             ><a
                                                 class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
                                                 id="restockTab"
@@ -417,7 +423,9 @@
                                                 <polyline
                                                         points="3.27 6.96 12 12.01 20.73 6.96"
                                                 ></polyline>
-                                                <line x1="12" y1="22.08" x2="12" y2="12"></line></svg><span class="d-none d-sm-inline">Chi tiết</span></a
+                                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                            </svg>
+                                            <span class="d-none d-sm-inline">Chi tiết</span></a
                                         >
 
                                             <a
@@ -450,7 +458,9 @@
                                                     <line x1="20" y1="12" x2="20" y2="3"></line>
                                                     <line x1="1" y1="14" x2="7" y2="14"></line>
                                                     <line x1="9" y1="8" x2="15" y2="8"></line>
-                                                    <line x1="17" y1="16" x2="23" y2="16"></line></svg><span class="d-none d-sm-inline">Ngày nhập</span></a
+                                                    <line x1="17" y1="16" x2="23" y2="16"></line>
+                                                </svg>
+                                                <span class="d-none d-sm-inline">Ngày nhập</span></a
                                             ><a
                                                 class="nav-link text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
                                                 id="advancedTab"
@@ -481,7 +491,9 @@
                                                         rx="2"
                                                         ry="2"
                                                 ></rect>
-                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="d-none d-sm-inline">Nâng cao</span></a
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                            </svg>
+                                            <span class="d-none d-sm-inline">Nâng cao</span></a
                                         >
                                         </div>
                                     </div>
@@ -497,18 +509,20 @@
                                                 <div class="row g-3">
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="mb-2">Giá tiền gốc</h5>
-                                                        <input id="price" name="price" value="<%=(p != null) ? p.getPrice() : ""%>"
-                                                                class="form-control"
-                                                                type="text"
-                                                                placeholder="Đồng" required
+                                                        <input id="price" name="price"
+                                                               value="<%=(p != null) ? p.getPrice() : ""%>"
+                                                               class="form-control"
+                                                               type="text"
+                                                               placeholder="Đồng" required
                                                         />
                                                     </div>
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="mb-2">Giá tiền đã giảm</h5>
-                                                        <input id="promoPrice" name="promoPrice" value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
-                                                                class="form-control"
-                                                                type="text"
-                                                                placeholder="Đồng" required
+                                                        <input id="promoPrice" name="promoPrice"
+                                                               value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                                               class="form-control"
+                                                               type="text"
+                                                               placeholder="Đồng" required
                                                         />
                                                     </div>
                                                 </div>
@@ -523,23 +537,26 @@
                                                     <div class="row g-3">
                                                         <div class="col-12 col-lg-6">
                                                             <h5 class="mb-2">Số lượng</h5>
-                                                            <input id="quantity" name="quantity" value="<%=(p != null) ? p.getQuantity() : ""%>"
-                                                                    class="form-control"
-                                                                    type="text"
-                                                                    placeholder="Ví dụ: 5" required
+                                                            <input id="quantity" name="quantity"
+                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"
+                                                                   class="form-control"
+                                                                   type="text"
+                                                                   placeholder="Ví dụ: 5" required
                                                             />
                                                         </div>
                                                         <div class="col-12 col-lg-6">
                                                             <h5 class="mb-2">Cân nặng</h5>
-                                                            <input id="cannang" name="cannang" value="<%=(p != null) ? p.getCannang() : ""%>"
-                                                                    class="form-control"
-                                                                    type="text"
-                                                                    placeholder="Kg" required
+                                                            <input id="cannang" name="cannang"
+                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"
+                                                                   class="form-control"
+                                                                   type="text"
+                                                                   placeholder="Kg" required
                                                             />
                                                         </div>
                                                         <div class="col-12 col-lg-6">
                                                             <h5 class="mb-2">Màu sắc</h5>
-                                                            <input id="mausac" name="mausac" value="<%=(p != null) ? p.getMausac() : ""%>"
+                                                            <input id="mausac" name="mausac"
+                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"
                                                                    class="form-control"
                                                                    type="text"
                                                                    placeholder="Ví dụ: Trắng" required
@@ -579,7 +596,9 @@
 
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="mb-2 text-1000">ID thú cưng</h5>
-                                                        <p name="pid" class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%></p>
+                                                        <p name="pid"
+                                                           class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%>
+                                                        </p>
 
                                                     </div>
                                                 </div>
@@ -587,7 +606,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                             <div class="col-12 col-xl-4">
                                 <div class="row g-2">
                                     <div class="col-12 col-xl-12">
@@ -599,11 +618,13 @@
                                                         <div class="mb-4">
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Loại thú cưng</h5>
-                                                            </div><select id="giong" name="giong" class="form-select mb-3" aria-label="category">
-                                                            <option value="Chó">Chó</option>
-                                                            <option value="Mèo">Mèo</option>
+                                                            </div>
+                                                            <select id="giong" name="giong" class="form-select mb-3"
+                                                                    aria-label="category">
+                                                                <option value="Chó">Chó</option>
+                                                                <option value="Mèo">Mèo</option>
 
-                                                        </select>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -612,11 +633,12 @@
                                                         <div>
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Tags</h5>
-                                                            </div><select class="form-select" aria-label="category">
-                                                            <option value="men-cloth">Chó</option>
-                                                            <option value="women-cloth">Mèo</option>
+                                                            </div>
+                                                            <select class="form-select" aria-label="category">
+                                                                <option value="men-cloth">Chó</option>
+                                                                <option value="women-cloth">Mèo</option>
 
-                                                        </select>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -632,11 +654,12 @@
                                                         <div class="mb-4 border-dashed-bottom pb-4">
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Kích cỡ</h5>
-                                                            </div><select class="form-select mb-3">
-                                                            <option value="size">Nhỏ</option>
-                                                            <option value="color">Vừa</option>
-                                                            <option value="weight">Lớn</option>
-                                                        </select>
+                                                            </div>
+                                                            <select class="form-select mb-3">
+                                                                <option value="size">Nhỏ</option>
+                                                                <option value="color">Vừa</option>
+                                                                <option value="weight">Lớn</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -645,34 +668,34 @@
                                     </div>
                                 </div>
                             </div>
-                            </div>
                         </div>
                     </form>
                 </div>
+            </main>
         </div>
-        </main>
     </div>
+</div>
 
-    <!-- Required Js -->
-    <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/feather.min.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="assets/js/plugins/clipboard.min.js"></script>
-    <script src="assets/js/uikit.min.js"></script>
+<!-- Required Js -->
+<script src="assets/js/vendor-all.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+<script src="assets/js/pcoded.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="assets/js/plugins/clipboard.min.js"></script>
+<script src="assets/js/uikit.min.js"></script>
 
-    <script src="bonus/js/bootstrap.min.js"></script>
-    <script src="bonus/js/lodash.min.js"></script>
-    <script src="bonus/tinymce/tinymce.min.js"></script>
-    <script src="bonus/js/dropzone.min.js"></script>
-    <script src="bonus/js/phoenix.js"></script>
+<script src="bonus/js/bootstrap.min.js"></script>
+<script src="bonus/js/lodash.min.js"></script>
+<script src="bonus/tinymce/tinymce.min.js"></script>
+<script src="bonus/js/dropzone.min.js"></script>
+<script src="bonus/js/phoenix.js"></script>
 
 
-    <!-- Apex Chart -->
-    <script src="assets/js/plugins/apexcharts.min.js"></script>
-    <!-- custom-chart js -->
-    <script src="assets/js/pages/dashboard-sale.js"></script>
+<!-- Apex Chart -->
+<script src="assets/js/plugins/apexcharts.min.js"></script>
+<!-- custom-chart js -->
+<script src="assets/js/pages/dashboard-sale.js"></script>
 
 </body>
 <script>
@@ -685,6 +708,7 @@
     } else {
         removeFilesData(1)
     }
+
     function reloadUpLoadFile() {
         $(".input-file").each(function () {
             $(this).on('change', function (e) {
@@ -700,6 +724,7 @@
             })
         });
     }
+
     $(".input-file").each(function () {
         $(this).on('change', function (e) {
             const idName = $(this).attr("id");
@@ -710,10 +735,11 @@
                 name = value.substring(value.lastIndexOf("\\") + 1);
             else
                 name = value.substring(value.lastIndexOf("/") + 1);
-            console.log(id +", " + name + ", ")
+            console.log(id + ", " + name + ", ")
             uploadFile(id, name, e)
         })
     });
+
     function uploadFile(id, name, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -724,6 +750,7 @@
         });
         postFilesData(id, name, data);
     }
+
     function removeFilesData(idDelete) {
         $("#remove" + idDelete).on("click", function (e) {
             e.preventDefault();
@@ -743,6 +770,7 @@
             console.log($("#deletedFile").val());
         });
     }
+
     function postFilesData(id, name, data) {
         let bool = false;
         $(".img-product-review").each(function () {
@@ -768,7 +796,7 @@
                     $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
                                                 <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
                                                 <div class="control">
-                                                <a id="remove`+ id +`" class="dz-remove text-400 remove" href="" data-dz-remove="">
+                                                <a id="remove` + id + `" class="dz-remove text-400 remove" href="" data-dz-remove="">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -778,8 +806,8 @@
                                             </div>`)
                     $("#my-awesome-dropzone").append(`<div class="image-container">
 
-                                        <div id="container`+ id +`" class="dz-message text-600" data-dz-message="data-dz-message">
-                                            <input type="file" id="image`+ id +`" name="files" class="input-file" accept="image/*" />
+                                        <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
+                                            <input type="file" id="image` + id + `" name="files" class="input-file" accept="image/*" />
                                             <br>
                                             <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
                                         </div>
@@ -833,12 +861,12 @@
                 id: id,
                 name: name,
                 price: price,
-                promoPrice : promo,
-                image : imageLink,
-                descripsion : descripsion,
-                mausac : mausac,
-                cannang : cannang,
-                giong : giong,
+                promoPrice: promo,
+                image: imageLink,
+                descripsion: descripsion,
+                mausac: mausac,
+                cannang: cannang,
+                giong: giong,
                 imgFile: imgFile,
             },
             success: function () {

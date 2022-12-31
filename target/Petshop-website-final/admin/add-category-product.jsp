@@ -1,3 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Nguyen Ngoc Huy
+  Date: 12/31/2022
+  Time: 2:48 AM
+  To change this template use File | Settings | File Templates.
+--%>
+
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +44,42 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
+    <script src="bonus/js/imageloaded.min.js"></script>
 
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="bonus/css/dropzone.min.css" rel="stylesheet"/>
+    <link href="bonus/css/line.css" rel="stylesheet"/>
+    <link href="bonus/css/choices.min.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link
+            href="bonus/css/theme.min.css"
+            type="text/css"
+            rel="stylesheet"
+            id="style-default"
+    />
+    <link
+            href="../../../assets/css/user.min.css"
+            type="text/css"
+            rel="stylesheet"
+            id="user-style-default"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            id="mce-u0"
+            href="bonus/css/skin.min.css"
+    />
 </head>
 
 <body class="">
@@ -45,7 +93,7 @@
 <!-- [ Mobile header ] start -->
 <div class="pc-mob-header pc-header">
     <div class="pcm-logo">
-        <img src="assets/images/logo.png" alt="" class="logo logo-lg">
+        <img src="assets/images/logo.svg" alt="" class="logo logo-lg">
     </div>
     <div class="pcm-toolbar">
         <a href="#!" class="pc-head-link" id="mobile-collapse">
@@ -159,7 +207,7 @@
                             class="pc-mtext">Người dùng</span><span class="pc-arrow"><i
                             data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="list-user.jsp">Danh sách người dùng</a></li>
+                        <li class="pc-item"><a class="pc-link" href="list-user.jsp?role=1">Danh sách người dùng</a></li>
                         <li class="pc-item"><a class="pc-link" href="add-user.jsp">Thêm người dùng</a></li>
                     </ul>
                 </li>
@@ -178,104 +226,100 @@
 <!-- [ Header ] start -->
 <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
 <!-- [ Header ] end -->
-
+<%List<Detail> list = DetailService.getInstance().listCategoryParentPd();%>
 <!-- [ Main Content ] start -->
 <div class="pc-container">
     <div class="pcoded-content">
-        <!-- [ breadcrumb ] start -->
         <div class="page-header">
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item">Tài khoản</li>
-                            <li class="breadcrumb-item">Admin</li>
-                            <li class="breadcrumb-item">Thêm admin</li>
+                            <li class="breadcrumb-item">Quản lý danh mục</li>
+                            <li class="breadcrumb-item">Thêm danh mục</li>
+                            <li class="breadcrumb-item">Danh mục sản phẩm</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
         <div class="row">
-            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm admin
-                mới</h2>
-            <hr>
-            <% String error = (String) request.getAttribute("addAdminerror"); %>
-            <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-            <form method="post" action="AddUserAdminController">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="form-label" for="inputEmail4">Tài khoản</label>
-                        <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Tên tài khoản">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="form-label" for="inputPassword4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="validationTooltip05" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="validationTooltip05" name="phone" required
-                               placeholder="+84">
+            <main class="main" id="top">
+                <div class="container-fluid px-0" data-layout="container">
+                    <form class="mb-9" method="post" action="AddCategoryProduct">
+                        <% Detail cate = null;
+                            if (request.getParameter("cid") != null)
+                                cate = DetailService.getInstance().getCateProductById(request.getParameter("cid"));
+                        %>
+                        <div class="row g-3 flex-between-end mb-5">
+                            <div class="col-auto">
+                                <%if (request.getParameter("cid") != null) {%>
+                                <h2 class="mb-2">Sửa danh mục sản phẩm</h2>
+                                <%} else {%>
+                                <h2 class="mb-2">Thêm danh mục sản phẩm</h2>
+                                <%}%>
+                            </div>
+                        </div>
 
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="form-label" for="inputEmail4">Họ và tên</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
-                    </div>
+                        <div class="row g-5">
+                            <div class="col-12 col-xl-8">
+                                <h4 class="mb-3">Tên danh mục</h4>
+                                <input class="form-control mb-5" name="catename" type="text"
+                                       value="<%=(cate != null) ? cate.getCatName() : ""%>" placeholder="Viết tên danh mục tại đây..."/>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-3 position-relative">
-                        <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                               placeholder="Mật khẩu">
-                    </div>
-                    <div class="col-md-3 position-relative">
-                        <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
-                               placeholder="Nhập lại mật khẩu">
-                    </div>
-                    <div class="col-md-3 position-relative">
-                        <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
-                        <select class="form-select" id="validationTooltip04" name="address" required>
-                            <option>TP.HCM</option>
-                            <option>Hà Nội</option>
-                        </select>
-                        <%--            <div class="invalid-tooltip">--%>
-                        <%--              Bạn chưa chọn vị trí cho người này--%>
-                        <%--            </div>--%>
-                    </div>
-                    <div class="col-md-3 position-relative">
-                        <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
-                        <select class="form-select" id="validationTooltip04" name="status" required>
-                            <option>Mở khóa</option>
-                            <option>Khóa</option>
-                        </select>
-                        <%--            <div class="invalid-tooltip">--%>
-                        <%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
-                        <%--            </div>--%>
-                    </div>
-                </div>
-                <%--        <div class="form-group">--%>
-                <%--          <div class="form-check" style="margin-top: 10px;">--%>
-                <%--            <input class="form-check-input" type="checkbox" id="gridCheck">--%>
-                <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
-                <%--          </div>--%>
-                <%--        </div>--%>
+                                <h4 class="mb-3">Danh mục cha</h4>
+                                <select class="form-control mb-5" name="cateparent">
+                                    <%if(cate != null){%>
+                                        <option value='0'>Không</option>
+                                        <%for (Detail c : list) {
+                                            if (c.getCatID().equals(cate.getParentID())) {%>
+                                                <option value='<%=c.getCatID()%>' selected><%=c.getCatName()%>
+                                                </option>
+                                            <%} else {%>
+                                                <option value='<%=c.getCatID()%>'><%=c.getCatName()%>
+                                                </option>
+                                            <%}%>
+                                        <%}%>
+                                    <%}else{%>
+                                    <option value='0' selected>Không</option>
+                                        <%for (Detail c : list) {%>
+                                        <option value='<%=c.getCatID()%>'><%=c.getCatName()%>
+                                        </option>
+                                        <%}%>
+                                    <%}%>
+                                </select>
 
-                    <button type="submit" class="btn  btn-primary"
-                            style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                        Thêm admin
-                    </button>
-            </form>
+                                <h4 class="mb-3">Trạng thái</h4>
+                                <select class="form-control mb-5" name="status">
+                                    <option value='1' selected>Hiện</option>
+                                    <option value='0'>Ẩn</option>
+                                </select>
+
+                                <div class="col-auto">
+                                    <%if (request.getParameter("cid") != null) {%>
+                                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                        Lưu thay đổi
+                                    </button>
+                                    <%} else {%>
+                                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                        Thêm danh mục
+                                    </button>
+                                    <%}%>
+                                    <input type="text" id="cid" name="cid"
+                                           value="<%=(cate != null) ? request.getParameter("cid") : ""%>"
+                                           style="display: none">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </main>
         </div>
-        <!-- [ Main Content ] end -->
     </div>
 </div>
 
@@ -288,6 +332,27 @@
 <script src="assets/js/plugins/clipboard.min.js"></script>
 <script src="assets/js/uikit.min.js"></script>
 
+<script src="bonus/js/popper.min.js"></script>
+<script src="bonus/js/bootstrap.min.js"></script>
+<script src="bonus/js/anchor.min.js"></script>
+<script src="bonus/js/is.min.js"></script>
+<script src="bonus/js/all.min.js"></script>
+<script src="bonus/js/lodash.min.js"></script>
+<script src="bonus/js/polyfill.min.js"></script>
+<script src="bonus/js/list.min.js"></script>
+<script src="bonus/js/feather.min.js"></script>
+<script src="bonus/js/dayjs.min.js"></script>
+<script src="bonus/tinymce/tinymce.min.js"></script>
+<script src="bonus/js/dropzone.min.js"></script>
+<script src="bonus/js/choises.min.js"></script>
+<script src="bonus/js/phoenix.js"></script>
+<script src="bonus/js/phoenix1.js"></script>
+<script src="bonus/js/theme.min.js"></script>
+<script src="bonus/js/docs.js"></script>
+<script src="bonus/js/utils.js"></script>
+<script src="bonus/js/image.js"></script>
+
+
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
@@ -295,3 +360,5 @@
 </body>
 
 </html>
+
+

@@ -183,8 +183,8 @@
                             class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
                             data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục sản phẩm</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#">Danh mục tin tức</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                     </ul>
                 </li>
                 <li class="pc-item pc-caption">
@@ -338,9 +338,8 @@
                                         </td>
                                         <%}%>
                                         <td class="city align-middle white-space-nowrap text-900 ps-7">
-                                            <a href="" class="btn btn-primary ">Sửa</a>
-                                            <a href="" class="btn btn-primary "
-                                               style="background-color:crimson;">Xóa</a>
+                                            <a href="add-category-product.jsp?cid=<%=cate.getCatID()%>" class="btn btn-primary ">Sửa</a>
+                                            <a href="RemoveCateProduct?cid=<%=cate.getCatID()%>" class="btn btn-primary " style="background-color:crimson;">Xóa</a>
                                         </td>
                                     </tr>
                                     <%}%>
@@ -427,8 +426,8 @@
                                         </td>
                                         <%}%>
                                         <td class="city align-middle white-space-nowrap text-900 ps-7">
-                                            <a href="" class="btn btn-primary ">Sửa</a>
-                                            <a href="" class="btn btn-primary "
+                                            <a href="add-category-blog.jsp?cbid=<%=cate.getCatID()%>" class="btn btn-primary ">Sửa</a>
+                                            <a href="RemoveCateBlog?cbid=<%=cate.getCatID()%>" class="btn btn-primary "
                                                style="background-color:crimson;">Xóa</a>
                                         </td>
                                     </tr>
