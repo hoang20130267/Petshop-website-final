@@ -245,6 +245,17 @@ public class CustomerUserDAO {
         });
         return detail;
     }
+    public static void deleteUser(String id) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("delete from user_account where id = ?")
+                    .bind(0, id)
+                    .execute();
+            handle.createUpdate("delete from infor_user where id_user = ?")
+                    .bind(0, id)
+                    .execute();
+            return true;
+        });
+    }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
 //        System.out.println(new CustomerUserDAO().listUser());

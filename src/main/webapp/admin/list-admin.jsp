@@ -276,7 +276,7 @@
                                     <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
                                     <td class="last-seen align-middle white-space-nowrap text-700 text-end">
                                         <a class="btn_2 edit btn btn-primary" href="add-admin.jsp?idUser=<%=c.getId()%>" style="color: white">Sửa</a>
-                                        <a class="btn_2 edit btn btn-primary" style="background-color: crimson; color: white">Xóa</a>
+                                        <a class="btn_2 edit btn btn-primary" href="delete-user?idUser=<%=c.getId()%>" style="background-color: crimson; color: white">Xóa</a>
                                     </td>
                                 </tr></tr>
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
