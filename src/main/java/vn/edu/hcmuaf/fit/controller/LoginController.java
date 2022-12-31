@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
         if (account != null) {
             if(account.isRole()){
                 HttpSession session = request.getSession();
-                session.setAttribute("user", account);
+                session.setAttribute("admin", account);
                 response.sendRedirect("admin/index.jsp");
             }else {
                 HttpSession session = request.getSession();

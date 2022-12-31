@@ -75,9 +75,57 @@
       cursor: pointer;
       border: solid 1px #5dcbf6
     }
+    .avatar-wrapper {
+      position: relative;
+      height: 200px;
+      width: 200px;
+      margin: 50px auto;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 1px 1px 15px -5px black;
+      transition: all .3s ease;
+    }
+    .avatar-wrapper :hover{
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+    .avatar-wrapper :hover .profile-pic{
+      opacity: .5;
+    }
+    .profile-pic {
+      height: 100%;
+      width: 100%;
+      transition: all .3s ease;
+    }
+    .profile-pic:after{
+      font-family: FontAwesome;
+      content: "\f007";
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      font-size: 190px;
+      background: #ecf0f1;
+      color: #34495e;
+      text-align: center;
+    }
+    .input-file {
+      color: transparent;
+      margin-left: 250px;
+      margin-bottom: 50px;
+
+    }
+    .input-file::before {
+      background: #00BFFF;
+      border-radius: 50px;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
   </style>
 </head>
-<% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
+
 <body>
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -205,7 +253,7 @@
 <!-- [ navigation menu ] end -->
 <!-- [ Header ] start -->
 <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
-
+<% CustomerUser user = (CustomerUser) session.getAttribute("admin"); %>
 <div class="pc-container">
   <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->
@@ -225,43 +273,113 @@
       </div>
     </div>
 <div class="container rounded bg-white mt-5 mb-5">
-  <div class="row">
-    <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="assets/images/user/avatar-2.png"><span class="font-weight-bold">Admin</span><span class="text-black-50">admin@gmail.com</span><span> </span></div>
-    </div>
-    <div class="col-md-5 border-right">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-right">Thông tin tài khoản</h4>
-        </div>
-        <div class="row mt-2">
-          <div class="col-md-6"><label class="labels">Username</label><input type="text" class="form-control" placeholder="Nhập username" value=""></div>
-          <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text" class="form-control" value="" placeholder="Nhập họ tên"></div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Nhập email tại đây" value=""></div>
-          <div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ làm việc</label><input type="text" class="form-control" placeholder="Nhập địa chỉ làm việc tại đây" value=""></div>
-          <div class="col-md-12"><label class="labels" style="padding-top: 10px">Số điện thoại</label><input type="text" class="form-control" placeholder="Nhập số điện thoại tại đây" value=""></div>
-
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-6"><label class="labels">Nơi ở</label><input type="text" class="form-control" placeholder="Nhập nơi ở" value=""></div>
-          <div class="col-md-6"><label class="labels">Quốc gia</label><input type="text" class="form-control" value="" placeholder="Nhập quốc gia"></div>
+  <form method="post" enctype="multipart/form-data" class="infor_user">
+    <div class="row">
+      <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <% int i = 0;
+            if (user.getAvt() != null) {
+          %>
+          <div class="image-container">
+            <div id="container<%=i%>">
+              <div class="avatar-wrapper">
+                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>" />
+              </div>
+            </div>
+          </div>
+          <div class="image-container">
+            <div id="container<%=i%>">
+              <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+            </div>
+          </div>
+          <%} else {%>
+          <div class="image-container">
+            <div id="container<%=i%>">
+              <div class="avatar-wrapper">
+                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/admin/assets/images/user/avatar-2.png" />
+              </div>
+            </div>
+          </div>
+          <div class="image-container">
+            <div id="container<%=i%>">
+              <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+            </div>
+          </div>
+          <%}%>
+          <input type="text" id="deletedFile" value="" style="display: none">
+          <span class="font-weight-bold"><%=user.getName()%></span>
+          <span class="text-black-50"><%=user.getEmail()%></span><span> </span>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center experience"><span>Đổi mật khẩu</span>
-          <a href="add-admin.jsp"><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Thêm admin mới</span></a>
-        </div><br>
-        <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="text" class="form-control" placeholder="Nhập mật khẩu" value=""></div> <br>
-        <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="text" class="form-control" placeholder="Nhập lại mật khẩu" value=""></div>
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Lưu thông tin</button></div>
+      <div class="col-md-5 border-right">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="text-right">Thông tin tài khoản</h4>
+            <% String sussesupdate = (String) request.getAttribute("updateInforSusses"); %>
+            <p style="color: #11ff02; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= sussesupdate == null ? "" : sussesupdate%>
+            </p>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">Username</label><input type="text" id="username"
+                                                                               class="form-control"
+                                                                               name="username"
+                                                                               placeholder="Nhập username"
+                                                                               value="<%=user.getUsername()%>"
+                                                                               readonly>
+            </div>
+            <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text" id="fullname"
+                                                                                class="form-control"
+                                                                                name="fullname"
+                                                                                value="<%=user.getName()%>"
+                                                                                placeholder="Nhập họ tên">
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12"><label class="labels">Email</label><input type="email" id="email"
+                                                                             class="form-control"
+                                                                             name="email"
+                                                                             placeholder="Nhập email tại đây"
+                                                                             value="<%=user.getEmail()%>"
+                                                                             readonly>
+            </div>
+            <div class="col-md-12"><label class="labels" style="padding-top: 10px">Số điện
+              thoại</label><input id="phone"
+                                  type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại tại đây"
+                                  value="<%=user.getPhone()%>"></div>
+            <div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input id="address"
+                                                                                                         type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
+                                                                                                         value="<%=user.getAddress()%>">
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="col-md-4">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center experience"><span>Đổi mật khẩu</span>
+          </div>
+          <br>
+          <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="password" id="newpass"
+                                                                                       class="form-control"
+                                                                                       name="newpass"
+                                                                                       placeholder="Nhập mật khẩu"
+                                                                                       value="<%=user.getPass()%>"></div>
+          <br>
+          <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="password" id="newpassconfirm"
+                                                                                       class="form-control"
+                                                                                       name="newpassconfirm"
+                                                                                       placeholder="Nhập lại mật khẩu"
+                                                                                       value="<%=user.getPass()%>"></div>
+          <% String errorpass = (String) request.getAttribute("passError"); %>
+          <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= errorpass == null ? "" : errorpass%>
+          </p>
+          <div class="mt-5 text-center">
+            <button class="btn btn-primary profile-button" type="submit">Lưu thông tin</button>
+          </div>
+        </div>
 
+      </div>
     </div>
-  </div>
+  </form>
 </div>
 </div>
 </div>
@@ -279,5 +397,126 @@
 <script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
 <script src="assets/js/pages/dashboard-sale.js"></script>
+<script>
+  function reloadUpLoadFile() {
+    $(".input-file").each(function () {
+      $(this).on('change', function (e) {
+        const idName = $(this).attr("id");
+        const id = idName.substring(5);
+        const value = $(this).val();
+        let name = "";
+        if (value.indexOf("\\") != -1)
+          name = value.substring(value.lastIndexOf("\\") + 1);
+        else
+          name = value.substring(value.lastIndexOf("/") + 1);
+        uploadFile(id, name, e)
+      })
+    });
+  }
+  $(".input-file").each(function () {
+    $(this).on('change', function (e) {
+      const idName = $(this).attr("id");
+      const id = idName.substring(5);
+      const value = $(this).val();
+      let name = "";
+      if (value.indexOf("\\") != -1)
+        name = value.substring(value.lastIndexOf("\\") + 1);
+      else
+        name = value.substring(value.lastIndexOf("/") + 1);
+      console.log(id +", " + name + ", ")
+      uploadFile(id, name, e)
+    })
+  });
+  function uploadFile(id, name, event) {
+    event.stopPropagation();
+    event.preventDefault();
+    const files = event.target.files;
+    const data = new FormData();
+    $.each(files, function (key, value) {
+      data.append(key, value);
+    });
+    postFilesData(id, name, data);
+  }
+  function postFilesData(id, name, data) {
+    let bool = false;
+    $(".img-avt-review").each(function () {
+      let nameFile = $(this).attr("src");
+      if (nameFile.indexOf(name) != -1) {
+        bool = true;
+      }
+    })
+    if (bool === false) {
+      $.ajax({
+        url: '/Petshop_website_final_war/UpDownImageAvatarUserController',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function (data, textStatus, jqXHR) {
+          //success
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          $("#container" + id).empty()
+          $("#container" + id).prepend(`<div class="avatar-wrapper">
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/img/user/` + name + `" />
+                            </div>`)
+          let value = $("#deletedFile").val();
+          if (value.indexOf(name) !== -1) {
+            value = value.replace(name + ",", "");
+            $("#deletedFile").val(value);
+          }
+          console.log($("#deletedFile").val());
+          reloadUpLoadFile();
+        }
+      });
+    } else {
+    }
+  }
+</script>
+<script>
+  $("button[type='submit']").click(function (e) {
+    e.preventDefault();
+
+    const username = $("#username").val();
+    const fullname = $("#fullname").val();
+    const phone = $("#phone").val();
+    const address = $("#address").val();
+    const newpass = $("#newpass").val();
+    const newpassconfirm = $("#newpassconfirm").val();
+    const imageLink = $(".img-avt-review").attr("src").substring(57);
+    console.log(imageLink);
+    let imgFile = []
+    $(".img-avt-review").each(function () {
+      let nameFile = $(this).attr("src");
+      if (nameFile.indexOf("\\") != -1)
+        imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
+      else
+        imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
+    })
+    const removed = $("#deletedFile").val();
+    const oldImg = removed.substring(0, removed.length - 1);
+    $.ajax({
+      url: "/Petshop_website_final_war/admin/UpdateInforAdminController",
+      type: "GET",
+      data: {
+        oldImg: oldImg,
+        username: username,
+        fullname: fullname,
+        phone : phone,
+        avt : imageLink,
+        address : address,
+        newpass : newpass,
+        newpassconfirm : newpassconfirm,
+        imgFile: imgFile,
+      },
+      success: function () {
+        alert("Cập nhật thông tin thành công");
+        window.location.href = "infor-admin.jsp"
+      }
+    })
+  })
+</script>
 </body>
 </html>

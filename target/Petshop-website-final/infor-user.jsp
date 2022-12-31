@@ -325,12 +325,13 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <%if (user.getAvt() != null) {
-                        int i = 0;%>
+                    <% int i = 0;
+                        if (user.getAvt() != null) {
+                        %>
                     <div class="image-container">
                         <div id="container<%=i%>">
                             <div class="avatar-wrapper">
-                                <img class="img-avt-review profile-pic" src="<%=user.getAvt()%>" />
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>" />
                             </div>
                         </div>
                     </div>
@@ -341,11 +342,17 @@
                     </div>
                     <%} else {%>
                     <div class="image-container">
-                    <div class="avatar-wrapper">
-                        <img class="profile-pic img-avt-review" src="http://localhost:8080/Petshop_website_final_war/img/user.png" />
+                        <div id="container<%=i%>">
+                            <div class="avatar-wrapper">
+                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/img/user.png" />
+                            </div>
+                        </div>
                     </div>
+                    <div class="image-container">
+                        <div id="container<%=i%>">
+                            <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
+                        </div>
                     </div>
-                    <input name="files" class="input-file" type="file" accept="image/*"/>
                     <%}%>
                     <input type="text" id="deletedFile" value="" style="display: none">
                     <span class="font-weight-bold"><%=user.getName()%></span>
