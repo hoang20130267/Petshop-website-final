@@ -169,11 +169,19 @@
              color: #34495e;
              text-align: center;
         }
-        .upload-button {
-            position: absolute;
-            top: 0; left: 0;
-            height: 100%;
-            width: 100%;
+        .input-file {
+            color: transparent;
+            margin-left: 230px;
+            margin-bottom: 50px;
+
+        }
+        .input-file::before {
+            background: #00BFFF;
+            border-radius: 50px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            transition: all 0.3s;
         }
     </style>
 

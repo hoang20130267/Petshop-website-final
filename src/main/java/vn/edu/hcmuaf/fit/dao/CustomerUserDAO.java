@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
@@ -177,6 +178,25 @@ public class CustomerUserDAO {
             return null;
         });
     }
+    public void updateAdmin(String id, String userName, String pass, String fullName, String email, String phone,String address,int status) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update user_account set user_name = ?, passMaHoa = ?, pass = ?, status = ? where id = ?")
+                    .bind(0, userName)
+                    .bind(1, Utils.maHoaMK(pass))
+                    .bind(2, pass)
+                    .bind(3, status)
+                    .bind(4, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name = ?, email = ?, phone = ?, address = ? where id_user = ?")
+                    .bind(0, fullName)
+                    .bind(1, email)
+                    .bind(2, phone)
+                    .bind(3, address)
+                    .bind(4, id)
+                    .execute();
+            return null;
+        });
+    }
 
     public void insertCustomer(String userName, String pass, String fullName, String email, String phone,String address,int status) {
         String id = new SignUpDAO().taoIDCustomerUser();
@@ -198,9 +218,37 @@ public class CustomerUserDAO {
             return null;
         });
     }
+    public void updateCustomer(String id, String userName, String pass, String fullName, String email, String phone,String address,int status) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update user_account set user_name = ?, passMaHoa = ?, pass = ?, status = ? where id = ?")
+                    .bind(0, userName)
+                    .bind(1, Utils.maHoaMK(pass))
+                    .bind(2, pass)
+                    .bind(3, status)
+                    .bind(4, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name = ?, email = ?, phone = ?, address = ? where id_user = ?")
+                    .bind(0, fullName)
+                    .bind(1, email)
+                    .bind(2, phone)
+                    .bind(3, address)
+                    .bind(4, id)
+                    .execute();
+            return null;
+        });
+    }
+    public CustomerUser getUserDetail(String id) {
+        CustomerUser detail = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from infor_user where id_user = ?")
+                    .bind(0, id)
+                    .mapToBean(CustomerUser.class).first();
+        });
+        return detail;
+    }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
-        System.out.println(new CustomerUserDAO().listUser());
-        System.out.println(new CustomerUserDAO().ListAdmin());
+//        System.out.println(new CustomerUserDAO().listUser());
+//        System.out.println(new CustomerUserDAO().ListAdmin());
+        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
     }
 }

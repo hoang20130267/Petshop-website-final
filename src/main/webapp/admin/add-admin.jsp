@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -200,52 +202,72 @@
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         <div class="row">
+            <%if (request.getParameter("idUser") != null) {%>
+            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa admin
+                mới</h2>
+            <hr>
+            <% }else{ %>
             <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm admin
                 mới</h2>
             <hr>
+            <% } %>
             <% String error = (String) request.getAttribute("addAdminerror"); %>
             <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-            <form method="post" action="AddUserAdminController">
+            <% CustomerUser users = null;
+            if(request.getParameter("idUser") != null)
+                    users = UserService.getInstance().getUserDetail(request.getParameter("idUser"));
+            %>
+            <form method="post" action="EditUserAdminController">
+            <input type="text" id="id" name="id"
+                   value="<%=(users != null) ? request.getParameter("idUser") : ""%>"
+                   style="display: none">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Tài khoản</label>
-                        <input type="text" class="form-control" id="username" name="username"
+                        <input type="text" class="form-control" id="username" name="username" value="<%=(users != null) ? users.getUsername() : ""%>"
                                placeholder="Tên tài khoản">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputPassword4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
+                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email" value="<%=(users != null) ? users.getEmail() : ""%>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="validationTooltip05" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="validationTooltip05" name="phone" required
+                        <input type="text" class="form-control" id="validationTooltip05" name="phone" value="<%=(users != null) ? users.getPhone() : ""%>" required
                                placeholder="+84">
 
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Họ và tên</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" value="<%=(users != null) ? users.getName() : ""%>">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-3 position-relative">
                         <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                        <input type="password" class="form-control" id="inputPassword4" name="passwd" value="<%=(users != null) ? users.getPass() : ""%>"
                                placeholder="Mật khẩu">
                     </div>
                     <div class="col-md-3 position-relative">
                         <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
+                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" value="<%=(users != null) ? users.getPass() : ""%>" required
                                placeholder="Nhập lại mật khẩu">
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
                         <select class="form-select" id="validationTooltip04" name="address" required>
-                            <option>TP.HCM</option>
-                            <option>Hà Nội</option>
+                            <% if(request.getParameter("idUser") != null) {
+                                if(users.getAddress().equals("TP.HCM")) {%>
+                            <option value="TP.HCM">TP.HCM</option>
+                            <option value="Hà nội" selected>Hà Nội</option>
+                                <%} else {%>
+                            <option value="TP.HCM" selected>TP.HCM</option>
+                            <option value="Hà nội">Hà Nội</option>
+                                <% }
+                             } %>
                         </select>
                         <%--            <div class="invalid-tooltip">--%>
                         <%--              Bạn chưa chọn vị trí cho người này--%>
@@ -254,8 +276,15 @@
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
                         <select class="form-select" id="validationTooltip04" name="status" required>
-                            <option>Mở khóa</option>
+                            <% if(request.getParameter("idUser") != null) {
+                                if(users.isStatus() == false) {%>
+                            <option selected>Mở khóa</option>
                             <option>Khóa</option>
+                            <%} else {%>
+                            <option>Mở khóa</option>
+                            <option selected>Khóa</option>
+                            <% }
+                             } %>
                         </select>
                         <%--            <div class="invalid-tooltip">--%>
                         <%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
@@ -268,11 +297,17 @@
                 <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
                 <%--          </div>--%>
                 <%--        </div>--%>
-
+            <%if (request.getParameter("idUser") != null) {%>
                     <button type="submit" class="btn  btn-primary"
                             style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                        Thêm admin
+                        Sửa admin
                     </button>
+            <%} else {%>
+            <button type="submit" class="btn  btn-primary"
+                    style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+                Thêm admin
+            </button>
+            <%}%>
             </form>
         </div>
         <!-- [ Main Content ] end -->
