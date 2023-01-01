@@ -64,10 +64,12 @@ public class ProductService {
         ProductDAO dao = new ProductDAO();
         return dao.getNext9Product(amount,category,price,size,orderby);
     }
+
 //    public List<Product> Filter(String category,String price, String size, String order_by) {
 //        ProductDAO dao = new ProductDAO();
 //        return dao.Filter(category,price,size,order_by);
 //    }
+
 
     public static void main(String[] args) {
         System.out.println(getData2());
