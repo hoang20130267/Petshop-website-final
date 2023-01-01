@@ -35,16 +35,18 @@ public class ProductService {
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
-    public static List<Product> getData4() {
+    public static List<Product> getAccessoryAdmin() {
         return JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId > 3000")
+            return handle.createQuery("SELECT p.* from product p INNER JOIN product_from_cate pc on p.productId = pc.product_id\n" +
+                            "WHERE pc.cate_id =3")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
 
     public static List<Product> getDataProductAdmin() {
         return JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId < 3000")
+            return handle.createQuery("SELECT p.* from product p INNER JOIN product_from_cate pc on p.productId = pc.product_id\n" +
+                            "WHERE pc.cate_id =1 or pc.cate_id = 2 ")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
