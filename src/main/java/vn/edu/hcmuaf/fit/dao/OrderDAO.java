@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
+import vn.edu.hcmuaf.fit.beans.OrderDetail;
+import vn.edu.hcmuaf.fit.beans.Orders;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.ProductService;
@@ -58,9 +60,38 @@ public class OrderDAO {
                         .bind(1,idp)
                         .execute();
             }
-
             return null;
         });
     }
 
+    public List<Orders> ordersList (){
+        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders")
+                .mapToBean(Orders.class).stream().collect(Collectors.toList()));
+        return  list;
+    }
+
+    public List<OrderDetail> getOrderDetailsById (String id){
+        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
+                "WHERE od.OrderID = ?"))
+                .bind(0,id)
+                .mapToBean(OrderDetail.class).stream().collect(Collectors.toList());
+        return list;
+    }
+
+    public void updateDelivery(String orderId, int delivery){
+        String date = java.time.LocalDate.now().toString();
+        JDBIConnector.get().withHandle(handle -> handle.createUpdate("UPDATE orders SET Delivered=?, DeliveryDate=? WHERE OrderID=?;")
+                        .bind(0,delivery)
+                        .bind(1,date)
+                        .bind(2,orderId)
+                        .execute()
+                );
+    }
+    public void updateStatus(String orderId, int status){
+        JDBIConnector.get().withHandle(handle -> handle.createUpdate("UPDATE orders SET `Status`=? WHERE OrderID=?")
+                .bind(0,status)
+                .bind(1,orderId)
+                .execute()
+            );
+    }
 }
