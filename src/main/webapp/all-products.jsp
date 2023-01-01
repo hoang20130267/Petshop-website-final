@@ -620,7 +620,7 @@
         const price = $("input[type='radio']:checked.checkGia").val();
         const orderby = $("#dropdownSelect").find(':selected').val();
         const size = $("input[type='radio']:checked.checkSize").val();
-        console.log(amount);
+        console.log(category);
         $.ajax({
             type: 'post',
             url: "FilterProductController",
