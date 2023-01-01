@@ -72,7 +72,7 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public int isStatus() {
+    public int getStatus() {
         return status;
     }
 
