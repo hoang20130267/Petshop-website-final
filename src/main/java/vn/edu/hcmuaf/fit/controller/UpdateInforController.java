@@ -35,6 +35,7 @@ public class UpdateInforController extends HttpServlet {
         if (image != "") {
             if (newpass.equals(newpassconfirm)) {
                 new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass, image);
+                user.setAvt("img/user/" + image);
                 request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
                 request.getRequestDispatcher("infor-user.jsp").forward(request, response);
                 removeOldImg(oldImg, request);
@@ -43,12 +44,14 @@ public class UpdateInforController extends HttpServlet {
                 request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
                 request.getRequestDispatcher("infor-user.jsp").forward(request, response);
             }
-        }else {
+        } else {
+            user.setAvt("img/user/"+ image);
             new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass);
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-user.jsp").forward(request, response);
         }
     }
+
     private void removeOldImg(String oldImg, HttpServletRequest request) {
         if (oldImg.length() > 0) {
             String[] splited = oldImg.split(",");

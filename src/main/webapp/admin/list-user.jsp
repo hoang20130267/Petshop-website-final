@@ -226,12 +226,12 @@
                 <h2 class="" style="margin-top: 20px; text-align: center;">Danh sách người dùng</h2>
               </div>
             </div>
-            <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
-              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Tất cả <span class="text-700 fw-semi-bold">(688)</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Mới <span class="text-700 fw-semi-bold">(6)</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Số người theo dõi <span class="text-700 fw-semi-bold">(8)</span></a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Tất cả nhận xét <span class="text-700 fw-semi-bold">(2)</span></a></li>
-            </ul>
+<%--            <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">--%>
+<%--              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Tất cả <span class="text-700 fw-semi-bold">(688)</span></a></li>--%>
+<%--              <li class="nav-item"><a class="nav-link" href="#">Mới <span class="text-700 fw-semi-bold">(6)</span></a></li>--%>
+<%--              <li class="nav-item"><a class="nav-link" href="#">Số người theo dõi <span class="text-700 fw-semi-bold">(8)</span></a></li>--%>
+<%--              <li class="nav-item"><a class="nav-link" href="#">Tất cả nhận xét <span class="text-700 fw-semi-bold">(2)</span></a></li>--%>
+<%--            </ul>--%>
             <div id="products" data-list="{&quot;valueNames&quot;:[&quot;customer&quot;,&quot;email&quot;,&quot;total-orders&quot;,&quot;total-spent&quot;,&quot;city&quot;,&quot;last-seen&quot;,&quot;last-order&quot;],&quot;page&quot;:10,&quot;pagination&quot;:true}">
               <div class="mb-4">
                 <div class="row g-3">
@@ -251,19 +251,10 @@
                           <li><a class="dropdown-item" href="#">Tỉnh thành khác</a></li>
                         </ul>
                       </div>
-                      <!-- <div class="btn-group position-static text-nowrap"><button class="btn btn-sm btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> VIP<svg class="svg-inline--fa fa-angle-down ms-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"></path></svg></button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Không</a></li>
-                          <li><a class="dropdown-item" href="#">VIP 1</a></li>
-                          <li><a class="dropdown-item" href="#">VIP 2</a></li>
-                          <li><a class="dropdown-item" href="#">VIP 3</a></li>
-                          <li></li>
-                        </ul>
-                      </div> -->
-                      <!-- <button class="btn btn-phoenix-secondary px-7 flex-shrink-0">More filters</button> -->
                     </div>
                   </div>
-                  <div class="col-auto"><button class="btn btn-link text-900 me-4 px-0"><svg class="svg-inline--fa fa-file-export fs--1 me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-export" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M192 312C192 298.8 202.8 288 216 288H384V160H256c-17.67 0-32-14.33-32-32L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48v-128H216C202.8 336 192 325.3 192 312zM256 0v128h128L256 0zM568.1 295l-80-80c-9.375-9.375-24.56-9.375-33.94 0s-9.375 24.56 0 33.94L494.1 288H384v48h110.1l-39.03 39.03C450.3 379.7 448 385.8 448 392s2.344 12.28 7.031 16.97c9.375 9.375 24.56 9.375 33.94 0l80-80C578.3 319.6 578.3 304.4 568.1 295z"></path></svg><!-- <span class="fa-solid fa-file-export fs--1 me-2"></span> Font Awesome fontawesome.com -->Xuất file</button><button class="btn btn-primary"><svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <span class="fas fa-plus me-2"></span> Font Awesome fontawesome.com -->Thêm người dùng</button></div>
+                  <div class="col-auto">
+                      <button class="btn btn-primary"><svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <span class="fas fa-plus me-2"></span> Font Awesome fontawesome.com -->Thêm người dùng</button></div>
                 </div>
               </div>
               <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
@@ -274,11 +265,10 @@
                         <th class="sort align-middle pe-5" scope="col" data-sort="customer" style="width:10%;">ID</th>
                         <th class="sort align-middle pe-5" scope="col" data-sort="customer" style="width:10%;">Người dùng</th>
                         <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">email</th>
-                        <th class="sort align-middle text-end" scope="col" data-sort="total-orders" style="width:10%">Số đơn</th>
+                        <th class="sort align-middle text-center" scope="col" data-sort="total-orders" style="width:10%">Số đơn</th>
                         <th class="sort align-middle text-end ps-3" scope="col" data-sort="total-spent" style="width:10%">Số tiền đã mua</th>
-                        <th class="sort align-middle ps-7" scope="col" data-sort="city" style="width:25%;">Tỉnh thành</th>
-                        <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Lần cuối online</th>
-                        <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Lần mua cuối</th>
+                        <th class="sort align-middle ps-7 text-center" scope="col" data-sort="city" style="width:25%;">Tỉnh thành</th>
+                        <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Sửa xóa</th>
                       </tr>
                     </thead>
                       <%
@@ -297,145 +287,15 @@
                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com"><%=c.getEmail()%></a></td>
                         <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center"><%=c.getQuantity()%></td>
                         <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=c.getPrice()%>đ</td>
-                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>
-                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
-                        <td class="last-order align-middle white-space-nowrap text-700 text-end">12/09/2021</td>
+                        <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
+                        <td class="last-order align-middle white-space-nowrap text-700 text-end">
+                            <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                            <a class="btn_2 edit btn btn-primary" href="delete-user?idUser=<%=c.getId()%>" style="background-color: crimson; color: white">Xóa</a>
+                        </td>
                       </tr>
                         </tr>
                             <%  } %>
-                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-<%--                          <p class="mb-0 text-1100 fw-bold">022</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Ngọc Trang</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">trang96@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">120.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">Hà Nội</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">04/09/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">023</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Ngô Chí Thông</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">chithong@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">1</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">30.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">8 tiếng trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">25/10/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">024</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Lê Chí Công</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">cong99@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">93.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">4 tiếng trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">07/08/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">025</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Ngọc My</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">mycute96@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">3</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">90.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">Tỉnh thành khác</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">15 phút trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">23/09/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">026</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Ngọc Thạch</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">ngocthach2k2@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">65.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">Hà Nội</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">10 tiếng trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">06/08/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">027</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Lê Văn Minh</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">minhle@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">60.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">12/09/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">028</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Minh Hiếu</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">minhiu@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">5</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">150.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">Vừa xong</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">21/10/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">029</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Lý Văn Kiệt</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">kiet99@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">65.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">Tỉnh thành khác</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">40 phút trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">01/10/2021</td>--%>
-<%--                      </tr><tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
-<%--                        <td class="fs--1 align-middle ps-0 py-3">--%>
-<%--                          <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
-<%--                          <p class="mb-0 text-1100 fw-bold">030</p>--%>
-<%--                        </td>--%>
-<%--                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
-<%--                            <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/user.png" alt=""></div>--%>
-<%--                            <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Thị Linh Chi</p>--%>
-<%--                          </a></td>--%>
-<%--                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">linhchinguyen@gmail.com</a></td>--%>
-<%--                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">1</td>--%>
-<%--                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3">35.000.000đ</td>--%>
-<%--                        <td class="city align-middle white-space-nowrap text-900 ps-7">TPHCM</td>--%>
-<%--                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">1 ngày trước</td>--%>
-<%--                        <td class="last-order align-middle white-space-nowrap text-700 text-end">04/07/2021</td>--%>
+
                     </tbody>
                   </table>
                 </div>

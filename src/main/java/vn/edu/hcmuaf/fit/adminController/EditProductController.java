@@ -33,22 +33,6 @@ public class EditProductController extends HttpServlet {
         String cateChild = request.getParameter("cateChild");
         String status = request.getParameter("status");
 
-        System.out.println(pid);
-        System.out.println(pname);
-        System.out.println(pprice);
-        System.out.println(quantity);
-        System.out.println(pdescription);
-        System.out.println(detail);
-        System.out.println(pgiong);
-        System.out.println(pmausac);
-        System.out.println(pcannang);
-        System.out.println(pimage);
-        System.out.println(oldImg);
-        System.out.println(CateParent);
-        System.out.println(cateChild);
-        System.out.println(status);
-
-
         CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("user");
         ProductDAO dao = new ProductDAO();
 

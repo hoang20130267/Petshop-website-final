@@ -60,6 +60,11 @@ public class ProductService {
         return dao.getProductDetail(Id);
     }
 
+    public List<Product> Filter( int amount, String category,String price, String size, String orderby) {
+        ProductDAO dao = new ProductDAO();
+        return dao.getNext9Product(amount,category,price,size,orderby);
+    }
+
 //    public List<Product> Filter(String category,String price, String size, String order_by) {
 //        ProductDAO dao = new ProductDAO();
 //        return dao.Filter(category,price,size,order_by);

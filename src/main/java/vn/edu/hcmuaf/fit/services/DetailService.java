@@ -18,6 +18,12 @@ public class DetailService {
         return detailService;
     }
 
+
+        public static List<Detail> listProCateClassify(String category) {
+            DetailDAO dao = new DetailDAO();
+            return dao.listProCateClassify(category);
+        }
+
     public static List<Detail> getData() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT * FROM product_category")
