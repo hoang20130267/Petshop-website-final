@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -225,7 +226,7 @@
 
 <!-- Hero Section Begin -->
 <!-- Hero Section End -->
-
+<%CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");%>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
@@ -294,7 +295,16 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
+                    <%if (user != null) {
+                        Product p = new ProductDAO().getProductDetail(product.getProductId());%>
+                    <%if (Integer.parseInt(p.getQuantity())> 0) {%>
+                    <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
+                    <%}%>
+                    <%
+                    } else {%>
+                    <a href="login.jsp" class="primary-btn snow">Thêm vào giỏ hàng</a>
+                    <%  }
+                    %>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
@@ -448,7 +458,33 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function (){
+        addcart();
+    })
+    function addcart() {
+        $(".snow").each(function (e) {
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                $.ajax({
+                    url: "AddCartController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                    },
+                    success: function (data) {
+                        $(".header__second__cart--notice").each(function () {
+                            $(this).text(data)
+                        })
+                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
+                    }
+                })
+            })
+        });
+    }
 
+</script>
 </body>
 
 </html>
