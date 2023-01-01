@@ -173,8 +173,8 @@ public class ProductDAO {
         if (category.equals("accessory")) {
             query += "AND pfc.cate_id=3 \n";
         }
-        if (category == "all") {
-            query = query;
+        if (category.equals("all")) {
+            query += query;
         }
         if (price != null) {
             if (!price.equals("-1")) {
@@ -219,15 +219,14 @@ public class ProductDAO {
         if (category.equals("accessory")) {
             query += "AND pfc.cate_id=3 \n";
         }
-        if (category == "all") {
-            query = query;
+        if (category.equals("all")) {
+            query += query;
         }
         if (price != null) {
             if (!price.equals("-1")) {
                 String[] splited = price.split("-");
                 query += " AND p.price >= " + Double.parseDouble(splited[0]) + " AND p.price <= " + Double.parseDouble(splited[1]);
             }
-
         }
         if (size != null) {
             String[] splited = size.split("-");
