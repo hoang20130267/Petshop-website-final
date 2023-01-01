@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
 import vn.edu.hcmuaf.fit.beans.Detail;
+import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.dao.DetailDAO;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
@@ -22,6 +23,9 @@ public class DetailService {
             return handle.createQuery("SELECT * FROM product_category")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
+    }
+    public List<Detail> listCategory(){
+        return new DetailDAO().listCategory();
     }
 
     public List<Detail> listCategoryProduct() {
@@ -71,7 +75,9 @@ public class DetailService {
     public void removeCateBlog(String id) {
         new DetailDAO().removeCateBlog(id);
     }
-
+    public List<Product> getListPdByCateId(String id){
+        return new DetailDAO().getListPdByCateId(id);
+    }
     public static void main(String[] args) {
         getData();
     }

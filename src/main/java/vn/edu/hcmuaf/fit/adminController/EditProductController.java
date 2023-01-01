@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -17,31 +18,46 @@ public class EditProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String pid = request.getParameter("pid");
+        String pid = request.getParameter("id");
         String pname = request.getParameter("name");
         String pprice = request.getParameter("price");
-        String ppromo = request.getParameter("promoPrice");
+        String quantity = request.getParameter("quantity");
         String pdescription = request.getParameter("description");
-        String pquantity = request.getParameter("quantity");
+        String detail = request.getParameter("detail");
         String pgiong = request.getParameter("giong");
         String pmausac = request.getParameter("mausac");
         String pcannang = request.getParameter("cannang");
         String pimage = request.getParameter("image");
         String oldImg = request.getParameter("oldImg");
-        HttpSession session = request.getSession();
+        String CateParent = request.getParameter("CateParent");
+        String cateChild = request.getParameter("cateChild");
+        String status = request.getParameter("status");
+
+        System.out.println(pid);
+        System.out.println(pname);
+        System.out.println(pprice);
+        System.out.println(quantity);
+        System.out.println(pdescription);
+        System.out.println(detail);
+        System.out.println(pgiong);
+        System.out.println(pmausac);
+        System.out.println(pcannang);
+        System.out.println(pimage);
+        System.out.println(oldImg);
+        System.out.println(CateParent);
+        System.out.println(cateChild);
+        System.out.println(status);
+
+
+        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("user");
         ProductDAO dao = new ProductDAO();
-        String cate = null;
-        if(pgiong.equals("Chó")){
-            cate = "1";
-        }else {
-            cate ="2";
-        }
-        if (pid == null) {
-        dao.insertProduct(pname, pimage, pprice, ppromo, pdescription, pquantity, pgiong, pmausac, pcannang, cate);
+
+        if (pid.equals("null")) {
+        dao.insertProduct(AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
         } else {
-            dao.updateProduct(pname, pimage, pprice, ppromo, pdescription, pquantity, pgiong, pmausac, pcannang, cate);
+            dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
         }

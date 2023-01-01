@@ -15,9 +15,6 @@ public class ProductDAO {
     private List<String> listCategory;
     private List<String> listCategoryAdmin;
 
-
-
-
     public ProductDAO() {
         listProduct = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product")
@@ -44,6 +41,7 @@ public class ProductDAO {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+
     public List<Product> searchProductByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where ProductName like ?").bind(0, "%" + txtSearch + "%")
@@ -51,6 +49,7 @@ public class ProductDAO {
         });
         return list;
     }
+
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
@@ -61,7 +60,8 @@ public class ProductDAO {
 
     public List<Product> searchByName2(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
+            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?")
+                    .bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -77,35 +77,49 @@ public class ProductDAO {
 
     public static void deleteProduct(String id) {
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("delete from product where productId = ?")
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 0").execute();
+            handle.createUpdate("delete from product where productId = ?")
                     .bind(0, id)
                     .execute();
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 1").execute();
+            return true;
         });
     }
 
-    public static void insertProduct(String name, String image, String price, String promoPrice,
-                                     String description,String quantity, String giong, String mausac, String cannang, String cate) {
+    public static void insertProduct(String idAdmin,String name, String image, String price, String description,
+                                     String detail,String quantity, String giong, String mausac,
+                                     String cannang, String cateParent, String cateChild, String status) {
         String id = taoIDProduct();
+        String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("insert into product (productId, ProductName, Image, Price, PromotionalPrice, Description, Quantity, giong, mausac, cannang) values(?,?,?,?,?,?,?,?,?,?)")
+            handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
+                            "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`) values(?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
                     .bind(2, "img/products/"+image)
                     .bind(3, price)
-                    .bind(4, promoPrice)
-                    .bind(5, description)
+                    .bind(4, description)
+                    .bind(5, detail)
                     .bind(6, quantity)
-                    .bind(7, giong)
-                    .bind(8, mausac)
-                    .bind(9, cannang)
+                    .bind(7, idAdmin)
+                    .bind(8, date)
+                    .bind(9, giong)
+                    .bind(10,mausac)
+                    .bind(11,cannang)
+                    .bind(12,Integer.parseInt(status))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
                     .bind(0,id)
-                    .bind(1,cate)
+                    .bind(1,cateParent)
+                    .execute();
+            handle.createUpdate("insert into product_from_cate values (?,?)")
+                    .bind(0,id)
+                    .bind(1,cateChild)
                     .execute();
             return true;
         });
     }
+
     public static void insertAccessory(String name, String image, String price, String promoPrice,
                                        String description,String quantity, String cate) {
         String id = taoIDProduct();
@@ -127,20 +141,26 @@ public class ProductDAO {
         });
     }
 
-    public static void updateProduct(String id, String name, String image, String price, String promoPrice,
-                                     String description, String quantity, String giong, String mausac, String cannang) {
+    public static void updateProduct(String id, String idAdmin,String name, String image, String price, String description,
+                                     String detail,String quantity, String giong, String mausac,
+                                     String cannang,String status) {
+        String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("update product set ProductName = ?, Image = ?, Price = ?, PromotionalPrice = ?, Description = ?, Quantity = ?, giong = ?, mausac = ?, cannang = ? where productId = ?")
-                    .bind(9, id)
+            return handle.createUpdate("UPDATE product SET ProductName=?,`Status`=?,Image=?,Price=?,Quantity=?,Description=?,Dital=?,UpdateBy=?,UpdateDate=?,giong=?,mausac=?,cannang=?\n" +
+                            "WHERE productId=?;\n")
                     .bind(0, name)
-                    .bind(1, image)
-                    .bind(2, price)
-                    .bind(3, promoPrice)
-                    .bind(4, description)
-                    .bind(5, quantity)
-                    .bind(6, giong)
-                    .bind(7, mausac)
-                    .bind(8, cannang)
+                    .bind(1, Integer.parseInt(status))
+                    .bind(2, image)
+                    .bind(3, price)
+                    .bind(4, quantity)
+                    .bind(5, description)
+                    .bind(6, detail)
+                    .bind(7, idAdmin)
+                    .bind(8, date)
+                    .bind(9, giong)
+                    .bind(10,mausac)
+                    .bind(11,cannang)
+                    .bind(12,id)
                     .execute();
         });
     }
@@ -325,9 +345,6 @@ public class ProductDAO {
     public static void main(String[] args){
         System.out.println(new ProductDAO().getTop9Product("cat"));
 //        System.out.println(new ProductDAO().test("dog"));
+         new ProductDAO().updateProduct("P1129","2201","name","img","123123","ádfsadfadf","ƯEDWffsdfF","2","sdfsdfsf","sdfsdfsff","4","1");
     }
 }
-
-
-
-
