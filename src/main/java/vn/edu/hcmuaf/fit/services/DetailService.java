@@ -16,13 +16,10 @@ public class DetailService {
         }
         return detailService;
     }
-
-<<<<<<< HEAD
         public static List<Detail> listProCateClassify(String category) {
             DetailDAO dao = new DetailDAO();
             return dao.listProCateClassify(category);
         }
-=======
     public static List<Detail> getData() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT * FROM product_category")
@@ -77,7 +74,6 @@ public class DetailService {
     public void removeCateBlog(String id) {
         new DetailDAO().removeCateBlog(id);
     }
->>>>>>> a109375ad11273109dbbdf2969e561acbf4b7074
 
     public static void main(String[] args) {
         getData();

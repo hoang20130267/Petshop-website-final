@@ -60,11 +60,9 @@ public class DetailDAO {
         return list;
     }
 
-<<<<<<< HEAD
     public static List<Detail> listProCateClassify(String category) {
         String query = "SELECT DISTINCT pc.* FROM  product_category pc join product_from_cate pfc on pfc.cate_id = pc.CatId JOIN product p on p.productId = pfc.product_id Where p.`Status` =1";
-        if (category != null)
-        {
+        if (category != null) {
             switch (category) {
                 case "all" -> query += " and pc.ParentID != \"null\"  ";
                 case "dog" -> query += " and pc.ParentID = 1";
@@ -76,18 +74,17 @@ public class DetailDAO {
         String finalquery = query;
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(finalquery)
-=======
-    public List<Detail> listCategoryProduct() {
-        List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product_category ")
->>>>>>> a109375ad11273109dbbdf2969e561acbf4b7074
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;
     }
-
-<<<<<<< HEAD
-=======
+    public List<Detail> listCategoryProduct() {
+        List<Detail> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from product_category ")
+                    .mapToBean(Detail.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
     public List<Detail> listCategoryBlog() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from blogcategory ")
@@ -238,8 +235,6 @@ public class DetailDAO {
 
         );
     }
-
->>>>>>> a109375ad11273109dbbdf2969e561acbf4b7074
     public static void main(String[] args) {
         new DetailDAO();
         System.out.println(new DetailDAO().listCategory());

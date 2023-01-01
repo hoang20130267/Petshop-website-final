@@ -35,9 +35,7 @@ public class FilterProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-<<<<<<< HEAD
         processRequest(request, response);
-=======
         String price = request.getParameter("price");
         String orderby = request.getParameter("orderby");
         String category = request.getParameter("category");
@@ -45,7 +43,5 @@ public class FilterProductController extends HttpServlet {
 //        List<Product> test = ProductService.getInstance().Filter(category,price,size,orderby);
 //        request.setAttribute("test", test);
         request.getRequestDispatcher("ajax/ajax_LoadProduct.jsp").forward(request, response);
-
->>>>>>> a109375ad11273109dbbdf2969e561acbf4b7074
     }
 }
