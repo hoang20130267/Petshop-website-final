@@ -1,3 +1,9 @@
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.OrderService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -191,7 +197,7 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">Tìm kiếm đơn hàng</span>
-                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <input type="text" class="form-control" placeholder="Tìm kiếm...">
                                     </div>
            
                                 </div>
@@ -202,112 +208,54 @@
                                         <tr>
                                             <th data-toggle="tooltip">Mã đơn hàng</th>
                                             <th data-toggle="tooltip">Người mua</th>
-                                            <th>Sản phẩm</th>
-                                            <th>Số lượng</th>
-                                            <th>Tình trạng</th>
+                                            <th>Giá</th>
                                             <th>Ngày mua</th>
+                                            <th>Tình trạng</th>
+                                            <th>Ngày giao</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td scope="row">0151</td>
-                                            <td>Nguyễn Thanh Tùng</td>
-                                            <td>Cún golden siêu phẩm</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>21/05/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0152</td>
-                                            <td>Nguyễn Ngọc Sơn</td>
-                                            <td>Mèo chân ngắn tai cụp</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Đang xử lý&ensp;
-                                                    <i class="material-icons-two-tone" data-feather="loader"></i> 
-                                                </a></td>
-                                            <td>26/07/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0153</td>
-                                            <td>Nguyễn Ngọc My</td>
-                                            <td>Munchkin Bicolor</td>
-                                            <td>02</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>14/08/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0154</td>
-                                            <td>Ngô Đức Hòa</td>
-                                            <td>Alaska Giant xám trắng</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>05/09/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0155</td>
-                                            <td>Nguyễn Hoài Thương</td>
-                                            <td>Alaska Giant xám trắng</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                Đang xử lý&ensp;
-                                                <i class="material-icons-two-tone" data-feather="loader"></i> 
-                                            </a></td>
-                                            <td>10/09/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0156</td>
-                                            <td>Vũ Văn Kiệt</td>
-                                            <td>Mèo tai cụp</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>20/09/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0157</td>
-                                            <td>Trần Tấn Nhất</td>
-                                            <td>Scottish Van tai cụp</td>
-                                            <td>02</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hủy đơn hàng
-                                                    <i class="material-icons-two-tone" data-feather="x"></i> 
-                                                </a></td>
-                                            <td>15/10/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0158</td>
-                                            <td>Lê Chí Công</td>
-                                            <td>Phốc sóc mặt gấu</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>24/10/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="row">0159</td>
-                                            <td>Ngô Đức Hòa</td>
-                                            <td>Mèo chân ngắn tai cụp</td>
-                                            <td>01</td>
-                                            <td><a href="" style="font-weight: bold;">
-                                                    Hoàn thành
-                                                    <i class="material-icons-two-tone" data-feather="check"></i> 
-                                                </a></td>
-                                            <td>05/09/2021</td>
-                                        </tr>
+                                    <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
+                                    <%List<Orders> listod = OrderService.getInstance().ordersList();
+                                        for (Orders od: listod) {%>
+                                            <form action="UpdateStatusOrder" method="post">
+                                                <input type="text" value="<%=od.getOrderID()%>" name="orderId" style="display: none">
+                                                <input type="text" value="<%=od.getStatus()%>" name="status" style="display: none">
+                                                <input type="text" value="<%=od.getDelivered()%>" name="delivery" style="display: none">
+
+                                                <tr>
+                                                    <td scope="row"><%=od.getOrderID()%></td>
+                                                    <td><%=UserService.getInstance().getUserDetail(od.getCustomerID()).getName()%></td>
+                                                    <td><%=format.format(od.getPrice())%></td>
+                                                    <td><%=od.getOrderDate()%></td>
+                                                    <td>
+                                                            <%if(od.getStatus()==0){%>
+                                                                <select class="form-select mb-3" name="udstatus" id="udstatus">
+                                                                    <option value="2" selected style="color: red; font-weight: bold">Đã hủy</option>
+                                                                </select>
+                                                            <%}else{%>
+                                                                    <%if(od.getDelivered()==0){%>
+                                                                        <select class="form-select mb-3" name="udstatus" id="status">
+                                                                            <option value="0" selected style="color: #00BFFF; font-weight: bold">Đang xử lý</option>
+                                                                            <option value="1" style="color: #35ff00; font-weight: bold">Hoàn thành</option>
+                                                                            <option value="2" style="color: red; font-weight: bold">Hủy đơn</option>
+                                                                        </select>
+                                                                    <%}else{%>
+                                                                        <select class="form-select mb-3" name="udstatus" id="status">
+                                                                            <option value="1" selected style="color: #35ff00; font-weight: bold">Hoàn thành</option>
+                                                                        </select>
+                                                                    <%}%>
+                                                            <%}%>
+                                                    <%if (od.getDeliveryDate() == null){%>
+                                                        <td>Chưa giao</td>
+                                                    <%}else{%>
+                                                        <td><%=od.getDeliveryDate()%></td>
+                                                    <%}%>
+                                                    <td><button class="btn_2 edit btn btn-primary" type="submit">Lưu</button></td>
+                                                </tr>
+                                            </form>
+                                        <%}%>
                                     </tbody>
                                     </table>
                                 </div>
