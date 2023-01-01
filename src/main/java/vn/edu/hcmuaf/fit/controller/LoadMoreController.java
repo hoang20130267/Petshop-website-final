@@ -21,7 +21,7 @@ public class LoadMoreController extends HttpServlet {
         String price = request.getParameter("price");
         String orderby = request.getParameter("orderby");
         String size = request.getParameter("size");
-        int amount_int = 0;
+        int amount_int = Integer.parseInt(amount);
         List<Product> list = new ProductDAO().getNext9Product(amount_int,category,price, size, orderby);
         request.setAttribute("listnext9", list);
         request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);

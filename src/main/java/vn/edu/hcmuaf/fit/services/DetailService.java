@@ -78,7 +78,6 @@ public class DetailService {
         new DetailDAO().removeCateBlog(id);
     }
 
-
     public static void main(String[] args) {
         getData();
     }

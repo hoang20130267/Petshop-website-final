@@ -20,7 +20,7 @@ public class FilterProductController extends HttpServlet {
         String price = request.getParameter("price");
         String orderby = request.getParameter("orderby");
         String size = request.getParameter("size");
-        int amount_int = 0;
+        int amount_int = Integer.parseInt(amount);
         List<Product> list = new ProductDAO().getNext9Product(amount_int,category,price, size, orderby);
         List<Product> list1 = new ProductDAO().getFullProduct(amount_int,category,price, size, orderby);
         request.setAttribute("listnext9", list);
