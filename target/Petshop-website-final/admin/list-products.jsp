@@ -202,8 +202,7 @@
             <div class="col-md-3">
               <div class="white_card position-relative mb_20">
                 <div class="card-body">
-                  <img
-                    src="<%=p.getImage()%>"
+                  <img  src="<%=p.getImage()%>"
                     class="d-block mx-auto my-4"
                     height="150"
                   />
@@ -211,8 +210,7 @@
                     <div class="col">
                       <span class="badge_btn_3 mb-1" style="display: flex; padding-left: 50px"><%=p.getGiong()%></span>
                       <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
-                      style="text-align: center;"><%=p.getProductName()%></a
-                      >
+                      style="text-align: center;"><%=p.getProductName()%></a>
                     </div>
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 46px;">

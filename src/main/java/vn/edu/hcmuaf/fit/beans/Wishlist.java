@@ -37,7 +37,7 @@ public class Wishlist implements Serializable {
 
     @Override
     public String toString() {
-        return "Cart{" +
+        return "Wishlist{" +
                 "data=" + data +
                 '}';
     }
