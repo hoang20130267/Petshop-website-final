@@ -1,5 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Blogs" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.BlogDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -124,6 +129,16 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .row p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 25px;
+            -webkit-line-clamp: 2;
+            height: 75px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
     </style>
 </head>
 
@@ -263,163 +278,68 @@
                         </div>
                         <div class="blog__sidebar__item">
                             <h4>Thể loại</h4>
-                            <ul>
-                                <li><a href="#">Tất Cả</a></li>
-                                <li><a href="#">Chó</a></li>
-                                <li><a href="#">Mèo</a></li>
-                                <li><a href="#">Life Style</a></li>
-                                <li><a href="#">Chăm sóc</a></li>
-                            </ul>
+                            <input type="radio" id="0" class="theloai" name="theloai" value="-1">
+                            <label for="0">Tất cả</label><br>
+                            <%
+                                List<Blogs> theloai = new BlogService().Theloai();
+                                for (Blogs b: theloai) {
+                            %>
+                            <input type="radio" id="<%=b.getCatId()%>" class="theloai" name="theloai" value="<%=b.getCatId()%>">
+                            <label for="<%=b.getCatId()%>"><%=b.getCatName()%></label><br>
+                            <% } %>
                         </div>
                         <div class="blog__sidebar__item">
                             <h4>Tin mới nhất</h4>
                             <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
+                                <% List<Blogs> listNew = new BlogService().getNewBlog();
+                                    for(Blogs b : listNew) {
+                                %>
+                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                        <img src="<%=b.getImage()%>" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6>Danh sách các thuốc tẩy giun<br> cho chó con an toàn</h6>
-                                        <span>11/12/2021</span>
+                                        <h6><%=b.getBlogName()%></h6>
+                                        <span><%=b.getCreateDate()%></span>
                                     </div>
                                 </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Từng bước cách chăm sóc <br> chó mẹ sau sinh mổ đẻ</h6>
-                                        <span>12/10/2021</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Cách chăm sóc chó mang<br> thai tại nhà cần phải biết</h6>
-                                        <span>20/08/ 2021</span>
-                                    </div>
-                                </a>
+                                <%  }%>
                             </div>
                         </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Từ khóa</h4>
-                            <div class="blog__sidebar__item__tags">
-                                <a href="#">Chó</a>
-                                <a href="#">Mèo</a>
-                                <a href="#">Chăm sóc</a>
-                                <a href="#">Đời Sống</a>
-                            </div>
-                        </div>
+<%--                        <div class="blog__sidebar__item">--%>
+<%--                            <h4>Từ khóa</h4>--%>
+<%--                            <div class="blog__sidebar__item__tags">--%>
+<%--                                <a href="#">Chó</a>--%>
+<%--                                <a href="#">Mèo</a>--%>
+<%--                                <a href="#">Chăm sóc</a>--%>
+<%--                                <a href="#">Đời Sống</a>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
+                        <% List<Blogs> list = new BlogService().getListBlogs();
+                            for (Blogs b : list) {
+                        %>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-                                    <img src="img/blog/blog-2.jpg" alt="">
+                                    <img src="<%=b.getImage()%>" alt="">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                        <li><i class="fa fa-calendar-o"></i><%=b.getCreateDate()%></li>
+<%--                                        <li><i class="fa fa-comment-o"></i> 5 </li>--%>
                                     </ul>
-                                    <h5><a href="blog-details.jsp">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</a></h5>
-                                    <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
+                                    <h5><a href="blog-details.jsp?id=<%=b.getBlogId()%>"><%=b.getBlogName()%></a></h5>
+                                    <p><%=b.getDescription()%></p>
+<%--                                    <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>--%>
+                                    <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__btn"  >ĐỌC THÊM <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="img/blog/blog-3.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="blog-details.jsp">Phải làm sao khi chó bị đau chân và đi khập khiễng ?</a></h5>
-                                    <p>Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="img/blog/blog-1.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="blog-details.jsp">Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?</a></h5>
-                                    <p>Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe cổ xưa ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="img/blog/blog-4.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="blog-details.jsp">Tẩy giun cho chó và những điều bạn cần phải biết</a></h5>
-                                    <p>Tẩy giun cho chó và phòng ngừa giun sán là việc rất quan trọng. Cũng giống như con người ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="img/blog/blog-5.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="blog-details.jsp">Cách chăm sóc chó mang thai tại nhà cần phải biết</a></h5>
-                                    <p>Việc chăm sóc chó mang thai tại nhà cũng không hề đơn giản. Nếu bạn không có kiến thức ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="img/blog/blog-6.jpg" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                        <li><i class="fa fa-comment-o"></i> 5</li>
-                                    </ul>
-                                    <h5><a href="blog-details.jsp">Danh sách các thuốc tẩy giun cho chó con an toàn</a></h5>
-                                    <p>Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một chú chó ...</p>
-                                    <a href="blog-details.jsp" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="product__pagination blog__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
+                       <% } %>
                     </div>
                 </div>
             </div>

@@ -260,7 +260,8 @@
                                 <% List<CustomerUser> list = new CustomerUserDAO().ListAdmin();
                                     for ( CustomerUser c: list) {
                                 %>
-                                <tbody class="list" id="table-latest-review-body"><tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                                <tbody class="list" id="table-latest-review-body">
+                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                     <td class="fs--1 align-middle ps-0 py-3">
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
                                         <p class="mb-0 text-1100 fw-bold"><%=c.getId()%></p>
@@ -278,7 +279,7 @@
                                         <a class="btn_2 edit btn btn-primary" href="add-admin.jsp?idUser=<%=c.getId()%>" style="color: white">Sửa</a>
                                         <a class="btn_2 edit btn btn-primary" href="delete-user?idUser=<%=c.getId()%>" style="background-color: crimson; color: white">Xóa</a>
                                     </td>
-                                </tr></tr>
+                                </tr>
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
 
                                         <%  } %>

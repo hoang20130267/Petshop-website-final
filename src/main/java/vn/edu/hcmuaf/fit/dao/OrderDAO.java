@@ -94,4 +94,12 @@ public class OrderDAO {
                 .execute()
             );
     }
+
+    public List<Orders> getOrdersByUser(String id){
+        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders WHERE CustomerID=?")
+                .bind(0,id)
+                .mapToBean(Orders.class).stream().collect(Collectors.toList())
+        );
+        return list;
+    }
 }

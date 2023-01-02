@@ -495,14 +495,7 @@
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
                 <input type="text" id="page" value="0" style="display: none;" />
-<%--                    <a onclick="loadmore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>--%>
 
-                <!--                    <div class="product__pagination">-->
-                <!--                        <a href="#">1</a>-->
-                <!--                        <a href="#">2</a>-->
-                <!--                        <a href="#">3</a>-->
-                <!--                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>-->
-                <!--                    </div>-->
             </div>
         </div>
     </div>
