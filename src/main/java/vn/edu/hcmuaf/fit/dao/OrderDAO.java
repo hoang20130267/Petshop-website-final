@@ -72,9 +72,10 @@ public class OrderDAO {
 
     public List<OrderDetail> getOrderDetailsById (String id){
         List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
-                "WHERE od.OrderID = ?"))
+                        "                WHERE o.OrderID = ?")
                 .bind(0,id)
-                .mapToBean(OrderDetail.class).stream().collect(Collectors.toList());
+                .mapToBean(OrderDetail.class).stream().collect(Collectors.toList())
+        );
         return list;
     }
 
@@ -101,5 +102,17 @@ public class OrderDAO {
                 .mapToBean(Orders.class).stream().collect(Collectors.toList())
         );
         return list;
+    }
+
+    public Orders getOrderByIdOrder(String id){
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders WHERE OrderID=?")
+                .bind(0,id)
+                .mapToBean(Orders.class).first());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new OrderDAO().getOrderByIdOrder("O735"));
+//        System.out.println(new OrderDAO().getOrdersByUser("1101"));
+
     }
 }

@@ -317,6 +317,9 @@ Created by IntelliJ IDEA.
 
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
     List<Orders> orders = OrderService.getInstance().getOrdersByUser(user.getId());%>
 <!-- Header Section Begin -->
 <jsp:include page="layout/header.jsp"></jsp:include>
@@ -375,18 +378,18 @@ Created by IntelliJ IDEA.
                         <td class="email align-middle white-space-nowrap pe-5"><%=od.getOrderDate()%></td>
                         <td class="email align-middle white-space-nowrap pe-5">
                             <%if(od.getStatus()==0){%>
-                            <p style="font-weight: bold; color: red" >Đã hủy</p>
+                            <p style=" color: red" >Đã hủy</p>
                             <%}else {
                                 if (od.getDelivered()==0){%>
-                            <p style="font-weight: bold; color: #00BFFF" >Đang xử lý</p>
+                            <p style=" color: #00BFFF" >Đang xử lý</p>
                             <%}else {%>
-                            <p style="font-weight: bold; color: #22ff00" >Hoàn thành</p>
+                            <p style=" color: #22ff00" >Hoàn thành</p>
                             <% }
                             }%>
 
                         </td>
                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100"
-                                                                                  href="">Xem</a></td>
+                                                                                  href="order-detail.jsp?orderId=<%=od.getOrderID()%>">Xem</a></td>
                     </tr>
                     <%}%>
                     </tbody>
