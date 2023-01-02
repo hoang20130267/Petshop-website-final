@@ -297,21 +297,40 @@
                     List<Product> list = dao.get8BestProduct();
                     for (Product p: list) {
                 %>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="<%=p.getImage()%>">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
+                    <%if(p.getPromotional()==1){%>
+                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg product__discount__item__pic " data-setbg="<%=p.getImage()%>">
+                                    <div class="product__discount__percent"><%=p.getPromotionalPrice()%>%</div>
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text product__discount__item__text">
+                                    <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%=p.getProductName()%></a></h6>
+                                    <div class="product__item__price"><%=format.format(p.getPrice()-( p.getPrice() *p.getPromotionalPrice()/100))%>đ<span><%=p.getPrice()%>đ</span></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#"><%=p.getProductName()%></a></h6>
-                            <h5><%=format.format(p.getPrice())%>đ</h5>
+                    <%}else {%>
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg product__discount__item__pic " data-setbg="<%=p.getImage()%>">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text product__discount__item__text">
+                                    <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%=p.getProductName()%></a></h6>
+                                    <div class="product__item__price"><%=format.format(p.getPrice())%>đ</div>
+
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    <%}%>
+
                 <% } %>
             </div>
         </div>

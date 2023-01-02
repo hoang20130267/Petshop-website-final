@@ -8,7 +8,7 @@ public class Product implements Serializable {
     private int status;
     private String image;
     private int price;
-    private String promotionalPrice;
+    private int promotionalPrice;
     private String quantity;
     private int warranty;
     private int Promotional;
@@ -33,7 +33,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, String promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -56,6 +56,10 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
+    }
+
+    public void setPromotional(int promotional) {
+        Promotional = promotional;
     }
 
     public String getProductId() {
@@ -98,11 +102,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getPromotionalPrice() {
+    public int getPromotionalPrice() {
         return promotionalPrice;
     }
 
-    public void setPromotionalPrice(String promotionalPrice) {
+    public void setPromotionalPrice(int promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
