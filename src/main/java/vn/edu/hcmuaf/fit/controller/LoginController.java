@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.Wishlist;
 import vn.edu.hcmuaf.fit.services.LoginService;
 
 import javax.servlet.*;
@@ -31,6 +32,7 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
                 session.setAttribute("cart", new Cart());
+                session.setAttribute("wishlist", new Wishlist());
                 response.sendRedirect("index.jsp");
             }
         } else {

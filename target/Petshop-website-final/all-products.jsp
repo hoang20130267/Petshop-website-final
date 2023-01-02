@@ -495,14 +495,7 @@
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
                 <input type="text" id="page" value="0" style="display: none;" />
-<%--                    <a onclick="loadmore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>--%>
 
-                <!--                    <div class="product__pagination">-->
-                <!--                        <a href="#">1</a>-->
-                <!--                        <a href="#">2</a>-->
-                <!--                        <a href="#">3</a>-->
-                <!--                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>-->
-                <!--                    </div>-->
             </div>
         </div>
     </div>
@@ -555,6 +548,7 @@
     $(document).ready(function (){
         loadMore();
         addcart();
+        addwishlist()
         $(document).ready(function () {
             $("#filter").each(function () {
                 this.addEventListener("click", function (e) {
@@ -585,6 +579,7 @@
                 var row = document.getElementById("items");
                 row.innerHTML += data;
                 addcart();
+                addwishlist()
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -612,7 +607,27 @@
            })
         });
     }
-
+    function addwishlist() {
+        $(".add-wishlist").each(function (e) {
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                $.ajax({
+                    url: "AddToWishlistController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                    },
+                    success: function (data) {
+                        $(".header__second__wishlist--notice").each(function () {
+                            $(this).text(data)
+                        })
+                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
+                    }
+                })
+            })
+        });
+    }
     function filter(e) {
         e.preventDefault();
         var amount = 0;

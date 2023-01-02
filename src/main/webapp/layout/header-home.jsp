@@ -5,7 +5,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Cart" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.util.Locale" %><%--
+<%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Wishlist" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 11/28/2022
@@ -15,6 +16,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
 <% Cart cart = (Cart) request.getSession().getAttribute("cart"); %>
+<% Wishlist wishlist = (Wishlist) request.getSession().getAttribute("wishlist"); %>
 <%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <header class="header">
     <div class="header__top">
@@ -54,6 +56,9 @@
                                     <a href="LogoutController" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
+                                    <a href="my-orders.jsp" class="dropdown-item">
+                                        <span><i data-feather="x-square"></i> Đơn hàng của tôi</span>
+                                    </a>
                                 </div>
                             </li>
                         </div>
@@ -89,7 +94,16 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="like-product.jsp"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li>
+                            <% if (user == null) {%>
+                            <a href="login.jsp"><i class="fa fa-heart"></i>
+                            </a>
+                            <%}
+                            else {%>
+                            <a href="like-product.jsp"><i class="fa fa-heart"></i>
+                                <span id="header__second__wishlist--notice" class="header__second__wishlist--notice"><%=wishlist.getQuantity_wishlist()%></span></a>
+                            <%}%>
+                        </li>
                         <li>
                             <% if (user == null) {%>
                             <a href="login.jsp">

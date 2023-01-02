@@ -33,7 +33,7 @@ public class EditProductController extends HttpServlet {
         String cateChild = request.getParameter("cateChild");
         String status = request.getParameter("status");
 
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("user");
+        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {
