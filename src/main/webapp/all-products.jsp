@@ -555,6 +555,7 @@
     $(document).ready(function (){
         loadMore();
         addcart();
+        addwishlist()
         $(document).ready(function () {
             $("#filter").each(function () {
                 this.addEventListener("click", function (e) {
@@ -585,6 +586,7 @@
                 var row = document.getElementById("items");
                 row.innerHTML += data;
                 addcart();
+                addwishlist()
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -612,7 +614,27 @@
            })
         });
     }
-
+    function addwishlist() {
+        $(".add-wishlist").each(function (e) {
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                $.ajax({
+                    url: "AddToWishlistController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                    },
+                    success: function (data) {
+                        $(".header__second__wishlist--notice").each(function () {
+                            $(this).text(data)
+                        })
+                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
+                    }
+                })
+            })
+        });
+    }
     function filter(e) {
         e.preventDefault();
         var amount = 0;

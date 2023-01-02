@@ -25,6 +25,7 @@ public class Product implements Serializable {
     private ProductSale sales;
 
     private int quantityCart;
+    private int quantityWishlist;
 
     private String cate_id;
 
@@ -32,7 +33,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, String cate_id) {
+    public Product(String productId, String productName, int status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -53,6 +54,7 @@ public class Product implements Serializable {
         this.cannang = cannang;
         this.sales = sales;
         this.quantityCart = quantityCart;
+        this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
     }
 
@@ -212,6 +214,10 @@ public class Product implements Serializable {
         return quantityCart;
     }
 
+    public int getQuantityWishlist() {
+        return quantityWishlist;
+    }
+
     public String getCate_id() {
         return cate_id;
     }
@@ -222,6 +228,10 @@ public class Product implements Serializable {
 
     public void setQuantityCart(int quantityCart) {
         this.quantityCart = quantityCart;
+    }
+
+    public void setQuantityWishlist(int quantityWishlist) {
+        this.quantityWishlist = quantityWishlist;
     }
 
     @Override
@@ -247,6 +257,7 @@ public class Product implements Serializable {
                 ", cannang='" + cannang + '\'' +
                 ", sales=" + sales +
                 ", quantityCart=" + quantityCart +
+                ", quantityWishlist=" + quantityWishlist +
                 ", cate_id='" + cate_id + '\'' +
                 '}';
     }
