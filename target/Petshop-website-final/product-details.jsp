@@ -7,6 +7,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -206,7 +207,7 @@
 
         .reply small:hover{
 
-            color: green;
+            color: crimson;
             cursor: pointer;
 
         }
@@ -337,7 +338,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="<%=product.getImage()%>" alt="">
+                             src="<%=product.getImage()%>" alt="" style="height: 570px; object-fit: cover">
                     </div>
 <%--                    <div class="product__details__pic__slider owl-carousel">--%>
 <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
@@ -411,8 +412,9 @@
 <%--                               aria-selected="false">Thông tin</a>--%>
 <%--                        </li>--%>
                         <li class="nav-item">
+                                <% List<Comment> listCmt1 = new CommentDAO().getListCommentByProductID(request.getParameter("id"));%>
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Đánh giá <span>(0)</span></a>
+                               aria-selected="false">Đánh giá <span>(<%=listCmt1.size()%>)</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -442,9 +444,25 @@
 <%--                        <% } else {%>--%>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <% List<Comment> listCmt = new CommentDAO().getListComment();
+                                <%if(user == null) {%>
+                                <div class="comment-section" style="margin-top: 50px; margin-left: 400px">
+                                    <p><b>Bạn phải đăng nhập mới có thể bình luận.</b></p>
+                                </div>
+                                <% } else{%>
+                                <div class="comment-section" style="margin-top: 50px; padding-left: 210px">
+                                    <form method="post" id="container">
+                                        <input type="text" id="cusID" value="<%=user.getId()%>" style="display: none">
+                                        <input type="text" id="pID" value="<%=product.getProductId()%>" style="display: none">
+                                        <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(user.getId()).getAvt()%>" width="45" height="45" class="user-img rounded-circle mr-2">
+                                        <input type="text" id="content" name="content" placeholder="Viết bình luận..." style="padding-left: 5px;width: 560px;height: 45px;border-radius: 15px">
+                                        <button id="button" class="site-btn" style="border-radius: 10px">Đăng</button>
+                                    </form>
+                                </div>
+                                <%}%>
+                                <% List<Comment> listCmt = new CommentDAO().getListCommentByProductID(request.getParameter("id"));
                                 for(Comment cmt : listCmt) {%>
-                                <div id="cmt-section">
+                                <div class="container-cmt">
+                                <div id="cmt-section<%=cmt.getID()%>">
                                     <div class="container mt-5">
                                         <div class="row  d-flex justify-content-center">
                                             <div class="col-md-8">
@@ -453,15 +471,20 @@
                                                     <div class="d-flex justify-content-between align-items-center">
 
                                                         <div class="user d-flex flex-row align-items-center">
+                                                            <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
 
-                                                            <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
-                                                            <span><small class="font-weight-bold text-primary"><%=cmt.getCustomerID()%></small> <small class="font-weight-bold"><%=cmt.getDescription()%></small></span>
+                                                            <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 100px"><%=cmt.getDescription()%></small></span>
                                                         </div>
                                                     </div>
                                                     <div class="action d-flex justify-content-between mt-2 align-items-center">
                                                         <div class="reply px-4">
-                                                            <small>Remove</small>
-                                                            <span class="dots"></span>
+                                                            <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
+                                                                if (user1 != null) {
+                                                                    if (user1.getId().equals(cmt.getCustomerID())) {
+                                                            %>
+                                                            <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa bình luận</small></a>
+                                                            <% }
+                                                            } %>
                                                         </div>
                                                         <div class="icons align-items-center">
                                                             <i class="fa fa-star text-warning"></i>
@@ -473,22 +496,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%}%>
-                                <%if(user == null) {%>
-                                    <div class="comment-section" style="margin-top: 50px"></div>
-                                <% } else{%>
-                                <div class="comment-section" style="margin-top: 50px; padding-left: 200px">
-                                    <form method="post" enctype="multipart/form-data" id="container">
-                                        <input type="text" id="cusID" value="<%=user.getId()%>" style="display: none">
-                                        <input type="text" id="pID" value="<%=product.getProductId()%>" style="display: none">
-
-                                        <input type="text" id="content" name="content">
-                                        <button id="button">Đăng</button>
-                                    </form>
                                 </div>
                                 <%}%>
 
-                            </div>
+                                </div>
+
                         </div>
 <%--                        <%}%>--%>
                     </div>
@@ -594,6 +606,7 @@
     $(document).ready(function (){
         addcart();
         addwishlist();
+        deletecomment();
     })
     function addcart() {
         $(".snow").each(function (e) {
@@ -636,6 +649,22 @@
             })
         });
     }
+    function deletecomment() {
+        $(".remove").click(function (e) {
+            e.preventDefault();
+            const id = this.id.substring(6);
+            $.ajax({
+                url: "DeleteCommentController",
+                type: "post",
+                data: {
+                    id: id,
+                },
+                success: function () {
+                    $("#cmt-section" + id).remove();
+                }
+            })
+        });
+    }
 </script>
 <script>
         $("#button").click(function (e) {
@@ -652,7 +681,8 @@
                     pID: pID
                 },
                 success: function (data) {
-                    $(".product__details__tab__desc").prepend(data);
+                    $(".container-cmt").prepend(data);
+                    document.getElementById('content').value = '';
                 }
             })
         })

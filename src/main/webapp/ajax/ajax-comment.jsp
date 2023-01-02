@@ -1,4 +1,6 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 02/01/2023
@@ -7,7 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%Comment cmt = (Comment) request.getAttribute("cmt");%>
-<div id="cmt-section">
+<div id="cmt-section<%=cmt.getID()%>">
   <div class="container mt-5">
     <div class="row  d-flex justify-content-center">
       <div class="col-md-8">
@@ -16,15 +18,20 @@
           <div class="d-flex justify-content-between align-items-center">
 
             <div class="user d-flex flex-row align-items-center">
+              <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
 
-              <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
-              <span><small class="font-weight-bold text-primary"><%=cmt.getCustomerID()%></small> <small class="font-weight-bold"><%=cmt.getDescription()%></small></span>
+              <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 100px"><%=cmt.getDescription()%></small></span>
             </div>
           </div>
           <div class="action d-flex justify-content-between mt-2 align-items-center">
             <div class="reply px-4">
-              <small>Remove</small>
-              <span class="dots"></span>
+              <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
+                if (user1 != null) {
+                  if (user1.getId().equals(cmt.getCustomerID())) {
+              %>
+              <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa bình luận</small></a>
+              <% }
+              } %>
             </div>
             <div class="icons align-items-center">
               <i class="fa fa-star text-warning"></i>
@@ -36,3 +43,22 @@
     </div>
   </div>
 </div>
+<script>
+  deletecomment();
+  function deletecomment() {
+    $(".remove").click(function (e) {
+      e.preventDefault();
+      const id = this.id.substring(6);
+      $.ajax({
+        url: "DeleteCommentController",
+        type: "post",
+        data: {
+          id: id,
+        },
+        success: function () {
+          $("#cmt-section" + id).remove();
+        }
+      })
+    });
+  }
+</script>
