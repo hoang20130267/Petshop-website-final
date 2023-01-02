@@ -19,10 +19,12 @@ public class BlogService {
         BlogDAO dao = new BlogDAO();
         return dao.Theloai();
     }
-    public static  List<Blogs> getNewBlog() {
+
+    public static  List<Blogs> NewBlogs() {
         BlogDAO dao = new BlogDAO();
         return dao.NewBlogs();
     }
+
     public  static List<Blogs> AdminListBlog() {
         BlogDAO dao = new BlogDAO();
         return dao.AdminListBlog();

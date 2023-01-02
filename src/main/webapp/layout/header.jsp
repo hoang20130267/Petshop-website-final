@@ -80,11 +80,11 @@
                 <nav class="header__menu">
                     <ul>
                         <li><a href="index.jsp">Trang Chủ</a></li>
-                        <li><a href="all-product?category=all>">Thú Cưng</a>
+                        <li><a href="all-product?category=all">Thú Cưng</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="all-product?category=dog">Chó</a></li>
-                                <li><a href="all-product?category=cat">Mèo</a></li>
-                                <li><a href="all-product?category=accessory">Phụ Kiện</a></li>
+                                <li><a href="all-product?category=1">Chó</a></li>
+                                <li><a href="all-product?category=2">Mèo</a></li>
+                                <li><a href="all-product?category=3">Phụ Kiện</a></li>
                             </ul>
                         </li>
                         <li><a href="blog.jsp">Tin Tức</a></li>
@@ -143,7 +143,7 @@
                             List<Detail> list = dao.listCategory();
                             for (Detail p : list) { %>
                         <li>
-                            <a href="#">
+                            <a href="all-product?category=<%=p.getCatID()%>">
                                 <%=p.getCatName()%>
                             </a>
                         </li>
