@@ -316,7 +316,8 @@ Created by IntelliJ IDEA.
 <!-- Humberger End -->
 
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
-<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");%>
+<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    List<Orders> orders = OrderService.getInstance().getOrdersByUser(user.getId());%>
 <!-- Header Section Begin -->
 <jsp:include page="layout/header.jsp"></jsp:include>
 <!-- Header Section End -->
@@ -345,6 +346,9 @@ Created by IntelliJ IDEA.
     <form method="post" enctype="multipart/form-data" class="infor_user">
         <div class="row">
             <div class="col-md-8 checkout__order" style="margin: auto;">
+                <%if(orders.size()==0){%>
+                    <p>Bạn chưa có đơn hàng, Nhanh tay đặt hàng nào!</p>
+                <%}else {%>
                 <table class="table table-sm fs--1 mb-0">
                     <thead>
                     <tr>
@@ -363,31 +367,32 @@ Created by IntelliJ IDEA.
                     </tr>
                     </thead>
                     <tbody class="list" id="table-latest-review-body">
-                    <%List<Orders> orders = OrderService.getInstance().getOrdersByUser(user.getId());
-                        for (Orders od:orders) {%>
-                            <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                <td class="fs--1 align-middle ps-0 py-3"><p class="mb-0 text-1100 fw-bold"><%=od.getOrderID()%></p></td>
-                                <td class="customer align-middle white-space-nowrap pe-5"><p
-                                        class="mb-0 ms-3 text-1100 fw-bold"><%=od.getPrice()%></p></td>
-                                <td class="email align-middle white-space-nowrap pe-5"><%=od.getOrderDate()%></td>
-                                <td class="email align-middle white-space-nowrap pe-5">
-                                    <%if(od.getStatus()==0){%>
-                                        <p style="font-weight: bold; color: red" >Đã hủy</p>
-                                    <%}else {
-                                        if (od.getDelivered()==0){%>
-                                    <p style="font-weight: bold; color: #00BFFF" >Đang xử lý</p>
-                                    <%}else {%>
-                                    <p style="font-weight: bold; color: #22ff00" >Hoàn thành</p>
-                                    <% }
-                                    }%>
+                    <%for (Orders od:orders) {%>
+                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                        <td class="fs--1 align-middle ps-0 py-3"><p class="mb-0 text-1100 fw-bold"><%=od.getOrderID()%></p></td>
+                        <td class="customer align-middle white-space-nowrap pe-5"><p
+                                class="mb-0 ms-3 text-1100 fw-bold"><%=format.format(od.getPrice())%></p></td>
+                        <td class="email align-middle white-space-nowrap pe-5"><%=od.getOrderDate()%></td>
+                        <td class="email align-middle white-space-nowrap pe-5">
+                            <%if(od.getStatus()==0){%>
+                            <p style="font-weight: bold; color: red" >Đã hủy</p>
+                            <%}else {
+                                if (od.getDelivered()==0){%>
+                            <p style="font-weight: bold; color: #00BFFF" >Đang xử lý</p>
+                            <%}else {%>
+                            <p style="font-weight: bold; color: #22ff00" >Hoàn thành</p>
+                            <% }
+                            }%>
 
-                                </td>
-                                <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100"
-                                                                                          href="">Xem</a></td>
-                            </tr>
+                        </td>
+                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100"
+                                                                                  href="">Xem</a></td>
+                    </tr>
                     <%}%>
                     </tbody>
                 </table>
+                <%}%>
+
 
             </div>
 

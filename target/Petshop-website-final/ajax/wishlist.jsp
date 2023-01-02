@@ -20,8 +20,8 @@
                     <tr>
                         <th class="shoping__product">Sản phẩm</th>
                         <th>Giá</th>
-                        <th>Thích</th>
-                        <th></th>
+                        <th style="padding-left: 120px">Thích</th>
+                        <th style="padding-left: 100px">Bỏ thích</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,18 +31,18 @@
                         for (String id : wishlist.getData().keySet()) {%>
                     <tr>
                         <td class="shoping__cart__item">
-                            <div class="pro-qty" id="quatity-<%=wishlist.getData().get(id).getProductId()%>">
+                            <div class="pro-qty" id="quatity-<%=wishlist.getData().get(id).getProductId()%>" style="width: 85px; height: 85px; object-fit: cover;">
                             <img src="<%=wishlist.getData().get(id).getImage()%>" alt="">
                             <h5><%=wishlist.getData().get(id).getProductName()%>
                         </td>
-                        <td class="shoping__cart__price">
+                        <td class="shoping__cart__price"  style="padding-left: 10px">
                             <%=format.format(wishlist.getData().get(id).getPrice())%>₫
                         </td>
-                        <td class="shoping__cart__total">
+                        <td class="shoping__cart__total"  style="padding-left: 130px">
                             <i class="fa fa-heart">
                             </i></td>
                         <td class="shoping__cart__item__close pro-qty">
-                            <a href="" id="delete<%=wishlist.getData().get(id).getProductId()%>"> <i class="icon_close"></i></a>
+                            <a href="" class="dlt" id="delete<%=wishlist.getData().get(id).getProductId()%>" style="color: black; padding-right: 50px"> <i class="icon_close"></i></a>
                         </td>
                     </tr>
                     <%
