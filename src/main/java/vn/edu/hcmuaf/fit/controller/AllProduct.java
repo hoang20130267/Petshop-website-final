@@ -27,7 +27,6 @@ public class AllProduct extends HttpServlet{
         request.getRequestDispatcher("all-products.jsp").forward(request,response);
         System.out.println(category);
         System.out.println(dao.getFullProduct( category, price,  size,  orderby));
-
     }
 
     @Override
