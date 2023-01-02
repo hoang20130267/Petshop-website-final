@@ -610,7 +610,6 @@
                         $(".header__second__cart--notice").each(function () {
                             $(this).text(data)
                         })
-                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
                     }
                 })
             })
@@ -653,7 +652,6 @@
                     pID: pID
                 },
                 success: function (data) {
-                    alert("Đăng bình luận thành công");
                     $(".product__details__tab__desc").prepend(data);
                 }
             })
