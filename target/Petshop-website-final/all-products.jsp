@@ -587,9 +587,9 @@
                    },
                    success: function (data) {
                        $(".header__second__cart--notice").each(function () {
-                           $(this).text(data)
+                           var quantity = $(this).text()
+                           $(this).text(parseInt(quantity)+1)
                        })
-                       $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
                    }
                })
            })

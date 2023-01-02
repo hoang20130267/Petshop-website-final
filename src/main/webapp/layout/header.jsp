@@ -165,7 +165,7 @@
                         </form>
                         <div id="result-search" style="display: none">
                             <ul class="result"
-                                style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;border-radius: 0px 0px 6px 6px;">
+                                style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;border-radius: 0px 0px 6px 6px;max-height: 500px;overflow-x: unset;overflow-y: scroll">
                                 <li class="search" style="margin-bottom: 10px;border: #b9b9b9">
                                     <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">Nhập từ khóa cần tìm...</h3>
                                 </li>
