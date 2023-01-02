@@ -653,7 +653,6 @@
                     pID: pID
                 },
                 success: function (data) {
-                    alert("Đăng bình luận thành công");
                     $(".product__details__tab__desc").prepend(data);
                 }
             })
