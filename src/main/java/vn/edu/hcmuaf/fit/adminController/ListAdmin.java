@@ -17,7 +17,6 @@ public class ListAdmin extends HttpServlet {
         request.setAttribute("listC",listC);
         request.getRequestDispatcher("list-admin.jsp").forward(request,response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
