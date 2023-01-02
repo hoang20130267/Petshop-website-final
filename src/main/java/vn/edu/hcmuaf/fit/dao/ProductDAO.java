@@ -181,7 +181,7 @@ public class ProductDAO {
         });
     }
 
-    public List<Product> getFullProduct(int amount, String category,String price, String size, String order_by) {
+    public List<Product> getFullProduct(String category,String price, String size, String order_by) {
         String query = "select distinct p.productId,p.ProductName,p.Image,p.Price, p.cannang from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if ( category.equals("dog")) {
@@ -219,8 +219,7 @@ public class ProductDAO {
         String Finalquery = query;
 
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery(Finalquery)
-                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+            return handle.createQuery(Finalquery).mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
     }

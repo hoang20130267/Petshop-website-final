@@ -66,7 +66,7 @@ public class DetailDAO {
         if (category != null)
         {
             switch (category) {
-                case "all" -> query += " and pc.ParentID != \"null\"  ";
+                case "all>" -> query += " and pc.ParentID != \"null\"  ";
                 case "dog" -> query += " and pc.ParentID = 1";
                 case "cat" -> query += " and pc.ParentID = 2";
                 case "accessory" -> query += " and pc.ParentID = 3";
