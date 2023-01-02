@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Detail implements Serializable {
     private String CatID;
@@ -13,10 +14,13 @@ public class Detail implements Serializable {
     private String UpdateBy;
     private String UpdateDate;
 
+    private List<Product> productsOfCate;
+
+
     public Detail() {
     }
 
-    public Detail(String catID, String catName, int status, int sort, String parentID, String createBy, String createDate, String updateBy, String updateDate) {
+    public Detail(String catID, String catName, int status, int sort, String parentID, String createBy, String createDate, String updateBy, String updateDate, List<Product> productsOfCate) {
         CatID = catID;
         CatName = catName;
         Status = status;
@@ -26,6 +30,7 @@ public class Detail implements Serializable {
         CreateDate = createDate;
         UpdateBy = updateBy;
         UpdateDate = updateDate;
+        productsOfCate = productsOfCate;
     }
 
     public String getCatID() {
@@ -98,6 +103,14 @@ public class Detail implements Serializable {
 
     public void setUpdateDate(String updateDate) {
         UpdateDate = updateDate;
+    }
+
+    public List<Product> getProductsOfCate() {
+        return productsOfCate;
+    }
+
+    public void setProductsOfCate(List<Product> productsOfCate) {
+        this.productsOfCate = productsOfCate;
     }
 
     @Override

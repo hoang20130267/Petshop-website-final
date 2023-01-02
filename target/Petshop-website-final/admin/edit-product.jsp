@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,9 +241,6 @@
             <div class="page-block">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <!-- <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard sale</h5>
-                        </div> -->
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item">Quản lý sản phẩm</li>
                             <li class="breadcrumb-item">Thú cưng</li>
@@ -255,10 +254,10 @@
             <main class="main" id="top">
                 <div class="container-fluid px-0" data-layout="container">
                     <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
-                            <% Product p = null;
+                        <% Product p = null;
                             if (request.getParameter("pid") != null)
-                            p = ProductService.getInstance().getProductDetail(request.getParameter("pid"));
-                            %>
+                                p = ProductService.getInstance().getProductDetail(request.getParameter("pid"));
+                        %>
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
                                 <%if (request.getParameter("pid") != null) {%>
@@ -267,9 +266,6 @@
                                 <%} else {%>
                                 <h2 class="mb-2">Thêm thú cưng</h2>
                                 <%}%>
-                                <!-- <h5 class="text-700 fw-semi-bold">
-                                  Orders placed across your store
-                                </h5> -->
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
@@ -288,32 +284,30 @@
                             </div>
                         </div>
                         <input type="text" id="pid" name="pid"
-                               value="<%=(p != null) ? request.getParameter("pid") : ""%>"
+                               value="<%=(p != null) ? request.getParameter("pid") : null%>"
                                style="display: none">
                         <h4 class="mb-3">Tên thú cưng</h4>
                         <div class="row g-5">
                             <div class="col-12 col-xl-8">
-                                <input name="name" id="name"
-                                       class="form-control mb-5"
-                                       type="text"
+                                <input name="name" id="name" class="form-control mb-5" type="text"
                                        placeholder="Viết tên thú cưng tại đây..."
-                                       value="<%=(p != null) ? p.getProductName() : ""%>" required
-                                />
+                                       value="<%=(p != null) ? p.getProductName() : ""%>" required/>
+                                <h4 class="mb-3">Mô tả ngắn</h4>
+                                <input name="description" id="descripsion" class="form-control mb-5" type="text"
+                                       placeholder="Viết mô tả ngắn tại đây..."
+                                       value="<%=(p != null) ? p.getDescription() : ""%>" required/>
                                 <div class="mb-6">
-                                    <h4 class="mb-3">Chi tiết thú cưng</h4>
-                                    <textarea name="description" rows="20" cols="10" id="editor" required>
-                                        <%=(p != null) ? p.getDescription() : ""%>
+                                    <h4 class="mb-3">Giới thiệu thú cưng</h4>
+                                    <textarea name="detail" rows="20" cols="10" id="editor" required>
+                                        <%=(p != null) ? p.getDital() : ""%>
                                     </textarea>
                                     <script>
                                         CKEDITOR.replace('editor');
                                     </script>
                                 </div>
                                 <h4 class="mb-3">Thêm ảnh</h4>
-                                <div
-                                        class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
-                                        id="my-awesome-dropzone"
-                                        data-dropzone="data-dropzone">
-
+                                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
+                                     id="my-awesome-dropzone" data-dropzone="data-dropzone">
                                     <% int i = 0;
                                         if (p != null) {
                                             if (p.getImage() != null) {%>
@@ -344,9 +338,7 @@
                                             }
                                         }
                                     %>
-
                                     <div class="image-container">
-
                                         <div id="container<%=i%>" class="dz-message text-600"
                                              data-dz-message="data-dz-message">
                                             <input type="file" id="image<%=i%>" name="files" class="input-file"
@@ -358,255 +350,148 @@
                                     </div>
                                 </div>
                                 <input type="text" id="deletedFile" value="" style="display: none">
-                                <h4 class="mb-3">Danh mục</h4>
-                                <div class="row g-0 border-top border-bottom border-300">
-                                    <div class="col-sm-4">
-                                        <div
-                                                class="nav flex-sm-column border-bottom border-bottom-sm-0 border-end-sm border-300 fs--1 vertical-tab h-100 justify-content-between"
-                                                role="tablist"
-                                                aria-orientation="vertical"
-                                        >
-                                            <a
-                                                    class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center active"
-                                                    id="pricingTab"
-                                                    data-bs-toggle="tab"
-                                                    data-bs-target="#pricingTabContent"
-                                                    role="tab"
-                                                    aria-controls="pricingTabContent"
-                                                    aria-selected="true"
-                                            >
-                                                <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16px"
-                                                        height="16px"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-tag me-sm-2 fs-4 nav-icons"
-                                                >
-                                                    <path
-                                                            d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
-                                                    ></path>
-                                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
-                                                </svg>
-                                                <sapn class="d-none d-sm-inline">Giá bán</sapn>
-                                            </a
-                                            ><a
-                                                class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
-                                                id="restockTab"
-                                                data-bs-toggle="tab"
-                                                data-bs-target="#restockTabContent"
-                                                role="tab"
-                                                aria-controls="restockTabContent"
-                                                aria-selected="false"
-                                                tabindex="-1"
-                                        >
-                                            <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16px"
-                                                    height="16px"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    class="feather feather-package me-sm-2 fs-4 nav-icons"
-                                            >
-                                                <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
-                                                <path
-                                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-                                                ></path>
-                                                <polyline
-                                                        points="3.27 6.96 12 12.01 20.73 6.96"
-                                                ></polyline>
-                                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                                            </svg>
-                                            <span class="d-none d-sm-inline">Chi tiết</span></a
-                                        >
-
-                                            <a
-                                                    class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
-                                                    id="attributesTab"
-                                                    data-bs-toggle="tab"
-                                                    data-bs-target="#attributesTabContent"
-                                                    role="tab"
-                                                    aria-controls="attributesTabContent"
-                                                    aria-selected="false"
-                                                    tabindex="-1"
-                                            >
-                                                <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16px"
-                                                        height="16px"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-sliders me-sm-2 fs-4 nav-icons"
-                                                >
-                                                    <line x1="4" y1="21" x2="4" y2="14"></line>
-                                                    <line x1="4" y1="10" x2="4" y2="3"></line>
-                                                    <line x1="12" y1="21" x2="12" y2="12"></line>
-                                                    <line x1="12" y1="8" x2="12" y2="3"></line>
-                                                    <line x1="20" y1="21" x2="20" y2="16"></line>
-                                                    <line x1="20" y1="12" x2="20" y2="3"></line>
-                                                    <line x1="1" y1="14" x2="7" y2="14"></line>
-                                                    <line x1="9" y1="8" x2="15" y2="8"></line>
-                                                    <line x1="17" y1="16" x2="23" y2="16"></line>
-                                                </svg>
-                                                <span class="d-none d-sm-inline">Ngày nhập</span></a
-                                            ><a
-                                                class="nav-link text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"
-                                                id="advancedTab"
-                                                data-bs-toggle="tab"
-                                                data-bs-target="#advancedTabContent"
-                                                role="tab"
-                                                aria-controls="advancedTabContent"
-                                                aria-selected="false"
-                                                tabindex="-1"
-                                        >
-                                            <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16px"
-                                                    height="16px"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    class="feather feather-lock me-sm-2 fs-4 nav-icons"
-                                            >
-                                                <rect
-                                                        x="3"
-                                                        y="11"
-                                                        width="18"
-                                                        height="11"
-                                                        rx="2"
-                                                        ry="2"
-                                                ></rect>
-                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                            </svg>
-                                            <span class="d-none d-sm-inline">Nâng cao</span></a
-                                        >
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div class="tab-content py-3 ps-sm-4 h-100" id="pricingTab">
-                                            <div
-                                                    class="tab-pane fade show active"
-                                                    id="pricingTabContent"
-                                                    role="tabpanel"
-                                                    aria-labelledby="homeTab"
-                                            >
-                                                <h4 class="mb-3 d-sm-none">Giá</h4>
-                                                <div class="row g-3">
-                                                    <div class="col-12 col-lg-6">
-                                                        <h5 class="mb-2">Giá tiền gốc</h5>
-                                                        <input id="price" name="price"
-                                                               value="<%=(p != null) ? p.getPrice() : ""%>"
-                                                               class="form-control"
-                                                               type="text"
-                                                               placeholder="Đồng" required
-                                                        />
-                                                    </div>
-                                                    <div class="col-12 col-lg-6">
-                                                        <h5 class="mb-2">Giá tiền đã giảm</h5>
-                                                        <input id="promoPrice" name="promoPrice"
-                                                               value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
-                                                               class="form-control"
-                                                               type="text"
-                                                               placeholder="Đồng" required
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="tab-pane fade h-100"
-                                                    id="restockTabContent"
-                                                    role="tabpanel"
-                                                    aria-labelledby="restockTab"
-                                            >
-                                                <div class="d-flex flex-column h-100">
-                                                    <div class="row g-3">
-                                                        <div class="col-12 col-lg-6">
-                                                            <h5 class="mb-2">Số lượng</h5>
-                                                            <input id="quantity" name="quantity"
-                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"
-                                                                   class="form-control"
-                                                                   type="text"
-                                                                   placeholder="Ví dụ: 5" required
-                                                            />
-                                                        </div>
-                                                        <div class="col-12 col-lg-6">
-                                                            <h5 class="mb-2">Cân nặng</h5>
-                                                            <input id="cannang" name="cannang"
-                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"
-                                                                   class="form-control"
-                                                                   type="text"
-                                                                   placeholder="Kg" required
-                                                            />
-                                                        </div>
-                                                        <div class="col-12 col-lg-6">
-                                                            <h5 class="mb-2">Màu sắc</h5>
-                                                            <input id="mausac" name="mausac"
-                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"
-                                                                   class="form-control"
-                                                                   type="text"
-                                                                   placeholder="Ví dụ: Trắng" required
-                                                            />
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div
-                                                    class="tab-pane fade"
-                                                    id="attributesTabContent"
-                                                    role="tabpanel"
-                                                    aria-labelledby="attributesTab"
-                                            >
-                                                <h5 class="mb-3 text-1000">Ngày nhập</h5>
-
-                                                <div class="form-check">
-
-                                                    <input
-                                                            class="form-control inventory-attributes"
-                                                            id="inventory"
-                                                            type="date"
-                                                            style="max-width: 350px"
-                                                    />
-
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="tab-pane fade"
-                                                    id="advancedTabContent"
-                                                    role="tabpanel"
-                                                    aria-labelledby="advancedTab"
-                                            >
-                                                <div class="row g-3">
-
-                                                    <div class="col-12 col-lg-6">
-                                                        <h5 class="mb-2 text-1000">ID thú cưng</h5>
-                                                        <p name="pid"
-                                                           class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%>
-                                                        </p>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p name="pid" class="form-control" style="display: none"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%></p>
+<%--                                <h4 class="mb-3">Danh mục</h4>--%>
+<%--                                <div class="row g-0 border-top border-bottom border-300">--%>
+<%--                                    <div class="col-sm-4">--%>
+<%--                                        <div class="nav flex-sm-column border-bottom border-bottom-sm-0 border-end-sm border-300 fs--1 vertical-tab h-100 justify-content-between"--%>
+<%--                                             role="tablist" aria-orientation="vertical">--%>
+<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center active"--%>
+<%--                                               id="pricingTab" data-bs-toggle="tab" data-bs-target="#pricingTabContent"--%>
+<%--                                               role="tab" aria-controls="pricingTabContent" aria-selected="true">--%>
+<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
+<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
+<%--                                                     class="feather feather-tag me-sm-2 fs-4 nav-icons">--%>
+<%--                                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>--%>
+<%--                                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>--%>
+<%--                                                </svg>--%>
+<%--                                                <sapn class="d-none d-sm-inline">Giá bán</sapn>--%>
+<%--                                            </a>--%>
+<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
+<%--                                               id="restockTab" data-bs-toggle="tab" data-bs-target="#restockTabContent"--%>
+<%--                                               role="tab" aria-controls="restockTabContent" aria-selected="false"--%>
+<%--                                               tabindex="-1">--%>
+<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
+<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
+<%--                                                     class="feather feather-package me-sm-2 fs-4 nav-icons">--%>
+<%--                                                    <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>--%>
+<%--                                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>--%>
+<%--                                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>--%>
+<%--                                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>--%>
+<%--                                                </svg>--%>
+<%--                                                <span class="d-none d-sm-inline">Chi tiết</span>--%>
+<%--                                            </a>--%>
+<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
+<%--                                               id="attributesTab" data-bs-toggle="tab"--%>
+<%--                                               data-bs-target="#attributesTabContent" role="tab"--%>
+<%--                                               aria-controls="attributesTabContent" aria-selected="false" tabindex="-1">--%>
+<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
+<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
+<%--                                                     class="feather feather-sliders me-sm-2 fs-4 nav-icons">--%>
+<%--                                                    <line x1="4" y1="21" x2="4" y2="14"></line>--%>
+<%--                                                    <line x1="4" y1="10" x2="4" y2="3"></line>--%>
+<%--                                                    <line x1="12" y1="21" x2="12" y2="12"></line>--%>
+<%--                                                    <line x1="12" y1="8" x2="12" y2="3"></line>--%>
+<%--                                                    <line x1="20" y1="21" x2="20" y2="16"></line>--%>
+<%--                                                    <line x1="20" y1="12" x2="20" y2="3"></line>--%>
+<%--                                                    <line x1="1" y1="14" x2="7" y2="14"></line>--%>
+<%--                                                    <line x1="9" y1="8" x2="15" y2="8"></line>--%>
+<%--                                                    <line x1="17" y1="16" x2="23" y2="16"></line>--%>
+<%--                                                </svg>--%>
+<%--                                                <span class="d-none d-sm-inline">Ngày nhập</span>--%>
+<%--                                            </a>--%>
+<%--                                            <a class="nav-link text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
+<%--                                               id="advancedTab" data-bs-toggle="tab"--%>
+<%--                                               data-bs-target="#advancedTabContent" role="tab"--%>
+<%--                                               aria-controls="advancedTabContent" aria-selected="false" tabindex="-1">--%>
+<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
+<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
+<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
+<%--                                                     class="feather feather-lock me-sm-2 fs-4 nav-icons">--%>
+<%--                                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>--%>
+<%--                                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>--%>
+<%--                                                </svg>--%>
+<%--                                                <span class="d-none d-sm-inline">Nâng cao</span>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="col-sm-8">--%>
+<%--                                        <div class="tab-content py-3 ps-sm-4 h-100" id="pricingTab1">--%>
+<%--                                            <div class="tab-pane fade show active" id="pricingTabContent"--%>
+<%--                                                 role="tabpanel" aria-labelledby="homeTab">--%>
+<%--                                                <h4 class="mb-3 d-sm-none">Giá</h4>--%>
+<%--                                                <div class="row g-3">--%>
+<%--                                                    <div class="col-12 col-lg-6">--%>
+<%--                                                        <h5 class="mb-2">Giá tiền gốc</h5>--%>
+<%--                                                        <input id="price" name="price"--%>
+<%--                                                               value="<%=(p != null) ? p.getPrice() : ""%>"--%>
+<%--                                                               class="form-control" type="text"--%>
+<%--                                                               placeholder="Đồng" required/>--%>
+<%--                                                    </div>--%>
+<%--                                                    <div class="col-12 col-lg-6">--%>
+<%--                                                        <h5 class="mb-2">Giá tiền đã giảm</h5>--%>
+<%--                                                        <input id="promoPrice" name="promoPrice"--%>
+<%--                                                               value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"--%>
+<%--                                                               class="form-control" type="text"--%>
+<%--                                                               placeholder="Đồng" required/>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="tab-pane fade h-100" id="restockTabContent" role="tabpanel"--%>
+<%--                                                 aria-labelledby="restockTab">--%>
+<%--                                                <div class="d-flex flex-column h-100">--%>
+<%--                                                    <div class="row g-3">--%>
+<%--                                                        <div class="col-12 col-lg-6">--%>
+<%--                                                            <h5 class="mb-2">Số lượng</h5>--%>
+<%--                                                            <input id="quantity" name="quantity"--%>
+<%--                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"--%>
+<%--                                                                   class="form-control" type="text"--%>
+<%--                                                                   placeholder="Ví dụ: 5" required/>--%>
+<%--                                                        </div>--%>
+<%--                                                        <div class="col-12 col-lg-6">--%>
+<%--                                                            <h5 class="mb-2">Cân nặng</h5>--%>
+<%--                                                            <input id="cannang" name="cannang"--%>
+<%--                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"--%>
+<%--                                                                   class="form-control" type="text"--%>
+<%--                                                                   placeholder="Kg" required/>--%>
+<%--                                                        </div>--%>
+<%--                                                        <div class="col-12 col-lg-6">--%>
+<%--                                                            <h5 class="mb-2">Màu sắc</h5>--%>
+<%--                                                            <input id="mausac" name="mausac"--%>
+<%--                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"--%>
+<%--                                                                   class="form-control" type="text"--%>
+<%--                                                                   placeholder="Ví dụ: Trắng" required/>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="tab-pane fade" id="attributesTabContent" role="tabpanel"--%>
+<%--                                                 aria-labelledby="attributesTab">--%>
+<%--                                                <h5 class="mb-3 text-1000">Ngày nhập</h5>--%>
+<%--                                                <div class="form-check">--%>
+<%--                                                    <input class="form-control inventory-attributes" id="inventory"--%>
+<%--                                                           type="date" style="max-width: 350px"/>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="tab-pane fade" id="advancedTabContent" role="tabpanel"--%>
+<%--                                                 aria-labelledby="advancedTab">--%>
+<%--                                                <div class="row g-3">--%>
+<%--                                                    <div class="col-12 col-lg-6">--%>
+<%--                                                        <h5 class="mb-2 text-1000">ID thú cưng</h5>--%>
+<%--                                                        <p name="pid"--%>
+<%--                                                           class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%>--%>
+<%--                                                        </p>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                             </div>
+                            <%List<Detail> ParentCates = DetailService.getInstance().listCategoryParentPd();%>
                             <div class="col-12 col-xl-4">
                                 <div class="row g-2">
                                     <div class="col-12 col-xl-12">
@@ -617,27 +502,58 @@
                                                     <div class="col-12 col-sm-6 col-xl-12">
                                                         <div class="mb-4">
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                                <h5>Loại thú cưng</h5>
+                                                                <h5>Danh mục cha</h5>
                                                             </div>
-                                                            <select id="giong" name="giong" class="form-select mb-3"
-                                                                    aria-label="category">
-                                                                <option value="Chó">Chó</option>
-                                                                <option value="Mèo">Mèo</option>
-
+                                                            <select id="CateParent" name="CateParent"
+                                                                    class="form-select mb-3" aria-label="category">
+                                                                <%
+                                                                    if (p != null) {
+                                                                        for (Detail cate : ParentCates) {
+                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
+                                                                %>
+                                                                <option value="<%=cate.getCatID()%>"
+                                                                        selected><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%} else {%>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <% }
+                                                                }%>
+                                                                <% } else {
+                                                                    for (Detail cate : ParentCates) {%>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%}%>
+                                                                <%}%>
                                                             </select>
                                                         </div>
                                                     </div>
-
-
+                                                    <%List<Detail> listCate = DetailService.getInstance().listCategory();%>
                                                     <div class="col-12 col-sm-6 col-xl-12">
                                                         <div>
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                                <h5>Tags</h5>
+                                                                <h5>Danh mục con</h5>
                                                             </div>
-                                                            <select class="form-select" aria-label="category">
-                                                                <option value="men-cloth">Chó</option>
-                                                                <option value="women-cloth">Mèo</option>
-
+                                                            <select class="form-select" aria-label="category" id="cateChild" name="cateChild">
+                                                                <%
+                                                                    if (p != null) {
+                                                                        for (Detail cate : listCate) {
+                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
+                                                                %>
+                                                                                    <option value="<%=cate.getCatID()%>"
+                                                                                            selected><%=cate.getCatName()%>
+                                                                                    </option>
+                                                                            <%} else {%>
+                                                                                    <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                                    </option>
+                                                                                <% }
+                                                                }%>
+                                                                <% } else {
+                                                                        for (Detail cate : listCate) {%>
+                                                                            <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                            </option>
+                                                                        <%}%>
+                                                                <%}%>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -648,17 +564,66 @@
                                     <div class="col-12 col-xl-12">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h4 class="card-title mb-4">Kích cỡ thú cưng</h4>
+                                                <h4 class="card-title mb-4">Chi tiết thú cưng</h4>
                                                 <div class="row">
                                                     <div class="col-12 col-sm-6 col-xl-12">
                                                         <div class="mb-4 border-dashed-bottom pb-4">
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                                <h5>Kích cỡ</h5>
+                                                                <h5>Cân nặng</h5>
                                                             </div>
-                                                            <select class="form-select mb-3">
-                                                                <option value="size">Nhỏ</option>
-                                                                <option value="color">Vừa</option>
-                                                                <option value="weight">Lớn</option>
+                                                            <input name="cannang" id="cannang"
+                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Kg" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giống</h5>
+                                                            </div>
+                                                            <input type="text" class="mb-3 form-control" name="giong"
+                                                                   id="giong"
+                                                                    value="<%=(p != null) ? p.getGiong() : ""%>">
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Màu sắc</h5>
+                                                            </div>
+                                                            <input  name="mausac" id="mausac"
+                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Ví dụ: Trắng" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Số Lượng</h5>
+                                                            </div>
+                                                            <input  name="quantity" id="quantity"
+                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Ví dụ: 5" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giá</h5>
+                                                            </div>
+                                                            <input name="price" id="price"
+                                                                   value="<%=(p != null) ? p.getPrice() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Đồng" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Trạng thái</h5>
+                                                            </div>
+                                                            <select class="form-select mb-3" name="status" id="status">
+                                                                <%if(p!=null){
+                                                                    if(p.getStatus()==1){%>
+                                                                        <option value="1" selected>Hiển thị</option>
+                                                                        <option value="0">Ẩn</option>
+                                                                    <%}else {%>
+                                                                        <option value="1" >Hiển thị</option>
+                                                                        <option value="0" selected>Ẩn</option>
+                                                                    <%}
+                                                                }else {%>
+                                                                <option value="1" selected>Hiển thị</option>
+                                                                <option value="0">Ẩn</option>
+                                                                <%}%>
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -833,13 +798,17 @@
 
         const id = $("#pid").val();
         const name = $("#name").val();
+        const descripsion = $("#descripsion").val();
+        const detail = CKEDITOR.instances.editor.getData();
         const quantity = $("#quantity").val();
         const price = $("#price").val();
-        const promo = $("#promoprice").val();
-        const descripsion = CKEDITOR.instances.editor.getData();
+        const status = $("#status").val();
         const mausac = $("#mausac").val();
         const cannang = $("#cannang").val();
         const giong = $("#giong").val();
+        const CateParent = $("#CateParent").val();
+        const cateChild = $("#cateChild").val();
+
         const imageLink = $(".img-product-review").attr("src").substring(61);
         console.log(imageLink);
         let imgFile = []
@@ -861,16 +830,19 @@
                 id: id,
                 name: name,
                 price: price,
-                promoPrice: promo,
                 image: imageLink,
-                descripsion: descripsion,
+                description: descripsion,
                 mausac: mausac,
                 cannang: cannang,
                 giong: giong,
                 imgFile: imgFile,
+                detail: detail,
+                CateParent: CateParent,
+                cateChild:cateChild,
+                status:status,
             },
             success: function () {
-                if (id.length < 1)
+                if (id.equals("null"))
                     alert("Thêm sản phẩm thành công");
                 else
                     alert("Cập nhật sản phẩm thành công");

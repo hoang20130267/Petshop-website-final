@@ -11,11 +11,17 @@ public class Orders implements Serializable {
     private String CustomerID;
     private double Discount;
     private String Notice;
+    private double Price;
+    private String RecipientName;
+    private String Email;
+    private String Phone;
+    private String Address;
 
     public Orders() {
     }
 
-    public Orders(String orderID, String orderDate, int status, int delivered, String deliveryDate, String customerID, double discount, String notice) {
+
+    public Orders(String orderID, String orderDate, int status, int delivered, String deliveryDate, String customerID, double discount, String notice, double price, String recipientName, String email, String phone, String address) {
         OrderID = orderID;
         OrderDate = orderDate;
         Status = status;
@@ -24,6 +30,51 @@ public class Orders implements Serializable {
         CustomerID = customerID;
         Discount = discount;
         Notice = notice;
+        Price = price;
+        RecipientName = recipientName;
+        Email = email;
+        Phone = phone;
+        Address = address;
+    }
+
+    public double getPrice() {
+        return Price;
+    }
+
+    public void setPrice(double price) {
+        Price = price;
+    }
+
+    public String getRecipientName() {
+        return RecipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        RecipientName = recipientName;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public String getOrderID() {

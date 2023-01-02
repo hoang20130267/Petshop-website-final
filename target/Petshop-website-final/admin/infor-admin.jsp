@@ -111,7 +111,7 @@
     }
     .input-file {
       color: transparent;
-      margin-left: 250px;
+      margin-left: 230px;
       margin-bottom: 50px;
 
     }
