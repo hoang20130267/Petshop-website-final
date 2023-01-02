@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Wishlist" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <head lang="zxx"><head>
@@ -259,78 +262,34 @@
                                 <tr>
                                     <th class="shoping__product">Sản phẩm</th>
                                     <th>Giá</th>
-                                    <th>Số lượng</th>
-                                    <th>Thích</th>
-                                    <th></th>
+                                    <th style="padding-left: 120px">Thích</th>
+                                    <th style="padding-left: 100px">Bỏ thích</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <!-- <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-1.jpg" alt="">
-                                        <h5>Alaska Giant xám trắng</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        25.000.000đ
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        <i class="fa fa-heart">
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <tr> -->
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-2.jpg" alt="">
-                                        <h5>Cún golden siêu phẩm</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        30.000.000đ
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        <i class="fa fa-heart">
+                            <% Wishlist wishlist = (Wishlist) request.getSession().getAttribute("wishlist");
+                                NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
+                            <% if (wishlist != null) {
+                                for (String id : wishlist.getData().keySet()) {%>
+                            <tr>
+                                <td class="shoping__cart__item">
+                                    <img src="<%=wishlist.getData().get(id).getImage()%>" alt="" style="width: 85px; height: 85px; object-fit: cover;">
+                                    <h5><%=wishlist.getData().get(id).getProductName()%>
+                                </td>
+                                <td class="shoping__cart__price" style="padding-left: 10px">
+                                    <%=format.format(wishlist.getData().get(id).getPrice())%>₫
+                                </td>
+                                <td class="shoping__cart__total" style="padding-left: 130px">
+                                    <i class="fa fa-heart">
                                     </i></td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr>
-                                <!-- <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="img/cart/cart-3.jpg" alt="">
-                                        <h5>Mèo chân ngắn tai cụp</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        30.000.000đ
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        <i class="fa fa-heart">
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="icon_close"></span>
-                                    </td>
-                                </tr> -->
+                                <td class="shoping__cart__item__close">
+                                    <a href="" class="dlt" id="delete<%=wishlist.getData().get(id).getProductId()%>" style="color: black; padding-right: 50px"> <i class="icon_close"></i></a>
+                                </td>
+                            </tr>
+                            <%
+                                    }
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
@@ -355,7 +314,30 @@
     <script src="js/main.js"></script>
     <script src="admin/assets/js/vendor-all.min.js"></script>
     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+    <script>
+        function deleteProduct() {
+            $(".dlt").each(function () {
+                const id = $(this).attr("id").substring(6);
+                $("#delete" + id).click(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "DeleteWishlistController",
+                        type: "post",
+                        data: {
+                            idP: id,
+                        },
+                        success: function (data) {
+                            $(".shoping-cart").html(data);
+                            deleteProduct();
+                        }
+                    })
+                })
+            })
+        }
 
-
+        $(document).ready(function () {
+            deleteProduct();
+        })
+    </script>
 
 </body></html>

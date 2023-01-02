@@ -239,7 +239,7 @@ public class CustomerUserDAO {
     }
     public CustomerUser getUserDetail(String id) {
         CustomerUser detail = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from infor_user where id_user = ?")
+            return handle.createQuery("select * from infor_user iu inner join user_account uc on iu.id_user = uc.id where id_user = ?")
                     .bind(0, id)
                     .mapToBean(CustomerUser.class).first();
         });

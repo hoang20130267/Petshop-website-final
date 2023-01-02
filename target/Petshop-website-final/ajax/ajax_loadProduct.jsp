@@ -3,7 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.util.Locale" %><%--
+<%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Wishlist" %><%--
   Created by IntelliJ IDEA.
   User: Nguyen Ngoc Huy
   Date: 12/16/2022
@@ -15,21 +16,22 @@
 <% List<Product> list = (List<Product>) request.getAttribute("listnext9");
     for (Product p : list) { %>
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
+<%Wishlist wishlist = (Wishlist) request.getSession().getAttribute("wishlist");%>
 
 <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">
     <div class="product__item">
         <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" style="background-image: url(<%=p.getImage()%>);">
             <ul class="product__item__pic__hover">
-                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                 <%if (user != null) {
                     Product product = new ProductDAO().getProductDetail(p.getProductId());%>
                 <%if (Integer.parseInt(product.getQuantity())> 0) {%>
+                <li><a class="add-wishlist" id="addWishlist-<%=p.getProductId()%>"><i class="fa fa-heart"></i></a></li>
                 <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
                         class="fa fa-shopping-cart"></i></a></li>
                 <%}%>
                 <%
                 } else {%>
+                <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
                 <li><a class="shopnow2" href="login.jsp"><i
                         class="fa fa-shopping-cart"></i></a></li>
                 <%  }
