@@ -16,12 +16,14 @@ public class ProductService {
         }
         return productService;
     }
+
     public static List<Product> getData() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
+
     public static List<Product> getData2() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang from product p INNER JOIN product_from_cate pc on p.productId = pc.product_id\n" +
@@ -29,12 +31,14 @@ public class ProductService {
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
+
     public static List<Product> getData3() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId < 3000 and productId > 2000")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
     }
+
     public static List<Product> getAccessoryAdmin() {
         return JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("SELECT p.* from product p INNER JOIN product_from_cate pc on p.productId = pc.product_id\n" +
@@ -57,21 +61,24 @@ public class ProductService {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
-    public Product getProductDetail(String Id){
+
+    public Product getProductDetail(String Id) {
         ProductDAO dao = new ProductDAO();
         return dao.getProductDetail(Id);
     }
 
-    public List<Product> Filter( int amount, String category,String price, String size, String orderby) {
+    public List<Product> Filter(int amount, String category, String price, String size, String orderby) {
         ProductDAO dao = new ProductDAO();
-        return dao.getNext9Product(amount,category,price,size,orderby);
+        return dao.getNext9Product(amount, category, price, size, orderby);
     }
 
-//    public List<Product> Filter(String category,String price, String size, String order_by) {
+    //    public List<Product> Filter(String category,String price, String size, String order_by) {
 //        ProductDAO dao = new ProductDAO();
 //        return dao.Filter(category,price,size,order_by);
 //    }
-
+    public List<Product> listProductSale() {
+        return new ProductDAO().listProductSale();
+    }
 
     public static void main(String[] args) {
         System.out.println(getData2());

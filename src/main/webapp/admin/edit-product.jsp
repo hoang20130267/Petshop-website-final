@@ -608,25 +608,6 @@
                                                                    placeholder="Đồng" required/>
 
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                                <h5>Giảm giá</h5>
-                                                            </div>
-                                                            <select class="form-select mb-3" name="status" id="status">
-                                                                <%if(p!=null){
-                                                                    if(p.getStatus()==1){%>
-                                                                <option value="1" selected>Hiển thị</option>
-                                                                <option value="0">Ẩn</option>
-                                                                <%}else {%>
-                                                                <option value="1" >Hiển thị</option>
-                                                                <option value="0" selected>Ẩn</option>
-                                                                <%}
-                                                                }else {%>
-                                                                <option value="1" selected>Hiển thị</option>
-                                                                <option value="0">Ẩn</option>
-                                                                <%}%>
-
-                                                            </select>
-
-                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Trạng thái</h5>
                                                             </div>
                                                             <select class="form-select mb-3" name="status" id="status">
@@ -642,8 +623,33 @@
                                                                 <option value="1" selected>Hiển thị</option>
                                                                 <option value="0">Ẩn</option>
                                                                 <%}%>
-
                                                             </select>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giảm giá</h5>
+                                                            </div>
+                                                            <select class="form-select mb-3" name="Promotional" id="Promotional">
+                                                                <%if(p!=null){
+                                                                    if(p.getPromotional()==1){%>
+                                                                <option value="1" selected>Có</option>
+                                                                <option value="0">Không</option>
+                                                                <%}else {%>
+                                                                <option value="1" >Có</option>
+                                                                <option value="0" selected>Không</option>
+                                                                <%}
+                                                                }else {%>
+                                                                <option value="1" >Có</option>
+                                                                <option value="0" selected>Không</option>
+                                                                <%}%>
+                                                            </select>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giảm bao nhiêu?(%)</h5>
+                                                            </div>
+                                                            <input  name="PromotionalPrice" id="PromotionalPrice"
+                                                                    value="<%=(p != null) ? p.getPromotional() : ""%>"
+                                                                    class="form-control mb-3" type="text"
+                                                                    placeholder="Ví dụ: 10" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -827,6 +833,9 @@
         const giong = $("#giong").val();
         const CateParent = $("#CateParent").val();
         const cateChild = $("#cateChild").val();
+        const Promotional = $("#Promotional").val();
+        const PromotionalPrice = $("#PromotionalPrice").val();
+
 
         const imageLink = $(".img-product-review").attr("src").substring(61);
         console.log(imageLink);
@@ -859,6 +868,8 @@
                 CateParent: CateParent,
                 cateChild:cateChild,
                 status:status,
+                Promotional: Promotional,
+                PromotionalPrice:PromotionalPrice,
             },
             success: function () {
                 if (id.equals("null"))

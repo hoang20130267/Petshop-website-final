@@ -49,8 +49,8 @@ public class Cart implements Serializable {
     public double total() {
         double sum = 0;
         for (Product p : data.values()) {
-            if (p.getSales() != null) {
-                sum += (p.getQuantityCart() * (p.getPrice() * 0.01 * (100 - p.getSales().getDiscount())));
+            if (p.getPromotional()== 1) {
+                sum += (p.getQuantityCart() * (p.getPrice()- p.getPrice()*p.getPromotionalPrice()/100 ));
             } else {
                 sum += (p.getQuantityCart() * p.getPrice());
             }
