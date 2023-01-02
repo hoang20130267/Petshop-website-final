@@ -5,6 +5,8 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -133,6 +135,80 @@
         }
         .dropdown-toggle.arrow-none:after {
             display: none;
+        }
+        .card {
+
+            border: none;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+            border-radius: 4px;
+        }
+
+
+        .dots{
+
+            height: 4px;
+            width: 4px;
+            margin-bottom: 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .badge{
+
+            padding: 7px;
+            padding-right: 9px;
+            padding-left: 16px;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+        }
+
+        .user-img{
+
+            margin-top: 4px;
+        }
+
+        .check-icon{
+
+            font-size: 17px;
+            color: #c3bfbf;
+            top: 1px;
+            position: relative;
+            margin-left: 3px;
+        }
+
+        .form-check-input{
+            margin-top: 6px;
+            margin-left: -24px !important;
+            cursor: pointer;
+        }
+
+
+        .form-check-input:focus{
+            box-shadow: none;
+        }
+
+
+        .icons i{
+
+            margin-left: 8px;
+        }
+        .reply{
+
+            margin-left: 12px;
+        }
+
+        .reply small{
+
+            color: #b7b4b4;
+
+        }
+
+
+        .reply small:hover{
+
+            color: green;
+            cursor: pointer;
+
         }
     </style>
 </head>
@@ -299,13 +375,15 @@
                         Product p = new ProductDAO().getProductDetail(product.getProductId());%>
                     <%if (Integer.parseInt(p.getQuantity())> 0) {%>
                     <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
+                    <a href="#" class="heart-icon" id="addWishlist-<%=p.getProductId()%>"><span class="icon_heart_alt"></span></a>
                     <%}%>
                     <%
                     } else {%>
                     <a href="login.jsp" class="primary-btn snow">Thêm vào giỏ hàng</a>
+                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <%  }
                     %>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+
                     <ul>
                         <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
                         <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
@@ -352,13 +430,67 @@
 <%--                                </p>--%>
 <%--                            </div>--%>
 <%--                        </div>--%>
+<%--                        <%if(user == null) {%>--%>
+
+<%--                        <div class="tab-pane" id="tabs-3" role="tabpanel">--%>
+<%--                            <div class="product__details__tab__desc">--%>
+<%--                                <h6>Đánh giá</h6>--%>
+<%--                                <p>Chưa có đánh giá nào.</p>--%>
+<%--                                <p>Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <% } else {%>--%>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Đánh giá</h6>
-                                <p>Chưa có đánh giá nào.</p>
-                                <p>Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</p>
+                                <% List<Comment> listCmt = new CommentDAO().getListComment();
+                                for(Comment cmt : listCmt) {%>
+                                <div id="cmt-section">
+                                    <div class="container mt-5">
+                                        <div class="row  d-flex justify-content-center">
+                                            <div class="col-md-8">
+                                                <div class="card p-3">
+
+                                                    <div class="d-flex justify-content-between align-items-center">
+
+                                                        <div class="user d-flex flex-row align-items-center">
+
+                                                            <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2">
+                                                            <span><small class="font-weight-bold text-primary"><%=cmt.getCustomerID()%></small> <small class="font-weight-bold"><%=cmt.getDescription()%></small></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                                        <div class="reply px-4">
+                                                            <small>Remove</small>
+                                                            <span class="dots"></span>
+                                                        </div>
+                                                        <div class="icons align-items-center">
+                                                            <i class="fa fa-star text-warning"></i>
+                                                            <i class="fa fa-check-circle-o check-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                                <%if(user == null) {%>
+                                    <div class="comment-section" style="margin-top: 50px"></div>
+                                <% } else{%>
+                                <div class="comment-section" style="margin-top: 50px; padding-left: 200px">
+                                    <form method="post" enctype="multipart/form-data" id="container">
+                                        <input type="text" id="cusID" value="<%=user.getId()%>" style="display: none">
+                                        <input type="text" id="pID" value="<%=product.getProductId()%>" style="display: none">
+
+                                        <input type="text" id="content" name="content">
+                                        <button id="button">Đăng</button>
+                                    </form>
+                                </div>
+                                <%}%>
+
                             </div>
                         </div>
+<%--                        <%}%>--%>
                     </div>
                 </div>
             </div>
@@ -461,6 +593,7 @@
 <script>
     $(document).ready(function (){
         addcart();
+        addwishlist();
     })
     function addcart() {
         $(".snow").each(function (e) {
@@ -483,6 +616,48 @@
             })
         });
     }
+    function addwishlist() {
+        $(".add-wishlist").each(function (e) {
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                $.ajax({
+                    url: "AddToWishlistController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                    },
+                    success: function (data) {
+                        $(".header__second__wishlist--notice").each(function () {
+                            $(this).text(data)
+                        })
+                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
+                    }
+                })
+            })
+        });
+    }
+</script>
+<script>
+        $("#button").click(function (e) {
+            e.preventDefault();
+            const comment = $("#content").val();
+            const pID = $("#pID").val();
+            console.log(comment);
+            console.log(pID);
+            $.ajax({
+                type: 'post',
+                url: '/Petshop_website_final_war/CommentController',
+                data: {
+                    desc: comment,
+                    pID: pID
+                },
+                success: function (data) {
+                    alert("Đăng bình luận thành công");
+                    $(".product__details__tab__desc").prepend(data);
+                }
+            })
+        })
 
 </script>
 </body>
