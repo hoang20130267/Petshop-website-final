@@ -11,7 +11,7 @@
 <% if (list!= null) {
   for (Product p : list) {%>
 <li class="search" style=" border-bottom: 1px solid #b9b9b9;margin-bottom: 10px;">
-  <a href="#" style="display: inline-flex;">
+  <a href="href="product-details.jsp?id=<%=p.getProductId()%>"" style="display: inline-flex;">
     <div class="product-img" style="margin-left: 5px;width: 60px;height: 60px;margin: 5px;">
       <img href="" src="<%=p.getImage()%>">
     </div>
