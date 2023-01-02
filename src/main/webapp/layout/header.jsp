@@ -54,6 +54,9 @@
                                     <a href="LogoutController" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
+                                    <a href="my-orders.jsp" class="dropdown-item">
+                                        <span><i data-feather="x-square"></i> Đơn hàng của tôi</span>
+                                    </a>
                                 </div>
                             </li>
                         </div>

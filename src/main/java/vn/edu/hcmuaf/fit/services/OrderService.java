@@ -33,4 +33,8 @@ public class OrderService {
     public void updateStatus(String orderId, int status){
         new OrderDAO().updateStatus(orderId,status);
     }
+
+    public List<Orders> getOrdersByUser(String id){
+        return new OrderDAO().getOrdersByUser(id);
+    }
 }
