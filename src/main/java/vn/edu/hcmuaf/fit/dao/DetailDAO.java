@@ -66,10 +66,10 @@ public class DetailDAO {
         if (category != null)
         {
             switch (category) {
-                case "all>" -> query += " and pc.ParentID != \"null\"  ";
-                case "dog" -> query += " and pc.ParentID = 1";
-                case "cat" -> query += " and pc.ParentID = 2";
-                case "accessory" -> query += " and pc.ParentID = 3";
+                case "all" -> query += " and pc.ParentID != \"null\"  ";
+                case "1" -> query += " and pc.ParentID = 1";
+                case "2" -> query += " and pc.ParentID = 2";
+                case "3" -> query += " and pc.ParentID = 3";
             }
         }
         String finalquery = query;
