@@ -21,13 +21,12 @@ public class AllProduct extends HttpServlet{
         String size = request.getParameter("size");
         String amount = request.getParameter("amount");
         int amount_int = 0;
-        List<Product> list = dao.getFullProduct( amount_int,  category, price,  size,  orderby);
+        List<Product> list = dao.getFullProduct(  category, price,  size,  orderby);
         request.setAttribute("list", list);
         request.setAttribute("numb", list.size());
         request.getRequestDispatcher("all-products.jsp").forward(request,response);
         System.out.println(category);
-        System.out.println(dao.getFullProduct( amount_int,  category, price,  size,  orderby));
-
+        System.out.println(dao.getFullProduct( category, price,  size,  orderby));
     }
 
     @Override
