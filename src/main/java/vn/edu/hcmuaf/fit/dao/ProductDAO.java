@@ -189,17 +189,10 @@ public class ProductDAO {
     public List<Product> getFullProduct(String category,String price, String size, String order_by) {
         String query = "select distinct p.productId,p.ProductName,p.Image,p.Price, p.cannang from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
-        if ( category.equals("dog")) {
-            query += "AND pfc.cate_id=1 \n";
-        }
-        if (category.equals("cat")) {
-            query += "AND pfc.cate_id=2 \n";
-        }
-        if (category.equals("accessory")) {
-            query += "AND pfc.cate_id=3 \n";
-        }
-        if (category.equals("all")) {
-            query += query;
+        if ( category != null) {
+            if (!category.equals("all")) {
+                query += "AND pfc.cate_id= ? \n";
+            }
         }
         if (price != null) {
             if (!price.equals("-1")) {
@@ -222,10 +215,22 @@ public class ProductDAO {
             }
         }
         String Finalquery = query;
+        List<Product> list = null;
+        if (!category.equals("all")) {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(Finalquery)
+                        .bind(0, category)
 
-        List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery(Finalquery).mapToBean(Product.class).stream().collect(Collectors.toList());
-        });
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        } else
+        {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(Finalquery)
+
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        }
         return list;
     }
 
@@ -234,17 +239,10 @@ public class ProductDAO {
     public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
         String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
-        if ( category.equals("dog")) {
-            query += "AND pfc.cate_id=1 \n";
-        }
-        if (category.equals("cat")) {
-            query += "AND pfc.cate_id=2 \n";
-        }
-        if (category.equals("accessory")) {
-            query += "AND pfc.cate_id=3 \n";
-        }
-        if (category.equals("all")) {
-            query += query;
+        if ( category != null) {
+            if (!category.equals("all")) {
+                query += "AND pfc.cate_id= ? \n";
+            }
         }
         if (price != null) {
             if (!price.equals("-1")) {
@@ -256,6 +254,7 @@ public class ProductDAO {
             String[] splited = size.split("-");
             query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
         }
+
         if (order_by != null) {
             switch (order_by) {
                 case "0" -> query += "\n ";
@@ -266,12 +265,22 @@ public class ProductDAO {
             }
         }
         String Finalquery = query + "limit ?,9; \n";
-        List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery(Finalquery)
-                    .bind(0, amount)
-                    .mapToBean(Product.class).stream().collect(Collectors.toList());
-        });
-        System.out.println(amount);
+        List<Product> list = null;
+        if (!category.equals("all")) {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(Finalquery)
+                        .bind(0, category)
+                        .bind(1, amount)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        } else
+        {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(Finalquery)
+                        .bind(0, amount)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+            }
         return list;
     }
 
@@ -339,7 +348,6 @@ public class ProductDAO {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
-
 //    public Product getProductDetail(String Id){
 //        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
 //                        "p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy," +
@@ -383,7 +391,11 @@ public class ProductDAO {
 //        System.out.println(new ProductDAO().getTop9Product("cat"));
         // int amount, String category,String price, String size, String order_by
 //        System.out.println(new ProductDAO().Test(9,"cat","20000000-200000000","0-2","3"));
+
+          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
+
 //          System.out.println(new ProductDAO().getNext9Product(0,"dog","10000000-150000000","2-5","2"));
+
 //        System.out.println(new ProductDAO().test("dog"));
 //         new ProductDAO().updateProduct("P1129","2201","name","img","123123","ádfsadfadf","ƯEDWffsdfF","2","sdfsdfsf","sdfsdfsff","4","1");
 //        System.out.println(1000.2-(1000.2*10/100));

@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-<<<<<<< HEAD
-Built-By: ADMIN
-Build-Jdk: Oracle OpenJDK version 18.0.1
-=======
-Built-By: Nguyen Ngoc Huy
-Build-Jdk: 18.0.2
->>>>>>> b86bb0504268ef392e1a8bbf03bd2b3a913eef64
+Built-By: admin
+Build-Jdk: Amazon Corretto version 18.0.2
 
