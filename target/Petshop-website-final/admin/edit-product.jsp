@@ -608,25 +608,6 @@
                                                                    placeholder="Đồng" required/>
 
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                                <h5>Giảm giá</h5>
-                                                            </div>
-                                                            <select class="form-select mb-3" name="status" id="status">
-                                                                <%if(p!=null){
-                                                                    if(p.getStatus()==1){%>
-                                                                <option value="1" selected>Hiển thị</option>
-                                                                <option value="0">Ẩn</option>
-                                                                <%}else {%>
-                                                                <option value="1" >Hiển thị</option>
-                                                                <option value="0" selected>Ẩn</option>
-                                                                <%}
-                                                                }else {%>
-                                                                <option value="1" selected>Hiển thị</option>
-                                                                <option value="0">Ẩn</option>
-                                                                <%}%>
-
-                                                            </select>
-
-                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Trạng thái</h5>
                                                             </div>
                                                             <select class="form-select mb-3" name="status" id="status">
