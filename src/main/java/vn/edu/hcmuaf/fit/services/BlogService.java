@@ -11,5 +11,16 @@ public class BlogService {
         BlogDAO dao = new BlogDAO();
         return dao.getListBlogs();
     }
-
+    public static Blogs getContent(String id) {
+        BlogDAO dao = new BlogDAO();
+        return dao.getContent(id);
+    }
+    public static  List<Blogs> Theloai() {
+        BlogDAO dao = new BlogDAO();
+        return dao.Theloai();
+    }
+    public static  List<Blogs> getNewBlog() {
+        BlogDAO dao = new BlogDAO();
+        return dao.NewBlogs();
+    }
 }
