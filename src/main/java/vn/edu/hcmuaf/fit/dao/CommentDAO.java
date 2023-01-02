@@ -71,4 +71,15 @@ public class CommentDAO  {
         });
         return id;
     }
+
+    public List<Comment> getComments() {
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
+                .mapToBean(Comment.class).stream().collect(Collectors.toList()));
+    }
+
+    public void removeComment(String id){
+         JDBIConnector.get().withHandle(handle -> handle.createUpdate("delete from productcomment where ID=?")
+                .bind(0,id)
+                .execute());
+    }
 }
