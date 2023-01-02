@@ -1,7 +1,9 @@
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Blogs" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Quản lý Petshop</title>
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
@@ -23,9 +25,11 @@
     <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
 
     <!-- font css -->
-    <link rel="stylesheet" href="assets/fonts/feather.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome.css">
-    <link rel="stylesheet" href="assets/fonts/material.css">
+    <link rel="stylesheet" href="assets/fonts/feather.css" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="assets/fonts/material.css" />
+    <link rel="stylesheet" href="assets/css/list/style1.css" />
+    <link rel="stylesheet" href="assets/css/list/bootstrap1.min.css" />
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
@@ -237,148 +241,131 @@
         <div class="row">
             <div class="row gx-3 gy-2 mb-3">
               <h2 style=" font-weight: 800; text-align: center; margin-bottom: 30px;">Danh sách tin tức</h2>
+                <% List<Blogs> list = new BlogService().AdminListBlog();
+                for (Blogs b : list) {
+        %>
               <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
                 <div class="product-card-container h-100">
                   <div class="position-relative text-decoration-none product-card h-100">
                     <div class="d-flex flex-column justify-content-between h-100">
                       <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-1.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
+                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>" alt=""></div><a class="stretched-link text-decoration-none" href="">
+                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> <%=b.getCreateDate()%></p>
                         </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe ...</h5>
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
+                        <h4 class="mb-2 lh-sm line-clamp-3"><%=b.getBlogName()%></h4>
+                          <div class="d-grid">
+                              <a class="btn_2" href="" style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
+                              <a class="btn_2" href="" style="margin-top: 3px; text-align: center;">Xóa</a>
+                          </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                <div class="product-card-container h-100">
-                  <div class="position-relative text-decoration-none product-card h-100">
-                    <div class="d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-2.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
-                        </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn ...</h5>
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                <div class="product-card-container h-100">
-                  <div class="position-relative text-decoration-none product-card h-100">
-                    <div class="d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-3.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
-                        </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Phải làm sao khi chó bị đau chân và đi khập khiễng ?</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ...</h5>
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                <div class="product-card-container h-100">
-                  <div class="position-relative text-decoration-none product-card h-100">
-                    <div class="d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-4.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
-                        </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Danh sách các thuốc tẩy giun cho chó con an toàn</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một ...</h5>
-                        
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                <div class="product-card-container h-100">
-                  <div class="position-relative text-decoration-none product-card h-100">
-                    <div class="d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-5.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
-                        </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Cách chăm sóc chó mang thai tại nhà cần phải biết</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Việc chăm sóc chó mang thai tại nhà cũng không hề đơn giản. Nếu bạn không có ...</h5>
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                <div class="product-card-container h-100">
-                  <div class="position-relative text-decoration-none product-card h-100">
-                    <div class="d-flex flex-column justify-content-between h-100">
-                      <div>
-                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-6.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">
-                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>
-                        </a>
-                        <h4 class="mb-2 lh-sm line-clamp-3">Danh sách các thuốc tẩy giun cho chó con an toàn</h4>
-                      </div>
-                      <h5 class="text-600 mb-0">Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một ...</h5>
-                      <div>
-                        <div class="d-flex align-items-center mb-1 mt-3">
-                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <% } %>
+<%--              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">--%>
+<%--                <div class="product-card-container h-100">--%>
+<%--                  <div class="position-relative text-decoration-none product-card h-100">--%>
+<%--                    <div class="d-flex flex-column justify-content-between h-100">--%>
+<%--                      <div>--%>
+<%--                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-2.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">--%>
+<%--                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>--%>
+<%--                        </a>--%>
+<%--                        <h4 class="mb-2 lh-sm line-clamp-3">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</h4>--%>
+<%--                      </div>--%>
+<%--                      <h5 class="text-600 mb-0">Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn ...</h5>--%>
+<%--                      <div>--%>
+<%--                        <div class="d-flex align-items-center mb-1 mt-3">--%>
+<%--                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>--%>
+<%--                        </div>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">--%>
+<%--                <div class="product-card-container h-100">--%>
+<%--                  <div class="position-relative text-decoration-none product-card h-100">--%>
+<%--                    <div class="d-flex flex-column justify-content-between h-100">--%>
+<%--                      <div>--%>
+<%--                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-3.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">--%>
+<%--                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>--%>
+<%--                        </a>--%>
+<%--                        <h4 class="mb-2 lh-sm line-clamp-3">Phải làm sao khi chó bị đau chân và đi khập khiễng ?</h4>--%>
+<%--                      </div>--%>
+<%--                      <h5 class="text-600 mb-0">Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ...</h5>--%>
+<%--                      <div>--%>
+<%--                        <div class="d-flex align-items-center mb-1 mt-3">--%>
+<%--                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>--%>
+<%--                        </div>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">--%>
+<%--                <div class="product-card-container h-100">--%>
+<%--                  <div class="position-relative text-decoration-none product-card h-100">--%>
+<%--                    <div class="d-flex flex-column justify-content-between h-100">--%>
+<%--                      <div>--%>
+<%--                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-4.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">--%>
+<%--                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>--%>
+<%--                        </a>--%>
+<%--                        <h4 class="mb-2 lh-sm line-clamp-3">Danh sách các thuốc tẩy giun cho chó con an toàn</h4>--%>
+<%--                      </div>--%>
+<%--                      <h5 class="text-600 mb-0">Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một ...</h5>--%>
+<%--                        --%>
+<%--                      <div>--%>
+<%--                        <div class="d-flex align-items-center mb-1 mt-3">--%>
+<%--                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>--%>
+<%--                        </div>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">--%>
+<%--                <div class="product-card-container h-100">--%>
+<%--                  <div class="position-relative text-decoration-none product-card h-100">--%>
+<%--                    <div class="d-flex flex-column justify-content-between h-100">--%>
+<%--                      <div>--%>
+<%--                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-5.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">--%>
+<%--                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>--%>
+<%--                        </a>--%>
+<%--                        <h4 class="mb-2 lh-sm line-clamp-3">Cách chăm sóc chó mang thai tại nhà cần phải biết</h4>--%>
+<%--                      </div>--%>
+<%--                      <h5 class="text-600 mb-0">Việc chăm sóc chó mang thai tại nhà cũng không hề đơn giản. Nếu bạn không có ...</h5>--%>
+<%--                      <div>--%>
+<%--                        <div class="d-flex align-items-center mb-1 mt-3">--%>
+<%--                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>--%>
+<%--                        </div>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="col-12 col-sm-6 col-md-4 col-xxl-2">--%>
+<%--                <div class="product-card-container h-100">--%>
+<%--                  <div class="position-relative text-decoration-none product-card h-100">--%>
+<%--                    <div class="d-flex flex-column justify-content-between h-100">--%>
+<%--                      <div>--%>
+<%--                        <div class="border border-1 border-2002 rounded-3 position-relative mb-3"><img class="img-fluid" src="assets/images/blog/blog-6.jpg" alt=""></div><a class="stretched-link text-decoration-none" href="">--%>
+<%--                          <p class=" text-700 mb-2"><i data-feather="calendar"></i> December 11, 2021</p>--%>
+<%--                        </a>--%>
+<%--                        <h4 class="mb-2 lh-sm line-clamp-3">Danh sách các thuốc tẩy giun cho chó con an toàn</h4>--%>
+<%--                      </div>--%>
+<%--                      <h5 class="text-600 mb-0">Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một ...</h5>--%>
+<%--                      <div>--%>
+<%--                        <div class="d-flex align-items-center mb-1 mt-3">--%>
+<%--                          <a class="blog_btn">ĐỌC THÊM  <i data-feather="arrow-right"></i></a>--%>
+<%--                        </div>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
             </div>
             <div class="d-flex justify-content-end">
-                <ul class="pagination mb-6">
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"></path></svg><!-- <span class="fas fa-chevron-left"> </span> Font Awesome fontawesome.com -->
-                    </a>
-                  </li>
-                  <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link pe-0" href="#"> <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></a>
-                  </li>
-                </ul>
             </div>
           </div>
         </div>

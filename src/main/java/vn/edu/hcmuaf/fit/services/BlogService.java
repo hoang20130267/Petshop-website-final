@@ -23,4 +23,8 @@ public class BlogService {
         BlogDAO dao = new BlogDAO();
         return dao.NewBlogs();
     }
+    public  static List<Blogs> AdminListBlog() {
+        BlogDAO dao = new BlogDAO();
+        return dao.AdminListBlog();
+    }
 }
