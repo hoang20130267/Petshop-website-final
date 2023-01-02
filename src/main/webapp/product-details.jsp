@@ -299,13 +299,15 @@
                         Product p = new ProductDAO().getProductDetail(product.getProductId());%>
                     <%if (Integer.parseInt(p.getQuantity())> 0) {%>
                     <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
+                    <a href="#" class="heart-icon" id="addWishlist-<%=p.getProductId()%>"><span class="icon_heart_alt"></span></a>
                     <%}%>
                     <%
                     } else {%>
                     <a href="login.jsp" class="primary-btn snow">Thêm vào giỏ hàng</a>
+                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <%  }
                     %>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+
                     <ul>
                         <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
                         <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
@@ -461,6 +463,7 @@
 <script>
     $(document).ready(function (){
         addcart();
+        addwishlist();
     })
     function addcart() {
         $(".snow").each(function (e) {
@@ -478,6 +481,27 @@
                             $(this).text(data)
                         })
                         $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
+                    }
+                })
+            })
+        });
+    }
+    function addwishlist() {
+        $(".add-wishlist").each(function (e) {
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                $.ajax({
+                    url: "AddToWishlistController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                    },
+                    success: function (data) {
+                        $(".header__second__wishlist--notice").each(function () {
+                            $(this).text(data)
+                        })
+                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
                     }
                 })
             })
