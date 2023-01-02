@@ -3,7 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.OrderService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
 <%@ page import="java.text.NumberFormat" %>
-<%@ page import="java.util.Locale" %><%--
+<%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %><%--
   Created by IntelliJ IDEA.
   User: Nguyen Ngoc Huy
   Date: 1/2/2023
@@ -313,6 +314,10 @@
   List<OrderDetail> listOd = OrderService.getInstance().getOrderDetailsById(orderId);
   Orders order = OrderService.getInstance().getOrderByIdOrder(orderId);
 %>
+<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+  if (user == null) {
+    response.sendRedirect("login.jsp");
+  }%>
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 
 <!-- Hero Section Begin -->
