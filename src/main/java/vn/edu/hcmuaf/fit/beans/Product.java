@@ -8,10 +8,10 @@ public class Product implements Serializable {
     private int status;
     private String image;
     private int price;
-    private String promotionalPrice;
+    private int promotionalPrice;
     private String quantity;
     private int warranty;
-    private boolean newProduct;
+    private int Promotional;
     private String description;
     private String dital;
     private String createBy;
@@ -33,7 +33,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, String promotionalPrice, String quantity, int warranty, boolean newProduct, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -42,7 +42,7 @@ public class Product implements Serializable {
         this.promotionalPrice = promotionalPrice;
         this.quantity = quantity;
         this.warranty = warranty;
-        this.newProduct = newProduct;
+        this.Promotional = Promotional;
         this.description = description;
         this.dital = dital;
         this.createBy = createBy;
@@ -56,6 +56,10 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
+    }
+
+    public void setPromotional(int promotional) {
+        Promotional = promotional;
     }
 
     public String getProductId() {
@@ -98,11 +102,11 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getPromotionalPrice() {
+    public int getPromotionalPrice() {
         return promotionalPrice;
     }
 
-    public void setPromotionalPrice(String promotionalPrice) {
+    public void setPromotionalPrice(int promotionalPrice) {
         this.promotionalPrice = promotionalPrice;
     }
 
@@ -122,12 +126,12 @@ public class Product implements Serializable {
         this.warranty = warranty;
     }
 
-    public boolean isNewProduct() {
-        return newProduct;
+    public int getPromotional() {
+        return Promotional;
     }
 
-    public void setNewProduct(boolean newProduct) {
-        this.newProduct = newProduct;
+    public void setNewProduct(int Promotional) {
+        this.Promotional = Promotional;
     }
 
     public String getDescription() {
@@ -245,7 +249,7 @@ public class Product implements Serializable {
                 ", promotionalPrice='" + promotionalPrice + '\'' +
                 ", quantity='" + quantity + '\'' +
                 ", warranty=" + warranty +
-                ", newProduct=" + newProduct +
+                ", newProduct=" + Promotional +
                 ", description='" + description + '\'' +
                 ", dital='" + dital + '\'' +
                 ", createBy='" + createBy + '\'' +

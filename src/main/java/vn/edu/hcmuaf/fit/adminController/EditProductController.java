@@ -32,16 +32,18 @@ public class EditProductController extends HttpServlet {
         String CateParent = request.getParameter("CateParent");
         String cateChild = request.getParameter("cateChild");
         String status = request.getParameter("status");
+        String Promotional = request.getParameter("Promotional");
+        String PromotionalPrice = request.getParameter("PromotionalPrice");
 
         CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {
-        dao.insertProduct(AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status);
+        dao.insertProduct(AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
         } else {
-            dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status);
+            dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
         }

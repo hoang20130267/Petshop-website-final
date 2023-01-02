@@ -306,10 +306,10 @@
                                 <h5><%=cart.getData().get(id).getProductName()%>
                                 </h5>
                             </td>
-                            <%if (cart.getData().get(id).getSales() != null) {%>
+                            <%if (cart.getData().get(id).getPromotional() ==1) {%>
                             <td class="shoping__cart__price">
-                                <%=format.format(cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount()))%>
-                                ₫ - (-<%=cart.getData().get(id).getSales().getDiscount()%>%)
+                                <%=format.format(cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100))%>
+                                ₫ (-<%=cart.getData().get(id).getPromotionalPrice()%>%)
                             </td>
                             <%} else {%>
                             <td class="shoping__cart__price">
@@ -329,9 +329,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <%if (cart.getData().get(id).getSales() != null) {%>
+                            <%if (cart.getData().get(id).getPromotional() ==1) {%>
                             <td class="shoping__cart__total" id="thanh_tien">
-                                <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount())))%>
+                                <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100)))%>
                                 ₫
                             </td>
                             <%} else {%>
@@ -358,22 +358,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                        &nbsp; Cập nhật giỏ hàng</a>
+                    <a href="all-products?category=all" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Mã giảm giá</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Nhập mã giảm giá">
-                            <button type="submit" class="site-btn">APPLY</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<%--            <div class="col-lg-6">--%>
+<%--                <div class="shoping__continue">--%>
+<%--                    <div class="shoping__discount">--%>
+<%--                        <h5>Mã giảm giá</h5>--%>
+<%--                        <form action="#">--%>
+<%--                            <input type="text" placeholder="Nhập mã giảm giá">--%>
+<%--                            <button type="submit" class="site-btn">APPLY</button>--%>
+<%--                        </form>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Tổng tiền giỏ hàng</h5>

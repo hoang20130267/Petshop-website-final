@@ -134,7 +134,6 @@
             text-overflow: ellipsis;
             line-height: 25px;
             -webkit-line-clamp: 2;
-            height: 75px;
             display: -webkit-box;
             -webkit-box-orient: vertical;
         }
@@ -280,8 +279,7 @@
                             <h4>Thể loại</h4>
                             <input type="radio" id="0" class="theloai" name="theloai" value="-1">
                             <label for="0">Tất cả</label><br>
-                            <%
-                                List<Blogs> theloai = new BlogService().Theloai();
+                            <% List<Blogs> theloai = new BlogService().Theloai();
                                 for (Blogs b: theloai) {
                             %>
                             <input type="radio" id="<%=b.getCatId()%>" class="theloai" name="theloai" value="<%=b.getCatId()%>">
@@ -291,7 +289,7 @@
                         <div class="blog__sidebar__item">
                             <h4>Tin mới nhất</h4>
                             <div class="blog__sidebar__recent">
-                                <% List<Blogs> listNew = new BlogService().getNewBlog();
+                                <% List<Blogs> listNew = new BlogService().NewBlogs();
                                     for(Blogs b : listNew) {
                                 %>
                                 <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item">
@@ -303,18 +301,9 @@
                                         <span><%=b.getCreateDate()%></span>
                                     </div>
                                 </a>
-                                <%  }%>
+                                <% }%>
                             </div>
                         </div>
-<%--                        <div class="blog__sidebar__item">--%>
-<%--                            <h4>Từ khóa</h4>--%>
-<%--                            <div class="blog__sidebar__item__tags">--%>
-<%--                                <a href="#">Chó</a>--%>
-<%--                                <a href="#">Mèo</a>--%>
-<%--                                <a href="#">Chăm sóc</a>--%>
-<%--                                <a href="#">Đời Sống</a>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">

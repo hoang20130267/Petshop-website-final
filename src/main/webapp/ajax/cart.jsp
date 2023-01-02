@@ -39,10 +39,10 @@
                             <h5><%=cart.getData().get(id).getProductName()%>
                             </h5>
                         </td>
-                        <%if (cart.getData().get(id).getSales() != null) {%>
+                        <%if (cart.getData().get(id).getPromotional() ==1) {%>
                         <td class="shoping__cart__price">
-                            <%=format.format(cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount()))%>
-                            ₫ - (-<%=cart.getData().get(id).getSales().getDiscount()%>%)
+                            <%=format.format(cart.getData().get(id).getPrice() -( cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100))%>
+                            ₫ - (-<%=cart.getData().get(id).getPromotionalPrice()%>%)
                         </td>
                         <%} else {%>
                         <td class="shoping__cart__price">
@@ -62,9 +62,9 @@
                                 </div>
                             </div>
                         </td>
-                        <%if (cart.getData().get(id).getSales() != null) {%>
+                        <%if (cart.getData().get(id).getPromotional() ==1) {%>
                         <td class="shoping__cart__total" id="thanh_tien">
-                            <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount())))%>
+                            <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100)))%>
                             ₫
                         </td>
                         <%} else {%>
@@ -109,12 +109,9 @@
         <div class="col-lg-6">
             <div class="shoping__checkout">
                 <h5>Tổng tiền giỏ hàng</h5>
-<%--                <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span>--%>
-
-                                    <ul>
-<%--                                        <li>Tạm tính <span>85.000.000 Đồng</span></li>--%>
-                                        <li>Tổng tiền <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
-                                    </ul>
+                    <ul>
+                        <li>Tổng tiền <span class="total__price"><%=cart != null ? format.format(cart.total()) : 0%>₫</span></li>
+                    </ul>
                 <a href="checkout.jsp" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
             </div>
         </div>
