@@ -317,6 +317,9 @@ Created by IntelliJ IDEA.
 
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
     List<Orders> orders = OrderService.getInstance().getOrdersByUser(user.getId());%>
 <!-- Header Section Begin -->
 <jsp:include page="layout/header.jsp"></jsp:include>
