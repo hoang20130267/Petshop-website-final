@@ -35,6 +35,10 @@ public class CommentDAO  {
         });
         return cmt;
     }
+    public List<Comment> getComments() {
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
+                .mapToBean(Comment.class).stream().collect(Collectors.toList()));
+    }
     public static String taoIDComment() {
         String numbers = "0123456789";
         StringBuilder stringBuilder = new StringBuilder("P");
