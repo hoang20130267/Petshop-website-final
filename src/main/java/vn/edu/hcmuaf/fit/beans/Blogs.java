@@ -14,11 +14,12 @@ public class Blogs implements Serializable {
     private String createDate;
     private String updateBy;
     private String updateDate;
-
+    private String catName;
+    private String catId;
     public Blogs() {
     }
 
-    public Blogs(String blogId, String blogName, String status, String image, String description, String dital, String createBy, String createDate, String updateBy, String updateDate) {
+    public Blogs(String blogId, String blogName, String status, String image, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String catName,String catId) {
         this.blogId = blogId;
         this.blogName = blogName;
         Status = status;
@@ -29,6 +30,24 @@ public class Blogs implements Serializable {
         this.createDate = createDate;
         this.updateBy = updateBy;
         this.updateDate = updateDate;
+        this.catName = catName;
+        this.catId = catId;
+    }
+
+    public String getCatName() {
+        return catName;
+    }
+
+    public String getCatId() {
+        return catId;
+    }
+
+    public void setCatId(String catId) {
+        this.catId = catId;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
     }
 
     public String getBlogId() {
@@ -124,6 +143,8 @@ public class Blogs implements Serializable {
                 ", createDate='" + createDate + '\'' +
                 ", updateBy='" + updateBy + '\'' +
                 ", updateDate='" + updateDate + '\'' +
+                ", catName='" + catName + '\'' +
+                ", catId='" + catId + '\'' +
                 '}';
     }
 }
