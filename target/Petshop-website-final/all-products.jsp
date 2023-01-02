@@ -343,93 +343,96 @@
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
-                    <div class="row">
+                    <div class="">
                         <div class="product__discount__slider owl-carousel" style="z-index: -1">
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/products/dog/sp1.jpg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
+                            <%List<Product> listSale = ProductService.getInstance().listProductSale();
+                                for (Product pd:listSale) {%>
+                                    <div class="col-lg-4">
+                                        <div class="product__discount__item">
+                                            <div class="product__discount__item__pic set-bg"
+                                                 data-setbg="<%=pd.getImage()%>">
+                                                <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
+                                                <ul class="product__item__pic__hover">
+                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="product__discount__item__text">
+                                                <h5><a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%></a></h5>
+                                                <div class="product__item__price"><%=format.format(pd.getPrice()-( pd.getPrice() *pd.getPromotionalPrice()/100))%>đ<span><%=pd.getPrice()%>đ</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                               <% }%>
+
+<%--                            <div class="col-lg-4">--%>
+<%--                                <div class="product__discount__item">--%>
+<%--                                    <div class="product__discount__item__pic set-bg"--%>
+<%--                                         data-setbg="img/products/cat/sp01.jpg">--%>
+<%--                                        <div class="product__discount__percent">-20%</div>--%>
+<%--                                        <ul class="product__item__pic__hover">--%>
 <%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
 <%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5><a href="#">ALASKA Hồng Phấn</a></h5>
-                                        <div class="product__item__price">18.000.000đ<span>20.000.000đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/products/cat/sp01.jpg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5><a href="#">Mèo Anh lông ngắn Bicolor Lilac</a></h5>
-                                        <div class="product__item__price">7.000.000đ<span>13.000.000đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/products/dog/sp3.png">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>
-                                        <div class="product__item__price">18.000.000đ <span>22.000.000đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/products/cat/sp02.jpg">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5><a href="#">Mèo Anh lông ngắn nâu trắng</a></h5>
-                                        <div class="product__item__price">8.000.000đ<span>11.000.000đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="img/products/dog/sp4.png">
-                                        <div class="product__discount__percent">-20%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>
-                                        <div class="product__item__price">15.000.000đ<span>19.000.000đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                        </ul>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product__discount__item__text">--%>
+<%--                                        <h5><a href="#">Mèo Anh lông ngắn Bicolor Lilac</a></h5>--%>
+<%--                                        <div class="product__item__price">7.000.000đ<span>13.000.000đ</span></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-lg-4">--%>
+<%--                                <div class="product__discount__item">--%>
+<%--                                    <div class="product__discount__item__pic set-bg"--%>
+<%--                                         data-setbg="img/products/dog/sp3.png">--%>
+<%--                                        <div class="product__discount__percent">-20%</div>--%>
+<%--                                        <ul class="product__item__pic__hover">--%>
+<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                        </ul>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product__discount__item__text">--%>
+<%--                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>--%>
+<%--                                        <div class="product__item__price">18.000.000đ <span>22.000.000đ</span></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-lg-4">--%>
+<%--                                <div class="product__discount__item">--%>
+<%--                                    <div class="product__discount__item__pic set-bg"--%>
+<%--                                         data-setbg="img/products/cat/sp02.jpg">--%>
+<%--                                        <div class="product__discount__percent">-20%</div>--%>
+<%--                                        <ul class="product__item__pic__hover">--%>
+<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                        </ul>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product__discount__item__text">--%>
+<%--                                        <h5><a href="#">Mèo Anh lông ngắn nâu trắng</a></h5>--%>
+<%--                                        <div class="product__item__price">8.000.000đ<span>11.000.000đ</span></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-lg-4">--%>
+<%--                                <div class="product__discount__item">--%>
+<%--                                    <div class="product__discount__item__pic set-bg"--%>
+<%--                                         data-setbg="img/products/dog/sp4.png">--%>
+<%--                                        <div class="product__discount__percent">-20%</div>--%>
+<%--                                        <ul class="product__item__pic__hover">--%>
+<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
+<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
+<%--                                        </ul>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product__discount__item__text">--%>
+<%--                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>--%>
+<%--                                        <div class="product__item__price">15.000.000đ<span>19.000.000đ</span></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                 </div>
