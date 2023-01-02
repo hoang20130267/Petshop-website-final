@@ -21,8 +21,7 @@ public class CommentDAO  {
     }
     public static List<Comment> getListCommentByProductID(String id) {
         List<Comment> cmt = JDBIConnector.get().withHandle(handle -> {
-           return handle.createQuery("select * from productcomment pcmt inner join infor_user iu on pcmt.CustomerID = iu.id_user" +
-                           "where pcmt.ProductID = ?")
+           return handle.createQuery("select * from productcomment where ProductID = ?")
                    .bind(0,id)
                    .mapToBean(Comment.class).stream().collect(Collectors.toList());
         });
@@ -70,5 +69,14 @@ public class CommentDAO  {
             return true;
         });
         return id;
+    }
+    public void RemoveComment(String id) {
+        JDBIConnector.get().withHandle(handle -> {
+                    handle.createUpdate("DELETE FROM productcomment WHERE ID = ?")
+                            .bind(0, id)
+                            .execute();
+                    return true;
+                }
+        );
     }
 }
