@@ -80,6 +80,9 @@ public class ProductService {
         return new ProductDAO().listProductSale();
     }
 
+    public List<Product> listRelateTo(String id) {
+        return  new ProductDAO().listRelateTo(id);
+    }
     public static void main(String[] args) {
         System.out.println(getData2());
     }

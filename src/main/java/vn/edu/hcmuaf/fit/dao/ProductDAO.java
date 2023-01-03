@@ -373,6 +373,19 @@ public class ProductDAO {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
+
+    public List<Product> listRelateTo(String id) {
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("\tSELECT p.productId,p.ProductName,p.Price, p.Image\n" +
+                        "\tfrom product p join product_from_cate pfc on p.productId = pfc.product_id\n" +
+                        "\tWHERE pfc.cate_id in (SELECT pfc1.cate_id\n" +
+                        "\tFROM product p1 join product_from_cate pfc1 on p1.productId = pfc1.product_id \n" +
+                        "\tWHERE p1.productId = ?\n" +
+                        "\t) AND p.productId != ? and `Status` =1\n" +
+                        "ORDER BY pfc.cate_id DESC\n" +
+                        "LIMIT 4;").bind(0,id).bind(1,id)
+                .mapToBean(Product.class).stream().collect(Collectors.toList()));
+    }
+
 //    public Product getProductDetail(String Id){
 //        Product product=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price," +
 //                        "p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Desription,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy," +
@@ -413,13 +426,23 @@ public class ProductDAO {
 //        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
 //        System.out.println(new ProductDAO().searchByName2("chuong"));
     public static void main(String[] args){
+        System.out.println(new ProductDAO().listRelateTo("1001"));
 //        System.out.println(new ProductDAO().getTop9Product("cat"));
         // int amount, String category,String price, String size, String order_by
 //        System.out.println(new ProductDAO().Test(9,"cat","20000000-200000000","0-2","3"));
 
+<<<<<<< HEAD
+
+//          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
+
+//        System.out.println(new ProductDAO().getNext9Product(0,"1","10000000-150000000","2-5","2"));
+//        System.out.println(new ProductDAO().getFullProduct("all","10000000-150000000","2-5","2"));
+
+=======
 //          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
   //        System.out.println(new ProductDAO().getNext9Product(0,"1","10000000-150000000","2-5","2"));
         System.out.println(new ProductDAO().getFullProduct("all","10000000-150000000","2-5","2"));
+>>>>>>> 82fb8f7fe7d1c5d8eeb4da07613834150f0750a2
 //          System.out.println(new ProductDAO().getNext9Product(0,"dog","10000000-150000000","2-5","2"));
 
 //        System.out.println(new ProductDAO().test("dog"));
