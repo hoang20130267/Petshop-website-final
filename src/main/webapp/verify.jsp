@@ -50,7 +50,8 @@
                             </div>
                         </div>
                         <div>
-                            <div style="padding-top: 28px; padding-left: 30px;width:300px">                  <h5 class="error" style="color: red; font-size: 16px"></h5>
+                            <div style="padding-top: 28px; padding-left: 30px;width:300px">
+                                <h5 class="error" style="color: red; font-size: 16px"></h5>
                                 <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
 
                                 <input type="text" id="role" name="role" value="register" style="display: none">

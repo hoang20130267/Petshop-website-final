@@ -510,11 +510,8 @@
                                                                         for (Detail cate : ParentCates) {
                                                                             if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
                                                                 %>
-                                                                <option value="<%=p.getCatName()%>"
-                                                                        selected><%=p.getCatName()%>
-                                                                </option>
                                                                 <option value="<%=cate.getCatName()%>"
-                                                                        ><%=cate.getCatName()%>
+                                                                        selected><%=cate.getCatName()%>
                                                                 </option>
                                                                 <%} else {%>
                                                                 <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
