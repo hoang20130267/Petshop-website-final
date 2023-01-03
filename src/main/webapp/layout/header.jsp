@@ -195,12 +195,17 @@
             $("#result-search").css("display", "block");
         })
         $("#search-keyword").on("blur", function () {
-            $("#result-search").css("display", "none");
+            if ($("#result-search .result:hover").length !== 0) {
+            $("#result-search").css("display", "block");
+            } else{
+                $("#result-search").css("display", "none");
+            }
         })
     })
 
     function searchByName(param) {
         const txtSearch = param.value;
+        $(".result").css("display", "block");
         if (txtSearch.length > 0) {
             $.ajax({
                 url: "/Petshop_website_final_war/search-main",
