@@ -22,7 +22,7 @@ public class AddCategoryProduct extends HttpServlet {
         String cateparent=request.getParameter("cateparent");
         String status = request.getParameter("status");
         String cid = request.getParameter("cid");
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("user");
+        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
 
         if(cid==""){
             DetailService.getInstance().insertCateProduct(AdminUser.getId(),CateName,cateparent);

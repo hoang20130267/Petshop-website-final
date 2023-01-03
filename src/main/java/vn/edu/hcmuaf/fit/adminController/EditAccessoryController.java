@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -17,22 +18,29 @@ public class EditAccessoryController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String pid = request.getParameter("pid");
+        String pid = request.getParameter("id");
         String pname = request.getParameter("name");
         String pprice = request.getParameter("price");
-        String ppromo = request.getParameter("promoPrice");
+        String PromotionalPrice = request.getParameter("PromotionalPrice");
         String pdescription = request.getParameter("description");
+        String detail = request.getParameter("detail");
+        String mausac = request.getParameter("mausac");
+        String cateChild = request.getParameter("cateChild");
+        String Promotional = request.getParameter("Promotional");
         String pquantity = request.getParameter("quantity");
         String pimage = request.getParameter("image");
+        String cannang = request.getParameter("cannang");
+        String status = request.getParameter("status");
+        CustomerUser admin = (CustomerUser) request.getSession().getAttribute("admin");
         HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
         String cate = "3";
-
+        System.out.println(pid);
         if (pid.length() < 1) {
-            dao.insertAccessory(pname, pimage, pprice, ppromo, pdescription, pquantity, cate);
+            dao.insertAccessory(admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice);
 
         } else {
-            dao.updateAccessory(pname, pimage, pprice, ppromo, pdescription, pquantity, cate);
+            dao.updateAccessory(pid,admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice);
 
         }
         response.sendRedirect("list-accessory");

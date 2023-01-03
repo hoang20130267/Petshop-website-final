@@ -21,7 +21,7 @@ public class AddCategoryBlog extends HttpServlet {
         String cateparent = request.getParameter("cateparent");
         String status = request.getParameter("status");
         String cbid = request.getParameter("cbid");
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("user");
+        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
 
         if (cbid == "") {
             DetailService.getInstance().insertCateBlog(AdminUser.getId(), CateName, cateparent);
