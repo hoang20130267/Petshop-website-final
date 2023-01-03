@@ -332,6 +332,19 @@
 <%--                            </label>--%>
 <%--                        </div>--%>
                     </div>
+                    <div class="sidebar__item">
+                        <h4>Sắp xếp</h4>
+                        <input type="radio" id="select1" class="sapxep" name="sapxep" value="0">
+                        <label for="select1">Mặc định</label><br>
+                        <input type="radio" id="select2" class="sapxep" name="sapxep" value="1">
+                        <label for="select2">Giá tăng dần</label><br>
+                        <input type="radio" id="select3" class="sapxep" name="sapxep" value="2">
+                        <label for="select3">Giá giảm dần</label><br>
+                        <input type="radio" id="select4" class="sapxep" name="sapxep" value="3">
+                        <label for="select4">A - Z</label><br>
+                        <input type="radio" id="select5" class="sapxep" name="sapxep" value="4">
+                        <label for="select5">Z - A</label><br>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
@@ -378,21 +391,21 @@
                 </div>
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <div class="filter__sort">
-                                <span>Sắp xếp</span>
-                                <select id="dropdownSelect">
-                                    <option selected value="0">Mặc Định</option>
-                                    <option value="1">Giá Tăng Dần</option>
-                                    <option value="2">Giá Giảm Dần</option>
-                                    <option value="3">A - Z</option>
-                                    <option value="4">Z - A</option>
-                                </select>
-                            </div>
-                        </div>
+                        <div class="col-lg-4 col-md-5"></div>
+<%--                            <div class="filter__sort">--%>
+<%--                                <span>Sắp xếp</span>--%>
+<%--                                <select id="dropdownSelect">--%>
+<%--                                    <option selected value="0">Mặc Định</option>--%>
+<%--                                    <option value="1">Giá Tăng Dần</option>--%>
+<%--                                    <option value="2">Giá Giảm Dần</option>--%>
+<%--                                    <option value="3">A - Z</option>--%>
+<%--                                    <option value="4">Z - A</option>--%>
+<%--                                </select>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
+                                <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
                             </div>
                         </div>
 
@@ -432,9 +445,9 @@
         loadMore();
         addcart();
         addwishlist();
-        $("#dropdownSelect").change(function (e) {
-                filter(e);
-        })
+        // $("#dropdownSelect").change(function (e) {
+        //         filter(e);
+        // })
         $("input[type='radio']").each(function () {
             this.addEventListener("change", function (e) {
                 filter(e);
@@ -446,7 +459,7 @@
         var amount = document.getElementsByClassName("amount-pd").length;
         let category = $("#category").val();
         const price = $("input[type='radio']:checked.checkGia").val();
-        const orderby = $("#dropdownSelect").find(':selected').val();
+        const orderby = $("input[type='radio']:checked.sapxep").val();
         const size = $("input[type='radio']:checked.checkSize").val();
         const listcate = $("input[type='radio']:checked.checkcate").val();
         if (listcate != null) {
@@ -524,7 +537,8 @@
         var amount = 0;
         let category = $("#category").val();
         const price = $("input[type='radio']:checked.checkGia").val();
-        const orderby = $("#dropdownSelect").find(':selected').val();
+        // const orderby = $("#dropdownSelect").find(':selected').val();
+        const orderby = $("input[type='radio']:checked.sapxep").val();
         const size = $("input[type='radio']:checked.checkSize").val();
         const listcate = $("input[type='radio']:checked.checkcate").val();
         if (listcate != null) {
