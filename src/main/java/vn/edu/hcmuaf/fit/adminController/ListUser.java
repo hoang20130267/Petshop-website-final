@@ -11,6 +11,9 @@ import java.util.List;
 
 @WebServlet(name = "ListUser", value = "/ListUser")
 public class ListUser extends HttpServlet {
+    /*
+        Danh sách người dùng - Nguyễn Sĩ Hoàng 20130267
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<CustomerUser> list = new CustomerUserDAO().listUser();

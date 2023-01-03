@@ -11,6 +11,9 @@ import java.util.List;
 
 @WebServlet(name = "ProductCat", value = "/products-cat")
 public class ProductCat extends HttpServlet {
+    /*
+        Danh sách sản phẩm mèo - Nguyễn Sĩ Hoàng 20130267
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> list = ProductService.getData3();

@@ -11,7 +11,9 @@ public class FileLocationContextListener implements ServletContextListener, Http
 
     public FileLocationContextListener() {
     }
-
+    /*
+          Lấy địa chỉ hình ảnh - Nguyễn Sĩ Hoàng 20130267
+    */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         String rootPath = System.getProperty("catalina.home");
