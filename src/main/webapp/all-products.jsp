@@ -255,8 +255,8 @@
                 <div class="sidebar">
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
-                            <input type="radio" id="0" name="checkcate" class="checkcate" value="-1">
-                            <label class="form-check-label" for="0">Tất cả</label><br>
+<%--                            <input type="radio" id="0" name="checkcate" class="checkcate" value="-1">--%>
+<%--                            <label class="form-check-label" for="0">Tất cả</label><br>--%>
                             <%  String category1 = request.getParameter("category");
                                 List<Detail> listD = new DetailService().listProCateClassify(category1);
                                 for (Detail p1 : listD) {
@@ -264,7 +264,6 @@
 
                                 <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
                                 <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
-
                             <% } %>
 
                     </div>
@@ -297,8 +296,8 @@
 
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-                        <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">
-                        <label for="age0">Tất cả</label><br>
+<%--                        <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">--%>
+<%--                        <label for="age0">Tất cả</label><br>--%>
                             <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
                             <label for="age1">Trên 10kg</label><br>
                             <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
@@ -421,18 +420,16 @@
         loadMore();
         addcart();
         addwishlist();
-
-            $("#dropdownSelect").change(function (e) {
-
+        $("#dropdownSelect").change(function (e) {
                 filter(e);
         })
-
         $("input[type='radio']").each(function () {
             this.addEventListener("change", function (e) {
                 filter(e);
             })
         })
     })
+
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
         let category = $("#category").val();

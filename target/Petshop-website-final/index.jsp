@@ -286,7 +286,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Thú Cưng Bán Chạy</h2>
+                        <h2>Sản phẩm bán chạy</h2>
                     </div>
                     <div class="featured__controls">
                     </div>

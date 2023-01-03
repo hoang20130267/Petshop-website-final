@@ -374,5 +374,16 @@ public class ProductDAO {
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
 
+    public List<Product> listRelateTo(String id) {
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("\tSELECT p.productId,p.ProductName,p.Price, p.Image\n" +
+                        "\tfrom product p join product_from_cate pfc on p.productId = pfc.product_id\n" +
+                        "\tWHERE pfc.cate_id in (SELECT pfc1.cate_id\n" +
+                        "\tFROM product p1 join product_from_cate pfc1 on p1.productId = pfc1.product_id \n" +
+                        "\tWHERE p1.productId = ?\n" +
+                        "\t) AND p.productId != ? and `Status` =1\n" +
+                        "ORDER BY pfc.cate_id DESC\n" +
+                        "LIMIT 4;").bind(0,id).bind(1,id)
+                .mapToBean(Product.class).stream().collect(Collectors.toList()));
+    }
 
 }
