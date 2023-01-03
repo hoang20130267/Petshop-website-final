@@ -207,6 +207,18 @@ public class BlogDAO {
             return true;
         });
     }
+
+    public static void deleteBlog(String id) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 0").execute();
+            handle.createUpdate("delete from blogs where BlogId = ?")
+                    .bind(0, id)
+                    .execute();
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 1").execute();
+            return true;
+        });
+    }
+
     public static void updateBlog(String id, String name, int status, String image, String description,String dital, String cate) {
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("update blogs set BlogName = ?, Status = ?, Image = ?, Description = ?, Dital = ? where BlogId = ?")
@@ -230,7 +242,7 @@ public class BlogDAO {
 //        System.out.println(new BlogDAO().getBlog("101"));
 //        System.out.println(new BlogDAO().listBlogCateById("2"));
 //        System.out.println(new BlogDAO().test("1"));
-        System.out.println(new BlogDAO().filterBlog("-1"));
+            deleteBlog("101");
 //        System.out.println(new BlogDAO().test1("2"));
         //        System.out.println(new BlogDAO().listBlogCateById("101"));
     }

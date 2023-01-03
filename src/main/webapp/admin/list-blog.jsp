@@ -255,8 +255,8 @@
                             </ul>
                             <h5><a href=""><%=b.getBlogName()%>
                             </a></h5>
-
                             <a href="add-blog.jsp?id=<%=b.getBlogId()%>" class="blog_btn">Chỉnh sửa  <i data-feather="arrow-right"></i></a>
+                            <a href="DeleteBlog?id=<%=b.getBlogId()%>" class="blog_btn">Xóa  <i data-feather="arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
