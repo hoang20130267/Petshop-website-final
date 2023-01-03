@@ -349,8 +349,20 @@
                                                  data-setbg="<%=pd.getImage()%>">
                                                 <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
                                                 <ul class="product__item__pic__hover">
-                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <%if (user != null) {
+                                                        Product product = new ProductDAO().getProductDetail(pd.getProductId());%>
+                                                    <%if (Integer.parseInt(product.getQuantity())> 0) {%>
+                                                    <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>" ><i
+                                                            class="fa fa-shopping-cart"></i></a></li>
+                                                    <%}%>
+                                                    <%
+                                                    } else {%>
+                                                    <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a class="shopnow2" href="login.jsp"><i
+                                                            class="fa fa-shopping-cart"></i></a></li>
+                                                    <%  }
+                                                    %>
                                                 </ul>
                                             </div>
                                             <div class="product__discount__item__text">

@@ -301,7 +301,7 @@
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="blog__details__text">
-                        <img src="img/blog/blog-2.jpg" alt="" height="400" width="800">
+                        <img src="<%=blogs.getImage()%>" alt="" height="400" width="800">
                         <h3><%=blogs.getBlogName()%></h3>
                         <p><%=blogs.getDital()%></p>
                     </div>
