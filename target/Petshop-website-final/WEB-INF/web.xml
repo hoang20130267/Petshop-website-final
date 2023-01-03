@@ -20,4 +20,12 @@
     <param-name>saveavataruser.dir</param-name>
     <param-value>Petshop-website-final/src/main/webapp/img/user</param-value>
   </context-param>
+  <context-param>
+    <param-name>tempblog.dir</param-name>
+    <param-value>Petshop_website_final_war/img/blog</param-value>
+  </context-param>
+  <context-param>
+    <param-name>saveblog.dir</param-name>
+    <param-value>Petshop-website-final/src/main/webapp/img/blog</param-value>
+  </context-param>
 </web-app>
