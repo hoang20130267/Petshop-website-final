@@ -69,6 +69,7 @@
       id="mce-u0"
       href="bonus/css/skin.min.css"
     />
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
       .blog_btn {
 	      display: inline-block;
@@ -244,7 +245,7 @@
                 <% List<Blogs> list = new BlogService().AdminListBlog();
                 for (Blogs b : list) {
         %>
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
                     <div class="blog__item">
                         <div class="blog__item__pic">
                             <img src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
@@ -253,9 +254,9 @@
                             <ul>
                                 <li><i class="fa fa-calendar-o"></i> <%=b.getCreateDate()%></li>
                             </ul>
-                            <h5><a href=""><%=b.getBlogName()%>
+                            <h5><a href="" style="font-size: 22px;font-weight: 600;color: #0b5ed7"><%=b.getBlogName()%>
                             </a></h5>
-
+                            <p><%=b.getDescription()%>></p>
                             <a href="add-blog.jsp?id=<%=b.getBlogId()%>" class="blog_btn">Chỉnh sửa  <i data-feather="arrow-right"></i></a>
                         </div>
                     </div>
