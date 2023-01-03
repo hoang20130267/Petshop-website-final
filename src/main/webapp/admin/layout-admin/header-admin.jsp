@@ -23,7 +23,7 @@
                         <form action="search" method="get" class="px-3">
                             <div class="form-group mb-0 d-flex align-items-center">
                                 <i data-feather="search" type="submit"></i>
-                                <input oninput="searchByName(this)" name="txt" type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+                                <input oninput="searchByName(this)" name="txt" type="search" class="form-control border-0 shadow-none" placeholder="Tìm kiếm. . .">
                             </div>
                         </form>
                     </div>

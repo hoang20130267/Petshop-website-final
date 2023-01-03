@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -192,6 +194,7 @@
           </div>
         </div>
         <!-- [ breadcrumb ] end -->
+          <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
         <!-- [ Main Content ] start -->
         <div class="row">
           <div id="content" class="row">
@@ -221,7 +224,7 @@
                     </div>
                     <div class="col-auto">
                       <h4 class="text-dark mt-0" style="margin-left: 65px;">
-                        <%=p.getPrice()%>đ
+                        <%=format.format(p.getPrice())%>đ
 
                       </h4>
                       <ul
