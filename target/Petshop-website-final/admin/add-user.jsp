@@ -250,13 +250,16 @@
 						<select class="form-select" id="validationTooltip04" name="status" required>
 							<% if(request.getParameter("idUser") != null) {
 								if(users.isStatus() == false) {%>
-							<option selected>Mở khóa</option>
-							<option>Khóa</option>
-							<%} else {%>
 							<option>Mở khóa</option>
 							<option selected>Khóa</option>
+							<%} else {%>
+							<option selected>Mở khóa</option>
+							<option>Khóa</option>
 							<% }
-							} %>
+							}else{%>
+							<option selected>Mở khóa</option>
+							<option>Khóa</option>
+							<% } %>
 						</select>
 						<%--            <div class="invalid-tooltip">--%>
 						<%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>

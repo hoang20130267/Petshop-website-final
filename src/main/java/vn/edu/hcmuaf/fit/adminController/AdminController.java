@@ -12,7 +12,7 @@ public class AdminController extends HttpServlet {
         doPost(request, response);
     }
     /*
-        Đăng nhập admin - Nguyễn Ngọc Huy 20130281
+        Đăng xuất admin - Nguyễn Ngọc Huy 20130281
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
