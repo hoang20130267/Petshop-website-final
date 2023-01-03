@@ -524,8 +524,9 @@
         addcart();
         addwishlist();
 
-        $("#dropdownSelect").change(function (e) {
-            filter(e);
+            $("#dropdownSelect").change(function (e) {
+
+                filter(e);
         })
 
         $("input[type='radio']").each(function () {
@@ -533,15 +534,6 @@
                 filter(e);
             })
         })
-
-        // $(document).ready(function () {
-        //     $("#filter").each(function () {
-        //         this.addEventListener("click", function (e) {
-        //             filter(e);
-        //         })
-        //     })
-        // });
-
     })
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
@@ -551,7 +543,7 @@
         const size = $("input[type='radio']:checked.checkSize").val();
         const listcate = $("input[type='radio']:checked.checkcate").val();
         if (listcate != null) {
-            category = listcate
+            category = listcate;
         }
         $.ajax({
             url: "/Petshop_website_final_war/loadMore",
@@ -625,9 +617,9 @@
         const size = $("input[type='radio']:checked.checkSize").val();
         const listcate = $("input[type='radio']:checked.checkcate").val();
         if (listcate != null) {
-            category = listcate
+            category = listcate;
         }
-        console.log(size + " "+ price+ " "+ category);
+        console.log(size + " "+ price+ " "+ category+ " " + orderby);
         $.ajax({
             type: 'post',
             url: "FilterProductController",
