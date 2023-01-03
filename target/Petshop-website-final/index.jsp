@@ -453,11 +453,11 @@
         })
 
         function addcart() {
-            $(".snow").each(function (e) {
+            $(".shopnow2").each(function (e) {
                 $(this).on("click",function (e){
                     e.preventDefault();
                     const idAdd = this.id;
-                    const quantity = $("#quantity").val();
+                    const quantity=1;
                     $.ajax({
                         url: "AddCartController",
                         type: "get",
@@ -467,11 +467,10 @@
                         },
                         success: function (data) {
                             $(".header__second__cart--notice").each(function () {
-                                const quantity2 = $(this).text();
-                                $(this).text(parseInt(quantity2)+ parseInt(quantity))
+                                var quantity = $(this).text()
+                                $(this).text(parseInt(quantity)+1)
+                                alert("Thêm vào giỏ hàng thành công")
                             })
-                            $(".header__cart__price span").text(data)
-                            alert("Thêm vào giỏ hàng thành công")
                         }
                     })
                 })
