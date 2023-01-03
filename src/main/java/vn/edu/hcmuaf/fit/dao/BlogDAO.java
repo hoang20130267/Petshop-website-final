@@ -114,13 +114,63 @@ public class BlogDAO {
         });
         return list;
     }
+    public List<Blogs> filterBlog(String theloai) {
+        String query = "SELECT b.BlogId, b.BlogName, b.CreateDate,b.Description,b.Image from blogs b JOIN blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
+                "join blogcategory bc on bc.CatId = bfc.CateId\n" +
+                "WHERE b.`Status` = 1\n";
+        if (theloai != null) {
+            if (!theloai.equals("-1")) {
+                query += "and bc.CatId = ?\n";
+            } else {
+                query += "\n ";
+            }
+        }
+        String finalquery = query;
+        List<Blogs> list = null;
+        if (theloai.equals("-1")) {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(finalquery)
+                        .mapToBean(Blogs.class).stream().collect(Collectors.toList());
+            });
+        } else {
+            list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(finalquery).bind(0, theloai)
+                        .mapToBean(Blogs.class).stream().collect(Collectors.toList());
+            });
+        }
+        return list;
+    }
+//       List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
+//            return handle.createQuery(finalquery)
+//                    .bind(0,theloai)
+//                    .mapToBean(Blogs.class).stream().collect(Collectors.toList());
+//        });
+
+
+
+    public String test1(String theloai) {
+        String query = "SELECT b.* from blogs b JOIN blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
+                "join blogcategory bc on bc.CatId = bfc.CateId\n" +
+                "WHERE b.`Status` = 1\n";
+        if ( theloai != null) {
+            if (!theloai.equals("-1")) {
+                query += "and bc.CatId = ?\n";
+            } else {
+                query += "\n ";
+            }
+        }
+        String finalquery = query;
+        return finalquery;
+    }
 
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().getListBlogs());
 //        System.out.println(new BlogDAO().getContent("101"));
 //        System.out.println(new BlogDAO().getBlog("101"));
 //        System.out.println(new BlogDAO().listBlogCateById("2"));
-        System.out.println(new BlogDAO().test("1"));
-//        System.out.println(new BlogDAO().listBlogCateById("101"));
+//        System.out.println(new BlogDAO().test("1"));
+        System.out.println(new BlogDAO().filterBlog("-1"));
+//        System.out.println(new BlogDAO().test1("2"));
+        //        System.out.println(new BlogDAO().listBlogCateById("101"));
     }
 }
