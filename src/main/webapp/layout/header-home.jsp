@@ -209,7 +209,11 @@
             $("#result-search").css("display", "block");
         })
         $("#search-keyword").on("blur", function () {
-            $("#result-search").css("display", "none");
+            if ($("#result-search .result:hover").length !== 0) {
+                $("#result-search").css("display", "block");
+            } else{
+                $("#result-search").css("display", "none");
+            }
         })
     })
 

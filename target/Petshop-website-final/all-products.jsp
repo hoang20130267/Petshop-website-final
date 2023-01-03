@@ -264,7 +264,6 @@
 
                                 <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
                                 <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
-
                             <% } %>
 
                     </div>

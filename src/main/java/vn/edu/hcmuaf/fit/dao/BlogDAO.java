@@ -90,6 +90,13 @@ public class BlogDAO {
         });
         return list;
     }
+    public Blogs getBlogCateById(String id) {
+            return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT b.CatId, b.CatName,b.`Status`,b.Sort,b.ParentID,b.CreateBy,b.CreateDate,b.UpdateBy,b.UpdateDate FROM blogcategory b INNER JOIN blog_from_cate bfc ON b.CatId = bfc.CateId \n" +
+                            "where bfc.BlogId = ?;"
+                    ).bind(0,id)
+                    .mapToBean(Blogs.class)
+                    .first());
+    }
 
     public boolean test(String id) {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
