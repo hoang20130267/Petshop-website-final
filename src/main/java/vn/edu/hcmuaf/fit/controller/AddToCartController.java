@@ -24,13 +24,13 @@ public class AddToCartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("idAdd").substring(8);
-        int quantity = 1;
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         Product product = ProductService.getInstance().getProductDetail(id);
         product.setQuantityCart(quantity);
         cart.put(id, product);
         request.getSession().setAttribute("cart", cart);
-        request.setAttribute("productDetails", product);
-
+        request.setAttribute("total", cart.total());
+        request.getRequestDispatcher("ajax/ajax_total.jsp").forward(request, response);
     }
 }
