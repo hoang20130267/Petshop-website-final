@@ -458,6 +458,7 @@
                                         <button id="button" class="site-btn" style="border-radius: 10px">Đăng</button>
                                     </form>
                                 </div>
+                                <div class="container-cmt"></div>
                                 <%}%>
                                 <% List<Comment> listCmt = new CommentDAO().getListCommentByProductID(request.getParameter("id"));
                                 for(Comment cmt : listCmt) {%>
