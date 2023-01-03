@@ -146,7 +146,7 @@ public class ProductDAO {
                     .bind(9,mausac)
                     .bind(10,cannang)
                     .bind(11,Integer.parseInt(status))
-                    .bind(12,PromotionalPrice)
+                    .bind(12,Double.parseDouble(PromotionalPrice))
                     .bind(13,Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
@@ -170,7 +170,7 @@ public class ProductDAO {
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -180,8 +180,8 @@ public class ProductDAO {
                     .bind(9, giong)
                     .bind(10,mausac)
                     .bind(11,cannang)
-                    .bind(12,PromotionalPrice)
-                    .bind(13,Promotional)
+                    .bind(12,Double.parseDouble(PromotionalPrice))
+                    .bind(13,Integer.parseInt(Promotional))
                     .bind(14,id)
                     .execute();
         });
@@ -204,8 +204,8 @@ public class ProductDAO {
                     .bind(8, date)
                     .bind(9, mausac)
                     .bind(10,cannang)
-                    .bind(11,PromotionalPrice)
-                    .bind(12,Promotional)
+                    .bind(11,Double.parseDouble(PromotionalPrice))
+                    .bind(12,Integer.parseInt(Promotional))
                     .bind(13,id)
                     .execute();
         });
