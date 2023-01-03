@@ -271,7 +271,7 @@
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="#">
-                                <input type="search" oninput="searchByName(this)" name="txt" placeholder="Tìm kiếm...">
+                                <input type="search" oninput="searchByNameBlog(this)" name="txt" placeholder="Tìm kiếm...">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -355,7 +355,7 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
-     function searchByName(param){
+     function searchByNameBlog(param){
          var txtSearch = param.value;
          $.ajax({
              url: "/Petshop_website_final_war/SearchBlog",
