@@ -239,7 +239,7 @@ public class DetailDAO {
     }
 
     public List<Product> getListPdByCateId(String id) {
-        List<Product> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price,p.PromotionalPrice,p.Quantity,p.Warranty,p.New,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang \n" +
+        List<Product> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price,p.PromotionalPrice,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang \n" +
                 "FROM product p INNER JOIN product_from_cate pc ON p.productId = pc.product_id \n" +
                 "WHERE pc.cate_id = ?;").bind(0,id).mapToBean(Product.class).stream().collect(Collectors.toList()));
         return list;
