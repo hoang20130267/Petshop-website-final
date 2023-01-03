@@ -9,6 +9,9 @@ import java.io.IOException;
 
 @WebServlet(name = "RemoveCmt", value = "/admin/RemoveCmt")
 public class RemoveCmt extends HttpServlet {
+    /*
+        Xóa bình luận admin - Nguyễn Ngọc Huy 20130281
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);

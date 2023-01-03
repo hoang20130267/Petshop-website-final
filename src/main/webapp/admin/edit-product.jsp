@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.controller.Category" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -508,7 +510,7 @@
                                                                         for (Detail cate : ParentCates) {
                                                                             if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
                                                                 %>
-                                                                <option value="<%=cate.getCatID()%>"
+                                                                <option value="<%=cate.getCatName()%>"
                                                                         selected><%=cate.getCatName()%>
                                                                 </option>
                                                                 <%} else {%>
@@ -539,18 +541,28 @@
                                                                         for (Detail cate : listCate) {
                                                                             if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
                                                                 %>
+<<<<<<< HEAD
+                                                                <option value="<%=cate.getCatID()%>"
+                                                                        selected><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%} else {%>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <% }
+=======
                                                                                     <option value="<%=cate.getCatID()%>"selected><%=cate.getCatName()%>
                                                                                     </option>
                                                                             <%} else {%>
                                                                                     <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
                                                                                     </option>
                                                                                 <% }
+>>>>>>> bc9e0c03f7b42222a1259b658fc411eeede17cc9
                                                                 }%>
                                                                 <% } else {
-                                                                        for (Detail cate : listCate) {%>
-                                                                            <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                            </option>
-                                                                        <%}%>
+                                                                    for (Detail cate : listCate) {%>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%}%>
                                                                 <%}%>
                                                             </select>
                                                         </div>

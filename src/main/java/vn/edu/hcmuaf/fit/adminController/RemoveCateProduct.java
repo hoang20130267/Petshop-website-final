@@ -9,6 +9,9 @@ import java.io.IOException;
 
 @WebServlet(name = "RemoveCateProduct", value = "/admin/RemoveCateProduct")
 public class RemoveCateProduct extends HttpServlet {
+    /*
+        Xóa danh mục sản phẩm - Nguyễn Ngọc Huy 20130281
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);

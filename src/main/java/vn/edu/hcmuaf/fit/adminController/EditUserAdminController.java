@@ -14,7 +14,9 @@ public class EditUserAdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-
+    /*
+        Thêm và chỉnh sửa thông tin admin - Nguyễn Ngọc Huy 20130281, Nguyễn Sĩ Hoàng 20130267
+    */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");

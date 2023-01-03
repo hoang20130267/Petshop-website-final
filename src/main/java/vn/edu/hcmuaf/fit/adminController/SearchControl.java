@@ -12,6 +12,9 @@ import java.util.List;
 
 @WebServlet(name = "SearchControl", value = "/search")
 public class SearchControl extends HttpServlet {
+    /*
+        Tìm kiếm sản phẩm thú cưng sử dụng ajax - Nguyễn Sĩ Hoàng 20130267
+    */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
