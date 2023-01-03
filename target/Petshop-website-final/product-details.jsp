@@ -364,12 +364,17 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
+                    <%if(product.getPromotional()==1){%>
+                    <div class="product__details__price" style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice()-( product.getPrice() *product.getPromotionalPrice()/100))%>đ
+                        <span style="margin-left: 12px;font-size: 18px;color: black;text-decoration: line-through;"><%=format.format(product.getPrice())%>đ</span></div>
+                    <%}else {%>
                     <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
+                    <%}%>
                     <p><%=product.getDescription()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="1">
+                                <input type="text" id="quantity" value="1">
                             </div>
                         </div>
                     </div>
@@ -561,6 +566,26 @@
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 <script>
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+</script>
+<script>
     $(document).ready(function (){
         addcart();
         addwishlist();
@@ -571,18 +596,21 @@
             $(this).on("click",function (e){
                 e.preventDefault();
                 const idAdd = this.id;
+                const quantity = $("#quantity").val();
                 $.ajax({
                     url: "AddCartController",
                     type: "get",
                     data: {
                         idAdd: idAdd,
+                        quantity:quantity
                     },
                     success: function (data) {
                         $(".header__second__cart--notice").each(function () {
-                            var quantity = $(this).text()
-                            $(this).text(parseInt(quantity)+1)
-                            alert("Thêm vào giỏ hàng thành công");
+                            $(this).text(data)
+                            const quantity2 = $(this).text();
+                            $(this).text(parseInt(quantity2)+ parseInt(quantity))
                         })
+                        $(".header__cart__price span").text(data)
                     }
                 })
             })
