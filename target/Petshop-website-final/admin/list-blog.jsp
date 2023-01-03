@@ -248,7 +248,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
+                            <img src="<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
                         </div>
                         <div class="blog__item__text">
                             <ul>
