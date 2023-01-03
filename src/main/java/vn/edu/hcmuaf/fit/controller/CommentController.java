@@ -21,12 +21,11 @@ public class CommentController extends HttpServlet {
         CustomerUser cusID = (CustomerUser) request.getSession().getAttribute("user");
         String desc = request.getParameter("desc");
         System.out.println(desc);
-        String date = null;
         int status = 1;
         String pID = request.getParameter("pID");
         String vote = "5";
         CommentDAO dao = new CommentDAO();
-        String id = dao.InsertComment(cusID.getId(), desc, date, status, pID, vote);
+        String id = dao.InsertComment(cusID.getId(), desc, status, pID, vote);
         Comment cmt = dao.getComment(id);
         request.setAttribute("cmt", cmt);
         request.getRequestDispatcher("ajax/ajax-comment.jsp").forward(request,response);

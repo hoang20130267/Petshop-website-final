@@ -53,11 +53,11 @@
                                     <a href="infor-user.jsp" class="dropdown-item">
                                         <span><i data-feather="briefcase"></i> Tài khoản của tôi</span>
                                     </a>
-                                    <a href="LogoutController" class="dropdown-item">
-                                        <span><i data-feather="x-square"></i> Đăng xuất</span>
-                                    </a>
                                     <a href="my-orders.jsp" class="dropdown-item">
                                         <span><i data-feather="x-square"></i> Đơn hàng của tôi</span>
+                                    </a>
+                                    <a href="LogoutController" class="dropdown-item">
+                                        <span><i data-feather="x-square"></i> Đăng xuất</span>
                                     </a>
                                 </div>
                             </li>
@@ -169,7 +169,7 @@
                         </form>
                         <div id="result-search" style="display: none">
                             <ul class="result"
-                                style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 1;border-radius: 0px 0px 6px 6px;max-height: 500px;overflow-x: unset;overflow-y: scroll">
+                                style="list-style-type: none;background: white;border:1px solid #b9b9b9;position: relative;z-index: 2;border-radius: 0px 0px 6px 6px;max-height: 500px;overflow-x: unset;overflow-y: scroll">
                                 <li class="search" style="margin-bottom: 10px;border: #b9b9b9">
                                     <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">
                                         Nhập từ khóa cần tìm...</h3>

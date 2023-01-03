@@ -303,8 +303,20 @@
                                 <div class="featured__item__pic set-bg product__discount__item__pic " data-setbg="<%=p.getImage()%>">
                                     <div class="product__discount__percent"><%=p.getPromotionalPrice()%>%</div>
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%if (user != null) {
+                                            Product product = new ProductDAO().getProductDetail(p.getProductId());%>
+                                        <%if (Integer.parseInt(product.getQuantity())> 0) {%>
+                                        <li><a class="add-wishlist" id="addWishlist-<%=p.getProductId()%>"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
+                                                class="fa fa-shopping-cart"></i></a></li>
+                                        <%}%>
+                                        <%
+                                        } else {%>
+                                        <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="shopnow2" href="login.jsp"><i
+                                                class="fa fa-shopping-cart"></i></a></li>
+                                        <%  }
+                                        %>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text product__discount__item__text">
@@ -434,7 +446,60 @@
     <script src="admin/assets/js/vendor-all.min.js"></script>
     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 
+    <script>
+        $(document).ready(function (){
+            addcart();
+            addwishlist();
+        })
 
+        function addcart() {
+            $(".snow").each(function (e) {
+                $(this).on("click",function (e){
+                    e.preventDefault();
+                    const idAdd = this.id;
+                    const quantity = $("#quantity").val();
+                    $.ajax({
+                        url: "AddCartController",
+                        type: "get",
+                        data: {
+                            idAdd: idAdd,
+                            quantity:quantity
+                        },
+                        success: function (data) {
+                            $(".header__second__cart--notice").each(function () {
+                                const quantity2 = $(this).text();
+                                $(this).text(parseInt(quantity2)+ parseInt(quantity))
+                            })
+                            $(".header__cart__price span").text(data)
+                            alert("Thêm vào giỏ hàng thành công")
+                        }
+                    })
+                })
+            });
+        }
+        function addwishlist() {
+            $(".add-wishlist").each(function (e) {
+                $(this).on("click",function (e){
+                    e.preventDefault();
+                    const idAdd = this.id;
+                    $.ajax({
+                        url: "AddToWishlistController",
+                        type: "get",
+                        data: {
+                            idAdd: idAdd,
+                        },
+                        success: function (data) {
+                            $(".header__second__wishlist--notice").each(function () {
+                                var quantity = $(this).text()
+                                $(this).text(parseInt(quantity)+1)
+                                alert("Thêm vào mục yêu thích thành công")
+                            })
+                        }
+                    })
+                })
+            });
+        }
+    </script>
 </body>
 
 </html>
