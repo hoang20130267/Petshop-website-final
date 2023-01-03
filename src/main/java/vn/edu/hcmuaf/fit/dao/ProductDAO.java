@@ -170,7 +170,7 @@ public class ProductDAO {
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -181,7 +181,7 @@ public class ProductDAO {
                     .bind(10,mausac)
                     .bind(11,cannang)
                     .bind(12,PromotionalPrice)
-                    .bind(13,Promotional)
+                    .bind(13,Integer.parseInt(Promotional))
                     .bind(14,id)
                     .execute();
         });
