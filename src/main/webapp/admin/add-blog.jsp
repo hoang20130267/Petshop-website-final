@@ -350,21 +350,17 @@
                                                         class="form-select mb-3" aria-label="category">
                                                     <%
                                                         if (b != null) {
-                                                            for (BlogCategory cate : listb) {
-                                                                if (BlogService.getInstance().listBlogCateById(cate.getCatId()).contains(b.getBlogId())) {
-                                                    %>
-                                                    <option value="<%=cate.getCatId()%>"selected>
-                                                        <%=cate.getCatName()%>
+                                                                if (BlogService.getInstance().getBlogCateById(b.getBlogId()) != null) {%>
+                                                    <option value="<%=BlogService.getInstance().getBlogCateById(b.getBlogId()).getCatId()%>"
+                                                            selected><%=BlogService.getInstance().getBlogCateById(b.getBlogId()).getCatName()%>
                                                     </option>
-                                                    <%} else {%>
-                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%>
-                                                    </option>
-                                                    <% }
-                                                    }%>
-                                                    <% } else {
+                                                    <% }%>
+                                                    <%for (BlogCategory cate : listb) {%>
+                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%></option>
+                                                    <%}
+                                                    } else {
                                                         for (BlogCategory cate : listb) {%>
-                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%>
-                                                    </option>
+                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%></option>
                                                     <%}%>
                                                     <%}%>
                                                 </select>
