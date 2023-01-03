@@ -239,7 +239,8 @@
         </div>
         <div class="row">
             <main class="main" id="top">
-                <div class="">
+                <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
+
                     <% Blogs b = null;
                         if (request.getParameter("id") != null)
                             b = BlogService.getInstance().getBlog(request.getParameter("id"));
@@ -249,7 +250,7 @@
                             <%if (request.getParameter("id") != null) {%>
                             <h2 class="mb-2">Chỉnh sửa bài viết</h2>
                             <%} else {%>
-                            <h2 class="mb-2">Thêm bài vi</h2>
+                            <h2 class="mb-2">Thêm bài viết</h2>
                             <%}%>
                         </div>
                         <div class="col-auto">
@@ -267,7 +268,6 @@
                             <%}%>
                         </div>
                     </div>
-                </div>
 
                 <input type="text" id="id" name="id" value="<%=(b != null) ? request.getParameter("id") : null%>"  style="display: none">
                 <h4 class="mb-3">Tên bài viết</h4>
@@ -304,7 +304,7 @@
                              data-dz-message="data-dz-message">
                             <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
                                  style="height:80px;width:80px;">
-                                <img class="img-product-review dz-image" src="<%=b.getImage()%>">
+                                <img class="img-blog-review dz-image" src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>">
                                 <div class="control">
                                     <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
                                        data-dz-remove="">
@@ -346,7 +346,7 @@
                                                 <div class="d-flex flex-wrap justify-content-between mb-2">
                                                     <h5>Danh mục</h5>
                                                 </div>
-                                                <select id="Cate" name="Cate"
+                                                <select id="cate" name="Cate"
                                                         class="form-select mb-3" aria-label="category">
                                                     <%
                                                         if (b != null) {
@@ -371,127 +371,130 @@
                                             </div>
                                         </div>
                                         </div>
+                </form>
             </main>
         </div>
-        <!-- Required Js -->
-        <script src="assets/js/vendor-all.min.js"></script>
-        <script src="assets/js/plugins/bootstrap.min.js"></script>
-        <script src="assets/js/plugins/feather.min.js"></script>
-        <script src="assets/js/pcoded.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-        <script src="assets/js/plugins/clipboard.min.js"></script>
-        <script src="assets/js/uikit.min.js"></script>
+    </div>
+</div>
+<!-- Required Js -->
+<script src="assets/js/vendor-all.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+<script src="assets/js/pcoded.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="assets/js/plugins/clipboard.min.js"></script>
+<script src="assets/js/uikit.min.js"></script>
 
-        <script src="bonus/js/bootstrap.min.js"></script>
-        <script src="bonus/js/lodash.min.js"></script>
-        <script src="bonus/tinymce/tinymce.min.js"></script>
-        <script src="bonus/js/dropzone.min.js"></script>
-        <script src="bonus/js/phoenix.js"></script>
-
-
-        <!-- Apex Chart -->
-        <script src="assets/js/plugins/apexcharts.min.js"></script>
-        <!-- custom-chart js -->
-        <script src="assets/js/pages/dashboard-sale.js"></script>
+<script src="bonus/js/bootstrap.min.js"></script>
+<script src="bonus/js/lodash.min.js"></script>
+<script src="bonus/tinymce/tinymce.min.js"></script>
+<script src="bonus/js/dropzone.min.js"></script>
+<script src="bonus/js/phoenix.js"></script>
 
 
-        <script>
-            const idProduct = $("#pid").val();
-            if (idProduct.length > 0) {
-                $(".remove").each(function () {
-                    const id = this.id.substring(6);
-                    removeFilesData(id)
-                })
-            } else {
-                removeFilesData(1)
+<!-- Apex Chart -->
+<script src="assets/js/plugins/apexcharts.min.js"></script>
+<!-- custom-chart js -->
+<script src="assets/js/pages/dashboard-sale.js"></script>
+</body>
+
+<script>
+    const idBlog = $("#id").val();
+    if (idBlog.length > 0) {
+        $(".remove").each(function () {
+            const id = this.id.substring(6);
+            removeFilesData(id)
+        })
+    } else {
+        removeFilesData(1)
+    }
+
+    function reloadUpLoadFile() {
+        $(".input-file").each(function () {
+            $(this).on('change', function (e) {
+                const idName = $(this).attr("id");
+                const id = idName.substring(5);
+                const value = $(this).val();
+                let name = "";
+                if (value.indexOf("\\") != -1)
+                    name = value.substring(value.lastIndexOf("\\") + 1);
+                else
+                    name = value.substring(value.lastIndexOf("/") + 1);
+                uploadFile(id, name, e)
+            })
+        });
+    }
+
+    $(".input-file").each(function () {
+        $(this).on('change', function (e) {
+            const idName = $(this).attr("id");
+            const id = idName.substring(5);
+            const value = $(this).val();
+            let name = "";
+            if (value.indexOf("\\") != -1)
+                name = value.substring(value.lastIndexOf("\\") + 1);
+            else
+                name = value.substring(value.lastIndexOf("/") + 1);
+            console.log(id + ", " + name + ", ")
+            uploadFile(id, name, e)
+        })
+    });
+
+    function uploadFile(id, name, event) {
+        event.stopPropagation();
+        event.preventDefault();
+        const files = event.target.files;
+        const data = new FormData();
+        $.each(files, function (key, value) {
+            data.append(key, value);
+        });
+        postFilesData(id, name, data);
+    }
+
+    function removeFilesData(idDelete) {
+        $("#remove" + idDelete).on("click", function (e) {
+            e.preventDefault();
+            const id = this.id.substring(6);
+            const src = $("#container" + id + " .img-blog-review").attr("src");
+            let imageName = "";
+            if (src.indexOf("\\") != -1)
+                imageName = src.substring(src.lastIndexOf("\\") + 1);
+            else
+                imageName = src.substring(src.lastIndexOf("/") + 1);
+            $("#container" + id).parent().remove();
+            const value = $("#deletedFile").val();
+            if (value.length > 0)
+                $("#deletedFile").val($("#deletedFile").val() + imageName + ",");
+            else
+                $("#deletedFile").val(imageName + ",");
+            console.log($("#deletedFile").val());
+        });
+    }
+
+    function postFilesData(id, name, data) {
+        let bool = false;
+        $(".img-blog-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf(name) != -1) {
+                bool = true;
             }
-
-            function reloadUpLoadFile() {
-                $(".input-file").each(function () {
-                    $(this).on('change', function (e) {
-                        const idName = $(this).attr("id");
-                        const id = idName.substring(5);
-                        const value = $(this).val();
-                        let name = "";
-                        if (value.indexOf("\\") != -1)
-                            name = value.substring(value.lastIndexOf("\\") + 1);
-                        else
-                            name = value.substring(value.lastIndexOf("/") + 1);
-                        uploadFile(id, name, e)
-                    })
-                });
-            }
-
-            $(".input-file").each(function () {
-                $(this).on('change', function (e) {
-                    const idName = $(this).attr("id");
-                    const id = idName.substring(5);
-                    const value = $(this).val();
-                    let name = "";
-                    if (value.indexOf("\\") != -1)
-                        name = value.substring(value.lastIndexOf("\\") + 1);
-                    else
-                        name = value.substring(value.lastIndexOf("/") + 1);
-                    console.log(id + ", " + name + ", ")
-                    uploadFile(id, name, e)
-                })
-            });
-
-            function uploadFile(id, name, event) {
-                event.stopPropagation();
-                event.preventDefault();
-                const files = event.target.files;
-                const data = new FormData();
-                $.each(files, function (key, value) {
-                    data.append(key, value);
-                });
-                postFilesData(id, name, data);
-            }
-
-            function removeFilesData(idDelete) {
-                $("#remove" + idDelete).on("click", function (e) {
-                    e.preventDefault();
-                    const id = this.id.substring(6);
-                    const src = $("#container" + id + " .img-product-review").attr("src");
-                    let imageName = "";
-                    if (src.indexOf("\\") != -1)
-                        imageName = src.substring(src.lastIndexOf("\\") + 1);
-                    else
-                        imageName = src.substring(src.lastIndexOf("/") + 1);
-                    $("#container" + id).parent().remove();
-                    const value = $("#deletedFile").val();
-                    if (value.length > 0)
-                        $("#deletedFile").val($("#deletedFile").val() + imageName + ",");
-                    else
-                        $("#deletedFile").val(imageName + ",");
-                    console.log($("#deletedFile").val());
-                });
-            }
-
-            function postFilesData(id, name, data) {
-                let bool = false;
-                $(".img-product-review").each(function () {
-                    let nameFile = $(this).attr("src");
-                    if (nameFile.indexOf(name) != -1) {
-                        bool = true;
-                    }
-                })
-                if (bool === false) {
-                    $.ajax({
-                        url: '/Petshop_website_final_war/UpDownImageProductController',
-                        type: 'POST',
-                        data: data,
-                        cache: false,
-                        dataType: 'json',
-                        processData: false,
-                        contentType: false,
-                        success: function (data, textStatus, jqXHR) {
-                            //success
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            $("#container" + id).empty()
-                            $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
-                                                <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
+        })
+        if (bool === false) {
+            $.ajax({
+                url: '/Petshop_website_final_war/UpdownImageBlogController',
+                type: 'POST',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (data, textStatus, jqXHR) {
+                    //success
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#container" + id).empty()
+                    $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
+                                                <img class="img-blog-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/blog/` + name + `">
                                                 <div class="control">
                                                 <a id="remove` + id + `" class="dz-remove text-400 remove" href="" data-dz-remove="">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
@@ -501,7 +504,7 @@
                                                 </a>
                                                 </div>
                                             </div>`)
-                            $("#my-awesome-dropzone").append(`<div class="image-container">
+                    $("#my-awesome-dropzone").append(`<div class="image-container">
 
                                         <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
                                             <input type="file" id="image` + id + `" name="files" class="input-file" accept="image/*" />
@@ -509,87 +512,65 @@
                                             <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
                                         </div>
                                     </div>`)
-                            let value = $("#deletedFile").val();
-                            if (value.indexOf(name) !== -1) {
-                                value = value.replace(name + ",", "");
-                                $("#deletedFile").val(value);
-                            }
-                            console.log($("#deletedFile").val());
-                            reloadUpLoadFile();
-                            removeFilesData(id);
-                        }
-                    });
-                } else {
-                    alert("Bạn đã upload ảnh này rồi !")
-                }
-            }
-        </script>
-        <script>
-            $("button[type='submit']").click(function (e) {
-                e.preventDefault();
-
-                const id = $("#pid").val();
-                const name = $("#name").val();
-                const descripsion = $("#descripsion").val();
-                const detail = CKEDITOR.instances.editor.getData();
-                const quantity = $("#quantity").val();
-                const price = $("#price").val();
-                const status = $("#status").val();
-                const mausac = $("#mausac").val();
-                const cannang = $("#cannang").val();
-                const giong = $("#giong").val();
-                const CateParent = $("#CateParent").val();
-                const cateChild = $("#cateChild").val();
-                const Promotional = $("#Promotional").val();
-                const PromotionalPrice = $("#PromotionalPrice").val();
-
-
-                const imageLink = $(".img-product-review").attr("src").substring(61);
-                console.log(imageLink);
-                let imgFile = []
-                $(".img-product-review").each(function () {
-                    let nameFile = $(this).attr("src");
-                    if (nameFile.indexOf("\\") != -1)
-                        imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
-                    else
-                        imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
-                })
-                const removed = $("#deletedFile").val();
-                const oldImg = removed.substring(0, removed.length - 1);
-                $.ajax({
-                    url: "/Petshop_website_final_war/admin/edit-product",
-                    type: "GET",
-                    data: {
-                        quantity: quantity,
-                        oldImg: oldImg,
-                        id: id,
-                        name: name,
-                        price: price,
-                        image: imageLink,
-                        description: descripsion,
-                        mausac: mausac,
-                        cannang: cannang,
-                        giong: giong,
-                        imgFile: imgFile,
-                        detail: detail,
-                        CateParent: CateParent,
-                        cateChild:cateChild,
-                        status:status,
-                        Promotional: Promotional,
-                        PromotionalPrice:PromotionalPrice,
-                    },
-                    success: function () {
-                        if (id.equals("null"))
-                            alert("Thêm sản phẩm thành công");
-                        else
-                            alert("Cập nhật sản phẩm thành công");
-                        window.location.href = "list-products"
+                    let value = $("#deletedFile").val();
+                    if (value.indexOf(name) !== -1) {
+                        value = value.replace(name + ",", "");
+                        $("#deletedFile").val(value);
                     }
-                })
-            })
-        </script>
+                    console.log($("#deletedFile").val());
+                    reloadUpLoadFile();
+                    removeFilesData(id);
+                }
+            });
+        } else {
+            alert("Bạn đã upload ảnh này rồi !")
+        }
+    }
+</script>
+<script>
+    $("button[type='submit']").click(function (e) {
+        e.preventDefault();
 
-</body>
+        const id = $("#id").val();
+        console.log(id);
+        const name = $("#name").val();
+        const descripsion = $("#descripsion").val();
+        const dital = CKEDITOR.instances.editor.getData();
+        const cate = $("#cate").val();
+        const imageLink = $(".img-blog-review").attr("src").substring(57);
+        let imgFile = []
+        $(".img-blog-review").each(function () {
+            let nameFile = $(this).attr("src");
+            if (nameFile.indexOf("\\") != -1)
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
+            else
+                imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
+        })
+        const removed = $("#deletedFile").val();
+        const oldImg = removed.substring(0, removed.length - 1);
+        $.ajax({
+            url: "/Petshop_website_final_war/admin/EditBlogController",
+            type: "GET",
+            data: {
+                oldImg: oldImg,
+                id: id,
+                name: name,
+                image: imageLink,
+                description: descripsion,
+                imgFile: imgFile,
+                dital: dital,
+                cate: cate,
+            },
+            success: function () {
+                if (id.equals("null"))
+                    alert("Thêm tin tức thành công");
+                else
+                    alert("Cập nhật tin tức thành công");
+                window.location.href = "list-blog.jsp"
+            }
+        })
+    })
+</script>
 
 </html>
 

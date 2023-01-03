@@ -541,23 +541,17 @@
                                                                         for (Detail cate : listCate) {
                                                                             if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
                                                                 %>
-<<<<<<< HEAD
                                                                 <option value="<%=cate.getCatID()%>"
                                                                         selected><%=cate.getCatName()%>
                                                                 </option>
                                                                 <%} else {%>
                                                                 <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
                                                                 </option>
-                                                                <% }
-=======
-                                                                                    <option value="<%=cate.getCatID()%>"selected><%=cate.getCatName()%>
-                                                                                    </option>
-                                                                            <%} else {%>
+                                                                <% }%>
+
                                                                                     <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
                                                                                     </option>
-                                                                                <% }
->>>>>>> bc9e0c03f7b42222a1259b658fc411eeede17cc9
-                                                                }%>
+                                                                <%}%>
                                                                 <% } else {
                                                                     for (Detail cate : listCate) {%>
                                                                 <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
