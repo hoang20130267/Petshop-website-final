@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -385,19 +386,35 @@
                     <%  }
                     %>
 
-                    <ul>
-                        <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
-                        <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
-                        <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
-                        <li><b>Chia sẻ thông tin </b>
-                            <div class="share">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </li>
-                    </ul>
+                    <%if(!DetailService.getInstance().getPentCateProduct(product.getProductId()).getCatID().equals("3")){%>
+                        <ul>
+                            <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
+                            <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
+                            <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
+                            <li><b>Chia sẻ thông tin </b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    <% }else { %>
+                            <ul>
+                                <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
+                                <li><b>Kích thước: </b> <span><%=product.getCannang()%></span></li>
+                                <li><b>Chia sẻ thông tin </b>
+                                    <div class="share">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                    <% } %>
+
                 </div>
             </div>
             <div class="col-lg-12">
