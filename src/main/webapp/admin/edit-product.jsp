@@ -728,7 +728,7 @@
                 PromotionalPrice:PromotionalPrice,
             },
             success: function () {
-                if (id.equals("null"))
+                if (id.length < 1)
                     alert("Thêm sản phẩm thành công");
                 else
                     alert("Cập nhật sản phẩm thành công");

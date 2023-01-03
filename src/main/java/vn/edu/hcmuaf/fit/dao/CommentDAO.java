@@ -57,8 +57,9 @@ public class CommentDAO  {
         if (listId.contains(stringBuilder.toString())) return taoIDComment();
         else return stringBuilder.toString();
     }
-    public static String InsertComment(String cusID, String desc, String date, int status, String pID, String vote){
+    public static String InsertComment(String cusID, String desc, int status, String pID, String vote){
         String id = taoIDComment();
+        String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into productcomment (ID ,CustomerID , Description , CommentDate, CommentStatus, ProductID, vote) " +
                             "values (?,?,?,?,?,?,?)")
