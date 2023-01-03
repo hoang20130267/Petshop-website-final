@@ -99,7 +99,7 @@ public class ProductDAO {
                             "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
@@ -110,7 +110,7 @@ public class ProductDAO {
                     .bind(10,mausac)
                     .bind(11,cannang)
                     .bind(12,Integer.parseInt(status))
-                    .bind(13,PromotionalPrice)
+                    .bind(13,Double.parseDouble(PromotionalPrice))
                     .bind(14,Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
@@ -133,10 +133,10 @@ public class ProductDAO {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
-                            "Dital, Quantity, CreateBy, CreateDate, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+                            "Dital, Quantity, CreateBy, CreateDate, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
@@ -202,7 +202,7 @@ public class ProductDAO {
                     .bind(6, detail)
                     .bind(7, idAdmin)
                     .bind(8, date)
-                    .bind(9,mausac)
+                    .bind(9, mausac)
                     .bind(10,cannang)
                     .bind(11,PromotionalPrice)
                     .bind(12,Promotional)

@@ -292,7 +292,7 @@
                                 <% List<Blogs> listNew = new BlogService().NewBlogs();
                                     for(Blogs b : listNew) {
                                 %>
-                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item">
+                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item" style="    display: flex !important;">
                                     <div class="blog__sidebar__recent__item__pic">
                                         <img src="<%=b.getImage()%>" alt="">
                                     </div>

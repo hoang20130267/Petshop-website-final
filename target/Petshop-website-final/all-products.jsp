@@ -361,74 +361,6 @@
                                     </div>
                                <% }%>
 
-<%--                            <div class="col-lg-4">--%>
-<%--                                <div class="product__discount__item">--%>
-<%--                                    <div class="product__discount__item__pic set-bg"--%>
-<%--                                         data-setbg="img/products/cat/sp01.jpg">--%>
-<%--                                        <div class="product__discount__percent">-20%</div>--%>
-<%--                                        <ul class="product__item__pic__hover">--%>
-<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                        </ul>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="product__discount__item__text">--%>
-<%--                                        <h5><a href="#">Mèo Anh lông ngắn Bicolor Lilac</a></h5>--%>
-<%--                                        <div class="product__item__price">7.000.000đ<span>13.000.000đ</span></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-lg-4">--%>
-<%--                                <div class="product__discount__item">--%>
-<%--                                    <div class="product__discount__item__pic set-bg"--%>
-<%--                                         data-setbg="img/products/dog/sp3.png">--%>
-<%--                                        <div class="product__discount__percent">-20%</div>--%>
-<%--                                        <ul class="product__item__pic__hover">--%>
-<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                        </ul>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="product__discount__item__text">--%>
-<%--                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>--%>
-<%--                                        <div class="product__item__price">18.000.000đ <span>22.000.000đ</span></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-lg-4">--%>
-<%--                                <div class="product__discount__item">--%>
-<%--                                    <div class="product__discount__item__pic set-bg"--%>
-<%--                                         data-setbg="img/products/cat/sp02.jpg">--%>
-<%--                                        <div class="product__discount__percent">-20%</div>--%>
-<%--                                        <ul class="product__item__pic__hover">--%>
-<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                        </ul>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="product__discount__item__text">--%>
-<%--                                        <h5><a href="#">Mèo Anh lông ngắn nâu trắng</a></h5>--%>
-<%--                                        <div class="product__item__price">8.000.000đ<span>11.000.000đ</span></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                            <div class="col-lg-4">--%>
-<%--                                <div class="product__discount__item">--%>
-<%--                                    <div class="product__discount__item__pic set-bg"--%>
-<%--                                         data-setbg="img/products/dog/sp4.png">--%>
-<%--                                        <div class="product__discount__percent">-20%</div>--%>
-<%--                                        <ul class="product__item__pic__hover">--%>
-<%--                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-<%--                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                        </ul>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="product__discount__item__text">--%>
-<%--                                        <h5><a href="#">Chó Corgi Pembroke</a></h5>--%>
-<%--                                        <div class="product__item__price">15.000.000đ<span>19.000.000đ</span></div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
                         </div>
                     </div>
                 </div>
@@ -455,47 +387,13 @@
                     </div>
                 </div>
                 <div class="row" id="items">
-<%--                    <%  String category = request.getParameter("category");--%>
-<%--                        List<Product> list = new ProductDAO().getTop9Product(category);--%>
-<%--                        for (Product p : list) { %>--%>
-<%--                    <input id="category" type="text" style="display: none" value="<%=category%>" name="category">--%>
-
-<%--                    <div class="col-lg-4 col-md-6 col-sm-6 amount-pd">--%>
-<%--                        <div class="product__item">--%>
-<%--                            <div class="product__item__pic set-bg" data-setbg="<%=p.getImage()%>" >--%>
-<%--                                <ul class="product__item__pic__hover">--%>
-
-<%--                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>--%>
-<%--                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>--%>
-<%--                                    <%if (user != null) {--%>
-<%--                                    Product product = new ProductDAO().getProductDetail(p.getProductId());%>--%>
-<%--                                    <%if (Integer.parseInt(product.getQuantity()) > 0) {%>--%>
-<%--                                    <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i--%>
-<%--                                            class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                    <%}%>--%>
-<%--                                    <%--%>
-<%--                                    } else {%>--%>
-<%--                                    <li><a class="shopnow2" href="login.jsp"><i--%>
-<%--                                            class="fa fa-shopping-cart"></i></a></li>--%>
-<%--                                      <%  }--%>
-<%--                                    %>--%>
-<%--                                </ul>--%>
-<%--                            </div>--%>
-<%--                            <div class="product__item__text">--%>
-<%--                                <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%= p.getProductName()%>--%>
-<%--                                </a></h6>--%>
-<%--                                <h5><%=format.format(p.getPrice())%>đ</h5>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <%}%>--%>
                 </div>
 
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
                 <input type="text" id="page" value="0" style="display: none;" />
 
-            </div>
+                </div>
         </div>
     </div>
 </section>
@@ -568,11 +466,13 @@
            $(this).on("click",function (e){
                e.preventDefault();
                const idAdd = this.id;
+               const quantity=1;
                $.ajax({
                    url: "AddCartController",
                    type: "get",
                    data: {
                        idAdd: idAdd,
+                       quantity:quantity
                    },
                    success: function (data) {
                        $(".header__second__cart--notice").each(function () {
