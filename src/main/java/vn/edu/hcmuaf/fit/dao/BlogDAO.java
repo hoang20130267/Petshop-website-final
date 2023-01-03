@@ -2,10 +2,10 @@ package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.BlogCategory;
 import vn.edu.hcmuaf.fit.beans.Blogs;
-import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class BlogDAO {
@@ -146,7 +146,24 @@ public class BlogDAO {
 //                    .mapToBean(Blogs.class).stream().collect(Collectors.toList());
 //        });
 
+    public static String taoIDBlog() {
+        String numbers = "0123456789";
+        StringBuilder stringBuilder = new StringBuilder("CB");
+        Random rd = new Random();
 
+        for (int i = 0; i < 3; i++) {
+            int index = rd.nextInt(numbers.length());
+            char rdC = numbers.charAt(index);
+            stringBuilder.append(rdC);
+        }
+        List<String> listId = JDBIConnector.get().withHandle(
+                handle -> handle.createQuery("SELECT CatId FROM blogcategory")
+                        .mapTo(String.class)
+                        .stream()
+                        .collect(Collectors.toList()));
+        if (listId.contains(stringBuilder.toString())) return taoIDBlog();
+        else return stringBuilder.toString();
+    }
 
     public String test1(String theloai) {
         String query = "SELECT b.* from blogs b JOIN blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
@@ -162,7 +179,44 @@ public class BlogDAO {
         String finalquery = query;
         return finalquery;
     }
-
+    public static void insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
+        String id = taoIDBlog();
+        String date = java.time.LocalDate.now().toString();
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("insert into blogs (BlogId, BlogName, Status, Image, Description, Dital, CreateBy, CreateDate) values(?,?,?,?,?,?,?,?)")
+                    .bind(0, id)
+                    .bind(1, name)
+                    .bind(2, status)
+                    .bind(3, "img/blog/"+image)
+                    .bind(4, description)
+                    .bind(5, dital)
+                    .bind(6, createBy)
+                    .bind(7, date)
+                    .execute();
+            handle.createUpdate("insert into blog_from_cate values (?,?)")
+                    .bind(0,id)
+                    .bind(1,cate)
+                    .execute();
+            return true;
+        });
+    }
+    public static void updateBlog(String id, String name, int status, String image, String description,String dital, String cate) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update blogs set BlogName = ?, Status = ?, Image = ?, Description = ?, Dital = ? where BlogId = ?")
+                    .bind(5, id)
+                    .bind(0, name)
+                    .bind(1, status)
+                    .bind(2, "img/blog/"+image)
+                    .bind(3, description)
+                    .bind(4, dital)
+                    .execute();
+            handle.createUpdate("update blog_from_cate set values CateId = ? where BlogId = ?")
+                    .bind(1,id)
+                    .bind(0,cate)
+                    .execute();
+            return true;
+        });
+    }
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().getListBlogs());
 //        System.out.println(new BlogDAO().getContent("101"));
