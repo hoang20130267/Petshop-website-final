@@ -340,8 +340,8 @@
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
-                    <div class="">
-                        <div class="product__discount__slider owl-carousel" style="z-index: -1">
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
                             <%List<Product> listSale = ProductService.getInstance().listProductSale();
                                 for (Product pd:listSale) {%>
                                     <div class="col-lg-4">
@@ -587,9 +587,9 @@
                    },
                    success: function (data) {
                        $(".header__second__cart--notice").each(function () {
-                           $(this).text(data)
+                           var quantity = $(this).text()
+                           $(this).text(parseInt(quantity)+1)
                        })
-                       $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
                    }
                })
            })
@@ -608,9 +608,9 @@
                     },
                     success: function (data) {
                         $(".header__second__wishlist--notice").each(function () {
-                            $(this).text(data)
+                            var quantity = $(this).text()
+                            $(this).text(parseInt(quantity)+1)
                         })
-                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
                     }
                 })
             })

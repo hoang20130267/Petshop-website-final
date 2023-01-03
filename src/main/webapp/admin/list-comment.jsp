@@ -1,3 +1,8 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.CommentService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -234,17 +239,6 @@
                             </div>
                             <div class="col-auto scrollbar overflow-hidden-y flex-grow-1">
                                 <div class="btn-group position-static" role="group">
-
-                                    <!-- <div class="btn-group position-static text-nowrap"><button class="btn btn-sm btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> Cấp quản lý<svg class="svg-inline--fa fa-angle-down ms-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"></path></svg></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Không</a></li>
-                                            <li><a class="dropdown-item" href="#">Quản lý cấp 1</a></li>
-                                            <li><a class="dropdown-item" href="#">Quản lý cấp 2</a></li>
-                                            <li><a class="dropdown-item" href="#">Quản lý cấp 3</a></li>
-                                            <li></li>
-                                        </ul>
-                                    </div> -->
-                                    <!-- <button class="btn btn-phoenix-secondary px-7 flex-shrink-0">More filters</button> -->
                                 </div>
                             </div>
                         </div>
@@ -258,219 +252,31 @@
                                     <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">Tên sản phẩm</th>
                                     <th class="sort align-middle " scope="col" data-sort="total-orders" style="width:10%">Người dùng</th>
                                     <th class="sort align-middle" scope="col" data-sort="city" style="width:25%;">Bình luận</th>
-                                    <th class="sort align-middle ps-7" scope="col" data-sort="city" style="width:25%;">Số sao</th>
                                     <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Ngày bình luận</th>
                                     <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Xóa bình luận</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list" id="table-latest-review-body">
-                                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">001</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">ALASKA Hồng Phấn</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Nguyễn Văn Linh</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Cún rất dễ thương</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">12/09/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
+                                <% List<Comment> listcmt = CommentService.getInstance().getComments();
+                                for (Comment cmt : listcmt) {%>
                                 <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                     <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">002</p>
+                                        <p class="mb-0 text-1100 fw-bold"><%=cmt.getID()%></p>
                                     </td>
                                     <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Mèo Anh lông ngắn Bicolor Lilac</p>
+                                        <p class="mb-0 text-1100 fw-bold"><%=ProductService.getInstance().getProductDetail(cmt.getProductID()).getProductName()%></p>
                                     </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Nguyễn Ngọc Trang</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href=""><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></a></td>
 
-                                    <td class="city align-middle white-space-nowrap text-900">Mèo hơi quậy nhưng dễ thương là được</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
+                                    <td class="city align-middle white-space-nowrap text-900"><%=cmt.getDescription()%></td>
+                                    <td class="last-order align-middle white-space-nowrap text-700 text-end"><%=cmt.getCommentDate()%></td>
+                                    <td class="last-order align-middle white-space-nowrap text-700 text-center">
+                                        <a class="btn_2 edit btn btn-primary" href="RemoveCmt?CmtId=<%=cmt.getID()%>" style="background-color: crimson; color: white">Xóa</a>
                                     </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">15/04/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
                                 </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">003</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Mèo Scottish silver</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Ngô Chí Thông</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
 
-                                    <td class="city align-middle white-space-nowrap text-900">Rất đáng tiền</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">20/12/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">004</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Nệm Lông Tròn</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Lê Chí Công</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Rất êm, bé cún rất thích</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">05/01/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">005</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Chó Corgi Fluffy</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Nguyễn Ngọc My</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Bé rất tăng động</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">16/06/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">006</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Chó Pomeranian Parti</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Nguyễn Ngọc Thạch</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Rất ngoan và dễ thương</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">24/07/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">007</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Cũi gỗ cho chó mèo</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Lê Văn Minh</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Cũi rất chắc chăn</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">29/09/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">008</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Mèo Anh lông dài đen nâu</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Nguyễn Minh Hiếu</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Mèo nhìn rất sang</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">11/04/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                    <td class="fs--1 align-middle ps-0 py-3">
-                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">009</p>
-                                    </td>
-                                    <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <!-- <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div> -->
-                                        <p class="mb-0 text-1100 fw-bold">Mèo Sphinx mắt xanh</p>
-                                    </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="">Lý Văn Kiệt</a></td>
-                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
-
-                                    <td class="city align-middle white-space-nowrap text-900">Mèo ngầu quá shop ơi</td>
-                                    <td class="last-seen align-middle white-space-nowrap text-700 text-center">
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star text-warning font-16"></i>
-                                        <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
-                                    </td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end">03/08/2021</td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                </tr>
+                                    <%}%>
+                                </tbody>
                             </table>
                         </div>
                         <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">

@@ -5,6 +5,9 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -134,6 +137,80 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .card {
+
+            border: none;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+            border-radius: 4px;
+        }
+
+
+        .dots{
+
+            height: 4px;
+            width: 4px;
+            margin-bottom: 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .badge{
+
+            padding: 7px;
+            padding-right: 9px;
+            padding-left: 16px;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+        }
+
+        .user-img{
+
+            margin-top: 4px;
+        }
+
+        .check-icon{
+
+            font-size: 17px;
+            color: #c3bfbf;
+            top: 1px;
+            position: relative;
+            margin-left: 3px;
+        }
+
+        .form-check-input{
+            margin-top: 6px;
+            margin-left: -24px !important;
+            cursor: pointer;
+        }
+
+
+        .form-check-input:focus{
+            box-shadow: none;
+        }
+
+
+        .icons i{
+
+            margin-left: 8px;
+        }
+        .reply{
+
+            margin-left: 12px;
+        }
+
+        .reply small{
+
+            color: #b7b4b4;
+
+        }
+
+
+        .reply small:hover{
+
+            color: crimson;
+            cursor: pointer;
+
+        }
     </style>
 </head>
 
@@ -261,7 +338,7 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
                         <img class="product__details__pic__item--large"
-                             src="<%=product.getImage()%>" alt="">
+                             src="<%=product.getImage()%>" alt="" style="height: 570px; object-fit: cover">
                     </div>
 <%--                    <div class="product__details__pic__slider owl-carousel">--%>
 <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
@@ -335,8 +412,9 @@
 <%--                               aria-selected="false">Thông tin</a>--%>
 <%--                        </li>--%>
                         <li class="nav-item">
+                                <% List<Comment> listCmt1 = new CommentDAO().getListCommentByProductID(request.getParameter("id"));%>
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Đánh giá <span>(0)</span></a>
+                               aria-selected="false">Đánh giá <span>(<%=listCmt1.size()%>)</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -354,13 +432,78 @@
 <%--                                </p>--%>
 <%--                            </div>--%>
 <%--                        </div>--%>
+<%--                        <%if(user == null) {%>--%>
+
+<%--                        <div class="tab-pane" id="tabs-3" role="tabpanel">--%>
+<%--                            <div class="product__details__tab__desc">--%>
+<%--                                <h6>Đánh giá</h6>--%>
+<%--                                <p>Chưa có đánh giá nào.</p>--%>
+<%--                                <p>Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <% } else {%>--%>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Đánh giá</h6>
-                                <p>Chưa có đánh giá nào.</p>
-                                <p>Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</p>
-                            </div>
+                                <%if(user == null) {%>
+                                <div class="comment-section" style="margin-top: 50px; margin-left: 400px">
+                                    <p><b>Bạn phải đăng nhập mới có thể bình luận.</b></p>
+                                </div>
+                                <% } else{%>
+                                <div class="comment-section" style="margin-top: 50px; padding-left: 210px">
+                                    <form method="post" id="container">
+                                        <input type="text" id="cusID" value="<%=user.getId()%>" style="display: none">
+                                        <input type="text" id="pID" value="<%=product.getProductId()%>" style="display: none">
+                                        <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(user.getId()).getAvt()%>" width="45" height="45" class="user-img rounded-circle mr-2">
+                                        <input type="text" id="content" name="content" placeholder="Viết bình luận..." style="padding-left: 5px;width: 560px;height: 45px;border-radius: 15px">
+                                        <button id="button" class="site-btn" style="border-radius: 10px">Đăng</button>
+                                    </form>
+                                </div>
+                                <div class="container-cmt"></div>
+                                <%}%>
+                                <% List<Comment> listCmt = new CommentDAO().getListCommentByProductID(request.getParameter("id"));
+                                for(Comment cmt : listCmt) {%>
+                                <div class="container-cmt">
+                                <div id="cmt-section<%=cmt.getID()%>">
+                                    <div class="container mt-5">
+                                        <div class="row  d-flex justify-content-center">
+                                            <div class="col-md-8">
+                                                <div class="card p-3">
+
+                                                    <div class="d-flex justify-content-between align-items-center">
+
+                                                        <div class="user d-flex flex-row align-items-center">
+                                                            <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
+
+                                                            <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 100px"><%=cmt.getDescription()%></small></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                                        <div class="reply px-4">
+                                                            <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
+                                                                if (user1 != null) {
+                                                                    if (user1.getId().equals(cmt.getCustomerID())) {
+                                                            %>
+                                                            <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa bình luận</small></a>
+                                                            <% }
+                                                            } %>
+                                                        </div>
+                                                        <div class="icons align-items-center">
+                                                            <i class="fa fa-star text-warning"></i>
+                                                            <i class="fa fa-check-circle-o check-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <%}%>
+
+                                </div>
+
                         </div>
+<%--                        <%}%>--%>
                     </div>
                 </div>
             </div>
@@ -464,6 +607,7 @@
     $(document).ready(function (){
         addcart();
         addwishlist();
+        deletecomment();
     })
     function addcart() {
         $(".snow").each(function (e) {
@@ -480,7 +624,6 @@
                         $(".header__second__cart--notice").each(function () {
                             $(this).text(data)
                         })
-                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
                     }
                 })
             })
@@ -507,6 +650,43 @@
             })
         });
     }
+    function deletecomment() {
+        $(".remove").click(function (e) {
+            e.preventDefault();
+            const id = this.id.substring(6);
+            $.ajax({
+                url: "DeleteCommentController",
+                type: "post",
+                data: {
+                    id: id,
+                },
+                success: function () {
+                    $("#cmt-section" + id).remove();
+                }
+            })
+        });
+    }
+</script>
+<script>
+        $("#button").click(function (e) {
+            e.preventDefault();
+            const comment = $("#content").val();
+            const pID = $("#pID").val();
+            console.log(comment);
+            console.log(pID);
+            $.ajax({
+                type: 'post',
+                url: '/Petshop_website_final_war/CommentController',
+                data: {
+                    desc: comment,
+                    pID: pID
+                },
+                success: function (data) {
+                    $(".container-cmt").prepend(data);
+                    document.getElementById('content').value = '';
+                }
+            })
+        })
 
 </script>
 </body>
