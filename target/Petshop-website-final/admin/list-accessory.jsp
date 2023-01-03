@@ -207,7 +207,7 @@
                     >
                   </div> -->
                   <img
-                    src="../<%=p.getImage()%>"
+                    src="<%=p.getImage()%>"
                     alt=""
                     class="d-block mx-auto my-4"
                     height="150"

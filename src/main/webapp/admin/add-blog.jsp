@@ -1,3 +1,7 @@
+<%@ page import="vn.edu.hcmuaf.fit.beans.Blogs" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.BlogCategory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -236,410 +240,139 @@
         <div class="row">
             <main class="main" id="top">
                 <div class="">
-                    <div class="col-auto">
-                        <h2 class="" style="text-align: center; margin: 10px 0px 20px;">Thêm tin tức mới</h2>
-                        <h5 class="text-900 fw-semi-bold" style="text-align: center;">
-
-                        </h5>
+                    <% Blogs b = null;
+                        if (request.getParameter("id") != null)
+                            b = BlogService.getInstance().getBlog(request.getParameter("id"));
+                    %>
+                    <div class="row g-3 flex-between-end mb-5">
+                        <div class="col-auto">
+                            <%if (request.getParameter("id") != null) {%>
+                            <h2 class="mb-2">Chỉnh sửa bài viết</h2>
+                            <%} else {%>
+                            <h2 class="mb-2">Thêm bài vi</h2>
+                            <%}%>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
+                                Xóa dữ liệu
+                            </button>
+                            <%if (request.getParameter("id") != null) {%>
+                            <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                Sửa bài viết
+                            </button>
+                            <%} else {%>
+                            <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                Đăng bài viết
+                            </button>
+                            <%}%>
+                        </div>
                     </div>
                 </div>
+
+                <input type="text" id="id" name="id" value="<%=(b != null) ? request.getParameter("id") : null%>"  style="display: none">
                 <h4 class="mb-3">Tên bài viết</h4>
                 <div class="row g-5">
                     <div class="">
-                        <input
-                                class="form-control mb-5"
-                                type="text"
-                                placeholder="Viết tên tin tức tại đây..."
-                        />
-                        <%--                  <h4 class="mb-3">Hình ảnh minh họa</h4>--%>
-                        <%--                  <div--%>
-                        <%--                    class="dropzone dropzone-multiple p-0 mb-5 dz-clickable"--%>
-                        <%--                    id="my-awesome-dropzone"--%>
-                        <%--                    data-dropzone="data-dropzone"--%>
-                        <%--                  >--%>
-                        <%--                    <div class="dz-preview d-flex flex-wrap"></div>--%>
-                        <%--                    <div--%>
-                        <%--                      class="dz-message text-600"--%>
-                        <%--                      data-dz-message="data-dz-message"--%>
-                        <%--                    >--%>
-                        <%--                      Kéo hình ảnh vào đây <span class="text-800">hoặc </span--%>
-                        <%--                      ><button class="btn btn-link p-0" type="button">--%>
-                        <%--                        Tìm trong thiết bị</button--%>
-                        <%--                      ><br /><img--%>
-                        <%--                        class="mt-3 me-2"--%>
-                        <%--                        src="../../../assets/img/icons/image-icon.png"--%>
-                        <%--                        width="40"--%>
-                        <%--                        alt=""--%>
-                        <%--                      />--%>
-                        <%--                    </div>--%>
-                        <%--                  </div>--%>
+                        <input name="name" id="name" class="form-control mb-5" type="text"
+                               placeholder="Viết tên thú cưng tại đây..."
+                               value="<%=(b != null) ? b.getBlogName() : ""%>" required/>
+                        <h4 class="mb-3">Mô tả ngắn</h4>
+                        <input name="description" id="descripsion" class="form-control mb-5" type="text"
+                               placeholder="Viết mô tả ngắn tại đây..."
+                               value="<%=(b != null) ? b.getDescription() : ""%>" required/>
                         <div class="mb-6">
                             <h4 class="mb-3">Chi tiết tin tức</h4>
-                            <textarea rows="40" cols="20" id="editor"
-                            <%--                      class="tinymce"--%>
-                            <%--                      name="content"--%>
-                            <%--                      data-tinymce='{"height":"15rem","placeholder":"Write a description here..."}'--%>
-                            <%--                      id="mce_0"--%>
-                            <%--                      aria-hidden="true"--%>
-                            <%--                      style="display: none"--%>
-                            ></textarea>
+                            <textarea rows="20" cols="10" id="editor">
+                            <%=(b != null) ? b.getDital() : ""%>
+                                </textarea>
                             <script>
                                 CKEDITOR.replace('editor');
                             </script>
-                            <%--                    <div--%>
-                            <%--                      role="application"--%>
-                            <%--                      class="tox tox-tinymce"--%>
-                            <%--                      aria-disabled="false"--%>
-                            <%--                      style="visibility: hidden; height: 15rem"--%>
-                            <%--                    >--%>
-                            <%--                    --%>
-                            <%--                      <div class="tox-editor-container">--%>
-                            <%--                        <div--%>
-                            <%--                          data-alloy-vertical-dir="toptobottom"--%>
-                            <%--                          class="tox-editor-header"--%>
-                            <%--                        >--%>
-                            <%--                          <div--%>
-                            <%--                            role="group"--%>
-                            <%--                            class="tox-toolbar-overlord"--%>
-                            <%--                            aria-disabled="false"--%>
-                            <%--                          >--%>
-                            <%--                            <div role="group" class="tox-toolbar__primary">--%>
-                            <%--                              <div--%>
-                            <%--                                title="history"--%>
-                            <%--                                role="toolbar"--%>
-                            <%--                                data-alloy-tabstop="true"--%>
-                            <%--                                tabindex="-1"--%>
-                            <%--                                class="tox-toolbar__group"--%>
-                            <%--                              >--%>
-                            <%--                                <button--%>
-                            <%--                                  aria-label="Undo"--%>
-                            <%--                                  title="Undo"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn tox-tbtn--disabled"--%>
-                            <%--                                  aria-disabled="true"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M6.4 8H12c3.7 0 6.2 2 6.8 5.1.6 2.7-.4 5.6-2.3 6.8a1 1 0 0 1-1-1.8c1.1-.6 1.8-2.7 1.4-4.6-.5-2.1-2.1-3.5-4.9-3.5H6.4l3.3 3.3a1 1 0 1 1-1.4 1.4l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 0 1 1.4 1.4L6.4 8Z"--%>
-                            <%--                                        fill-rule="nonzero"--%>
-                            <%--                                      ></path></svg></span></button><button--%>
-                            <%--                                  aria-label="Redo"--%>
-                            <%--                                  title="Redo"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn tox-tbtn--disabled"--%>
-                            <%--                                  aria-disabled="true"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M17.6 10H12c-2.8 0-4.4 1.4-4.9 3.5-.4 2 .3 4 1.4 4.6a1 1 0 1 1-1 1.8c-2-1.2-2.9-4.1-2.3-6.8.6-3 3-5.1 6.8-5.1h5.6l-3.3-3.3a1 1 0 1 1 1.4-1.4l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4-1.4l3.3-3.3Z"--%>
-                            <%--                                        fill-rule="nonzero"--%>
-                            <%--                                      ></path></svg></span>--%>
-                            <%--                                </button>--%>
-                            <%--                              </div>--%>
-                            <%--                              <div--%>
-                            <%--                                title="formatting"--%>
-                            <%--                                role="toolbar"--%>
-                            <%--                                data-alloy-tabstop="true"--%>
-                            <%--                                tabindex="-1"--%>
-                            <%--                                class="tox-toolbar__group"--%>
-                            <%--                              >--%>
-                            <%--                                <button--%>
-                            <%--                                  aria-label="Bold"--%>
-                            <%--                                  title="Bold"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M7.8 19c-.3 0-.5 0-.6-.2l-.2-.5V5.7c0-.2 0-.4.2-.5l.6-.2h5c1.5 0 2.7.3 3.5 1 .7.6 1.1 1.4 1.1 2.5a3 3 0 0 1-.6 1.9c-.4.6-1 1-1.6 1.2.4.1.9.3 1.3.6s.8.7 1 1.2c.4.4.5 1 .5 1.6 0 1.3-.4 2.3-1.3 3-.8.7-2.1 1-3.8 1H7.8Zm5-8.3c.6 0 1.2-.1 1.6-.5.4-.3.6-.7.6-1.3 0-1.1-.8-1.7-2.3-1.7H9.3v3.5h3.4Zm.5 6c.7 0 1.3-.1 1.7-.4.4-.4.6-.9.6-1.5s-.2-1-.7-1.4c-.4-.3-1-.4-2-.4H9.4v3.8h4Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Italic"--%>
-                            <%--                                  title="Italic"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="m16.7 4.7-.1.9h-.3c-.6 0-1 0-1.4.3-.3.3-.4.6-.5 1.1l-2.1 9.8v.6c0 .5.4.8 1.4.8h.2l-.2.8H8l.2-.8h.2c1.1 0 1.8-.5 2-1.5l2-9.8.1-.5c0-.6-.4-.8-1.4-.8h-.3l.2-.9h5.8Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Underline"--%>
-                            <%--                                  title="Underline"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M16 5c.6 0 1 .4 1 1v5.5a4 4 0 0 1-.4 1.8l-1 1.4a5.3 5.3 0 0 1-5.5 1 5 5 0 0 1-1.6-1c-.5-.4-.8-.9-1.1-1.4a4 4 0 0 1-.4-1.8V6c0-.6.4-1 1-1s1 .4 1 1v5.5c0 .3 0 .6.2 1l.6.7a3.3 3.3 0 0 0 2.2.8 3.4 3.4 0 0 0 2.2-.8c.3-.2.4-.5.6-.8l.2-.9V6c0-.6.4-1 1-1ZM8 17h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 0 1 0-2Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Strikethrough"--%>
-                            <%--                                  title="Strikethrough"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <g fill-rule="evenodd">--%>
-                            <%--                                        <path--%>
-                            <%--                                          d="M15.6 8.5c-.5-.7-1-1.1-1.3-1.3-.6-.4-1.3-.6-2-.6-2.7 0-2.8 1.7-2.8 2.1 0 1.6 1.8 2 3.2 2.3 4.4.9 4.6 2.8 4.6 3.9 0 1.4-.7 4.1-5 4.1A6.2 6.2 0 0 1 7 16.4l1.5-1.1c.4.6 1.6 2 3.7 2 1.6 0 2.5-.4 3-1.2.4-.8.3-2-.8-2.6-.7-.4-1.6-.7-2.9-1-1-.2-3.9-.8-3.9-3.6C7.6 6 10.3 5 12.4 5c2.9 0 4.2 1.6 4.7 2.4l-1.5 1.1Z"--%>
-                            <%--                                        ></path>--%>
-                            <%--                                        <path--%>
-                            <%--                                          d="M5 11h14a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"--%>
-                            <%--                                          fill-rule="nonzero"--%>
-                            <%--                                        ></path>--%>
-                            <%--                                      </g></svg></span>--%>
-                            <%--                                </button>--%>
-                            <%--                              </div>--%>
-                            <%--                              <div--%>
-                            <%--                                title="alignment"--%>
-                            <%--                                role="toolbar"--%>
-                            <%--                                data-alloy-tabstop="true"--%>
-                            <%--                                tabindex="-1"--%>
-                            <%--                                class="tox-toolbar__group"--%>
-                            <%--                              >--%>
-                            <%--                                <button--%>
-                            <%--                                  aria-label="Align left"--%>
-                            <%--                                  title="Align left"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm0 4h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Zm0-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Align center"--%>
-                            <%--                                  title="Align center"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm3 4h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 1 1 0-2Zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 0 1 0-2Zm-3-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Align right"--%>
-                            <%--                                  title="Align right"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm6 4h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm-6-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Justify"--%>
-                            <%--                                  title="Justify"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 1 1 0-2Zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 0 1 0-2Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span>--%>
-                            <%--                                </button>--%>
-                            <%--                              </div>--%>
-                            <%--                              <div--%>
-                            <%--                                title="list"--%>
-                            <%--                                role="toolbar"--%>
-                            <%--                                data-alloy-tabstop="true"--%>
-                            <%--                                tabindex="-1"--%>
-                            <%--                                class="tox-toolbar__group"--%>
-                            <%--                              >--%>
-                            <%--                                <button--%>
-                            <%--                                  aria-label="Numbered list"--%>
-                            <%--                                  title="Numbered list"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M10 17h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm0-6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm0-6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 1 1 0-2ZM6 4v3.5c0 .3-.2.5-.5.5a.5.5 0 0 1-.5-.5V5h-.5a.5.5 0 0 1 0-1H6Zm-1 8.8.2.2h1.3c.3 0 .5.2.5.5s-.2.5-.5.5H4.9a1 1 0 0 1-.9-1V13c0-.4.3-.8.6-1l1.2-.4.2-.3a.2.2 0 0 0-.2-.2H4.5a.5.5 0 0 1-.5-.5c0-.3.2-.5.5-.5h1.6c.5 0 .9.4.9 1v.1c0 .4-.3.8-.6 1l-1.2.4-.2.3ZM7 17v2c0 .6-.4 1-1 1H4.5a.5.5 0 0 1 0-1h1.2c.2 0 .3-.1.3-.3 0-.2-.1-.3-.3-.3H4.4a.4.4 0 1 1 0-.8h1.3c.2 0 .3-.1.3-.3 0-.2-.1-.3-.3-.3H4.5a.5.5 0 1 1 0-1H6c.6 0 1 .4 1 1Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span></button--%>
-                            <%--                                ><button--%>
-                            <%--                                  aria-label="Bullet list"--%>
-                            <%--                                  title="Bullet list"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M11 5h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm0 6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2Zm0 6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2ZM4.5 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1Zm0 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1Zm0 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1Z"--%>
-                            <%--                                        fill-rule="evenodd"--%>
-                            <%--                                      ></path></svg></span>--%>
-                            <%--                                </button>--%>
-                            <%--                              </div>--%>
-                            <%--                              <div--%>
-                            <%--                                title="link"--%>
-                            <%--                                role="toolbar"--%>
-                            <%--                                data-alloy-tabstop="true"--%>
-                            <%--                                tabindex="-1"--%>
-                            <%--                                class="tox-toolbar__group"--%>
-                            <%--                              >--%>
-                            <%--                                <button--%>
-                            <%--                                  aria-label="Insert/edit link"--%>
-                            <%--                                  title="Insert/edit link"--%>
-                            <%--                                  type="button"--%>
-                            <%--                                  tabindex="-1"--%>
-                            <%--                                  class="tox-tbtn"--%>
-                            <%--                                  aria-disabled="false"--%>
-                            <%--                                  aria-pressed="false"--%>
-                            <%--                                >--%>
-                            <%--                                  <span class="tox-icon tox-tbtn__icon-wrap"--%>
-                            <%--                                    ><svg--%>
-                            <%--                                      width="24"--%>
-                            <%--                                      height="24"--%>
-                            <%--                                      focusable="false"--%>
-                            <%--                                    >--%>
-                            <%--                                      <path--%>
-                            <%--                                        d="M6.2 12.3a1 1 0 0 1 1.4 1.4l-2 2a2 2 0 1 0 2.6 2.8l4.8-4.8a1 1 0 0 0 0-1.4 1 1 0 1 1 1.4-1.3 2.9 2.9 0 0 1 0 4L9.6 20a3.9 3.9 0 0 1-5.5-5.5l2-2Zm11.6-.6a1 1 0 0 1-1.4-1.4l2-2a2 2 0 1 0-2.6-2.8L11 10.3a1 1 0 0 0 0 1.4A1 1 0 1 1 9.6 13a2.9 2.9 0 0 1 0-4L14.4 4a3.9 3.9 0 0 1 5.5 5.5l-2 2Z"--%>
-                            <%--                                        fill-rule="nonzero"--%>
-                            <%--                                      ></path></svg></span>--%>
-                            <%--                                </button>--%>
-                            <%--                              </div>--%>
-                            <%--                            </div>--%>
-                            <%--                          </div>--%>
-                            <%--                          <div class="tox-anchorbar"></div>--%>
-                            <%--                        </div>--%>
-                            <%--                        <div class="tox-sidebar-wrap">--%>
-                            <%--                          <div class="tox-edit-area">--%>
-                            <%--                            <iframe--%>
-                            <%--                              id="mce_0_ifr"--%>
-                            <%--                              frameborder="0"--%>
-                            <%--                              allowtransparency="true"--%>
-                            <%--                              title="Rich Text Area"--%>
-                            <%--                              class="tox-edit-area__iframe"--%>
-                            <%--                              src="bonus/textarea.html"></iframe>--%>
-                            <%--                          </div>--%>
-                            <%--                          <div role="complementary" class="tox-sidebar">--%>
-                            <%--                            <div--%>
-                            <%--                              data-alloy-tabstop="true"--%>
-                            <%--                              tabindex="-1"--%>
-                            <%--                              class="tox-sidebar__slider tox-sidebar--sliding-closed"--%>
-                            <%--                              style="width: 0px"--%>
-                            <%--                            >--%>
-                            <%--                              <div class="tox-sidebar__pane-container"></div>--%>
-                            <%--                            </div>--%>
-                            <%--                          </div>--%>
-                            <%--                        </div>--%>
-                            <%--                      </div>--%>
-                            <%--                      <div--%>
-                            <%--                        aria-hidden="true"--%>
-                            <%--                        class="tox-throbber"--%>
-                            <%--                        style="display: none"--%>
-                            <%--                      ></div>--%>
-                            <%--                    </div>--%>
-                            <%--                  </div>--%>
-                            <button type="submit" class="btn  btn-primary"
-                                    style="margin-top: 40px;margin-bottom: 50px;margin-right: 20px;float: right; padding:10px 40px 10px 40px; font-size: large;">
-                                Thêm tin tức
-                            </button>
                         </div>
                     </div>
+                </div>
+
+
+                <h4 class="mb-3">Thêm ảnh</h4>
+                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
+                     id="my-awesome-dropzone" data-dropzone="data-dropzone">
+                    <% int i = 0;
+                        if (b != null) {
+                            if (b.getImage() != null) {%>
+                    <div class="image-container">
+                        <div id="container<%=i%>" class="dz-message text-600"
+                             data-dz-message="data-dz-message">
+                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
+                                 style="height:80px;width:80px;">
+                                <img class="img-product-review dz-image" src="<%=b.getImage()%>">
+                                <div class="control">
+                                    <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
+                                       data-dz-remove="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                             height="16px" viewBox="0 0 24 24" fill="none"
+                                             stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round"
+                                             class="feather feather-x">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%
+                                i++;
+                            }
+                        }
+                    %>
+                    <div class="image-container">
+                        <div id="container<%=i%>" class="dz-message text-600"
+                             data-dz-message="data-dz-message">
+                            <input type="file" id="image<%=i%>" name="files" class="input-file"
+                                   accept="image/*"/>
+                            <br>
+                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png"
+                                 width="40" alt="">
+                        </div>
+                    </div>
+                </div>
+                <input type="text" id="deletedFile" value="" style="display: none">
+
+                <% List<BlogCategory> listb = BlogService.getInstance().listBlogCate(); %>
+                                        <div class="col-12 col-xl-8">
+                                        <div class="col-12 col-sm-6 col-xl-12">
+                                            <div class="mb-4">
+                                                <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                    <h5>Danh mục</h5>
+                                                </div>
+                                                <select id="Cate" name="Cate"
+                                                        class="form-select mb-3" aria-label="category">
+                                                    <%
+                                                        if (b != null) {
+                                                            for (BlogCategory cate : listb) {
+                                                                if (BlogService.getInstance().listBlogCateById(cate.getCatId()).contains(b.getBlogId())) {
+                                                    %>
+                                                    <option value="<%=cate.getCatId()%>"selected>
+                                                        <%=cate.getCatName()%>
+                                                    </option>
+                                                    <%} else {%>
+                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%>
+                                                    </option>
+                                                    <% }
+                                                    }%>
+                                                    <% } else {
+                                                        for (BlogCategory cate : listb) {%>
+                                                    <option value="<%=cate.getCatId()%>"><%=cate.getCatName()%>
+                                                    </option>
+                                                    <%}%>
+                                                    <%}%>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </div>
             </main>
         </div>
-
         <!-- Required Js -->
         <script src="assets/js/vendor-all.min.js"></script>
         <script src="assets/js/plugins/bootstrap.min.js"></script>
@@ -661,6 +394,203 @@
         <!-- custom-chart js -->
         <script src="assets/js/pages/dashboard-sale.js"></script>
 
+
+        <script>
+            const idProduct = $("#pid").val();
+            if (idProduct.length > 0) {
+                $(".remove").each(function () {
+                    const id = this.id.substring(6);
+                    removeFilesData(id)
+                })
+            } else {
+                removeFilesData(1)
+            }
+
+            function reloadUpLoadFile() {
+                $(".input-file").each(function () {
+                    $(this).on('change', function (e) {
+                        const idName = $(this).attr("id");
+                        const id = idName.substring(5);
+                        const value = $(this).val();
+                        let name = "";
+                        if (value.indexOf("\\") != -1)
+                            name = value.substring(value.lastIndexOf("\\") + 1);
+                        else
+                            name = value.substring(value.lastIndexOf("/") + 1);
+                        uploadFile(id, name, e)
+                    })
+                });
+            }
+
+            $(".input-file").each(function () {
+                $(this).on('change', function (e) {
+                    const idName = $(this).attr("id");
+                    const id = idName.substring(5);
+                    const value = $(this).val();
+                    let name = "";
+                    if (value.indexOf("\\") != -1)
+                        name = value.substring(value.lastIndexOf("\\") + 1);
+                    else
+                        name = value.substring(value.lastIndexOf("/") + 1);
+                    console.log(id + ", " + name + ", ")
+                    uploadFile(id, name, e)
+                })
+            });
+
+            function uploadFile(id, name, event) {
+                event.stopPropagation();
+                event.preventDefault();
+                const files = event.target.files;
+                const data = new FormData();
+                $.each(files, function (key, value) {
+                    data.append(key, value);
+                });
+                postFilesData(id, name, data);
+            }
+
+            function removeFilesData(idDelete) {
+                $("#remove" + idDelete).on("click", function (e) {
+                    e.preventDefault();
+                    const id = this.id.substring(6);
+                    const src = $("#container" + id + " .img-product-review").attr("src");
+                    let imageName = "";
+                    if (src.indexOf("\\") != -1)
+                        imageName = src.substring(src.lastIndexOf("\\") + 1);
+                    else
+                        imageName = src.substring(src.lastIndexOf("/") + 1);
+                    $("#container" + id).parent().remove();
+                    const value = $("#deletedFile").val();
+                    if (value.length > 0)
+                        $("#deletedFile").val($("#deletedFile").val() + imageName + ",");
+                    else
+                        $("#deletedFile").val(imageName + ",");
+                    console.log($("#deletedFile").val());
+                });
+            }
+
+            function postFilesData(id, name, data) {
+                let bool = false;
+                $(".img-product-review").each(function () {
+                    let nameFile = $(this).attr("src");
+                    if (nameFile.indexOf(name) != -1) {
+                        bool = true;
+                    }
+                })
+                if (bool === false) {
+                    $.ajax({
+                        url: '/Petshop_website_final_war/UpDownImageProductController',
+                        type: 'POST',
+                        data: data,
+                        cache: false,
+                        dataType: 'json',
+                        processData: false,
+                        contentType: false,
+                        success: function (data, textStatus, jqXHR) {
+                            //success
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $("#container" + id).empty()
+                            $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
+                                                <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
+                                                <div class="control">
+                                                <a id="remove` + id + `" class="dz-remove text-400 remove" href="" data-dz-remove="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                </a>
+                                                </div>
+                                            </div>`)
+                            $("#my-awesome-dropzone").append(`<div class="image-container">
+
+                                        <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
+                                            <input type="file" id="image` + id + `" name="files" class="input-file" accept="image/*" />
+                                            <br>
+                                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
+                                        </div>
+                                    </div>`)
+                            let value = $("#deletedFile").val();
+                            if (value.indexOf(name) !== -1) {
+                                value = value.replace(name + ",", "");
+                                $("#deletedFile").val(value);
+                            }
+                            console.log($("#deletedFile").val());
+                            reloadUpLoadFile();
+                            removeFilesData(id);
+                        }
+                    });
+                } else {
+                    alert("Bạn đã upload ảnh này rồi !")
+                }
+            }
+        </script>
+        <script>
+            $("button[type='submit']").click(function (e) {
+                e.preventDefault();
+
+                const id = $("#pid").val();
+                const name = $("#name").val();
+                const descripsion = $("#descripsion").val();
+                const detail = CKEDITOR.instances.editor.getData();
+                const quantity = $("#quantity").val();
+                const price = $("#price").val();
+                const status = $("#status").val();
+                const mausac = $("#mausac").val();
+                const cannang = $("#cannang").val();
+                const giong = $("#giong").val();
+                const CateParent = $("#CateParent").val();
+                const cateChild = $("#cateChild").val();
+                const Promotional = $("#Promotional").val();
+                const PromotionalPrice = $("#PromotionalPrice").val();
+
+
+                const imageLink = $(".img-product-review").attr("src").substring(61);
+                console.log(imageLink);
+                let imgFile = []
+                $(".img-product-review").each(function () {
+                    let nameFile = $(this).attr("src");
+                    if (nameFile.indexOf("\\") != -1)
+                        imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
+                    else
+                        imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
+                })
+                const removed = $("#deletedFile").val();
+                const oldImg = removed.substring(0, removed.length - 1);
+                $.ajax({
+                    url: "/Petshop_website_final_war/admin/edit-product",
+                    type: "GET",
+                    data: {
+                        quantity: quantity,
+                        oldImg: oldImg,
+                        id: id,
+                        name: name,
+                        price: price,
+                        image: imageLink,
+                        description: descripsion,
+                        mausac: mausac,
+                        cannang: cannang,
+                        giong: giong,
+                        imgFile: imgFile,
+                        detail: detail,
+                        CateParent: CateParent,
+                        cateChild:cateChild,
+                        status:status,
+                        Promotional: Promotional,
+                        PromotionalPrice:PromotionalPrice,
+                    },
+                    success: function () {
+                        if (id.equals("null"))
+                            alert("Thêm sản phẩm thành công");
+                        else
+                            alert("Cập nhật sản phẩm thành công");
+                        window.location.href = "list-products"
+                    }
+                })
+            })
+        </script>
+
 </body>
 
 </html>
+
+

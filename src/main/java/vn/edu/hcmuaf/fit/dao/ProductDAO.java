@@ -413,16 +413,5 @@ public class ProductDAO {
 //        updateAccessory("3041", "Deo phai chuong", "deo co", "200000", "1000", "cho ngu", "5");
 //        System.out.println(new ProductDAO().searchByName2("chuong"));
     public static void main(String[] args){
-//        System.out.println(new ProductDAO().getTop9Product("cat"));
-        // int amount, String category,String price, String size, String order_by
-//        System.out.println(new ProductDAO().Test(9,"cat","20000000-200000000","0-2","3"));
-
-          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
-
-//          System.out.println(new ProductDAO().getNext9Product(0,"dog","10000000-150000000","2-5","2"));
-
-//        System.out.println(new ProductDAO().test("dog"));
-//         new ProductDAO().updateProduct("P1129","2201","name","img","123123","ádfsadfadf","ƯEDWffsdfF","2","sdfsdfsf","sdfsdfsff","4","1");
-//        System.out.println(1000.2-(1000.2*10/100));
     }
 }

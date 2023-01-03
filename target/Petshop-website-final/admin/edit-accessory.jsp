@@ -12,15 +12,17 @@
     <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 11]>
-    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    	<![endif]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="DashboardKit is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
-    <meta name="keywords" content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description"
+          content="DashboardKit is made using Bootstrap 5 design framework. Download the free admin template & use it for your project.">
+    <meta name="keywords"
+          content="DashboardKit, Dashboard Kit, Dashboard UI Kit, Bootstrap 5, Admin Template, Admin Dashboard, CRM, CMS, Free Bootstrap Admin Template">
     <meta name="author" content="DashboardKit ">
 
 
@@ -39,36 +41,36 @@
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
-    <link href="bonus/css/dropzone.min.css" rel="stylesheet" />
-    <link href="bonus/css/line.css" rel="stylesheet" />
-    <link href="bonus/css/choices.min.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="bonus/css/dropzone.min.css" rel="stylesheet"/>
+    <link href="bonus/css/line.css" rel="stylesheet"/>
+    <link href="bonus/css/choices.min.css" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+            rel="stylesheet"
     />
     <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
     <link
-      href="bonus/css/theme.min.css"
-      type="text/css"
-      rel="stylesheet"
-      id="style-default"
+            href="bonus/css/theme.min.css"
+            type="text/css"
+            rel="stylesheet"
+            id="style-default"
     />
     <link
-      href="../../../assets/css/user.min.css"
-      type="text/css"
-      rel="stylesheet"
-      id="user-style-default"
+            href="../../../assets/css/user.min.css"
+            type="text/css"
+            rel="stylesheet"
+            id="user-style-default"
     />
     <link
-      rel="stylesheet"
-      type="text/css"
-      id="mce-u0"
-      href="bonus/css/skin.min.css"
+            rel="stylesheet"
+            type="text/css"
+            id="mce-u0"
+            href="bonus/css/skin.min.css"
     />
     <script type="text/javascript" src="<%=request.getContextPath()%>/libraries/ckeditor/ckeditor.js"></script>
     <style>
@@ -86,133 +88,150 @@
 </head>
 
 <body class="">
-	<!-- [ Pre-loader ] start -->
-	<div class="loader-bg">
-		<div class="loader-track">
-			<div class="loader-fill"></div>
-		</div>
-	</div>
-	<!-- [ Pre-loader ] End -->
-	<!-- [ Mobile header ] start -->
-	<div class="pc-mob-header pc-header">
-		<div class="pcm-logo">
-			<img src="assets/images/logo.svg" alt="" class="logo logo-lg">
-		</div>
-		<div class="pcm-toolbar">
-			<a href="#!" class="pc-head-link" id="mobile-collapse">
-				<div class="hamburger hamburger--arrowturn">
-					<div class="hamburger-box">
-						<div class="hamburger-inner"></div>
-					</div>
-				</div>
-			</a>
-			<a href="#!" class="pc-head-link" id="headerdrp-collapse">
-				<i data-feather="align-right"></i>
-			</a>
-			<a href="#!" class="pc-head-link" id="header-collapse">
-				<i data-feather="more-vertical"></i>
-			</a>
-		</div>
-	</div>
-	<!-- [ Mobile header ] End -->
-
-	<!-- [ navigation menu ] start -->
-	<nav class="pc-sidebar ">
-		<div class="navbar-wrapper">
-			<div class="m-header">
-				<a href="index.jsp" class="b-brand">
-					<!-- ========   change your logo hear   ============ -->
-					<img src="assets/images/logo.png" alt="" class="logo logo-lg">
-					<img src="assets/images/logo-sm.svg" alt="" class="logo logo-sm">
-				</a>
-			</div>
-			<div class="navbar-content">
-        <ul class="pc-navbar">
-            <li class="pc-item pc-caption">
-                <label>Quản lý</label>
-            </li>
-            <li class="pc-item">
-                <a href="index.jsp" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Quản lý chung</span></a>
-            </li>
-            <li class="pc-item pc-caption">
-                <label>Quản lý sản phẩm</label>
-                <!-- <span>UI Components</span> -->
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
-                    <li class="pc-item"><a class="pc-link" href="edit-product.jsp">Thêm thú cưng</a></li>
-                </ul>
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
-                    <li class="pc-item"><a class="pc-link" href="edit-accessory.jsp">Thêm phụ kiện</a></li>
-                </ul>
-            </li>
-            <li class="pc-item">
-                <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
-            </li>
-            <li class="pc-item pc-caption">
-                <label>Quản lý tin tức</label>
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="file-minus"></i></span><span class="pc-mtext">Tin tức</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="list-blog.jsp">Danh sách tin tức</a></li>
-                    <li class="pc-item"><a class="pc-link" href="add-blog.jsp">Thêm tin tức</a></li>
-                </ul>
-            </li>
-            <li class="pc-item pc-caption">
-                <label>Quản lý danh mục</label>
-            </li>
-            <li class="pc-item">
-                <a href="list-category.jsp" class="pc-link "><span class="pc-micon"><i
-                        class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Danh sách danh mục</span></a>
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
-                                                                        data-feather="file-minus"></i></span><span
-                        class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
-                        data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
-                    <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
-                </ul>
-            </li>
-            <li class="pc-item pc-caption">
-                <label>Tài khoản</label>
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="cpu"></i></span><span class="pc-mtext">Admin</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="list-admin.jsp">Danh sách admin</a></li>
-                    <li class="pc-item"><a class="pc-link" href="add-admin.jsp">Thêm admin</a></li>
-                </ul>
-            </li>
-            <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="user"></i></span><span class="pc-mtext">Người dùng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                <ul class="pc-submenu">
-                    <li class="pc-item"><a class="pc-link" href="list-user.jsp">Danh sách người dùng</a></li>
-                    <li class="pc-item"><a class="pc-link" href="add-user.jsp">Thêm người dùng</a></li>
-                </ul>
-            </li>
-            <li class="pc-item pc-caption">
-                <label>Quản lý bình luận</label>
-            </li>
-            <li class="pc-item">
-                <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Bình luận</span></a>
-            </li>
-        </ul>
+<!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+    <div class="loader-track">
+        <div class="loader-fill"></div>
     </div>
-		</div>
-	</nav>
-	<!-- [ navigation menu ] end -->
-	<!-- [ Header ] start -->
-    <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
-	<!-- [ Header ] end -->
+</div>
+<!-- [ Pre-loader ] End -->
+<!-- [ Mobile header ] start -->
+<div class="pc-mob-header pc-header">
+    <div class="pcm-logo">
+        <img src="assets/images/logo.svg" alt="" class="logo logo-lg">
+    </div>
+    <div class="pcm-toolbar">
+        <a href="#!" class="pc-head-link" id="mobile-collapse">
+            <div class="hamburger hamburger--arrowturn">
+                <div class="hamburger-box">
+                    <div class="hamburger-inner"></div>
+                </div>
+            </div>
+        </a>
+        <a href="#!" class="pc-head-link" id="headerdrp-collapse">
+            <i data-feather="align-right"></i>
+        </a>
+        <a href="#!" class="pc-head-link" id="header-collapse">
+            <i data-feather="more-vertical"></i>
+        </a>
+    </div>
+</div>
+<!-- [ Mobile header ] End -->
+
+<!-- [ navigation menu ] start -->
+<nav class="pc-sidebar ">
+    <div class="navbar-wrapper">
+        <div class="m-header">
+            <a href="index.jsp" class="b-brand">
+                <!-- ========   change your logo hear   ============ -->
+                <img src="assets/images/logo.png" alt="" class="logo logo-lg">
+                <img src="assets/images/logo-sm.svg" alt="" class="logo logo-sm">
+            </a>
+        </div>
+        <div class="navbar-content">
+            <ul class="pc-navbar">
+                <li class="pc-item pc-caption">
+                    <label>Quản lý</label>
+                </li>
+                <li class="pc-item">
+                    <a href="index.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">home</i></span><span
+                            class="pc-mtext">Quản lý chung</span></a>
+                </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý sản phẩm</label>
+                    <!-- <span>UI Components</span> -->
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i
+                            data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span
+                            class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
+                        <li class="pc-item"><a class="pc-link" href="edit-product.jsp">Thêm thú cưng</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span
+                            class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
+                        <li class="pc-item"><a class="pc-link" href="edit-accessory.jsp">Thêm phụ kiện</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item">
+                    <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
+                </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý tin tức</label>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                            data-feather="file-minus"></i></span><span
+                            class="pc-mtext">Tin tức</span><span class="pc-arrow"><i
+                            data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="list-blog.jsp">Danh sách tin tức</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-blog.jsp">Thêm tin tức</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý danh mục</label>
+                </li>
+                <li class="pc-item">
+                    <a href="list-category.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Danh sách danh mục</span></a>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                            data-feather="file-minus"></i></span><span
+                            class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
+                            data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a>
+                        </li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-caption">
+                    <label>Tài khoản</label>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                            data-feather="cpu"></i></span><span
+                            class="pc-mtext">Admin</span><span class="pc-arrow"><i
+                            data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="list-admin.jsp">Danh sách admin</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-admin.jsp">Thêm admin</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                            data-feather="user"></i></span><span
+                            class="pc-mtext">Người dùng</span><span class="pc-arrow"><i
+                            data-feather="chevron-right"></i></span></a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" href="list-user.jsp">Danh sách người dùng</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-user.jsp">Thêm người dùng</a></li>
+                    </ul>
+                </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý bình luận</label>
+                </li>
+                <li class="pc-item">
+                    <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
+                            class="pc-mtext">Bình luận</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
+<!-- [ Header ] start -->
+<jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
+<!-- [ Header ] end -->
 
 <!-- [ Main Content ] start -->
 <div class="pc-container">
@@ -233,253 +252,269 @@
         </div>
         <div class="row">
 
-    <main class="main" id="top">
-        <div class="container-fluid px-0" data-layout="container">
+            <main class="main" id="top">
+                <div class="container-fluid px-0" data-layout="container">
 
-          <!-- <div class="content"> -->
+                    <!-- <div class="content"> -->
 
-            <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
-                    <% Product p = null;
+                    <form name="item" method="post" enctype="multipart/form-data" class="mb-9">
+                            <% Product p = null;
                             if (request.getParameter("pid") != null)
                             p = ProductService.getInstance().getProductDetail(request.getParameter("pid"));
                     %>
-              <div class="row g-3 flex-between-end mb-5">
-                <div class="col-auto">
-                    <%if (request.getParameter("pid") != null) {%>
+                        <div class="row g-3 flex-between-end mb-5">
+                            <div class="col-auto">
+                                <%if (request.getParameter("pid") != null) {%>
 
-                    <h2 class="mb-2">Chỉnh sửa phụ kiện</h2>
-                    <%} else {%>
-                    <h2 class="mb-2">Thêm phụ kiện</h2>
-                    <%}%>
-                  <!-- <h5 class="text-700 fw-semi-bold">
-                    Orders placed across your store
-                  </h5> -->
-                </div>
-                <div class="col-auto">
-                    <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
-                        Xóa dữ liệu</button
-                    >
-                    <%if (request.getParameter("pid") != null) {%>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                        Sửa phụ kiện
-                    </button>
-                    <%} else {%>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                        Đăng phụ kiện
-                    </button>
-                    <%}%>
-                </div>
-              </div>
+                                <h2 class="mb-2">Chỉnh sửa phụ kiện</h2>
+                                <%} else {%>
+                                <h2 class="mb-2">Thêm phụ kiện</h2>
+                                <%}%>
+                                <!-- <h5 class="text-700 fw-semi-bold">
+                                  Orders placed across your store
+                                </h5> -->
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
+                                    Xóa dữ liệu
+                                </button
+                                >
+                                <%if (request.getParameter("pid") != null) {%>
+                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                    Sửa phụ kiện
+                                </button>
+                                <%} else {%>
+                                <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
+                                    Đăng phụ kiện
+                                </button>
+                                <%}%>
+                            </div>
+                        </div>
                         <input type="text" id="pid" name="pid"
                                value="<%=(p != null) ? request.getParameter("pid") : ""%>"
                                style="display: none">
-              <h4 class="mb-3">Tên phụ kiện</h4>
-              <div class="row g-5">
-                <div class="col-12 col-xl-8">
-                  <input name="name" id="name"
-                    class="form-control mb-5"
-                    type="text"
-                    placeholder="Viết tên phụ kiện tại đây..." value="<%=(p != null) ? p.getProductName() : ""%>" required/>
+                        <h4 class="mb-3">Tên phụ kiện</h4>
+                        <div class="row g-5">
+                            <div class="col-12 col-xl-8">
+                                <input name="name" id="name"
+                                       class="form-control mb-5"
+                                       type="text"
+                                       placeholder="Viết tên phụ kiện tại đây..."
+                                       value="<%=(p != null) ? p.getProductName() : ""%>" required/>
 
-                    <h4 class="mb-3">Mô tả ngắn</h4>
-                    <input name="description" id="descripsion" class="form-control mb-5" type="text"
-                           placeholder="Viết mô tả ngắn tại đây..."
-                           value="<%=(p != null) ? p.getDescription() : ""%>" required/>
+                                <h4 class="mb-3">Mô tả ngắn</h4>
+                                <input name="description" id="descripsion" class="form-control mb-5" type="text"
+                                       placeholder="Viết mô tả ngắn tại đây..."
+                                       value="<%=(p != null) ? p.getDescription() : ""%>" required/>
 
-                  <div class="mb-6">
-                    <h4 class="mb-3">Giới thiệu phụ kiện</h4>
-                      <textarea name="description" rows="20" cols="10" id="editor" required>
+                                <div class="mb-6">
+                                    <h4 class="mb-3">Giới thiệu phụ kiện</h4>
+                                    <textarea name="description" rows="20" cols="10" id="editor" required>
                           <%=(p != null) ? p.getDescription() : ""%>
                       </textarea>
-                      <script>
-                          CKEDITOR.replace('editor');
-                      </script>
+                                    <script>
+                                        CKEDITOR.replace('editor');
+                                    </script>
 
-                  </div>
-                  <h4 class="mb-3">Thêm ảnh</h4>
-                    <div
-                            class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
-                            id="my-awesome-dropzone"
-                            data-dropzone="data-dropzone">
+                                </div>
+                                <h4 class="mb-3">Thêm ảnh</h4>
+                                <div
+                                        class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
+                                        id="my-awesome-dropzone"
+                                        data-dropzone="data-dropzone">
 
-                        <% int i = 0;
-                            if (p != null) {
-                                if (p.getImage() != null) {%>
-                        <div class="image-container">
-                            <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
-                                <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
-                                    <img class="img-product-review dz-image" src="<%=p.getImage()%>">
-                                    <div class="control">
-                                        <a id="remove<%=i%>" class="dz-remove text-400 remove" href="" data-dz-remove="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-                                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                                            </svg>
-                                        </a>
+                                    <% int i = 0;
+                                        if (p != null) {
+                                            if (p.getImage() != null) {%>
+                                    <div class="image-container">
+                                        <div id="container<%=i%>" class="dz-message text-600"
+                                             data-dz-message="data-dz-message">
+                                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
+                                                 style="height:80px;width:80px;">
+                                                <img class="img-product-review dz-image" src="<%=p.getImage()%>">
+                                                <div class="control">
+                                                    <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
+                                                       data-dz-remove="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                             height="16px" viewBox="0 0 24 24" fill="none"
+                                                             stroke="currentColor" stroke-width="2"
+                                                             stroke-linecap="round" stroke-linejoin="round"
+                                                             class="feather feather-x">
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                                i++;
+                                            }
+                                        }
+                                    %>
+
+                                    <div class="image-container">
+                                        <div id="container<%=i%>" class="dz-message text-600"
+                                             data-dz-message="data-dz-message">
+                                            <input type="file" id="image<%=i%>" name="files" class="input-file"/>
+                                            <br>
+                                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png"
+                                                 width="40" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="deletedFile" value="" style="display: none">
+                            </div>
+                            <div class="col-12 col-xl-4">
+                                <div class="row g-2">
+                                    <div class="col-12 col-xl-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="card-title mb-4">Chi tiết thú cưng</h4>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-6 col-xl-12">
+                                                        <div class="mb-4 border-dashed-bottom pb-4">
+                                                            <%List<Detail> listCate = DetailService.getInstance().listCateAccessory();%>
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Danh mục con</h5>
+                                                            </div>
+                                                            <select class="form-select mb-3" aria-label="category"
+                                                                    id="cateChild" name="cateChild">
+                                                                <%if (p != null) {
+                                                                        for (Detail cate : listCate) {%>
+                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                        </option>
+                                                                        <%}
+                                                                }else {
+                                                                    for (Detail cate : listCate) {%>
+                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                        </option>
+                                                                    <%}
+                                                                }%>
+
+                                                            </select>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Kích Thước</h5>
+                                                            </div>
+                                                            <input name="cannang" id="cannang"
+                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Màu sắc</h5>
+                                                            </div>
+                                                            <input name="mausac" id="mausac"
+                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Ví dụ: Trắng" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Số Lượng</h5>
+                                                            </div>
+                                                            <input name="quantity" id="quantity"
+                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Ví dụ: 5" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giá</h5>
+                                                            </div>
+                                                            <input name="price" id="price"
+                                                                   value="<%=(p != null) ? p.getPrice() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Đồng" required/>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Trạng thái</h5>
+                                                            </div>
+                                                            <select class="form-select mb-3" name="status" id="status">
+                                                                <%
+                                                                    if (p != null) {
+                                                                        if (p.getStatus() == 1) {
+                                                                %>
+                                                                <option value="1" selected>Hiển thị</option>
+                                                                <option value="0">Ẩn</option>
+                                                                <%} else {%>
+                                                                <option value="1">Hiển thị</option>
+                                                                <option value="0" selected>Ẩn</option>
+                                                                <%
+                                                                    }
+                                                                } else {
+                                                                %>
+                                                                <option value="1" selected>Hiển thị</option>
+                                                                <option value="0">Ẩn</option>
+                                                                <%}%>
+                                                            </select>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giảm giá</h5>
+                                                            </div>
+                                                            <select class="form-select mb-3" name="Promotional"
+                                                                    id="Promotional">
+                                                                <%
+                                                                    if (p != null) {
+                                                                        if (p.getPromotional() == 1) {
+                                                                %>
+                                                                <option value="1" selected>Có</option>
+                                                                <option value="0">Không</option>
+                                                                <%} else {%>
+                                                                <option value="1">Có</option>
+                                                                <option value="0" selected>Không</option>
+                                                                <%
+                                                                    }
+                                                                } else {
+                                                                %>
+                                                                <option value="1">Có</option>
+                                                                <option value="0" selected>Không</option>
+                                                                <%}%>
+                                                            </select>
+
+                                                            <div class="d-flex flex-wrap justify-content-between mb-2">
+                                                                <h5>Giảm bao nhiêu?(%)</h5>
+                                                            </div>
+                                                            <input name="PromotionalPrice" id="PromotionalPrice"
+                                                                   value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                                                   class="form-control mb-3" type="text"
+                                                                   placeholder="Ví dụ: 10" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <%i++;
-                        }
-                        }%>
-
-                        <div class="image-container">
-                            <div id="container<%=i%>" class="dz-message text-600" data-dz-message="data-dz-message">
-                                <input type="file" id="image<%=i%>" name="files" class="input-file"/>
-                                <br>
-                                <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <input type="text" id="deletedFile" value="" style="display: none">
                 </div>
-                  <div class="col-12 col-xl-4">
-                      <div class="row g-2">
-                          <div class="col-12 col-xl-12">
-                              <div class="card">
-                                  <div class="card-body">
-                                      <h4 class="card-title mb-4">Chi tiết thú cưng</h4>
-                                      <div class="row">
-                                          <div class="col-12 col-sm-6 col-xl-12">
-                                              <div class="mb-4 border-dashed-bottom pb-4">
-                                                  <%List<Detail> listCate = DetailService.getInstance().listCategory();%>
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Danh mục con</h5>
-                                                  </div>
-                                                  <select class="form-select mb-3" aria-label="category" id="cateChild" name="cateChild">
-<%--                                                      <%--%>
-<%--                                                          if (p != null) {--%>
-<%--                                                              for (Detail cate : listCate) {--%>
-<%--                                                                  if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p)) {--%>
-<%--                                                      %>--%>
-<%--                                                                      <option value="<%=cate.getCatID()%>"--%>
-<%--                                                                              selected><%=cate.getCatName()%>--%>
-<%--                                                                      </option>--%>
-<%--                                                                  <%} else {%>--%>
-<%--                                                                          <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>--%>
-<%--                                                                          </option>--%>
-<%--                                                                        <% }--%>
-<%--                                                              }%>--%>
-<%--                                                        <% } else {--%>
-<%--                                                              for (Detail cate : listCate) {%>--%>
-<%--                                                                  <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>--%>
-<%--                                                                  </option>--%>
-<%--                                                            <%}%>--%>
-<%--                                                        <%}%>--%>
-                                                  </select>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Kích Thước</h5>
-                                                  </div>
-                                                  <input name="cannang" id="cannang"
-                                                         value="<%=(p != null) ? p.getCannang() : ""%>"
-                                                         class="form-control mb-3" type="text"
-                                                         placeholder="" required/>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Màu sắc</h5>
-                                                  </div>
-                                                  <input  name="mausac" id="mausac"
-                                                          value="<%=(p != null) ? p.getMausac() : ""%>"
-                                                          class="form-control mb-3" type="text"
-                                                          placeholder="Ví dụ: Trắng" required/>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Số Lượng</h5>
-                                                  </div>
-                                                  <input  name="quantity" id="quantity"
-                                                          value="<%=(p != null) ? p.getQuantity() : ""%>"
-                                                          class="form-control mb-3" type="text"
-                                                          placeholder="Ví dụ: 5" required/>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Giá</h5>
-                                                  </div>
-                                                  <input name="price" id="price"
-                                                         value="<%=(p != null) ? p.getPrice() : ""%>"
-                                                         class="form-control mb-3" type="text"
-                                                         placeholder="Đồng" required/>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Trạng thái</h5>
-                                                  </div>
-                                                  <select class="form-select mb-3" name="status" id="status">
-                                                      <%if(p!=null){
-                                                          if(p.getStatus()==1){%>
-                                                      <option value="1" selected>Hiển thị</option>
-                                                      <option value="0">Ẩn</option>
-                                                      <%}else {%>
-                                                      <option value="1" >Hiển thị</option>
-                                                      <option value="0" selected>Ẩn</option>
-                                                      <%}
-                                                      }else {%>
-                                                      <option value="1" selected>Hiển thị</option>
-                                                      <option value="0">Ẩn</option>
-                                                      <%}%>
-                                                  </select>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Giảm giá</h5>
-                                                  </div>
-                                                  <select class="form-select mb-3" name="Promotional" id="Promotional">
-                                                      <%if(p!=null){
-                                                          if(p.getPromotional()==1){%>
-                                                      <option value="1" selected>Có</option>
-                                                      <option value="0">Không</option>
-                                                      <%}else {%>
-                                                      <option value="1" >Có</option>
-                                                      <option value="0" selected>Không</option>
-                                                      <%}
-                                                      }else {%>
-                                                      <option value="1" >Có</option>
-                                                      <option value="0" selected>Không</option>
-                                                      <%}%>
-                                                  </select>
-
-                                                  <div class="d-flex flex-wrap justify-content-between mb-2">
-                                                      <h5>Giảm bao nhiêu?(%)</h5>
-                                                  </div>
-                                                  <input  name="PromotionalPrice" id="PromotionalPrice"
-                                                          value="<%=(p != null) ? p.getPromotional() : ""%>"
-                                                          class="form-control mb-3" type="text"
-                                                          placeholder="Ví dụ: 10" required/>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-      </main>
+                </form>
+            </main>
+        </div>
     </div>
 </div>
-</div>
 
-    <!-- Required Js -->
-    <script src="assets/js/vendor-all.min.js"></script>
-    <script src="assets/js/plugins/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/feather.min.js"></script>
-    <script src="assets/js/pcoded.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="assets/js/plugins/clipboard.min.js"></script>
-    <script src="assets/js/uikit.min.js"></script>
+<!-- Required Js -->
+<script src="assets/js/vendor-all.min.js"></script>
+<script src="assets/js/plugins/bootstrap.min.js"></script>
+<script src="assets/js/plugins/feather.min.js"></script>
+<script src="assets/js/pcoded.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="assets/js/plugins/clipboard.min.js"></script>
+<script src="assets/js/uikit.min.js"></script>
 
-    <script src="bonus/js/bootstrap.min.js"></script>
-    <script src="bonus/js/lodash.min.js"></script>
-    <script src="bonus/tinymce/tinymce.min.js"></script>
-    <script src="bonus/js/dropzone.min.js"></script>
-    <script src="bonus/js/phoenix.js"></script>
+<script src="bonus/js/bootstrap.min.js"></script>
+<script src="bonus/js/lodash.min.js"></script>
+<script src="bonus/tinymce/tinymce.min.js"></script>
+<script src="bonus/js/dropzone.min.js"></script>
+<script src="bonus/js/phoenix.js"></script>
 
 
 <!-- Apex Chart -->
-    <script src="assets/js/plugins/apexcharts.min.js"></script>
+<script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
-    <script src="assets/js/pages/dashboard-sale.js"></script>
+<script src="assets/js/pages/dashboard-sale.js"></script>
 </body>
 <script>
     const idProduct = $("#pid").val();
@@ -491,6 +526,7 @@
     } else {
         removeFilesData(1)
     }
+
     function reloadUpLoadFile() {
         $(".input-file").each(function () {
             $(this).on('change', function (e) {
@@ -506,6 +542,7 @@
             })
         });
     }
+
     $(".input-file").each(function () {
         $(this).on('change', function (e) {
             const idName = $(this).attr("id");
@@ -516,10 +553,11 @@
                 name = value.substring(value.lastIndexOf("\\") + 1);
             else
                 name = value.substring(value.lastIndexOf("/") + 1);
-            console.log(id +", " + name + ", ")
+            console.log(id + ", " + name + ", ")
             uploadFile(id, name, e)
         })
     });
+
     function uploadFile(id, name, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -530,6 +568,7 @@
         });
         postFilesData(id, name, data);
     }
+
     function removeFilesData(idDelete) {
         $("#remove" + idDelete).on("click", function (e) {
             e.preventDefault();
@@ -549,6 +588,7 @@
             console.log($("#deletedFile").val());
         });
     }
+
     function postFilesData(id, name, data) {
         let bool = false;
         $(".img-product-review").each(function () {
@@ -574,7 +614,7 @@
                     $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
                                                 <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
                                                 <div class="control">
-                                                <a id="remove`+ id +`" class="dz-remove text-400 remove" href="" data-dz-remove="">
+                                                <a id="remove` + id + `" class="dz-remove text-400 remove" href="" data-dz-remove="">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
                                                         <line x1="18" y1="6" x2="6" y2="18"></line>
                                                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -584,8 +624,8 @@
                                             </div>`)
                     $("#my-awesome-dropzone").append(`<div class="image-container">
 
-                                        <div id="container`+ id +`" class="dz-message text-600" data-dz-message="data-dz-message">
-                                            <input type="file" id="image`+ id +`" name="files" class="input-file"/>
+                                        <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
+                                            <input type="file" id="image` + id + `" name="files" class="input-file"/>
                                             <br>
                                             <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
                                         </div>
@@ -641,15 +681,15 @@
                 id: id,
                 name: name,
                 price: price,
-                image : imageLink,
-                descripsion : descripsion,
-                detail:detail,
-                status:status,
-                mausac:mausac,
-                cannang:cannang,
-                cateChild:cateChild,
-                Promotional:Promotional,
-                PromotionalPrice:PromotionalPrice,
+                image: imageLink,
+                descripsion: descripsion,
+                detail: detail,
+                status: status,
+                mausac: mausac,
+                cannang: cannang,
+                cateChild: cateChild,
+                Promotional: Promotional,
+                PromotionalPrice: PromotionalPrice,
                 imgFile: imgFile,
             },
             success: function () {

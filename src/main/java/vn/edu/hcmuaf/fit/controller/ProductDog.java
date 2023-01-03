@@ -11,6 +11,9 @@ import java.util.List;
 
 @WebServlet(name = "ProductDog", value = "/products-dog")
 public class ProductDog extends HttpServlet {
+    /*
+        Danh sách sản phẩm chó - Nguyễn Sĩ Hoàng 20130267
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Product> list = ProductService.getData2();

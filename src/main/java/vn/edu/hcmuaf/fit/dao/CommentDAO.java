@@ -21,8 +21,7 @@ public class CommentDAO  {
     }
     public static List<Comment> getListCommentByProductID(String id) {
         List<Comment> cmt = JDBIConnector.get().withHandle(handle -> {
-           return handle.createQuery("select * from productcomment pcmt inner join infor_user iu on pcmt.CustomerID = iu.id_user" +
-                           "where pcmt.ProductID = ?")
+           return handle.createQuery("select * from productcomment where ProductID = ?")
                    .bind(0,id)
                    .mapToBean(Comment.class).stream().collect(Collectors.toList());
         });
@@ -35,6 +34,10 @@ public class CommentDAO  {
                     .mapToBean(Comment.class).first();
         });
         return cmt;
+    }
+    public List<Comment> getComments() {
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
+                .mapToBean(Comment.class).stream().collect(Collectors.toList()));
     }
     public static String taoIDComment() {
         String numbers = "0123456789";
@@ -71,15 +74,13 @@ public class CommentDAO  {
         });
         return id;
     }
-
-    public List<Comment> getComments() {
-        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
-                .mapToBean(Comment.class).stream().collect(Collectors.toList()));
-    }
-
-    public void removeComment(String id){
-         JDBIConnector.get().withHandle(handle -> handle.createUpdate("delete from productcomment where ID=?")
-                .bind(0,id)
-                .execute());
+    public void RemoveComment(String id) {
+        JDBIConnector.get().withHandle(handle -> {
+                    handle.createUpdate("DELETE FROM productcomment WHERE ID = ?")
+                            .bind(0, id)
+                            .execute();
+                    return true;
+                }
+        );
     }
 }

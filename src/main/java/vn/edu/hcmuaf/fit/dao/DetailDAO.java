@@ -3,7 +3,6 @@ package vn.edu.hcmuaf.fit.dao;
 import vn.edu.hcmuaf.fit.beans.Detail;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
-import vn.edu.hcmuaf.fit.services.DetailService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,7 +63,8 @@ public class DetailDAO {
 
     public static List<Detail> listProCateClassify(String category) {
         String query = "SELECT DISTINCT pc.* FROM  product_category pc join product_from_cate pfc on pfc.cate_id = pc.CatId JOIN product p on p.productId = pfc.product_id Where p.`Status` =1";
-        if (category != null) {
+        if (category != null)
+        {
             switch (category) {
                 case "all" -> query += " and pc.ParentID != \"null\"  ";
                 case "1" -> query += " and pc.ParentID = 1";
@@ -227,11 +227,11 @@ public class DetailDAO {
 
     public void removeCateBlog(String id) {
         JDBIConnector.get().withHandle(handle -> {
-                    handle.createUpdate("SET FOREIGN_KEY_CHECKS = 0").execute();
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 0").execute();
                     handle.createUpdate("DELETE FROM blogcategory WHERE CatId=?")
                             .bind(0, id)
                             .execute();
-                    handle.createUpdate("SET FOREIGN_KEY_CHECKS = 1").execute();
+            handle.createUpdate("SET FOREIGN_KEY_CHECKS = 1").execute();
                     return null;
                 }
 
@@ -239,30 +239,30 @@ public class DetailDAO {
     }
 
     public List<Product> getListPdByCateId(String id) {
-        List<Product> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.* \n" +
+        List<Product> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId, p.ProductName, p.`Status`,p.Image,p.Price,p.PromotionalPrice,p.Quantity,p.Warranty,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang \n" +
                 "FROM product p INNER JOIN product_from_cate pc ON p.productId = pc.product_id \n" +
-                "WHERE pc.cate_id = ?;").bind(0, id).mapToBean(Product.class).stream().collect(Collectors.toList()));
+                "WHERE pc.cate_id = ?;").bind(0,id).mapToBean(Product.class).stream().collect(Collectors.toList()));
         return list;
     }
 
-    public boolean productOfCate(String idCate, String idProduct){
-        Product p= null;
-        p=JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.* FROM product p INNER JOIN product_from_cate pc ON p.productId=pc.product_id\n" +
-                "WHERE p.productId=? AND pc.cate_id=?")
-                .bind(0,idProduct)
-                .bind(1,idCate)
-                .mapToBean(Product.class).first());
-        if(p==null) return false;
-        return true;
+    public Detail getCateProduct(String id){
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT c.CatId, c.CatName,c.`Status`,c.Sort,c.ParentID,c.CreateBy,c.CreateDate,c.UpdateBy,c.UpdateDate FROM product_category c INNER JOIN product_from_cate pc ON c.CatId=pc.cate_id\n" +
+                "WHERE c.ParentID IS NOT NULL AND pc.product_id=?").bind(0,id).mapToBean(Detail.class).first());
     }
 
+    public Detail getPentCateProduct(String id){
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT c.CatId, c.CatName,c.`Status`,c.Sort,c.ParentID,c.CreateBy,c.CreateDate,c.UpdateBy,c.UpdateDate FROM product_category c INNER JOIN product_from_cate pc ON c.CatId=pc.cate_id\n" +
+                "WHERE c.ParentID IS NULL AND pc.product_id=?").bind(0,id).mapToBean(Detail.class).first());
+    }
+
+    public List<Detail> listCateAccessory(){
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT c.CatId, c.CatName,c.`Status`,c.Sort,c.ParentID,c.CreateBy,c.CreateDate,c.UpdateBy,c.UpdateDate FROM product_category c \n" +
+                "WHERE c.ParentID IS NOT NULL AND ParentID=3").mapToBean(Detail.class).stream().collect(Collectors.toList()));
+
+    }
     public static void main(String[] args) {
         new DetailDAO();
-        List<Detail> listCate = DetailService.getInstance().listCategory();
-        Product p =ProductDAO.getProductById("1101");
-        System.out.println(DetailService.getInstance().getListPdByCateId("5").contains(p));
-
-
+        System.out.println(new DetailDAO().getCateProduct("3001"));
     }
 
 

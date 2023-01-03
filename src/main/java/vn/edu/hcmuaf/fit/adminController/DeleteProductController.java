@@ -7,8 +7,11 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteController", value = "/admin/delete-product")
-public class DeleteController extends HttpServlet {
+@WebServlet(name = "DeleteProductController", value = "/admin/delete-product")
+public class DeleteProductController extends HttpServlet {
+    /*
+        Xóa sản phẩm thú cưng - Nguyễn Sĩ Hoàng 20130267
+    */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.controller.Category" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -261,7 +263,6 @@
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
                                 <%if (request.getParameter("pid") != null) {%>
-
                                 <h2 class="mb-2">Chỉnh sửa thú cưng</h2>
                                 <%} else {%>
                                 <h2 class="mb-2">Thêm thú cưng</h2>
@@ -270,8 +271,7 @@
                             <div class="col-auto">
                                 <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
                                     Xóa dữ liệu
-                                </button
-                                >
+                                </button>
                                 <%if (request.getParameter("pid") != null) {%>
                                 <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                                     Sửa thú cưng
@@ -283,9 +283,7 @@
                                 <%}%>
                             </div>
                         </div>
-                        <input type="text" id="pid" name="pid"
-                               value="<%=(p != null) ? request.getParameter("pid") : null%>"
-                               style="display: none">
+                        <input type="text" id="pid" name="pid" value="<%=(p != null) ? request.getParameter("pid") : null%>"  style="display: none">
                         <h4 class="mb-3">Tên thú cưng</h4>
                         <div class="row g-5">
                             <div class="col-12 col-xl-8">
@@ -305,6 +303,7 @@
                                         CKEDITOR.replace('editor');
                                     </script>
                                 </div>
+
                                 <h4 class="mb-3">Thêm ảnh</h4>
                                 <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
                                      id="my-awesome-dropzone" data-dropzone="data-dropzone">
@@ -367,28 +366,25 @@
                                                             </div>
                                                             <select id="CateParent" name="CateParent"
                                                                     class="form-select mb-3" aria-label="category">
-                                                                <%
-                                                                    if (p != null) {
-                                                                        for (Detail cate : ParentCates) {
-                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
-                                                                %>
-                                                                <option value="<%=cate.getCatID()%>"
-                                                                        selected><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%} else {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <% }
-                                                                }%>
-                                                                <% } else {
-                                                                    for (Detail cate : ParentCates) {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%}%>
-                                                                <%}%>
+                                                                <%if (p != null) {
+                                                                            if (DetailService.getInstance().getPentCateProduct(p.getProductId()) != null) {%>
+                                                                                <option value="<%=DetailService.getInstance().getPentCateProduct(p.getProductId()).getCatID()%>"
+                                                                                        selected><%=DetailService.getInstance().getPentCateProduct(p.getProductId()).getCatName()%>
+                                                                                </option>
+                                                                            <% }%>
+                                                                            <%for (Detail cate : ParentCates) {%>
+                                                                             <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%></option>
+                                                                            <%}
+                                                                    } else {
+                                                                        for (Detail cate : ParentCates) {%>
+                                                                            <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%></option>
+                                                                        <%}%>
+                                                                    <%}%>
                                                             </select>
                                                         </div>
                                                     </div>
+
+
                                                     <%List<Detail> listCate = DetailService.getInstance().listCategory();%>
                                                     <div class="col-12 col-sm-6 col-xl-12">
                                                         <div>
@@ -396,24 +392,23 @@
                                                                 <h5>Danh mục con</h5>
                                                             </div>
                                                             <select class="form-select" aria-label="category" id="cateChild" name="cateChild">
-                                                                <%
-                                                                    if (p != null) {
-                                                                        for (Detail cate : listCate) {
-                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
-                                                                %>
-                                                                                    <option value="<%=cate.getCatID()%>"
-                                                                                            selected><%=cate.getCatName()%>
-                                                                                    </option>
-                                                                            <%} else {%>
-                                                                                    <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                                    </option>
-                                                                                <% }
-                                                                }%>
-                                                                <% } else {
-                                                                        for (Detail cate : listCate) {%>
+                                                                <%if (p != null) {
+                                                                        if (DetailService.getInstance().getCateProduct(p.getProductId()) != null) {%>
+                                                                        <option value="<%=DetailService.getInstance().getCateProduct(p.getProductId()).getCatID()%>"
+                                                                            selected><%=DetailService.getInstance().getCateProduct(p.getProductId()).getCatName()%>
+                                                                            </option>
+                                                                        <% }%>
+                                                                       <%for (Detail cate : listCate) {%>
                                                                             <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
                                                                             </option>
-                                                                        <%}%>
+                                                                        <%}
+
+
+                                                                        }  else {
+                                                                    for (Detail cate : listCate) {%>
+                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                        </option>
+                                                                    <%}%>
                                                                 <%}%>
                                                             </select>
                                                         </div>
@@ -508,7 +503,7 @@
                                                                 <h5>Giảm bao nhiêu?(%)</h5>
                                                             </div>
                                                             <input  name="PromotionalPrice" id="PromotionalPrice"
-                                                                    value="<%=(p != null) ? p.getPromotional() : ""%>"
+                                                                    value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
                                                                     class="form-control mb-3" type="text"
                                                                     placeholder="Ví dụ: 10" required/>
                                                         </div>

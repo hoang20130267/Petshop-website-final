@@ -340,8 +340,8 @@
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
-                    <div class="">
-                        <div class="product__discount__slider owl-carousel" style="z-index: -1">
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
                             <%List<Product> listSale = ProductService.getInstance().listProductSale();
                                 for (Product pd:listSale) {%>
                                     <div class="col-lg-4">

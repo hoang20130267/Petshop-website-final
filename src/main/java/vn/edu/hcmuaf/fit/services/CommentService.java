@@ -18,6 +18,6 @@ public class CommentService {
     }
 
     public void removeComment(String id){
-        new CommentDAO().removeComment(id);
+        new CommentDAO().RemoveComment(id);
     }
 }
