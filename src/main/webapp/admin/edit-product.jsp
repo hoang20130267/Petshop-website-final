@@ -350,145 +350,6 @@
                                 </div>
                                 <input type="text" id="deletedFile" value="" style="display: none">
                                 <p name="pid" class="form-control" style="display: none"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%></p>
-<%--                                <h4 class="mb-3">Danh mục</h4>--%>
-<%--                                <div class="row g-0 border-top border-bottom border-300">--%>
-<%--                                    <div class="col-sm-4">--%>
-<%--                                        <div class="nav flex-sm-column border-bottom border-bottom-sm-0 border-end-sm border-300 fs--1 vertical-tab h-100 justify-content-between"--%>
-<%--                                             role="tablist" aria-orientation="vertical">--%>
-<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center active"--%>
-<%--                                               id="pricingTab" data-bs-toggle="tab" data-bs-target="#pricingTabContent"--%>
-<%--                                               role="tab" aria-controls="pricingTabContent" aria-selected="true">--%>
-<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
-<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
-<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
-<%--                                                     class="feather feather-tag me-sm-2 fs-4 nav-icons">--%>
-<%--                                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>--%>
-<%--                                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>--%>
-<%--                                                </svg>--%>
-<%--                                                <sapn class="d-none d-sm-inline">Giá bán</sapn>--%>
-<%--                                            </a>--%>
-<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
-<%--                                               id="restockTab" data-bs-toggle="tab" data-bs-target="#restockTabContent"--%>
-<%--                                               role="tab" aria-controls="restockTabContent" aria-selected="false"--%>
-<%--                                               tabindex="-1">--%>
-<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
-<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
-<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
-<%--                                                     class="feather feather-package me-sm-2 fs-4 nav-icons">--%>
-<%--                                                    <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>--%>
-<%--                                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>--%>
-<%--                                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>--%>
-<%--                                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>--%>
-<%--                                                </svg>--%>
-<%--                                                <span class="d-none d-sm-inline">Chi tiết</span>--%>
-<%--                                            </a>--%>
-<%--                                            <a class="nav-link border-end border-end-sm-0 border-bottom-sm border-300 text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
-<%--                                               id="attributesTab" data-bs-toggle="tab"--%>
-<%--                                               data-bs-target="#attributesTabContent" role="tab"--%>
-<%--                                               aria-controls="attributesTabContent" aria-selected="false" tabindex="-1">--%>
-<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
-<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
-<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
-<%--                                                     class="feather feather-sliders me-sm-2 fs-4 nav-icons">--%>
-<%--                                                    <line x1="4" y1="21" x2="4" y2="14"></line>--%>
-<%--                                                    <line x1="4" y1="10" x2="4" y2="3"></line>--%>
-<%--                                                    <line x1="12" y1="21" x2="12" y2="12"></line>--%>
-<%--                                                    <line x1="12" y1="8" x2="12" y2="3"></line>--%>
-<%--                                                    <line x1="20" y1="21" x2="20" y2="16"></line>--%>
-<%--                                                    <line x1="20" y1="12" x2="20" y2="3"></line>--%>
-<%--                                                    <line x1="1" y1="14" x2="7" y2="14"></line>--%>
-<%--                                                    <line x1="9" y1="8" x2="15" y2="8"></line>--%>
-<%--                                                    <line x1="17" y1="16" x2="23" y2="16"></line>--%>
-<%--                                                </svg>--%>
-<%--                                                <span class="d-none d-sm-inline">Ngày nhập</span>--%>
-<%--                                            </a>--%>
-<%--                                            <a class="nav-link text-center text-sm-start cursor-pointer outline-none d-sm-flex align-items-sm-center"--%>
-<%--                                               id="advancedTab" data-bs-toggle="tab"--%>
-<%--                                               data-bs-target="#advancedTabContent" role="tab"--%>
-<%--                                               aria-controls="advancedTabContent" aria-selected="false" tabindex="-1">--%>
-<%--                                                <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px"--%>
-<%--                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"--%>
-<%--                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
-<%--                                                     class="feather feather-lock me-sm-2 fs-4 nav-icons">--%>
-<%--                                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>--%>
-<%--                                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>--%>
-<%--                                                </svg>--%>
-<%--                                                <span class="d-none d-sm-inline">Nâng cao</span>--%>
-<%--                                            </a>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="col-sm-8">--%>
-<%--                                        <div class="tab-content py-3 ps-sm-4 h-100" id="pricingTab1">--%>
-<%--                                            <div class="tab-pane fade show active" id="pricingTabContent"--%>
-<%--                                                 role="tabpanel" aria-labelledby="homeTab">--%>
-<%--                                                <h4 class="mb-3 d-sm-none">Giá</h4>--%>
-<%--                                                <div class="row g-3">--%>
-<%--                                                    <div class="col-12 col-lg-6">--%>
-<%--                                                        <h5 class="mb-2">Giá tiền gốc</h5>--%>
-<%--                                                        <input id="price" name="price"--%>
-<%--                                                               value="<%=(p != null) ? p.getPrice() : ""%>"--%>
-<%--                                                               class="form-control" type="text"--%>
-<%--                                                               placeholder="Đồng" required/>--%>
-<%--                                                    </div>--%>
-<%--                                                    <div class="col-12 col-lg-6">--%>
-<%--                                                        <h5 class="mb-2">Giá tiền đã giảm</h5>--%>
-<%--                                                        <input id="promoPrice" name="promoPrice"--%>
-<%--                                                               value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"--%>
-<%--                                                               class="form-control" type="text"--%>
-<%--                                                               placeholder="Đồng" required/>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="tab-pane fade h-100" id="restockTabContent" role="tabpanel"--%>
-<%--                                                 aria-labelledby="restockTab">--%>
-<%--                                                <div class="d-flex flex-column h-100">--%>
-<%--                                                    <div class="row g-3">--%>
-<%--                                                        <div class="col-12 col-lg-6">--%>
-<%--                                                            <h5 class="mb-2">Số lượng</h5>--%>
-<%--                                                            <input id="quantity" name="quantity"--%>
-<%--                                                                   value="<%=(p != null) ? p.getQuantity() : ""%>"--%>
-<%--                                                                   class="form-control" type="text"--%>
-<%--                                                                   placeholder="Ví dụ: 5" required/>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="col-12 col-lg-6">--%>
-<%--                                                            <h5 class="mb-2">Cân nặng</h5>--%>
-<%--                                                            <input id="cannang" name="cannang"--%>
-<%--                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"--%>
-<%--                                                                   class="form-control" type="text"--%>
-<%--                                                                   placeholder="Kg" required/>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div class="col-12 col-lg-6">--%>
-<%--                                                            <h5 class="mb-2">Màu sắc</h5>--%>
-<%--                                                            <input id="mausac" name="mausac"--%>
-<%--                                                                   value="<%=(p != null) ? p.getMausac() : ""%>"--%>
-<%--                                                                   class="form-control" type="text"--%>
-<%--                                                                   placeholder="Ví dụ: Trắng" required/>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="tab-pane fade" id="attributesTabContent" role="tabpanel"--%>
-<%--                                                 aria-labelledby="attributesTab">--%>
-<%--                                                <h5 class="mb-3 text-1000">Ngày nhập</h5>--%>
-<%--                                                <div class="form-check">--%>
-<%--                                                    <input class="form-control inventory-attributes" id="inventory"--%>
-<%--                                                           type="date" style="max-width: 350px"/>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="tab-pane fade" id="advancedTabContent" role="tabpanel"--%>
-<%--                                                 aria-labelledby="advancedTab">--%>
-<%--                                                <div class="row g-3">--%>
-<%--                                                    <div class="col-12 col-lg-6">--%>
-<%--                                                        <h5 class="mb-2 text-1000">ID thú cưng</h5>--%>
-<%--                                                        <p name="pid"--%>
-<%--                                                           class="form-control"><%=(p != null) ? p.getProductId() : "Sản phẩm chưa có id"%>--%>
-<%--                                                        </p>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
                             </div>
                             <%List<Detail> ParentCates = DetailService.getInstance().listCategoryParentPd();%>
                             <div class="col-12 col-xl-4">
@@ -505,25 +366,20 @@
                                                             </div>
                                                             <select id="CateParent" name="CateParent"
                                                                     class="form-select mb-3" aria-label="category">
-                                                                <%
-                                                                    if (p != null) {
-                                                                        for (Detail cate : ParentCates) {
-                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
-                                                                %>
-                                                                <option value="<%=cate.getCatName()%>"
-                                                                        selected><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%} else {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <% }
-                                                                }%>
-                                                                <% } else {
-                                                                    for (Detail cate : ParentCates) {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%}%>
-                                                                <%}%>
+                                                                <%if (p != null) {
+                                                                            if (DetailService.getInstance().getPentCateProduct(p.getProductId()) != null) {%>
+                                                                                <option value="<%=DetailService.getInstance().getPentCateProduct(p.getProductId()).getCatID()%>"
+                                                                                        selected><%=DetailService.getInstance().getPentCateProduct(p.getProductId()).getCatName()%>
+                                                                                </option>
+                                                                            <% }%>
+                                                                            <%for (Detail cate : ParentCates) {%>
+                                                                             <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%></option>
+                                                                            <%}
+                                                                    } else {
+                                                                        for (Detail cate : ParentCates) {%>
+                                                                            <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%></option>
+                                                                        <%}%>
+                                                                    <%}%>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -536,33 +392,23 @@
                                                                 <h5>Danh mục con</h5>
                                                             </div>
                                                             <select class="form-select" aria-label="category" id="cateChild" name="cateChild">
-                                                                <%
-                                                                    if (p != null) {
-                                                                        for (Detail cate : listCate) {
-                                                                            if (DetailService.getInstance().getListPdByCateId(cate.getCatID()).contains(p.getProductId())) {
-                                                                %>
-<<<<<<< HEAD
-                                                                <option value="<%=cate.getCatID()%>"
-                                                                        selected><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%} else {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <% }
-=======
-                                                                                    <option value="<%=cate.getCatID()%>"selected><%=cate.getCatName()%>
-                                                                                    </option>
-                                                                            <%} else {%>
-                                                                                    <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                                    </option>
-                                                                                <% }
->>>>>>> bc9e0c03f7b42222a1259b658fc411eeede17cc9
-                                                                }%>
-                                                                <% } else {
+                                                                <%if (p != null) {
+                                                                        if (DetailService.getInstance().getCateProduct(p.getProductId()) != null) {%>
+                                                                        <option value="<%=DetailService.getInstance().getCateProduct(p.getProductId()).getCatID()%>"
+                                                                            selected><%=DetailService.getInstance().getCateProduct(p.getProductId()).getCatName()%>
+                                                                            </option>
+                                                                        <% }%>
+                                                                       <%for (Detail cate : listCate) {%>
+                                                                            <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                            </option>
+                                                                        <%}
+
+
+                                                                        }  else {
                                                                     for (Detail cate : listCate) {%>
-                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                </option>
-                                                                <%}%>
+                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                        </option>
+                                                                    <%}%>
                                                                 <%}%>
                                                             </select>
                                                         </div>
@@ -657,7 +503,7 @@
                                                                 <h5>Giảm bao nhiêu?(%)</h5>
                                                             </div>
                                                             <input  name="PromotionalPrice" id="PromotionalPrice"
-                                                                    value="<%=(p != null) ? p.getPromotional() : ""%>"
+                                                                    value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
                                                                     class="form-control mb-3" type="text"
                                                                     placeholder="Ví dụ: 10" required/>
                                                         </div>

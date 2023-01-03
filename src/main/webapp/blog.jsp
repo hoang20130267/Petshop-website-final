@@ -271,7 +271,7 @@
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="#">
-                                <input type="text" placeholder="Tìm kiếm...">
+                                <input type="search" oninput="searchByName(this)" name="txt" placeholder="Tìm kiếm...">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -307,7 +307,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7">
-                    <div class="row">
+                    <div class="row" id="content">
                         <% List<Blogs> list = new BlogService().getListBlogs();
                             for (Blogs b : list) {
                         %>
@@ -353,6 +353,53 @@
     <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 
 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script>
+     function searchByName(param){
+         var txtSearch = param.value;
+         $.ajax({
+             url: "/Petshop_website_final_war/SearchBlog",
+             type: "get",
+             data: {
+                 txt: txtSearch
+             },
+             success: function (data) {
+                 var row = document.getElementById("content");
+                 row.innerHTML = data;
+             },
+             error: function (xhr) {
+                 //Do Something to handle error
+             }
+         });
+     }
+ </script>
+
+<script>
+    $(document).ready(function () {
+        $("input[type='radio']").each(function () {
+            this.addEventListener("change", function (e) {
+                filter(e);
+            })
+        })
+    })
+
+        function filter() {
+            const theloai = $("input[type='radio']:checked.theloai").val();
+            $.ajax({
+                url: "/Petshop_website_final_war/FilterBlog",
+                type: "get", //send it through get method
+                data: {
+                    theloai: theloai
+                },
+                success: function (data) {
+                    $("#content").html(data);
+                    console.log(data);
+                    console.log(theloai);
+                }
+            });
+        }
+
+</script>
 </body>
 
 </html>

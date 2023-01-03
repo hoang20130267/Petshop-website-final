@@ -22,7 +22,7 @@ public class Blogs implements Serializable {
     public Blogs(String blogId, String blogName, String status, String image, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String catName,String catId) {
         this.blogId = blogId;
         this.blogName = blogName;
-        Status = status;
+        this.Status = status;
         this.image = image;
         this.description = description;
         this.dital = dital;

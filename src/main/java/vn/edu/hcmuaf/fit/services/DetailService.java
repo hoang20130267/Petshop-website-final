@@ -84,6 +84,17 @@ public class DetailService {
     public List<Product> getListPdByCateId(String id){
         return new DetailDAO().getListPdByCateId(id);
     }
+
+    public Detail getCateProduct(String id){
+        return new DetailDAO().getCateProduct(id);
+    }
+
+    public Detail getPentCateProduct(String id){
+        return  new DetailDAO().getPentCateProduct(id);
+    }
+    public List<Detail> listCateAccessory(){
+        return new DetailDAO().listCateAccessory();
+    }
     public static void main(String[] args) {
         new DetailService().listCategoryParentPd();
     }
