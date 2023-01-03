@@ -50,6 +50,10 @@ public class BlogService {
         BlogDAO dao = new BlogDAO();
         return dao.listBlogCateById(id);
     }
+    public static Blogs getBlogCateById(String id) {
+        BlogDAO dao = new BlogDAO();
+        return dao.getBlogCateById(id);
+    }
     public static List<Blogs> filterBlog(String theloai) {
         BlogDAO dao = new BlogDAO();
         return dao.filterBlog(theloai);
