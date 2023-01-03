@@ -1,5 +1,3 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
@@ -8,6 +6,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.*" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -380,51 +380,24 @@
                 </div>
             </div>
             <div class="row">
+                <% List<vn.edu.hcmuaf.fit.beans.Blogs> listNewest = new BlogService().NewBlogs();
+                    for(Blogs blogs2 : listNewest) {
+                %>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="img/blog/blog-1.jpg" alt="">
+                            <img src="<%=blogs2.getImage()%>" alt="">
                         </div>
                         <div class="blog__item__text">
                             <ul>
-                                <li><i class="fa fa-calendar-o"></i> 20/9/2022</li>
-                                <li><i class="fa fa-comment-o"></i> 6</li>
+                                <li><i class="fa fa-calendar-o"></i> <%=blogs2.getCreateDate()%></li>
                             </ul>
-                            <h5><a href="#">Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?</a></h5>
-                            <p>Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe cổ xưa ...</p>
+                            <h5><a href="blog-details.jsp?id=<%=blogs2.getBlogId()%>"><%=blogs2.getBlogName()%></a></h5>
+                            <p><%=blogs2.getDescription()%></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> 15/10/2022</li>
-                                <li><i class="fa fa-comment-o"></i> 15</li>
-                            </ul>
-                            <h5><a href="#">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</a></h5>
-                            <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> 20/9/2021</li>
-                                <li><i class="fa fa-comment-o"></i> 25</li>
-                            </ul>
-                            <h5><a href="#">Phải làm sao khi chó bị đau chân và đi khập khiễng?</a></h5>
-                            <p>Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ... </p>
-                        </div>
-                    </div>
-                </div>
+                <% }%>
             </div>
         </div>
     </section>

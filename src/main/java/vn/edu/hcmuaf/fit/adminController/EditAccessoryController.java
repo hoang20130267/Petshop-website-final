@@ -34,6 +34,7 @@ public class EditAccessoryController extends HttpServlet {
         String pimage = request.getParameter("image");
         String cannang = request.getParameter("cannang");
         String status = request.getParameter("status");
+        String oldImg = request.getParameter("oldImg");
         CustomerUser admin = (CustomerUser) request.getSession().getAttribute("admin");
         HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
@@ -41,10 +42,12 @@ public class EditAccessoryController extends HttpServlet {
         System.out.println(pid);
         if (pid.length() < 1) {
             dao.insertAccessory(admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice);
-
+            removeOldImg(oldImg, request);
+            copyImage(request, pimage);
         } else {
             dao.updateAccessory(pid,admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice);
-
+            removeOldImg(oldImg, request);
+            copyImage(request, pimage);
         }
         response.sendRedirect("list-accessory");
     }
@@ -63,21 +66,19 @@ public class EditAccessoryController extends HttpServlet {
         }
     }
 
-    public void copyImage(HttpServletRequest request, String[] imgFile) throws IOException {
+    public void copyImage(HttpServletRequest request, String imgFile) throws IOException {
         if (imgFile != null) {
-            for (String img : imgFile) {
-                File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + img);
-                FileInputStream fis = new FileInputStream(file);
-                File local = new File(request.getServletContext().getAttribute("FILEPRODUCT_DIR") + File.separator + img);
-                FileOutputStream fos = new FileOutputStream(local);
-                byte[] bytes = new byte[1024];
-                int read;
-                while ((read = fis.read(bytes)) != -1) {
-                    fos.write(bytes, 0, read);
-                }
-                fis.close();
-                fos.close();
+            File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + imgFile);
+            FileInputStream fis = new FileInputStream(file);
+            File local = new File(request.getServletContext().getAttribute("FILEPRODUCT_DIR") + File.separator + imgFile);
+            FileOutputStream fos = new FileOutputStream(local);
+            byte[] bytes = new byte[1024];
+            int read;
+            while ((read = fis.read(bytes)) != -1) {
+                fos.write(bytes, 0, read);
             }
+            fis.close();
+            fos.close();
         }
     }
     @Override

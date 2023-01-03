@@ -210,7 +210,7 @@
                     >
                   </div> -->
                   <img
-                    src="<%=p.getImage()%>"
+                    src="<%=p.getImage()%>" style="height: 150px; width: 150px; object-fit: cover"
                     alt=""
                     class="d-block mx-auto my-4"
                     height="150"

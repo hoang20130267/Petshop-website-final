@@ -28,9 +28,11 @@
     <link rel="icon" href="assets/images/favicon.svg" type="image/x-icon">
 
     <!-- font css -->
-    <link rel="stylesheet" href="assets/fonts/feather.css">
-    <link rel="stylesheet" href="assets/fonts/fontawesome.css">
-    <link rel="stylesheet" href="assets/fonts/material.css">
+    <link rel="stylesheet" href="assets/fonts/feather.css" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="assets/fonts/material.css" />
+    <link rel="stylesheet" href="assets/css/list/style1.css" />
+    <link rel="stylesheet" href="assets/css/list/bootstrap1.min.css" />
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
@@ -70,6 +72,7 @@
             id="mce-u0"
             href="bonus/css/skin.min.css"
     />
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="">

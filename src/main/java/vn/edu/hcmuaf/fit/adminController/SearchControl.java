@@ -8,7 +8,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet(name = "SearchControl", value = "/search")
 public class SearchControl extends HttpServlet {
@@ -24,18 +26,12 @@ public class SearchControl extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.searchByName(txtSearch);
         PrintWriter out = response.getWriter();
+        NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));
         for (Product p : list) {
             out.println("<div class=\"col-md-3\">\n" +
                     "              <div class=\"white_card position-relative mb_20\">\n" +
                     "                <div class=\"card-body\">\n" +
-                    "                  <!-- <div class=\"ribbon1 rib1-primary\">\n" +
-                    "                    <span class=\"text-white text-center rib1-primary\"\n" +
-                    "                      >50% off</span\n" +
-                    "                    >\n" +
-                    "                  </div> -->\n" +
-                    "                  <img\n" +
-                    "                    src=\""+p.getImage()+"\"\n" +
-                    "                    alt=\"\"\n" +
+                    "                  <img  src=\""+p.getImage()+"\" style=\"height: 150px; width: 150px; object-fit: cover\"\n" +
                     "                    class=\"d-block mx-auto my-4\"\n" +
                     "                    height=\"150\"\n" +
                     "                  />\n" +
@@ -43,13 +39,12 @@ public class SearchControl extends HttpServlet {
                     "                    <div class=\"col\">\n" +
                     "                      <span class=\"badge_btn_3 mb-1\" style=\"display: flex; padding-left: 50px\">"+p.getGiong()+"</span>\n" +
                     "                      <a href=\"#\" class=\"f_w_400 color_text_3 f_s_14 d-block\"\n" +
-                    "                      style=\"text-align: center;\">"+p.getProductName()+"</a\n" +
-                    "                      >\n" +
+                    "                      style=\"text-align: center;\">"+p.getProductName()+"</a>\n" +
                     "                    </div>\n" +
                     "                    <div class=\"col-auto\">\n" +
                     "                      <h4 class=\"text-dark mt-0\" style=\"margin-left: 46px;\">\n" +
-                    "                        "+p.getPrice()+"đ\n" +
-                    "                       \n" +
+                    "                        "+format.format(p.getPrice())+"đ\n" +
+                    "\n" +
                     "                      </h4>\n" +
                     "                      <ul\n" +
                     "                        class=\"list-inline mb-0 product-review align-self-center\" style=\"margin-left: 35px;\"\n" +
@@ -81,8 +76,8 @@ public class SearchControl extends HttpServlet {
                     "                    </div>\n" +
                     "                  </div>\n" +
                     "                  <div class=\"d-grid\">\n" +
-                    "                    <a class=\"btn_2\" href=\"edit-product.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Chỉnh sửa</a>\n" +
-                    "                    <a class=\"btn_2\" href=\"delete-product?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center\">Xóa</a>\n" +
+                    "                      <a class=\"btn_2\" href=\"edit-product.jsp?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center;\">Chỉnh sửa</a>\n" +
+                    "                      <a class=\"btn_2\" href=\"delete-product?pid="+p.getProductId()+"\" style=\"margin-top: 3px; text-align: center;\">Xóa</a>\n" +
                     "                  </div>\n" +
                     "                </div>\n" +
                     "              </div>\n" +

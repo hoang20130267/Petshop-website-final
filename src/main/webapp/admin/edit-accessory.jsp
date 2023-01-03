@@ -310,7 +310,7 @@
                                 <div class="mb-6">
                                     <h4 class="mb-3">Giới thiệu phụ kiện</h4>
                                     <textarea name="description" rows="20" cols="10" id="editor" required>
-                          <%=(p != null) ? p.getDescription() : ""%>
+                          <%=(p != null) ? p.getDital() : ""%>
                       </textarea>
                                     <script>
                                         CKEDITOR.replace('editor');
@@ -682,7 +682,7 @@
                 name: name,
                 price: price,
                 image: imageLink,
-                descripsion: descripsion,
+                description: descripsion,
                 detail: detail,
                 status: status,
                 mausac: mausac,
