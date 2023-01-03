@@ -85,7 +85,7 @@ public class DetailService {
         return new DetailDAO().getListPdByCateId(id);
     }
     public static void main(String[] args) {
-        getData();
+        new DetailService().listCategoryParentPd();
     }
 }
 

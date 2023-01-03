@@ -392,7 +392,7 @@ public class ProductDAO {
         // int amount, String category,String price, String size, String order_by
 //        System.out.println(new ProductDAO().Test(9,"cat","20000000-200000000","0-2","3"));
 
-          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
+//          System.out.println(new ProductDAO().getNext9Product(0,"all","10000000-150000000","2-5","2"));
 
 //          System.out.println(new ProductDAO().getNext9Product(0,"dog","10000000-150000000","2-5","2"));
 
