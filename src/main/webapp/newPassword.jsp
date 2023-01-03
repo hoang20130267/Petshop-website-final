@@ -53,19 +53,19 @@
             <div class="col-12">
               <div class="input-group">
                 <label class="label">Nhập mật khẩu mới</label>
-                <input id="newpass" type="text" name="newpass">
+                <input id="newpass" type="text" name="newpass" style="width:250px; border: solid 3px #000000 ;height: 45px; border-radius: 30px; padding:10px">
               </div>
             </div>
             <div class="col-12">
               <div class="input-group">
                 <label class="label">Nhập lại mật khẩu</label>
-                <input id="confirmpass" type="text" name="confirmpass">
+                <input id="confirmpass" type="text" name="confirmpass" style="width:250px; border: solid 3px #000000 ;height: 45px; border-radius: 30px; padding:10px">
               </div>
             </div>
             <div class="col-2">
               <div class="p-t-15" style="padding-top: 28px; padding-left: 30px;">
                 <h5 class="error" style="color: red; font-size: 16px"><%= error == null ? "" : error%></h5>
-                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue">
+                <input type="submit" value="Xác Nhận" class="btn btn--radius-2 btn--blue" style="margin-left: 120px">
                 <%--                <a href="#"> <div class="btn btn--radius-2 btn--blue" type="text" >Xác Nhận</div></a>--%>
                 <input type="text" id="role" name="role" value="register" style="display: none">
 
@@ -73,7 +73,7 @@
             </div>
 
           </div>
-          <span>Bạn đã có tài khoản? <a href="../Login/index.jsp" style="text-decoration: none; color: #00BFFF">Đăng nhập</a></span>
+          <span style="margin-left: 150px ">Bạn đã có tài khoản? <a href="../Login/index.jsp" style="text-decoration: none; color: #00BFFF">Đăng nhập</a></span>
         </form>
       </div>
     </div>
