@@ -478,6 +478,7 @@
                        $(".header__second__cart--notice").each(function () {
                            var quantity = $(this).text()
                            $(this).text(parseInt(quantity)+1)
+                           alert("Thêm vào giỏ hàng thành công")
                        })
                    }
                })
@@ -499,6 +500,7 @@
                         $(".header__second__wishlist--notice").each(function () {
                             var quantity = $(this).text()
                             $(this).text(parseInt(quantity)+1)
+                            alert("Thêm vào mục yêu thích thành công")
                         })
                     }
                 })

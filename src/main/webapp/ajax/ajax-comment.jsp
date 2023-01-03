@@ -20,18 +20,19 @@
             <div class="user d-flex flex-row align-items-center">
               <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
 
-              <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 100px"><%=cmt.getDescription()%></small></span>
+              <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 10px; font-size: 14px"><%=cmt.getDescription()%></small></span>
             </div>
+            <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
+              if (user1 != null) {
+                if (user1.getId().equals(cmt.getCustomerID())) {
+            %>
+            <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa bình luận</small></a>
+            <% }
+            } %>
           </div>
           <div class="action d-flex justify-content-between mt-2 align-items-center">
             <div class="reply px-4">
-              <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
-                if (user1 != null) {
-                  if (user1.getId().equals(cmt.getCustomerID())) {
-              %>
-              <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa bình luận</small></a>
-              <% }
-              } %>
+              <small><%=cmt.getCommentDate()%></small>
             </div>
             <div class="icons align-items-center">
               <i class="fa fa-star text-warning"></i>
@@ -43,22 +44,3 @@
     </div>
   </div>
 </div>
-<script>
-  deletecomment();
-  function deletecomment() {
-    $(".remove").click(function (e) {
-      e.preventDefault();
-      const id = this.id.substring(6);
-      $.ajax({
-        url: "DeleteCommentController",
-        type: "post",
-        data: {
-          id: id,
-        },
-        success: function () {
-          $("#cmt-section" + id).remove();
-        }
-      })
-    });
-  }
-</script>

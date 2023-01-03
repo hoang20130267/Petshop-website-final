@@ -558,7 +558,7 @@
                 cate: cate,
             },
             success: function () {
-                if (id.equals("null"))
+                if (id.length < 1)
                     alert("Thêm tin tức thành công");
                 else
                     alert("Cập nhật tin tức thành công");
