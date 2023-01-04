@@ -133,6 +133,14 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .row1 p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 25px;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
     </style>
     </head>
     <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
@@ -330,8 +338,20 @@
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg product__discount__item__pic " data-setbg="<%=p.getImage()%>">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <%if (user != null) {
+                                            Product product = new ProductDAO().getProductDetail(p.getProductId());%>
+                                        <%if (Integer.parseInt(product.getQuantity())> 0) {%>
+                                        <li><a class="add-wishlist" id="addWishlist-<%=p.getProductId()%>"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="shopnow2" id="addCart-<%=p.getProductId()%>" ><i
+                                                class="fa fa-shopping-cart"></i></a></li>
+                                        <%}%>
+                                        <%
+                                        } else {%>
+                                        <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="shopnow2" href="login.jsp"><i
+                                                class="fa fa-shopping-cart"></i></a></li>
+                                        <%  }
+                                        %>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text product__discount__item__text">
@@ -383,10 +403,10 @@
                 <% List<vn.edu.hcmuaf.fit.beans.Blogs> listNewest = new BlogService().NewBlogs();
                     for(Blogs blogs2 : listNewest) {
                 %>
-                <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="row1 col-lg-4 col-md-4 col-sm-6">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="<%=blogs2.getImage()%>" alt="">
+                            <img src="<%=blogs2.getImage()%>" alt="" style="width: 290px;height: 200px; object-fit: cover">
                         </div>
                         <div class="blog__item__text">
                             <ul>

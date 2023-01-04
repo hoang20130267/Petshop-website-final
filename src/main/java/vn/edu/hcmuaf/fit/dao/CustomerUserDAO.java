@@ -260,6 +260,7 @@ public class CustomerUserDAO {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
 //        System.out.println(new CustomerUserDAO().listUser());
 //        System.out.println(new CustomerUserDAO().ListAdmin());
-        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        new CustomerUserDAO().insertAdmin("chó ngu", "123", "Ngoc Huy", "easfasf", "ầd", "áaf", 1);
     }
 }

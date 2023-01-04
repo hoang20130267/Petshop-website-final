@@ -31,17 +31,16 @@
                         for (String id : wishlist.getData().keySet()) {%>
                     <tr>
                         <td class="shoping__cart__item">
-                            <div class="pro-qty" id="quatity-<%=wishlist.getData().get(id).getProductId()%>" style="width: 85px; height: 85px; object-fit: cover;">
-                            <img src="<%=wishlist.getData().get(id).getImage()%>" alt="">
+                            <img src="<%=wishlist.getData().get(id).getImage()%>" alt="" style="width: 85px; height: 85px; object-fit: cover;">
                             <h5><%=wishlist.getData().get(id).getProductName()%>
                         </td>
-                        <td class="shoping__cart__price"  style="padding-left: 10px">
+                        <td class="shoping__cart__price" style="padding-left: 10px">
                             <%=format.format(wishlist.getData().get(id).getPrice())%>₫
                         </td>
-                        <td class="shoping__cart__total"  style="padding-left: 130px">
+                        <td class="shoping__cart__total" style="padding-left: 130px">
                             <i class="fa fa-heart">
                             </i></td>
-                        <td class="shoping__cart__item__close pro-qty">
+                        <td class="shoping__cart__item__close">
                             <a href="" class="dlt" id="delete<%=wishlist.getData().get(id).getProductId()%>" style="color: black; padding-right: 50px"> <i class="icon_close"></i></a>
                         </td>
                     </tr>

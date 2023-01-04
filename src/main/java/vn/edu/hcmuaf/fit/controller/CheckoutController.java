@@ -31,6 +31,6 @@ public class CheckoutController extends HttpServlet {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         OrderService.getInstance().insertOrder(customerUser.getId(),fulname,phone,address,email,notice,cart);
         request.getSession().setAttribute("cart",new Cart());
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("my-orders.jsp");
     }
 }

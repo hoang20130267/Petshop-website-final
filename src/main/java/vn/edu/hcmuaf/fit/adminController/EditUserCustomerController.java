@@ -37,7 +37,7 @@ public class EditUserCustomerController extends HttpServlet {
         System.out.println(status);
 
         String exe = SignUpService.getInstance().checkUser(email, username);
-        if(id == null) {
+        if(id.isEmpty()) {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);

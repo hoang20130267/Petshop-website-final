@@ -193,15 +193,15 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body text-center">
-                        <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-text">Tìm kiếm đơn hàng</span>
-                                        <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                                    </div>
-           
-                                </div>
-                        </div>
+<%--                        <div class="col-md-6">--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <div class="input-group">--%>
+<%--                                        <span class="input-group-text">Tìm kiếm đơn hàng</span>--%>
+<%--                                        <input type="text" class="form-control" placeholder="Tìm kiếm...">--%>
+<%--                                    </div>--%>
+<%--           --%>
+<%--                                </div>--%>
+<%--                        </div>--%>
                                 <div class="tab-pane fade show active" id="nav-week1" role="tabpanel" aria-labelledby="nav-week1-tab">
                                     <table class="table">
                                         <thead>

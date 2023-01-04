@@ -90,9 +90,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="shoping__cart__btns">
-                <a href="#" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
-                <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                    &nbsp; Cập nhật giỏ hàng</a>
+                <a href="all-product?category=all" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
             </div>
         </div>
         <div class="col-lg-6">
@@ -101,7 +99,7 @@
                     <h5>Mã giảm giá</h5>
                     <form action="#">
                         <input type="text" placeholder="Nhập mã giảm giá">
-                        <button type="submit" class="site-btn">APPLY</button>
+                        <button type="submit" class="site-btn">Áp dụng</button>
                     </form>
                 </div>
             </div>

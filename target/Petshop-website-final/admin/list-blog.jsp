@@ -87,6 +87,14 @@
 	      top: 1px;
 	      margin-left: 5px;
       }
+      .row1 p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 25px;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+      }
     </style>
 </head>
 
@@ -245,7 +253,7 @@
                 <% List<Blogs> list = new BlogService().AdminListBlog();
                 for (Blogs b : list) {
         %>
-                <div class="col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
+                <div class="row1 col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
                     <div class="blog__item">
                         <div class="blog__item__pic">
                             <img src="<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">

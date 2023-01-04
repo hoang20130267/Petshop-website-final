@@ -20,4 +20,8 @@ public class CommentService {
     public void removeComment(String id){
         new CommentDAO().RemoveComment(id);
     }
+
+    public static void main(String[] args) {
+        System.out.println(getInstance().getComments());
+    }
 }
