@@ -296,7 +296,7 @@
                             <div class="col-lg-6">
                                 <div class="blog__details__author">
                                     <div class="blog__details__author__pic">
-                                        <img src="img/blog/details/details-author.jpg" alt="">
+                                        <img src="admin/assets/images/user/avatar-2.png" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
                                         <h6>LTW_Nhom10</h6>

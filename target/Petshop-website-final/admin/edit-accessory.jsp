@@ -275,10 +275,6 @@
                                 </h5> -->
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
-                                    Xóa dữ liệu
-                                </button
-                                >
                                 <%if (request.getParameter("pid") != null) {%>
                                 <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                                     Sửa phụ kiện

@@ -606,7 +606,6 @@
                     },
                     success: function (data) {
                         $(".header__second__cart--notice").each(function () {
-                            $(this).text(data)
                             const quantity2 = $(this).text();
                             $(this).text(parseInt(quantity2)+ parseInt(quantity))
                         })

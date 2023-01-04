@@ -279,7 +279,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary" href="add-category-product.jsp">
                                         <svg class="svg-inline--fa fa-plus me-2"
                                              aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus"
                                              role="img"
@@ -375,7 +375,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-primary"  href="add-category-blog.jsp">
                                         <svg class="svg-inline--fa fa-plus me-2"
                                              aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus"
                                              role="img"

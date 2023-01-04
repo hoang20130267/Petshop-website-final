@@ -35,7 +35,7 @@ public class SearchBlog extends HttpServlet {
                     "                                        <li><i class=\"fa fa-calendar-o\"></i>"+b.getCreateDate()+"</li>\n" +
                     "                                    </ul>\n" +
                     "                                    <h5><a href=\"blog-details.jsp?id="+b.getBlogId()+"\">"+b.getBlogName()+"</a></h5>\n" +
-                    "                                    <p><%=b.getDescription()%></p>\n" +
+                    "                                    <p>"+b.getDescription()+"</p>\n" +
                     "                                    <a href=\"blog-details.jsp?id="+b.getBlogId()+"\" class=\"blog__btn\"  >ĐỌC THÊM <span class=\"arrow_right\"></span></a>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
