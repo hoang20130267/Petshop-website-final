@@ -472,9 +472,9 @@
                                                                 <h5>Giảm bao nhiêu?(%)</h5>
                                                             </div>
                                                             <input name="PromotionalPrice" id="PromotionalPrice"
-                                                                   value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                                                   value="<%=(p != null) ? p.getPromotionalPrice() : "0"%>"
                                                                    class="form-control mb-3" type="text"
-                                                                   placeholder="Ví dụ: 10" required/>
+                                                                   placeholder="Ví dụ: 10"/>
                                                         </div>
                                                     </div>
                                                 </div>

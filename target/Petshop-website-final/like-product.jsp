@@ -274,7 +274,7 @@
                             <tr>
                                 <td class="shoping__cart__item">
                                     <img src="<%=wishlist.getData().get(id).getImage()%>" alt="" style="width: 85px; height: 85px; object-fit: cover;">
-                                    <h5><%=wishlist.getData().get(id).getProductName()%>
+                                    <a href="product-details.jsp?id=<%=wishlist.getData().get(id).getProductId()%>"><h5><%=wishlist.getData().get(id).getProductName()%></h5></a>
                                 </td>
                                 <td class="shoping__cart__price" style="padding-left: 10px">
                                     <%=format.format(wishlist.getData().get(id).getPrice())%>₫
