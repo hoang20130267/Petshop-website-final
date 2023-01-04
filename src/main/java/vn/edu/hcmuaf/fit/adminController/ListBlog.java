@@ -13,6 +13,9 @@ import java.util.List;
 
 @WebServlet(name = "ListBlog", value = "/ListBlog")
 public class ListBlog extends HttpServlet {
+    /*
+        Danh sách tin tức trong admin - Nguyễn Huy Hoàng 20130266
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Blogs> list = BlogService.getInstance().AdminListBlog();

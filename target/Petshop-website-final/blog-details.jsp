@@ -128,6 +128,14 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .row1 p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 25px;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
     </style>
 </head>
 
@@ -342,10 +350,10 @@
                  <% List<Blogs> listNewest = new BlogService().NewBlogs();
                      for(Blogs blogs2 : listNewest) {
                  %>
-                 <div class="col-lg-4 col-md-4 col-sm-6">
+                 <div class="row1 col-lg-4 col-md-4 col-sm-6">
                      <div class="blog__item">
                          <div class="blog__item__pic">
-                             <img src="<%=blogs2.getImage()%>" alt="">
+                             <img src="<%=blogs2.getImage()%>" alt="" style="width: 290px;height: 200px; object-fit: cover">
                          </div>
                          <div class="blog__item__text">
                              <ul>
