@@ -36,8 +36,8 @@
                     <tr>
                         <td class="shoping__cart__item">
                             <img src="<%=cart.getData().get(id).getImage()%>" alt=""style="width: 85px; height: 85px; object-fit: cover;">
-                            <h5><%=cart.getData().get(id).getProductName()%>
-                            </h5>
+                            <a href="product-details.jsp?id=<%=cart.getData().get(id).getProductId()%>"><h5><%=cart.getData().get(id).getProductName()%>
+                            </h5></a>
                         </td>
                         <%if (cart.getData().get(id).getPromotional() ==1) {%>
                         <td class="shoping__cart__price">

@@ -254,9 +254,9 @@
             <div class="row g-3 flex-between-end mb-5">
               <div class="col-auto">
                 <%if (request.getParameter("cbid") != null) {%>
-                <h2 class="mb-2">Sửa danh mục sản phẩm</h2>
+                <h2 class="mb-2">Sửa danh mục tin tức</h2>
                 <%} else {%>
-                <h2 class="mb-2">Thêm danh mục sản phẩm</h2>
+                <h2 class="mb-2">Thêm danh mục tin tức</h2>
                 <%}%>
               </div>
             </div>

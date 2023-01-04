@@ -260,11 +260,11 @@
                         <select class="form-select" id="validationTooltip04" name="address" required>
                             <% if(request.getParameter("idUser") != null) {
                                 if(users.getAddress().equals("TP.HCM")) {%>
-                            <option value="TP.HCM">TP.HCM</option>
-                            <option value="Hà nội" selected>Hà Nội</option>
-                                <%} else {%>
                             <option value="TP.HCM" selected>TP.HCM</option>
                             <option value="Hà nội">Hà Nội</option>
+                                <%} else {%>
+                            <option value="TP.HCM">TP.HCM</option>
+                            <option value="Hà nội" selected>Hà Nội</option>
                             <% }
                             }else{%>
                             <option value="TP.HCM">TP.HCM</option>

@@ -71,49 +71,58 @@
 	<!-- [ Mobile header ] End -->
 
 	<!-- [ navigation menu ] start -->
-	<nav class="pc-sidebar ">
-		<div class="navbar-wrapper">
-			<div class="m-header">
-				<a href="index.jsp" class="b-brand">
-					<!-- ========   change your logo hear   ============ -->
-					<img src="assets/images/logo.png" alt="" class="logo logo-lg">
-					<img src="assets/images/logo-sm.svg" alt="" class="logo logo-sm">
-				</a>
-			</div>
-			<div class="navbar-content">
+    <nav class="pc-sidebar ">
+        <div class="navbar-wrapper">
+            <div class="m-header">
+                <a href="index.jsp" class="b-brand">
+                    <!-- ========   change your logo hear   ============ -->
+                    <img src="assets/images/logo.png" alt="" class="logo logo-lg">
+                    <img src="assets/images/logo-sm.svg" alt="" class="logo logo-sm">
+                </a>
+            </div>
+            <div class="navbar-content">
                 <ul class="pc-navbar">
                     <li class="pc-item pc-caption">
                         <label>Quản lý</label>
                     </li>
                     <li class="pc-item">
-                        <a href="index.jsp" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Quản lý chung</span></a>
+                        <a href="index.jsp" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">home</i></span><span
+                                class="pc-mtext">Quản lý chung</span></a>
                     </li>
                     <li class="pc-item pc-caption">
                         <label>Quản lý sản phẩm</label>
                         <!-- <span>UI Components</span> -->
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i
+                                data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span
+                                class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="list-products">Danh sách thú cưng</a></li>
                             <li class="pc-item"><a class="pc-link" href="edit-product.jsp">Thêm thú cưng</a></li>
                         </ul>
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span
+                                class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="list-accessory">Danh sách phụ kiện</a></li>
                             <li class="pc-item"><a class="pc-link" href="edit-accessory.jsp">Thêm phụ kiện</a></li>
                         </ul>
                     </li>
                     <li class="pc-item">
-                        <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
+                        <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
                     </li>
                     <li class="pc-item pc-caption">
                         <label>Quản lý tin tức</label>
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="file-minus"></i></span><span class="pc-mtext">Tin tức</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                                data-feather="file-minus"></i></span><span
+                                class="pc-mtext">Tin tức</span><span class="pc-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="list-blog.jsp">Danh sách tin tức</a></li>
                             <li class="pc-item"><a class="pc-link" href="add-blog.jsp">Thêm tin tức</a></li>
@@ -132,37 +141,45 @@
                                 class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
                                 data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
-                            <li class="pc-item"><a class="pc-link" href="#">Danh mục sản phẩm</a></li>
-                            <li class="pc-item"><a class="pc-link" href="#">Danh mục tin tức</a></li>
+                            <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a>
+                            </li>
+                            <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                         </ul>
                     </li>
                     <li class="pc-item pc-caption">
                         <label>Tài khoản</label>
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="cpu"></i></span><span class="pc-mtext">Admin</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                                data-feather="cpu"></i></span><span
+                                class="pc-mtext">Admin</span><span class="pc-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
                             <li class="pc-item"><a class="pc-link" href="list-admin.jsp">Danh sách admin</a></li>
                             <li class="pc-item"><a class="pc-link" href="add-admin.jsp">Thêm admin</a></li>
                         </ul>
                     </li>
                     <li class="pc-item pc-hasmenu">
-                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="user"></i></span><span class="pc-mtext">Người dùng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+                        <a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone"
+                                                                                data-feather="user"></i></span><span
+                                class="pc-mtext">Người dùng</span><span class="pc-arrow"><i
+                                data-feather="chevron-right"></i></span></a>
                         <ul class="pc-submenu">
-                            <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
-                            <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
+                            <li class="pc-item"><a class="pc-link" href="list-user.jsp">Danh sách người dùng</a></li>
+                            <li class="pc-item"><a class="pc-link" href="add-user.jsp">Thêm người dùng</a></li>
                         </ul>
                     </li>
                     <li class="pc-item pc-caption">
                         <label>Quản lý bình luận</label>
                     </li>
                     <li class="pc-item">
-                        <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Bình luận</span></a>
+                        <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
+                                class="pc-mtext">Bình luận</span></a>
                     </li>
                 </ul>
             </div>
-		</div>
-	</nav>
+        </div>
+    </nav>
 	<!-- [ navigation menu ] end -->
 	<!-- [ Header ] start -->
     <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>

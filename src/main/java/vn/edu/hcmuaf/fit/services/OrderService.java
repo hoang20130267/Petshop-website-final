@@ -41,4 +41,11 @@ public class OrderService {
     public Orders getOrderByIdOrder(String id){
         return new OrderDAO().getOrderByIdOrder(id);
     }
+    public double getPriceOrder(List<Orders> od) {
+        double price = 0;
+        for (Orders o : od){
+            price+=o.getPrice();
+        }
+        return price;
+    }
 }
