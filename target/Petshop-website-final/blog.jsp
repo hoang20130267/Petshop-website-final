@@ -314,11 +314,11 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-                                    <img src="<%=b.getImage()%>" alt="">
+                                    <img src="<%=b.getImage()%>" alt="" style="width: 290px;height: 225px;object-fit: cover;">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i><%=b.getCreateDate()%></li>
+                                        <li><i class="fa fa-calendar-o"></i> <%=b.getCreateDate()%></li>
                                     </ul>
                                     <h5><a href="blog-details.jsp?id=<%=b.getBlogId()%>"><%=b.getBlogName()%></a></h5>
                                     <p><%=b.getDescription()%></p>
