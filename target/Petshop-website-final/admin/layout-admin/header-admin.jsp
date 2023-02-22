@@ -23,14 +23,14 @@
                         <form action="search" method="get" class="px-3">
                             <div class="form-group mb-0 d-flex align-items-center">
                                 <i data-feather="search" type="submit"></i>
-                                <input oninput="searchByName(this)" name="txt" type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+                                <input oninput="searchByName(this)" name="txt" type="search" class="form-control border-0 shadow-none" placeholder="Tìm kiếm. . .">
                             </div>
                         </form>
                     </div>
                 </li>
                 <li class="dropdown pc-h-item">
                     <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="assets/images/user/avatar-2.png" alt="user-image" class="user-avtar">
+                        <img src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>" alt="user-image" class="user-avtar">
                         <span>
 								<span class="user-name"><%=user.getName()%></span>
 <%--								<span class="user-desc">Quản lý cấp 1</span>--%>

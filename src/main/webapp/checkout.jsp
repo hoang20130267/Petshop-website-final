@@ -324,14 +324,8 @@
                             </ul>
                             <div class="checkout__order__total">Tổng tiền
                                 <span><%=cart != null ? format.format(cart.total()) : 0%>₫</span></div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc-or">
-                                    <p>Xác nhận thông tin<span>*</span></p>
-                                    <input type="checkbox" id="acc-or">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <p>Tôi xác nhận thông tin đơn hàng và những thông tin tôi đã nhập là chính xác.</p>
+
+                            <p>Kiểm tra lại thông tin đơn hàng và những thông tin tôi đã nhập trước khi đặt hàng.</p>
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
                                     Thanh toán khi nhận hàng
@@ -339,13 +333,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div class="checkout__input__checkbox">
-                                <label for="paypal">
-                                    Thanh toán qua thẻ
-                                    <input type="checkbox" id="paypal">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
+
                             <button type="submit" class="site-btn">Mua hàng</button>
                         </div>
                     </div>

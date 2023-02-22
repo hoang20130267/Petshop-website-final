@@ -37,7 +37,7 @@ public class EditUserAdminController extends HttpServlet {
         System.out.println(status);
 
         String exe = SignUpService.getInstance().checkUser(email,username);
-        if(id == null) {
+        if(id.isEmpty()) {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addAdminerror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
@@ -51,7 +51,6 @@ public class EditUserAdminController extends HttpServlet {
             } else {
                     new CustomerUserDAO().insertAdmin(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-admin.jsp");
-
                     }
             }
         }else{

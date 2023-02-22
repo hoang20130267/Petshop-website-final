@@ -222,7 +222,7 @@
 					</div>
 					<div class="form-group col-md-6">
 						<label class="form-label" for="inputEmail4">Họ và tên</label>
-						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" <%=(users != null) ? users.getName() : ""%>>
+						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" value="<%=(users != null) ? users.getName() : ""%>">
 					</div>
 
 				</div>
@@ -250,13 +250,16 @@
 						<select class="form-select" id="validationTooltip04" name="status" required>
 							<% if(request.getParameter("idUser") != null) {
 								if(users.isStatus() == false) {%>
-							<option selected>Mở khóa</option>
-							<option>Khóa</option>
-							<%} else {%>
 							<option>Mở khóa</option>
 							<option selected>Khóa</option>
+							<%} else {%>
+							<option selected>Mở khóa</option>
+							<option>Khóa</option>
 							<% }
-							} %>
+							}else{%>
+							<option selected>Mở khóa</option>
+							<option>Khóa</option>
+							<% } %>
 						</select>
 						<%--            <div class="invalid-tooltip">--%>
 						<%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>

@@ -138,11 +138,8 @@ public class CustomerUserDAO {
     }
 
     public List<CustomerUser> listUser() {
-        String query = "SELECT u.user_name, u.id,ifu.email, SUM(od.Price) as Price, SUM(od.Quantity) AS Quantity \n" +
-                "FROM user_account u join infor_user ifu on u.id = ifu.id_user \n" +
-                "join orders o on o.CustomerID = ifu.id_user\n" +
-                "join orderdetail od on o.OrderID = od.OrderID\n" +
-                "GROUP BY u.user_name, u.id;\n";
+        String query = "SELECT u.user_name, u.id,ifu.email, ifu.address FROM user_account u join infor_user ifu on u.id = ifu.id_user\n" +
+                "where role=0";
         String FinalQuery = query;
         List<CustomerUser> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(FinalQuery)
                 .mapToBean(CustomerUser.class)
@@ -260,6 +257,7 @@ public class CustomerUserDAO {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
 //        System.out.println(new CustomerUserDAO().listUser());
 //        System.out.println(new CustomerUserDAO().ListAdmin());
-        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        new CustomerUserDAO().insertAdmin("chó ngu", "123", "Ngoc Huy", "easfasf", "ầd", "áaf", 1);
     }
 }

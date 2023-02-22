@@ -271,7 +271,7 @@
                     <div class="blog__sidebar">
                         <div class="blog__sidebar__search">
                             <form action="#">
-                                <input type="search" oninput="searchByName(this)" name="txt" placeholder="Tìm kiếm...">
+                                <input type="search" oninput="searchByNameBlog(this)" name="txt" placeholder="Tìm kiếm...">
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
@@ -292,9 +292,9 @@
                                 <% List<Blogs> listNew = new BlogService().NewBlogs();
                                     for(Blogs b : listNew) {
                                 %>
-                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item">
+                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item" style="    display: flex !important;">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="<%=b.getImage()%>" alt="">
+                                        <img src="<%=b.getImage()%>" alt="" style="object-fit: cover;height: 60px;width: 180px">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
                                         <h6><%=b.getBlogName()%></h6>
@@ -314,16 +314,14 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-                                    <img src="<%=b.getImage()%>" alt="">
+                                    <img src="<%=b.getImage()%>" alt="" style="width: 290px;height: 225px;object-fit: cover;">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i><%=b.getCreateDate()%></li>
-<%--                                        <li><i class="fa fa-comment-o"></i> 5 </li>--%>
+                                        <li><i class="fa fa-calendar-o"></i> <%=b.getCreateDate()%></li>
                                     </ul>
                                     <h5><a href="blog-details.jsp?id=<%=b.getBlogId()%>"><%=b.getBlogName()%></a></h5>
                                     <p><%=b.getDescription()%></p>
-<%--                                    <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>--%>
                                     <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__btn"  >ĐỌC THÊM <span class="arrow_right"></span></a>
                                 </div>
                             </div>
@@ -355,7 +353,7 @@
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
-     function searchByName(param){
+     function searchByNameBlog(param){
          var txtSearch = param.value;
          $.ajax({
              url: "/Petshop_website_final_war/SearchBlog",

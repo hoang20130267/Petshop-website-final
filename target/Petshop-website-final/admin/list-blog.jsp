@@ -87,6 +87,14 @@
 	      top: 1px;
 	      margin-left: 5px;
       }
+      .row1 p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 25px;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+      }
     </style>
 </head>
 
@@ -245,10 +253,10 @@
                 <% List<Blogs> list = new BlogService().AdminListBlog();
                 for (Blogs b : list) {
         %>
-                <div class="col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
+                <div class="row1 col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
                     <div class="blog__item">
                         <div class="blog__item__pic">
-                            <img src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
+                            <img src="<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
                         </div>
                         <div class="blog__item__text">
                             <ul>
@@ -256,14 +264,11 @@
                             </ul>
                             <h5><a href="" style="font-size: 22px;font-weight: 600;color: #0b5ed7"><%=b.getBlogName()%>
                             </a></h5>
-<<<<<<< HEAD
-=======
-                            <p><%=b.getDescription()%>></p>
->>>>>>> 79bcc53422137f9112552877c711fdf939a01e17
+                            <p><%=b.getDescription()%></p>
                             <a href="add-blog.jsp?id=<%=b.getBlogId()%>" class="blog_btn">Chỉnh sửa  <i data-feather="arrow-right"></i></a>
                             <a href="DeleteBlog?id=<%=b.getBlogId()%>" class="blog_btn">Xóa  <i data-feather="arrow-right"></i></a>
                         </div>
-                    </div>  
+                    </div>
                 </div>
                 <% } %>
             </div>

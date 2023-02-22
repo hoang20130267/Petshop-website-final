@@ -70,6 +70,7 @@ public class DetailDAO {
                 case "1" -> query += " and pc.ParentID = 1";
                 case "2" -> query += " and pc.ParentID = 2";
                 case "3" -> query += " and pc.ParentID = 3";
+                default -> query+=" and pc.ParentID != \"null\"  ";
             }
         }
         String finalquery = query;

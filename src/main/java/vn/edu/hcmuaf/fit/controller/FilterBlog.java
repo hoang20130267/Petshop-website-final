@@ -12,6 +12,9 @@ import java.util.List;
 
 @WebServlet(name = "FilterBlog", value = "/FilterBlog")
 public class FilterBlog extends HttpServlet {
+    /*
+        Lọc tin tức sử dụng ajax - Nguyễn Huy Hoàng 20130266
+    */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -22,21 +25,20 @@ public class FilterBlog extends HttpServlet {
         PrintWriter out = response.getWriter();
         for (Blogs b : list) {
             out.println("<div class=\"col-lg-6 col-md-6 col-sm-6\">\n" +
-                    "                    <div class=\"blog__item\">\n" +
-                    "                        <div class=\"blog__item__pic\">\n" +
-                    "                            <img src=\"http://localhost:8080/Petshop_website_final_war/" +b.getImage()+ "\"  alt=\"\">\n" +
-                    "                        </div>\n" +
-                    "                        <div class=\"blog__item__text\">\n" +
-                    "                            <ul>\n" +
-                    "                                <li><i class=\"fa fa-calendar-o\"></i>" +b.getCreateDate() + "</li>\n" +
-                    "                            </ul>\n" +
-                    "                            <h5><a href=\"\"> " +b.getBlogName() + "\n" +
-                    "                            </a></h5>\n" +
-                    "\n" +
-                    "                            <a href=\"add-blog.jsp?id=" + b.getBlogId() + "\" class=\"blog_btn\">Chỉnh sửa  <i data-feather=\"arrow-right\"></i></a>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>");
+                    "                            <div class=\"blog__item\">\n" +
+                    "                                <div class=\"blog__item__pic\">\n" +
+                    "                                    <img src=\""+b.getImage()+"\" alt=\"\">\n" +
+                    "                                </div>\n" +
+                    "                                <div class=\"blog__item__text\">\n" +
+                    "                                    <ul>\n" +
+                    "                                        <li><i class=\"fa fa-calendar-o\"></i>"+b.getCreateDate()+"</li>\n" +
+                    "                                    </ul>\n" +
+                    "                                    <h5><a href=\"blog-details.jsp?id="+b.getBlogId()+"\">"+b.getBlogName()+"</a></h5>\n" +
+                    "                                    <p>"+b.getDescription()+"</p>\n" +
+                    "                                    <a href=\"blog-details.jsp?id="+b.getBlogId()+"\" class=\"blog__btn\"  >ĐỌC THÊM <span class=\"arrow_right\"></span></a>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "                        </div>");
         }
     }
 

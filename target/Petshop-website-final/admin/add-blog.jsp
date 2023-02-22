@@ -304,7 +304,7 @@
                              data-dz-message="data-dz-message">
                             <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
                                  style="height:80px;width:80px;">
-                                <img class="img-blog-review dz-image" src="http://localhost:8080/Petshop_website_final_war/<%=b.getImage()%>">
+                                <img class="img-blog-review dz-image" src="<%=b.getImage()%>">
                                 <div class="control">
                                     <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
                                        data-dz-remove="">
@@ -558,7 +558,7 @@
                 cate: cate,
             },
             success: function () {
-                if (id.equals("null"))
+                if (id.length < 1)
                     alert("Thêm tin tức thành công");
                 else
                     alert("Cập nhật tin tức thành công");

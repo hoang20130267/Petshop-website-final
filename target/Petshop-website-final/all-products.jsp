@@ -395,7 +395,9 @@
                     </div>
                     <div class="sidebar__item">
                         <h4>Sắp xếp</h4>
-                            <input type="radio" id="select1" class="sapxep" name="sapxep" value="0">
+
+                        <input type="radio" id="select1" class="sapxep" name="sapxep" value="0">
+
                         <label for="select1">Mặc định</label><br>
                         <input type="radio" id="select2" class="sapxep" name="sapxep" value="1">
                         <label for="select2">Giá tăng dần</label><br>

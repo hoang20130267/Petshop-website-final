@@ -269,9 +269,6 @@
                                 <%}%>
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
-                                    Xóa dữ liệu
-                                </button>
                                 <%if (request.getParameter("pid") != null) {%>
                                 <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                                     Sửa thú cưng
@@ -503,9 +500,9 @@
                                                                 <h5>Giảm bao nhiêu?(%)</h5>
                                                             </div>
                                                             <input  name="PromotionalPrice" id="PromotionalPrice"
-                                                                    value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                                                    value="<%=(p != null) ? p.getPromotionalPrice() : "0"%>"
                                                                     class="form-control mb-3" type="text"
-                                                                    placeholder="Ví dụ: 10" required/>
+                                                                    placeholder="Ví dụ: 10"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -728,7 +725,7 @@
                 PromotionalPrice:PromotionalPrice,
             },
             success: function () {
-                if (id.equals("null"))
+                if (id.length < 1)
                     alert("Thêm sản phẩm thành công");
                 else
                     alert("Cập nhật sản phẩm thành công");

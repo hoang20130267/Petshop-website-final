@@ -54,7 +54,8 @@ public class ProductDAO {
 
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
+            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where (pfc.cate_id = 1 or pfc.cate_id =2) and \n" +
+                            "p.ProductName like ?").bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -62,7 +63,8 @@ public class ProductDAO {
 
     public List<Product> searchByName2(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?")
+            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 and \n" +
+                            "p.ProductName like ?")
                     .bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
@@ -99,7 +101,7 @@ public class ProductDAO {
                             "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
@@ -110,7 +112,7 @@ public class ProductDAO {
                     .bind(10,mausac)
                     .bind(11,cannang)
                     .bind(12,Integer.parseInt(status))
-                    .bind(13,PromotionalPrice)
+                    .bind(13,Double.parseDouble(PromotionalPrice))
                     .bind(14,Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
@@ -133,10 +135,10 @@ public class ProductDAO {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
-                            "Dital, Quantity, CreateBy, CreateDate, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+                            "Dital, Quantity, CreateBy, CreateDate, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
@@ -146,7 +148,7 @@ public class ProductDAO {
                     .bind(9,mausac)
                     .bind(10,cannang)
                     .bind(11,Integer.parseInt(status))
-                    .bind(12,PromotionalPrice)
+                    .bind(12,Double.parseDouble(PromotionalPrice))
                     .bind(13,Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
@@ -170,7 +172,7 @@ public class ProductDAO {
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -180,8 +182,8 @@ public class ProductDAO {
                     .bind(9, giong)
                     .bind(10,mausac)
                     .bind(11,cannang)
-                    .bind(12,PromotionalPrice)
-                    .bind(13,Promotional)
+                    .bind(12,Double.parseDouble(PromotionalPrice))
+                    .bind(13,Integer.parseInt(Promotional))
                     .bind(14,id)
                     .execute();
         });
@@ -195,17 +197,17 @@ public class ProductDAO {
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
                     .bind(6, detail)
                     .bind(7, idAdmin)
                     .bind(8, date)
-                    .bind(9,mausac)
+                    .bind(9, mausac)
                     .bind(10,cannang)
-                    .bind(11,PromotionalPrice)
-                    .bind(12,Promotional)
+                    .bind(11,Double.parseDouble(PromotionalPrice))
+                    .bind(12,Integer.parseInt(Promotional))
                     .bind(13,id)
                     .execute();
         });

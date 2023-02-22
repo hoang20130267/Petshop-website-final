@@ -15,7 +15,7 @@ public class EditUserCustomerController extends HttpServlet {
         doPost(request, response);
     }
     /*
-        Thêm và chỉnh sửa thông tin người dùng - Nguyễn Ngọc Huy 20130281
+        Thêm và chỉnh sửa thông tin người dùng - Nguyễn Ngọc Huy 20130281, Nguyễn Sĩ Hoàng 20130267
     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class EditUserCustomerController extends HttpServlet {
         System.out.println(status);
 
         String exe = SignUpService.getInstance().checkUser(email, username);
-        if(id == null) {
+        if(id.isEmpty()) {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);

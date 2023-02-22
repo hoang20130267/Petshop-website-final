@@ -8,6 +8,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -198,14 +199,14 @@
             margin-left: 12px;
         }
 
-        .reply small{
+        .remove small{
 
             color: #b7b4b4;
 
         }
 
 
-        .reply small:hover{
+        .remove small:hover{
 
             color: crimson;
             cursor: pointer;
@@ -340,16 +341,16 @@
                         <img class="product__details__pic__item--large"
                              src="<%=product.getImage()%>" alt="" style="height: 570px; object-fit: cover">
                     </div>
-<%--                    <div class="product__details__pic__slider owl-carousel">--%>
-<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
-<%--                             src="img/products/dog/sp6.png" alt="">--%>
-<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
-<%--                             src="img/products/dog/sp6.png" alt="">--%>
-<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
-<%--                             src="img/products/dog/sp6.png" alt="">--%>
-<%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
-<%--                             src="img/products/dog/sp6.png" alt="">--%>
-<%--                    </div>--%>
+                    <%--                    <div class="product__details__pic__slider owl-carousel">--%>
+                    <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+                    <%--                             src="img/products/dog/sp6.png" alt="">--%>
+                    <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+                    <%--                             src="img/products/dog/sp6.png" alt="">--%>
+                    <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+                    <%--                             src="img/products/dog/sp6.png" alt="">--%>
+                    <%--                        <img data-imgbigurl="img/products/dog/sp6.png"--%>
+                    <%--                             src="img/products/dog/sp6.png" alt="">--%>
+                    <%--                    </div>--%>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -363,12 +364,17 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
+                    <%if(product.getPromotional()==1){%>
+                    <div class="product__details__price" style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice()-( product.getPrice() *product.getPromotionalPrice()/100))%>đ
+                        <span style="margin-left: 12px;font-size: 18px;color: black;text-decoration: line-through;"><%=format.format(product.getPrice())%>đ</span></div>
+                    <%}else {%>
                     <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
+                    <%}%>
                     <p><%=product.getDescription()%></p>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
-                                <input type="text" value="1">
+                                <input type="text" id="quantity" value="1">
                             </div>
                         </div>
                     </div>
@@ -376,28 +382,44 @@
                         Product p = new ProductDAO().getProductDetail(product.getProductId());%>
                     <%if (Integer.parseInt(p.getQuantity())> 0) {%>
                     <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon" id="addWishlist-<%=p.getProductId()%>"><span class="icon_heart_alt"></span></a>
+                    <a href="#" class="heart-icon add-wishlist" id="addWishlist-<%=p.getProductId()%>"><span class="icon_heart_alt"></span></a>
                     <%}%>
                     <%
                     } else {%>
                     <a href="login.jsp" class="primary-btn snow">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a href="login.jsp" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <%  }
                     %>
 
-                    <ul>
-                        <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
-                        <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
-                        <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
-                        <li><b>Chia sẻ thông tin </b>
-                            <div class="share">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </li>
-                    </ul>
+                    <%if(!DetailService.getInstance().getPentCateProduct(product.getProductId()).getCatID().equals("3")){%>
+                        <ul>
+                            <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
+                            <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
+                            <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
+                            <li><b>Chia sẻ thông tin </b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    <% }else { %>
+                            <ul>
+                                <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
+                                <li><b>Kích thước: </b> <span><%=product.getCannang()%></span></li>
+                                <li><b>Chia sẻ thông tin </b>
+                                    <div class="share">
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-instagram"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                    <% } %>
+
                 </div>
             </div>
             <div class="col-lg-12">
@@ -407,12 +429,12 @@
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
                                aria-selected="true">Giới thiệu</a>
                         </li>
-<%--                        <li class="nav-item">--%>
-<%--                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"--%>
-<%--                               aria-selected="false">Thông tin</a>--%>
-<%--                        </li>--%>
+                        <%--                        <li class="nav-item">--%>
+                        <%--                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"--%>
+                        <%--                               aria-selected="false">Thông tin</a>--%>
+                        <%--                        </li>--%>
                         <li class="nav-item">
-                                <% List<Comment> listCmt1 = new CommentDAO().getListCommentByProductID(request.getParameter("id"));%>
+                            <% List<Comment> listCmt1 = new CommentDAO().getListCommentByProductID(request.getParameter("id"));%>
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
                                aria-selected="false">Đánh giá <span>(<%=listCmt1.size()%>)</span></a>
                         </li>
@@ -424,24 +446,6 @@
                                 <p><%=product.getDital()%></p>
                             </div>
                         </div>
-<%--                        <div class="tab-pane" id="tabs-2" role="tabpanel">--%>
-<%--                            <div class="product__details__tab__desc">--%>
-<%--                                <h6>Thông tin thú cưng</h6>--%>
-<%--                                <p>--%>
-<%--                                <%=product.getDescription()%>--%>
-<%--                                </p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <%if(user == null) {%>--%>
-
-<%--                        <div class="tab-pane" id="tabs-3" role="tabpanel">--%>
-<%--                            <div class="product__details__tab__desc">--%>
-<%--                                <h6>Đánh giá</h6>--%>
-<%--                                <p>Chưa có đánh giá nào.</p>--%>
-<%--                                <p>Chỉ những khách hàng đã đăng nhập và mua sản phẩm này mới có thể đưa ra đánh giá.</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                        <% } else {%>--%>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <%if(user == null) {%>
@@ -458,27 +462,24 @@
                                         <button id="button" class="site-btn" style="border-radius: 10px">Đăng</button>
                                     </form>
                                 </div>
-                                <div class="container-cmt"></div>
+                                <div id="cmt-con" class="container-cmt"></div>
                                 <%}%>
                                 <% List<Comment> listCmt = new CommentDAO().getListCommentByProductID(request.getParameter("id"));
-                                for(Comment cmt : listCmt) {%>
-                                <div class="container-cmt">
-                                <div id="cmt-section<%=cmt.getID()%>">
-                                    <div class="container mt-5">
-                                        <div class="row  d-flex justify-content-center">
-                                            <div class="col-md-8">
-                                                <div class="card p-3">
+                                    for(Comment cmt : listCmt) {%>
+                                <div id="cmt-con" class="container-cmt">
+                                    <div id="cmt-section<%=cmt.getID()%>">
+                                        <div class="container mt-5">
+                                            <div class="row  d-flex justify-content-center">
+                                                <div class="col-md-8">
+                                                    <div class="card p-3">
 
-                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div class="d-flex justify-content-between align-items-center">
 
-                                                        <div class="user d-flex flex-row align-items-center">
-                                                            <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
+                                                            <div class="user d-flex flex-row align-items-center">
+                                                                <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>" width="35" height="35" class="user-img rounded-circle mr-2">
 
-                                                            <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 100px"><%=cmt.getDescription()%></small></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                                        <div class="reply px-4">
+                                                                <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 10px; font-size: 14px"><%=cmt.getDescription()%></small></span>
+                                                            </div>
                                                             <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
                                                                 if (user1 != null) {
                                                                     if (user1.getId().equals(cmt.getCustomerID())) {
@@ -487,9 +488,13 @@
                                                             <% }
                                                             } %>
                                                         </div>
-                                                        <div class="icons align-items-center">
-                                                            <i class="fa fa-star text-warning"></i>
-                                                            <i class="fa fa-check-circle-o check-icon"></i>
+                                                        <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                                            <div class="reply px-4">
+                                                                <small><%=cmt.getCommentDate()%></small>
+                                                            </div>
+                                                            <div class="icons align-items-center">
+                                                                <i class="fa fa-check-circle-o check-icon text-primary"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -497,13 +502,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
                                 <%}%>
 
-                                </div>
+                            </div>
 
                         </div>
-<%--                        <%}%>--%>
+                        <%--                        <%}%>--%>
                     </div>
                 </div>
             </div>
@@ -536,7 +540,7 @@
                     </div>
                     <div class="product__item__text">
                         <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%=p.getProductName()%></a></h6>
-                        <h5><%=p.getPrice()%></h5>
+                        <h5><%=format.format(p.getPrice())%>đ</h5>
                     </div>
                 </div>
             </div>
@@ -562,6 +566,26 @@
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 <script>
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+</script>
+<script>
     $(document).ready(function (){
         addcart();
         addwishlist();
@@ -572,16 +596,20 @@
             $(this).on("click",function (e){
                 e.preventDefault();
                 const idAdd = this.id;
+                const quantity = $("#quantity").val();
                 $.ajax({
                     url: "AddCartController",
                     type: "get",
                     data: {
                         idAdd: idAdd,
+                        quantity:quantity
                     },
                     success: function (data) {
                         $(".header__second__cart--notice").each(function () {
-                            $(this).text(data)
+                            const quantity2 = $(this).text();
+                            $(this).text(parseInt(quantity2)+ parseInt(quantity))
                         })
+                        $(".header__cart__price span").text(data)
                     }
                 })
             })
@@ -600,9 +628,10 @@
                     },
                     success: function (data) {
                         $(".header__second__wishlist--notice").each(function () {
-                            $(this).text(data)
+                            var quantity = $(this).text()
+                            $(this).text(parseInt(quantity)+1)
+                            alert("Thêm vào mục yêu thích thành công");
                         })
-                        $(".product__shopnow").html(`<a class="notify" style="color:green; font-size: 16px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào yêu thích thành công !</a>`)
                     }
                 })
             })
@@ -626,25 +655,27 @@
     }
 </script>
 <script>
-        $("#button").click(function (e) {
-            e.preventDefault();
-            const comment = $("#content").val();
-            const pID = $("#pID").val();
-            console.log(comment);
-            console.log(pID);
-            $.ajax({
-                type: 'post',
-                url: '/Petshop_website_final_war/CommentController',
-                data: {
-                    desc: comment,
-                    pID: pID
-                },
-                success: function (data) {
-                    $(".container-cmt").prepend(data);
-                    document.getElementById('content').value = '';
-                }
-            })
+    $("#button").click(function (e) {
+        e.preventDefault();
+        const comment = $("#content").val();
+        const pID = $("#pID").val();
+        // console.log(comment);
+        // console.log(pID);
+        $.ajax({
+            type: 'post',
+            url: '/Petshop_website_final_war/CommentController',
+            data: {
+                desc: comment,
+                pID: pID
+            },
+            success: function (data) {
+                // console.log(data);
+                $("#cmt-con").prepend(data);
+                deletecomment();
+                document.getElementById('content').value = '';
+            }
         })
+    })
 
 </script>
 </body>

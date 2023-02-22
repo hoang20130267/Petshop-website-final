@@ -8,7 +8,9 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet(name = "SearchControlAccessory", value = "/search-accessory")
 public class SearchControlAccessory extends HttpServlet {
@@ -24,6 +26,7 @@ public class SearchControlAccessory extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.searchByName2(txtSearch);
         PrintWriter out = response.getWriter();
+        NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));
         for (Product p : list) {
             out.println("<div class=\"col-md-3\">\n" +
                     "              <div class=\"white_card position-relative mb_20\">\n" +
@@ -34,7 +37,7 @@ public class SearchControlAccessory extends HttpServlet {
                     "                    >\n" +
                     "                  </div> -->\n" +
                     "                  <img\n" +
-                    "                    src=\"../"+p.getImage()+"\"\n" +
+                    "                    src=\""+p.getImage()+"\" style=\"height: 150px; width: 150px; object-fit: cover\"\n" +
                     "                    alt=\"\"\n" +
                     "                    class=\"d-block mx-auto my-4\"\n" +
                     "                    height=\"150\"\n" +
@@ -48,7 +51,7 @@ public class SearchControlAccessory extends HttpServlet {
                     "                    </div>\n" +
                     "                    <div class=\"col-auto\">\n" +
                     "                      <h4 class=\"text-dark mt-0\" style=\"margin-left: 65px;\">\n" +
-                    "                        "+p.getPrice()+"đ\n" +
+                    "                        "+format.format(p.getPrice())+"đ\n" +
                     "\n" +
                     "                      </h4>\n" +
                     "                      <ul\n" +
