@@ -135,9 +135,6 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
-      /*  .danhmuc {
-            margin-top: 680px;
-        }*/
     </style>
 </head>
 <%
@@ -252,8 +249,8 @@
 
 <!-- Product Section Begin -->
 <section class="product spad">
-    <div class="container">
 
+    <div class="container">
         <div class="product__discount">
             <div class="section-title product__discount__title">
                 <h2>Giảm Giá</h2>
@@ -295,32 +292,29 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
-                    <div class="sidebar__item danhmuc">
+                    <div class="sidebar__item">
                         <h4>Danh mục</h4>
 <%--                            <input type="radio" id="0" name="checkcate" class="checkcate" value="-1">--%>
 <%--                            <label class="form-check-label" for="0">Tất cả</label><br>--%>
-
-                        <%  String category1 = request.getParameter("category");
-                                List<Detail> listD = new DetailService().listProCateClassify(category1); %>
-
-                        <% if (!category1.equals("all") && !category1.equals("1") && !category1.equals("2") && !category1.equals("3"))
-                        { %>
-                        <input type="radio" id="-1" name="checkcate" class="checkcate" value="all">
-                        <label class="form-check-label" for="-1">Tất cả</label><br>
-                        <%
-                        }
-                        else { %>
-                        <input type="radio" id="-1" name="checkcate" class="checkcate" value="<%=category1%>">
-                        <label class="form-check-label" for="-1">Tất cả</label><br>
-                        <% } %>
-
-
-                        <%        for (Detail p1 : listD) {
+                            <%  String category1 = request.getParameter("category");
+                                List<Detail> listD = new DetailService().listProCateClassify(category1);
                             %>
+
+                            <% if (!category1.equals("all") && !category1.equals("1")  && !category1.equals("2") ) { %>
+                            <input type="radio" id="-1" name="checkcate" class="checkcate" value="all">
+                            <label class="form-check-label" for="-1">Tất cả </label><br>
+                            <% } else {
+                            %>
+                            <input type="radio" id="-1" name="checkcate" class="checkcate" value="<%=category1%>">
+                            <label class="form-check-label" for="-1">Tất cả </label><br>
+                            <% } %>
+                            <%
+                                for (Detail p1 : listD) {
+                            %>
+
                                 <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
                                 <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
                             <% } %>
@@ -355,21 +349,19 @@
 
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-<%--                        <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">--%>
-<%--                        <label for="age0">Tất cả</label><br>--%>
                             <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">
                             <label for="age0">Tất cả</label><br>
-                            <input type="radio" id="age1" class="checkSize" name="checkSize" value="0-2">
-                            <label for="age1">Dưới 2kg</label><br>
-                            <input type="radio" id="age2" class="checkSize" name="checkSize" value="2-3">
-                            <label for="age2">2kg-3kg</label><br>
-                            <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
-                            <label for="age3">3kg-5kg</label><br>
-                            <input type="radio" id="age4" class="checkSize" name="checkSize" value="5-10">
-                            <label for="age4">5kg-10kg</label><br>
-                            <input type="radio" id="age5" class="checkSize" name="checkSize" value="10-100">
-                            <label for="age5">Trên 10kg</label><br>
-<%--                            <label for="large">--%>
+                        <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
+                        <label for="age5">dưới 2kg</label><br>
+                        <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
+                        <label for="age4">2kg-3kg</label><br>
+                        <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
+                        <label for="age3">3kg-5kg</label><br>
+                        <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
+                        <label for="age2">5kg-10kg</label><br>
+                        <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
+                        <label for="age1">Trên 10kg</label><br>
+                        <%--                            <label for="large">--%>
 <%--                                5kg - 10kg--%>
 <%--                                <input type="radio" id="large" value="5-100">--%>
 <%--                            </label>--%>
@@ -395,9 +387,7 @@
                     </div>
                     <div class="sidebar__item">
                         <h4>Sắp xếp</h4>
-
                         <input type="radio" id="select1" class="sapxep" name="sapxep" value="0">
-
                         <label for="select1">Mặc định</label><br>
                         <input type="radio" id="select2" class="sapxep" name="sapxep" value="1">
                         <label for="select2">Giá tăng dần</label><br>
@@ -411,7 +401,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
-          <%--      <div class="product__discount">
+             <%--   <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
@@ -608,7 +598,6 @@
             category = listcate;
         }
         console.log(size + " "+ price+ " "+ category+ " " + orderby);
-        console.log(amount);
         $.ajax({
             type: 'post',
             url: "FilterProductController",

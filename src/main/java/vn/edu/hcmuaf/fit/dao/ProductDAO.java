@@ -229,8 +229,10 @@ public class ProductDAO {
 
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
         if (order_by != null) {
             switch (order_by) {
@@ -278,8 +280,10 @@ public class ProductDAO {
             }
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
 
         if (order_by != null) {
