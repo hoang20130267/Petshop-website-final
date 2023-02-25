@@ -445,32 +445,18 @@
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5"></div>
-<%--                            <div class="filter__sort">--%>
-<%--                                <span>Sắp xếp</span>--%>
-<%--                                <select id="dropdownSelect">--%>
-<%--                                    <option selected value="0">Mặc Định</option>--%>
-<%--                                    <option value="1">Giá Tăng Dần</option>--%>
-<%--                                    <option value="2">Giá Giảm Dần</option>--%>
-<%--                                    <option value="3">A - Z</option>--%>
-<%--                                    <option value="4">Z - A</option>--%>
-<%--                                </select>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row" id="items">
                 </div>
-
                     <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
                 <input type="text" id="page" value="0" style="display: none;" />
-
                 </div>
         </div>
     </div>
@@ -615,9 +601,8 @@
         });
     }
 </script>
+
 <script>
-
-
 
 </script>
 
