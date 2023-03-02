@@ -249,75 +249,28 @@
 
 <!-- Product Section Begin -->
 <section class="product spad">
-
     <div class="container">
-        <div class="product__discount">
-            <div class="section-title product__discount__title">
-                <h2>Giảm Giá</h2>
-            </div>
-            <div class="row">
-                <div class="product__discount__slider owl-carousel">
-                    <%List<Product> listSale = ProductService.getInstance().listProductSale();
-                        for (Product pd:listSale) {%>
-                    <div class="col-lg-4">
-                        <div class="product__discount__item">
-                            <div class="product__discount__item__pic set-bg"
-                                 data-setbg="<%=pd.getImage()%>">
-                                <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
-                                <ul class="product__item__pic__hover">
-                                    <%if (user != null) {
-                                        Product product = new ProductDAO().getProductDetail(pd.getProductId());%>
-                                    <%if (Integer.parseInt(product.getQuantity())> 0) {%>
-                                    <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i class="fa fa-heart"></i></a></li>
-                                    <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>" ><i
-                                            class="fa fa-shopping-cart"></i></a></li>
-                                    <%}%>
-                                    <%
-                                    } else {%>
-                                    <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
-                                    <li><a class="shopnow2" href="login.jsp"><i
-                                            class="fa fa-shopping-cart"></i></a></li>
-                                    <%  }
-                                    %>
-                                </ul>
-                            </div>
-                            <div class="product__discount__item__text">
-                                <h5><a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%></a></h5>
-                                <div class="product__item__price"><%=format.format(pd.getPrice()-( pd.getPrice() *pd.getPromotionalPrice()/100))%>đ<span><%=pd.getPrice()%>đ</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <% }%>
-
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
-<%--                            <input type="radio" id="0" name="checkcate" class="checkcate" value="-1">--%>
-<%--                            <label class="form-check-label" for="0">Tất cả</label><br>--%>
-                            <%  String category1 = request.getParameter("category");
-                                List<Detail> listD = new DetailService().listProCateClassify(category1);
-                            %>
+                        <% String category1 = request.getParameter("category");
+                            if (category1 != "1" && category1 != "2" && category1 != "3" && category1 != "all") { %>
+                        <input type="radio" id="all" name="checkcate" class="checkcate" value="<%=category1%>">
+                        <label class="form-check-label" for="all">Tất cả</label><br>
+                        <% } else { %>
+                        <input type="radio" id="all" name="checkcate" class="checkcate" value="-1">
+                        <label class="form-check-label" for="all">Tất cả</label><br>
+                        <% } %>
+                        <%
+                            List<Detail> listD = new DetailService().listProCateClassify(category1);
+                            for (Detail p1 : listD) {
+                        %>
 
-                            <% if (!category1.equals("all") && !category1.equals("1")  && !category1.equals("2") ) { %>
-                            <input type="radio" id="-1" name="checkcate" class="checkcate" value="all">
-                            <label class="form-check-label" for="-1">Tất cả </label><br>
-                            <% } else {
-                            %>
-                            <input type="radio" id="-1" name="checkcate" class="checkcate" value="<%=category1%>">
-                            <label class="form-check-label" for="-1">Tất cả </label><br>
-                            <% } %>
-                            <%
-                                for (Detail p1 : listD) {
-                            %>
-
-                                <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
-                                <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
-                            <% } %>
+                        <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
+                        <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
+                        <% } %>
 
                     </div>
                     <div class="sidebar__item">
@@ -349,41 +302,18 @@
 
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-                            <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">
-                            <label for="age0">Tất cả</label><br>
-                        <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
-                        <label for="age5">dưới 2kg</label><br>
-                        <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
-                        <label for="age4">2kg-3kg</label><br>
-                        <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
-                        <label for="age3">3kg-5kg</label><br>
-                        <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
-                        <label for="age2">5kg-10kg</label><br>
+                        <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">
+                        <label for="age0">Tất cả</label><br>
                         <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
                         <label for="age1">Trên 10kg</label><br>
-                        <%--                            <label for="large">--%>
-<%--                                5kg - 10kg--%>
-<%--                                <input type="radio" id="large" value="5-100">--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                        <div class="sidebar__item__size">--%>
-<%--                            <label for="medium">--%>
-<%--                                3kg - 5kg--%>
-<%--                                <input type="radio" id="medium" value="3-5">--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                        <div class="sidebar__item__size">--%>
-<%--                            <label for="small">--%>
-<%--                                2kg-3kg--%>
-<%--                                <input type="radio" id="small" value="2-3">--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-<%--                        <div class="sidebar__item__size">--%>
-<%--                            <label for="tiny">--%>
-<%--                                dưới 2kg--%>
-<%--                                <input type="radio" id="tiny" value="0-2">--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
+                        <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
+                        <label for="age2">5kg-10kg</label><br>
+                        <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
+                        <label for="age3">3kg-5kg</label><br>
+                        <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
+                        <label for="age4">2kg-3kg</label><br>
+                        <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
+                        <label for="age5">dưới 2kg</label><br>
                     </div>
                     <div class="sidebar__item">
                         <h4>Sắp xếp</h4>
@@ -401,7 +331,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
-             <%--   <div class="product__discount">
+                <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
@@ -409,55 +339,59 @@
                         <div class="product__discount__slider owl-carousel">
                             <%List<Product> listSale = ProductService.getInstance().listProductSale();
                                 for (Product pd:listSale) {%>
-                                    <div class="col-lg-4">
-                                        <div class="product__discount__item">
-                                            <div class="product__discount__item__pic set-bg"
-                                                 data-setbg="<%=pd.getImage()%>">
-                                                <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
-                                                <ul class="product__item__pic__hover">
-                                                    <%if (user != null) {
-                                                        Product product = new ProductDAO().getProductDetail(pd.getProductId());%>
-                                                    <%if (Integer.parseInt(product.getQuantity())> 0) {%>
-                                                    <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>" ><i
-                                                            class="fa fa-shopping-cart"></i></a></li>
-                                                    <%}%>
-                                                    <%
-                                                    } else {%>
-                                                    <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a class="shopnow2" href="login.jsp"><i
-                                                            class="fa fa-shopping-cart"></i></a></li>
-                                                    <%  }
-                                                    %>
-                                                </ul>
-                                            </div>
-                                            <div class="product__discount__item__text">
-                                                <h5><a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%></a></h5>
-                                                <div class="product__item__price"><%=format.format(pd.getPrice()-( pd.getPrice() *pd.getPromotionalPrice()/100))%>đ<span><%=pd.getPrice()%>đ</span></div>
-                                            </div>
-                                        </div>
+                            <div class="col-lg-4">
+                                <div class="product__discount__item">
+                                    <div class="product__discount__item__pic set-bg"
+                                         data-setbg="<%=pd.getImage()%>">
+                                        <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
+                                        <ul class="product__item__pic__hover">
+                                            <%if (user != null) {
+                                                Product product = new ProductDAO().getProductDetail(pd.getProductId());%>
+                                            <%if (Integer.parseInt(product.getQuantity())> 0) {%>
+                                            <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i class="fa fa-heart"></i></a></li>
+                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>" ><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
+                                            <%}%>
+                                            <%
+                                            } else {%>
+                                            <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                                            <li><a class="shopnow2" href="login.jsp"><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
+                                            <%  }
+                                            %>
+                                        </ul>
                                     </div>
-                               <% }%>
+                                    <div class="product__discount__item__text">
+                                        <h5><a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%></a></h5>
+                                        <div class="product__item__price"><%=format.format(pd.getPrice()-( pd.getPrice() *pd.getPromotionalPrice()/100))%>đ<span><%=pd.getPrice()%>đ</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }%>
 
                         </div>
                     </div>
-                </div>--%>
+                </div>
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5"></div>
+                     `
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="row" id="items">
                 </div>
-                    <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
+
+                <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
                 <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
                 <input type="text" id="page" value="0" style="display: none;" />
-                </div>
+
+            </div>
         </div>
     </div>
 </section>
@@ -527,26 +461,26 @@
     }
     function addcart() {
         $(".shopnow2").each(function (e) {
-           $(this).on("click",function (e){
-               e.preventDefault();
-               const idAdd = this.id;
-               const quantity=1;
-               $.ajax({
-                   url: "AddCartController",
-                   type: "get",
-                   data: {
-                       idAdd: idAdd,
-                       quantity:quantity
-                   },
-                   success: function (data) {
-                       $(".header__second__cart--notice").each(function () {
-                           var quantity = $(this).text()
-                           $(this).text(parseInt(quantity)+1)
-                           alert("Thêm vào giỏ hàng thành công")
-                       })
-                   }
-               })
-           })
+            $(this).on("click",function (e){
+                e.preventDefault();
+                const idAdd = this.id;
+                const quantity=1;
+                $.ajax({
+                    url: "AddCartController",
+                    type: "get",
+                    data: {
+                        idAdd: idAdd,
+                        quantity:quantity
+                    },
+                    success: function (data) {
+                        $(".header__second__cart--notice").each(function () {
+                            var quantity = $(this).text()
+                            $(this).text(parseInt(quantity)+1)
+                            alert("Thêm vào giỏ hàng thành công")
+                        })
+                    }
+                })
+            })
         });
     }
     function addwishlist() {
@@ -601,8 +535,9 @@
         });
     }
 </script>
-
 <script>
+
+
 
 </script>
 

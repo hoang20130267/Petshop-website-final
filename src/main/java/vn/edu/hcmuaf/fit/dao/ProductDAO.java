@@ -266,6 +266,7 @@ public class ProductDAO {
 
 
     public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
+
         String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if ( category != null) {

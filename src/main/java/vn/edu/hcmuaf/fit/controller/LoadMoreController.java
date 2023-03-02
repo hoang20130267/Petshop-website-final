@@ -29,7 +29,6 @@ public class LoadMoreController extends HttpServlet {
         request.setAttribute("listnext9", list);
         request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {

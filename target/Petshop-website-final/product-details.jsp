@@ -241,11 +241,13 @@
     }
     String productId = request.getParameter("id");
     if (productId != null) {
-        if (history.size() == 4) {
-            history.remove(0);
-            history.add(3,productId);
-        } else {
-            history.add(productId);
+        if (!history.contains(productId)) {
+            if (history.size() == 4) {
+                history.remove(0);
+                history.add(3, productId);
+            } else {
+                history.add(productId);
+            }
         }
     }
     session.setAttribute("history", history);
