@@ -20,7 +20,6 @@ public class Pagging extends HttpServlet {
         String size = request.getParameter("size");
 
       /*  String indexPage = request.getParameter("page");*/
-        String indexPage = "1";
       /*  int sum = Integer.parseInt(request.getParameter("sum"));*/
 
        /* if ( indexPage == null) {
