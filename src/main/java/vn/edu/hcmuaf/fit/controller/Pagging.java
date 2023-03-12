@@ -9,49 +9,31 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Pagging", value = "/Pagging")
+@WebServlet(name = "Pagging", value = "/pagging")
 public class Pagging extends HttpServlet {
-
-    public void processRequest (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String category = request.getParameter("category");
-        String price = request.getParameter("price");
-        String orderby = request.getParameter("orderby");
-        String size = request.getParameter("size");
-
-      /*  String indexPage = request.getParameter("page");*/
-      /*  int sum = Integer.parseInt(request.getParameter("sum"));*/
-
-       /* if ( indexPage == null) {
-            index = 1;
-        } else index = Integer.parseInt(indexPage);
-        int count;
-        if(sum !=  null){
-            count  = Integer.parseInt(sum);
-        } else {
-            count = 0;
-        }*/
-        /*int totalPage = sum/9;
-        if (totalPage % 9 != 0) {
-            totalPage++;
-        }
-        request.setAttribute("totalPage", totalPage);
-        System.out.println(sum);*/
-      /*  List<Product> list = new ProductDAO().getNext9Product(index,category,price, size, orderby);
-        request.setAttribute("listnext9", list);
-        request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);*/
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request,response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request,response);
-    }
+        ProductDAO dao = new ProductDAO();
+        String price = request.getParameter("price");
+        String orderby = request.getParameter("orderby");
+        String category = request.getParameter("category");
+        String size = request.getParameter("size");
 
-    public static void main(String[] args) {
+        int total = Integer.parseInt(request.getParameter("total"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        int endPage = total/9;
+        int positionProduct = page*9;
+        if (total % 9 != 0) {
+            endPage++;
+        }
 
+        List<Product> list = dao.getNext9Product(positionProduct, category, price,  size,  orderby);
+        request.setAttribute("listPagging",list);
+        request.getRequestDispatcher("all-products.jsp").forward(request,response);
     }
 }
