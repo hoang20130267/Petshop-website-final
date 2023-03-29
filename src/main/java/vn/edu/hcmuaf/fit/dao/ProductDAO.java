@@ -229,8 +229,10 @@ public class ProductDAO {
 
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
         if (order_by != null) {
             switch (order_by) {
@@ -264,6 +266,7 @@ public class ProductDAO {
 
 
     public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
+
         String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if ( category != null) {
@@ -278,8 +281,10 @@ public class ProductDAO {
             }
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
 
         if (order_by != null) {
