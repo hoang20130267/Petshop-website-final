@@ -7,10 +7,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -18,9 +18,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pet Shop</title>
-
-    <!-- Google Font -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
           integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -141,7 +138,6 @@
     CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
 %>
 <body>
-
 <!-- Floatting -->
 <div class="add-button">
     <div class="sub-button tl">
@@ -157,13 +153,10 @@
         <i class="fa-brands fa-instagram"></i>
     </div>
 </div>
-
-
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
 </div>
-
 <!-- Humberger Begin -->
 <div class="humberger__menu__overlay"></div>
 <div class="humberger__menu__wrapper">
@@ -268,52 +261,53 @@
                             for (Detail p1 : listD) {
                         %>
 
-                        <input type="radio" id="<%=p1.getCatID()%>" name="checkcate" class="checkcate" value="<%=p1.getCatID()%>">
-                        <label class="form-check-label" for="<%=p1.getCatID()%>"><%=p1.getCatName()%></label><br>
+                        <input type="radio" id="<%=p1.getCatID()%>idP" name="checkcate" class="checkcate"
+                               value="<%=p1.getCatID()%>">
+                        <label class="form-check-label" for="<%=p1.getCatID()%>idP"><%=p1.getCatName()%>
+                        </label><br>
                         <% } %>
 
                     </div>
                     <div class="sidebar__item">
-                        <h4>Khoảng giá</h4>
-                        <input type="radio" id="a1"
+                        <%--@declare id="gia5"--%><h4>Khoảng giá</h4>
+                        <input type="radio" id="gia0"
                                class="checkGia" name="checkGia" value="-1">
-                        <label for="a1">Tất cả</label><br>
+                        <label for="gia0">Tất cả</label><br>
 
-                        <input type="radio" id="a2" class="checkGia" name="checkGia"  value="0-5000000">
-                        <label for="a2">Dưới 5,000,000đ</label><br>
+                        <input type="radio" id="gia1" class="checkGia" name="checkGia" value="0-5000000">
+                        <label for="gia1">Dưới 5,000,000đ</label><br>
 
-
-                        <input type="radio" id="a3" class="checkGia" name="checkGia" value="5000000-10000000">
-                        <label for="a3">5,000,000đ - 10,000,000đ</label><br>
-
-
-                        <input type="radio" id="a4" class="checkGia" name="checkGia" value="10000000-15000000">
-                        <label for="a4">10,000,000đ - 15,000,000đ</label><br>
+                        <input type="radio" id="gia3" class="checkGia" name="checkGia" value="5000000-10000000">
+                        <label for="gia3">5,000,000đ - 10,000,000đ</label><br>
 
 
-                        <input type="radio" id="a5" class="checkGia" name="checkGia" value="15000000-20000000">
-                        <label for="a5">15,000,000đ - 20,000,000đ</label><br>
+                        <input type="radio" id="gia4" class="checkGia" name="checkGia" value="10000000-15000000">
+                        <label for="gia4">10,000,000đ - 15,000,000đ</label><br>
 
 
-                        <input type="radio" id="a6" class="checkGia" name="checkGia" value="20000000-200000000">
-                        <label for="a6">Trên 20,000,000đ</label><br>
+                        <input type="radio" id=gia5" class="checkGia" name="checkGia" value="15000000-20000000">
+                        <label for="gia5">15,000,000đ - 20,000,000đ</label><br>
+
+
+                        <input type="radio" id="gia6" class="checkGia" name="checkGia" value="20000000-200000000">
+                        <label for="gia6">Trên 20,000,000đ</label><br>
 
                     </div>
 
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-                        <input type="radio" id="age0" class="checkSize" name="checkSize" value="-1">
-                        <label for="age0">Tất cả</label><br>
-                        <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
-                        <label for="age1">Trên 10kg</label><br>
-                        <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
-                        <label for="age2">5kg-10kg</label><br>
-                        <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
-                        <label for="age3">3kg-5kg</label><br>
-                        <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
-                        <label for="age4">2kg-3kg</label><br>
-                        <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
-                        <label for="age5">dưới 2kg</label><br>
+                        <input type="radio" id="size0" class="checkSize" name="checkSize" value="-1">
+                        <label for="size0">Tất cả</label><br>
+                        <input type="radio" id="size1" class="checkSize" name="checkSize" value="10-100">
+                        <label for="size1">Trên 10kg</label><br>
+                        <input type="radio" id="size2" class="checkSize" name="checkSize" value="5-10">
+                        <label for="size2">5kg-10kg</label><br>
+                        <input type="radio" id="size3" class="checkSize" name="checkSize" value="3-5">
+                        <label for="size3">3kg-5kg</label><br>
+                        <input type="radio" id="size4" class="checkSize" name="checkSize" value="2-3">
+                        <label for="size4">2kg-3kg</label><br>
+                        <input type="radio" id="size5" class="checkSize" name="checkSize" value="0-2">
+                        <label for="size5">dưới 2kg</label><br>
                     </div>
                     <div class="sidebar__item">
                         <h4>Sắp xếp</h4>
@@ -337,33 +331,42 @@
                     </div>
                     <div class="row">
                         <div class="product__discount__slider owl-carousel">
-                            <%List<Product> listSale = ProductService.getInstance().listProductSale();
-                                for (Product pd:listSale) {%>
+                            <%
+                                List<Product> listSale = ProductService.getInstance().listProductSale();
+                                for (Product pd : listSale) {
+                            %>
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
                                          data-setbg="<%=pd.getImage()%>">
                                         <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
                                         <ul class="product__item__pic__hover">
-                                            <%if (user != null) {
-                                                Product product = new ProductDAO().getProductDetail(pd.getProductId());%>
-                                            <%if (Integer.parseInt(product.getQuantity())> 0) {%>
-                                            <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i class="fa fa-heart"></i></a></li>
-                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>" ><i
+                                            <%
+                                                if (user != null) {
+                                                    Product product = new ProductDAO().getProductDetail(pd.getProductId());
+                                            %>
+                                            <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
+                                            <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
+                                                    class="fa fa-heart"></i></a></li>
+                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
                                                     class="fa fa-shopping-cart"></i></a></li>
                                             <%}%>
                                             <%
                                             } else {%>
-                                            <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a></li>
+                                            <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a>
+                                            </li>
                                             <li><a class="shopnow2" href="login.jsp"><i
                                                     class="fa fa-shopping-cart"></i></a></li>
-                                            <%  }
+                                            <% }
                                             %>
                                         </ul>
                                     </div>
                                     <div class="product__discount__item__text">
-                                        <h5><a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%></a></h5>
-                                        <div class="product__item__price"><%=format.format(pd.getPrice()-( pd.getPrice() *pd.getPromotionalPrice()/100))%>đ<span><%=pd.getPrice()%>đ</span></div>
+                                        <h5>
+                                            <a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%>
+                                            </a></h5>
+                                        <div class="product__item__price"><%=format.format(pd.getPrice() - (pd.getPrice() * pd.getPromotionalPrice() / 100))%>
+                                            đ<span><%=pd.getPrice()%>đ</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -375,22 +378,27 @@
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5"></div>
-                     `
+                        `
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm</h6>
+                                <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm
+                                </h6>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row" id="items">
                 </div>
+                <button onclick="loadMore()"
+                        style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;"
+                        class="loadmore-btn site-btn">Tải thêm
+                </button>
+                <div class="bar" id="pagging_bar">
 
-                <button onclick="loadMore()" style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm</button>
-                <input id="category" name="category" value="<%=request.getParameter("category")%>" style="display: none">
-                <input type="text" id="page" value="0" style="display: none;" />
-
+                </div>
+                <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
+                <input id="category" name="category" value="<%=request.getParameter("category")%>"
+                       style="display: none">
             </div>
         </div>
     </div>
@@ -414,13 +422,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
         loadMore();
+        barPagging();
+/*        pagging();*/
         addcart();
         addwishlist();
-        // $("#dropdownSelect").change(function (e) {
-        //         filter(e);
-        // })
         $("input[type='radio']").each(function () {
             this.addEventListener("change", function (e) {
                 filter(e);
@@ -428,6 +435,56 @@
         })
     })
 
+    function barPagging() {
+        /* let page = $("#page").val();*/
+        let total = $("#total").val();
+        $.ajax({
+            url: "/Petshop_website_final_war/ajax/ajax-barPagging.jsp",
+            type: "get", //send it through get method
+            data: {
+                total: total,
+                /*          page: page*/
+            },
+            success: function (data) {
+                $("#pagging_bar").html(data);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function  pagging(page) {
+        let category = $("#category").val();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const orderby = $("input[type='radio']:checked.sapxep").val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        const listcate = $("input[type='radio']:checked.checkcate").val();
+        if (listcate != null) {
+            category = listcate;
+        }
+
+        $.ajax({
+            url: "/Petshop_website_final_war/ControllerPagging",
+            type: "get", //send it through get method
+            data: {
+                category: category,
+                orderby: orderby,
+                price: price,
+                size: size,
+                page: page,
+            },
+            success: function (data) {
+                $("#items").html(data);
+                $(".page-item").removeClass("active")
+                $(".page-item.item" + page).addClass("active")
+                console.log(page);
+
+            },
+            error: function (xhr) {
+            }
+        });
+    }
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
         let category = $("#category").val();
@@ -459,23 +516,24 @@
             }
         });
     }
+
     function addcart() {
         $(".shopnow2").each(function (e) {
-            $(this).on("click",function (e){
+            $(this).on("click", function (e) {
                 e.preventDefault();
                 const idAdd = this.id;
-                const quantity=1;
+                const quantity = 1;
                 $.ajax({
                     url: "AddCartController",
                     type: "get",
                     data: {
                         idAdd: idAdd,
-                        quantity:quantity
+                        quantity: quantity
                     },
                     success: function (data) {
                         $(".header__second__cart--notice").each(function () {
                             var quantity = $(this).text()
-                            $(this).text(parseInt(quantity)+1)
+                            $(this).text(parseInt(quantity) + 1)
                             alert("Thêm vào giỏ hàng thành công")
                         })
                     }
@@ -483,9 +541,10 @@
             })
         });
     }
+
     function addwishlist() {
         $(".add-wishlist").each(function (e) {
-            $(this).on("click",function (e){
+            $(this).on("click", function (e) {
                 e.preventDefault();
                 const idAdd = this.id;
                 $.ajax({
@@ -497,7 +556,7 @@
                     success: function (data) {
                         $(".header__second__wishlist--notice").each(function () {
                             var quantity = $(this).text()
-                            $(this).text(parseInt(quantity)+1)
+                            $(this).text(parseInt(quantity) + 1)
                             alert("Thêm vào mục yêu thích thành công")
                         })
                     }
@@ -505,19 +564,19 @@
             })
         });
     }
+
     function filter(e) {
         e.preventDefault();
+        let total = $("#total").val();
         var amount = 0;
         let category = $("#category").val();
         const price = $("input[type='radio']:checked.checkGia").val();
-        // const orderby = $("#dropdownSelect").find(':selected').val();
         const orderby = $("input[type='radio']:checked.sapxep").val();
         const size = $("input[type='radio']:checked.checkSize").val();
         const listcate = $("input[type='radio']:checked.checkcate").val();
         if (listcate != null) {
             category = listcate;
         }
-        console.log(size + " "+ price+ " "+ category+ " " + orderby);
         $.ajax({
             type: 'post',
             url: "FilterProductController",
@@ -531,12 +590,13 @@
             success: function (data) {
                 $("#items").html(data);
                 $(".filter__found h6 span").text($("#numb").val());
+                $("#total").attr("value", $("#numb").val());
+                barPagging();
             }
         });
     }
 </script>
 <script>
-
 
 
 </script>

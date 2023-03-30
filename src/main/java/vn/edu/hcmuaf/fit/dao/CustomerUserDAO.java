@@ -1,12 +1,12 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
-import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
 
+
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -252,6 +252,26 @@ public class CustomerUserDAO {
                     .execute();
             return true;
         });
+    }
+
+    public CustomerUser getUserByEmail(String email) {
+        Optional<CustomerUser> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.role, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
+                .bind(0, email)
+                .mapToBean(CustomerUser.class)
+                .findFirst()
+        );
+        return user.orElse(null);
+    }
+
+    public String getIdUserByName(String username) {
+        Optional<String> Statement = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("SELECT ua.id" +
+                                " FROM infor_user i INNER JOIN user_account ua ON i.id_user = ua.id WHERE ua.status = 1 AND ua.user_name=? ")
+                        .bind(0, username)
+                        .mapTo(String.class)
+                        .findFirst()
+        );
+        return Statement.orElse(null);
     }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));

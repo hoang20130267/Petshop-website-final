@@ -178,7 +178,8 @@
                                          <a href="#" class="twitter">
                                              <span ><i class="fa-brands fa-twitter"></i></span>
                                          </a>
-                                         <a href="#" class="google">
+                                         <a href="https://accounts.google.com/o/oauth2/auth?scope=profile+email&redirect_uri=http://localhost:8080/Petshop_website_final_war/LoginGoogleHandler&response_type=code
+		   &client_id=863418616412-fi3ia9v25cl6jun5jbmgr4j9m0km6bof.apps.googleusercontent.com&approval_prompt=force" class="google">
                                              <span> <i class="fa-brands fa-google"></i></span>
                                          </a>
 
