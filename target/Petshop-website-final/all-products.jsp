@@ -399,8 +399,6 @@
                 <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
                 <input id="category" name="category" value="<%=request.getParameter("category")%>"
                        style="display: none">
-                <input id="page" name="page" value="1" style="display: none">
-
             </div>
         </div>
     </div>
@@ -427,7 +425,7 @@
     $(document).ready(function () {
         loadMore();
         barPagging();
-      /*  pagging();*/
+/*        pagging();*/
         addcart();
         addwishlist();
         $("input[type='radio']").each(function () {
@@ -437,81 +435,15 @@
         })
     })
 
-/*    function check(page) {
-            console.log(page);
-            pagging(page);
-    };*/
-
-    function  pagging(page) {
-        let category = $("#category").val();
-        const price = $("input[type='radio']:checked.checkGia").val();
-        const orderby = $("input[type='radio']:checked.sapxep").val();
-        const size = $("input[type='radio']:checked.checkSize").val();
-        const listcate = $("input[type='radio']:checked.checkcate").val();
-        if (listcate != null) {
-            category = listcate;
-        }
-        $.ajax({
-            url: "/Petshop_website_final_war/ControllerPagging",
-            type: "get", //send it through get method
-            data: {
-                category: category,
-                orderby: orderby,
-                price: price,
-                size: size,
-                page: page
-            },
-            success: function (data) {
-                $("#items").html(data);
-                $(".page-item").removeClass("active")
-                $(".page-item.item" + page).addClass("active")
-               /* $("#page").attr("value", $("#numb").val());*/
-            },
-            error: function (xhr) {
-            }
-        });
-    }
-
-
-    /* function pagging() {
-        let category = $("#category").val();
-        const price = $("input[type='radio']:checked.checkGia").val();
-        const orderby = $("input[type='radio']:checked.sapxep").val();
-        const size = $("input[type='radio']:checked.checkSize").val();
-        const listcate = $("input[type='radio']:checked.checkcate").val();
-        let total = $("#total").val();
-        if (listcate != null) {
-            category = listcate;
-        }
-
-        $.ajax({
-            url: "/Petshop_website_final_war/ControllerPagging",
-            type: "get", //send it through get method
-            data: {
-                total: total,
-                category: category,
-                orderby: orderby,
-                price: price,
-                size: size
-            },
-            success: function (data) {
-                $("#items").html(data);
-                $("#page").attr("value", $("#numb").val());
-            },
-            error: function (xhr) {
-            }
-        });
-    }
-*/
     function barPagging() {
-        let page = $("#page").val();
+        /* let page = $("#page").val();*/
         let total = $("#total").val();
         $.ajax({
             url: "/Petshop_website_final_war/ajax/ajax-barPagging.jsp",
             type: "get", //send it through get method
             data: {
                 total: total,
-                page: page
+                /*          page: page*/
             },
             success: function (data) {
                 $("#pagging_bar").html(data);
@@ -522,6 +454,37 @@
         });
     }
 
+    function  pagging(page) {
+        let category = $("#category").val();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const orderby = $("input[type='radio']:checked.sapxep").val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        const listcate = $("input[type='radio']:checked.checkcate").val();
+        if (listcate != null) {
+            category = listcate;
+        }
+
+        $.ajax({
+            url: "/Petshop_website_final_war/ControllerPagging",
+            type: "get", //send it through get method
+            data: {
+                category: category,
+                orderby: orderby,
+                price: price,
+                size: size,
+                page: page,
+            },
+            success: function (data) {
+                $("#items").html(data);
+                $(".page-item").removeClass("active")
+                $(".page-item.item" + page).addClass("active")
+                console.log(page);
+
+            },
+            error: function (xhr) {
+            }
+        });
+    }
     function loadMore() {
         var amount = document.getElementsByClassName("amount-pd").length;
         let category = $("#category").val();
@@ -629,7 +592,6 @@
                 $(".filter__found h6 span").text($("#numb").val());
                 $("#total").attr("value", $("#numb").val());
                 barPagging();
-                pagging(1);
             }
         });
     }

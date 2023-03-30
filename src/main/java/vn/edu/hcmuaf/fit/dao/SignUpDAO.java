@@ -48,6 +48,10 @@ public class SignUpDAO {
         });
     }
 
+    public void insertUserByAcGG() {
+
+    }
+
     public String checkUser(String email, String username){
         String result=null;
         String mail=null;
@@ -70,6 +74,17 @@ public class SignUpDAO {
         }
         return result;
     }
+
+    public boolean checkMail(String email) {
+        String emails = null;
+        try {
+            emails = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT email FROM info_user WHERE email = ?").bind(0, email).mapTo(String.class).first());
+        } catch (Exception e) {
+        }
+        if (emails != null) return true;
+        else return false;
+    }
+
 
     public static void main(String[] args) {
 
