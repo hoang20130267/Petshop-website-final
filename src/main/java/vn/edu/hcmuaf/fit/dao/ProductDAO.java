@@ -54,7 +54,8 @@ public class ProductDAO {
 
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId <3000 and ProductName like ?").bind(0, "%" + txtSearch + "%")
+            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where (pfc.cate_id = 1 or pfc.cate_id =2) and \n" +
+                            "p.ProductName like ?").bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -62,7 +63,8 @@ public class ProductDAO {
 
     public List<Product> searchByName2(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId > 3000 and ProductName like ?")
+            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 and \n" +
+                            "p.ProductName like ?")
                     .bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
@@ -195,7 +197,7 @@ public class ProductDAO {
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -227,8 +229,10 @@ public class ProductDAO {
 
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
         if (order_by != null) {
             switch (order_by) {
@@ -262,6 +266,7 @@ public class ProductDAO {
 
 
     public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
+
         String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if ( category != null) {
@@ -276,8 +281,10 @@ public class ProductDAO {
             }
         }
         if (size != null) {
-            String[] splited = size.split("-");
-            query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            if (!size.equals("-1")) {
+                String[] splited = size.split("-");
+                query += " AND p.cannang >= " + Double.parseDouble(splited[0]) + " AND p.cannang <= " + Double.parseDouble(splited[1]);
+            }
         }
 
         if (order_by != null) {

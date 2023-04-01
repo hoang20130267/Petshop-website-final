@@ -128,6 +128,14 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        .row1 p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 25px;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
     </style>
 </head>
 
@@ -268,40 +276,26 @@
                         <div class="blog__sidebar__item">
                             <h4>Tin mới nhất</h4>
                             <div class="blog__sidebar__recent">
-                                <a href="#" class="blog__sidebar__recent__item">
+                                <% List<Blogs> listNew = new BlogService().NewBlogs();
+                                    for(Blogs b : listNew) {
+                                %>
+                                <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item" style="    display: flex !important;">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                        <img src="<%=b.getImage()%>" alt="" style="object-fit: cover;height: 70px;width: 137px">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
-                                        <h6>Danh sách các thuốc tẩy giun<br> cho chó con an toàn</h6>
-                                        <span>11/12/2021</span>
+                                        <h6><%=b.getBlogName()%></h6>
+                                        <span><%=b.getCreateDate()%></span>
                                     </div>
                                 </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Từng bước cách chăm sóc <br> chó mẹ sau sinh mổ đẻ</h6>
-                                        <span>12/10/2021</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="blog__sidebar__recent__item">
-                                    <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                    </div>
-                                    <div class="blog__sidebar__recent__item__text">
-                                        <h6>Cách chăm sóc chó mang<br> thai tại nhà cần phải biết</h6>
-                                        <span>20/08/ 2021</span>
-                                    </div>
-                                </a>
+                                <% }%>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-7 order-md-1 order-1">
                     <div class="blog__details__text">
-                        <img src="img/blog/blog-2.jpg" alt="" height="400" width="800">
+                        <img src="<%=blogs.getImage()%>" alt="" height="400" width="800">
                         <h3><%=blogs.getBlogName()%></h3>
                         <p><%=blogs.getDital()%></p>
                     </div>
@@ -310,7 +304,7 @@
                             <div class="col-lg-6">
                                 <div class="blog__details__author">
                                     <div class="blog__details__author__pic">
-                                        <img src="img/blog/details/details-author.jpg" alt="">
+                                        <img src="admin/assets/images/user/avatar-2.png" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
                                         <h6>LTW_Nhom10</h6>
@@ -353,51 +347,24 @@
                  </div>
              </div>
              <div class="row">
-                 <div class="col-lg-4 col-md-4 col-sm-6">
+                 <% List<Blogs> listNewest = new BlogService().NewBlogs();
+                     for(Blogs blogs2 : listNewest) {
+                 %>
+                 <div class="row1 col-lg-4 col-md-4 col-sm-6">
                      <div class="blog__item">
                          <div class="blog__item__pic">
-                             <img src="img/blog/blog-1.jpg" alt="">
+                             <img src="<%=blogs2.getImage()%>" alt="" style="width: 290px;height: 200px; object-fit: cover">
                          </div>
                          <div class="blog__item__text">
                              <ul>
-                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                 <li><i class="fa fa-comment-o"></i> 5</li>
+                                 <li><i class="fa fa-calendar-o"></i> <%=blogs2.getCreateDate()%></li>
                              </ul>
-                             <h5><a href="blog-details2.html">Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?</a></h5>
-                             <p>Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe cổ xưa ...</p>
+                             <h5><a href="blog-details.jsp?id=<%=blogs2.getBlogId()%>"><%=blogs2.getBlogName()%></a></h5>
+                             <p><%=blogs2.getDescription()%></p>
                          </div>
                      </div>
                  </div>
-                 <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="blog__item">
-                         <div class="blog__item__pic">
-                             <img src="img/blog/blog-2.jpg" alt="">
-                         </div>
-                         <div class="blog__item__text">
-                             <ul>
-                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                 <li><i class="fa fa-comment-o"></i> 5</li>
-                             </ul>
-                             <h5><a href="blog-details.jsp">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</a></h5>
-                             <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-lg-4 col-md-4 col-sm-6">
-                     <div class="blog__item">
-                         <div class="blog__item__pic">
-                             <img src="img/blog/blog-3.jpg" alt="">
-                         </div>
-                         <div class="blog__item__text">
-                             <ul>
-                                 <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
-                                 <li><i class="fa fa-comment-o"></i> 5</li>
-                             </ul>
-                             <h5><a href="blog-details1.html">Phải làm sao khi chó bị đau chân và đi khập khiễng ?</a></h5>
-                             <p>Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ...</p>
-                         </div>
-                     </div>
-                 </div>
+                 <% }%>
              </div>
          </div>
      </section>

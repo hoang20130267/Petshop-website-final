@@ -294,7 +294,7 @@
                                 %>
                                 <a href="blog-details.jsp?id=<%=b.getBlogId()%>" class="blog__sidebar__recent__item" style="    display: flex !important;">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="<%=b.getImage()%>" alt="" style="object-fit: cover;height: 70px;width: 250px">
+                                        <img src="<%=b.getImage()%>" alt="" style="object-fit: cover;height: 60px;width: 180px">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
                                         <h6><%=b.getBlogName()%></h6>
@@ -314,11 +314,11 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="blog__item">
                                 <div class="blog__item__pic">
-                                    <img src="<%=b.getImage()%>" alt="">
+                                    <img src="<%=b.getImage()%>" alt="" style="width: 290px;height: 225px;object-fit: cover;">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i><%=b.getCreateDate()%></li>
+                                        <li><i class="fa fa-calendar-o"></i> <%=b.getCreateDate()%></li>
                                     </ul>
                                     <h5><a href="blog-details.jsp?id=<%=b.getBlogId()%>"><%=b.getBlogName()%></a></h5>
                                     <p><%=b.getDescription()%></p>

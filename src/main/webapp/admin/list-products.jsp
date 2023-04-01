@@ -206,7 +206,7 @@
             <div class="col-md-3">
               <div class="white_card position-relative mb_20">
                 <div class="card-body">
-                  <img  src="<%=p.getImage()%>"
+                  <img  src="<%=p.getImage()%>" style="height: 150px; width: 150px; object-fit: cover"
                     class="d-block mx-auto my-4"
                     height="150"
                   />

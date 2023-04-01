@@ -1,6 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.OrderService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -242,19 +246,19 @@
                       </form>
                     </div>
                   </div>
-                  <div class="col-auto scrollbar overflow-hidden-y flex-grow-1">
-                    <div class="btn-group position-static" role="group">
-                      <div class="btn-group position-static text-nowrap"><button class="btn btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> Tỉnh thành<svg class="svg-inline--fa fa-angle-down ms-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"></path></svg><!-- <span class="fas fa-angle-down ms-2"></span> Font Awesome fontawesome.com --></button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">TP.HCM</a></li>
-                          <li><a class="dropdown-item" href="#">Hà nội</a></li>
-                          <li><a class="dropdown-item" href="#">Tỉnh thành khác</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+<%--                  <div class="col-auto scrollbar overflow-hidden-y flex-grow-1">--%>
+<%--                    <div class="btn-group position-static" role="group">--%>
+<%--                      <div class="btn-group position-static text-nowrap"><button class="btn btn-phoenix-secondary px-7 flex-shrink-0" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"> Tỉnh thành<svg class="svg-inline--fa fa-angle-down ms-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"></path></svg><!-- <span class="fas fa-angle-down ms-2"></span> Font Awesome fontawesome.com --></button>--%>
+<%--                        <ul class="dropdown-menu">--%>
+<%--                          <li><a class="dropdown-item" href="#">TP.HCM</a></li>--%>
+<%--                          <li><a class="dropdown-item" href="#">Hà nội</a></li>--%>
+<%--                          <li><a class="dropdown-item" href="#">Tỉnh thành khác</a></li>--%>
+<%--                        </ul>--%>
+<%--                      </div>--%>
+<%--                    </div>--%>
+<%--                  </div>--%>
                   <div class="col-auto">
-                      <button class="btn btn-primary"><svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <span class="fas fa-plus me-2"></span> Font Awesome fontawesome.com -->Thêm người dùng</button></div>
+                      <button href="add-user.jsp" class="btn btn-primary"><svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <span class="fas fa-plus me-2"></span> Font Awesome fontawesome.com -->Thêm người dùng</button></div>
                 </div>
               </div>
               <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
@@ -271,9 +275,11 @@
                         <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Sửa xóa</th>
                       </tr>
                     </thead>
+                      <%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
                       <%
                           List<CustomerUser> listAccount = new CustomerUserDAO().listUser();
                             for(CustomerUser c : listAccount) {
+                                List<Orders> od =OrderService.getInstance().getOrdersByUser(c.getId());
                       %>
                     <tbody class="list" id="table-latest-review-body"><tr class="hover-actions-trigger btn-reveal-trigger position-static">
                         <td class="fs--1 align-middle ps-0 py-3">
@@ -285,8 +291,8 @@
                             <p class="mb-0 ms-3 text-1100 fw-bold"><%=c.getUsername()%></p>
                           </a></td>
                         <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com"><%=c.getEmail()%></a></td>
-                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center"><%=c.getQuantity()%></td>
-                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=c.getPrice()%>đ</td>
+                        <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center"><%=od.size()%></td>
+                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=format.format(OrderService.getInstance().getPriceOrder(od))%>đ</td>
                         <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
                         <td class="last-order align-middle white-space-nowrap text-700 text-end">
                             <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>

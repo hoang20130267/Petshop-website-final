@@ -1,8 +1,11 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.CommentService" %>
-<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -213,8 +216,9 @@
                             <h5 class="m-b-10">Dashboard sale</h5>
                         </div> -->
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item">Quản lý bình luận</li>
-                            <li class="breadcrumb-item">Bình luận</li>
+                            <li class="breadcrumb-item">Tài khoản</li>
+                            <li class="breadcrumb-item">Admin</li>
+                            <li class="breadcrumb-item">Danh sách admin</li>
                         </ul>
                     </div>
                 </div>
@@ -241,6 +245,8 @@
 <%--                                <div class="btn-group position-static" role="group">--%>
 <%--                                </div>--%>
 <%--                            </div>--%>
+<%--                            <div class="col-auto">--%>
+<%--                                <button class="btn btn-primary"><svg class="svg-inline--fa fa-plus me-2" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path></svg><!-- <span class="fas fa-plus me-2"></span> Font Awesome fontawesome.com -->Thêm admin</button></div>--%>
 <%--                        </div>--%>
 <%--                    </div>--%>
                     <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
@@ -250,32 +256,38 @@
                                 <tr>
                                     <th class="sort align-middle pe-5" scope="col" data-sort="total-spent" style="width:10%;">ID</th>
                                     <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">Tên sản phẩm</th>
-                                    <th class="sort align-middle " scope="col" data-sort="total-orders" style="width:10%">Người dùng</th>
+                                    <th class="sort align-middle " scope="col" data-sort="total-orders" style="width:10%">ID người dùng</th>
                                     <th class="sort align-middle" scope="col" data-sort="city" style="width:25%;">Bình luận</th>
                                     <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Ngày bình luận</th>
                                     <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Xóa bình luận</th>
                                 </tr>
                                 </thead>
+                                <% List<Comment> list = new CommentService().getComments();
+                                    for (Comment c: list) {
+//                                        CustomerUser cus = UserService.getInstance().getUserDetail(c.getCustomerID());
+                                        Product p = ProductService.getInstance().getProductDetail(c.getProductID());
+                                %>
                                 <tbody class="list" id="table-latest-review-body">
-                                <% List<Comment> listcmt = CommentService.getInstance().getComments();
-                                for (Comment cmt : listcmt) {%>
                                 <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                     <td class="fs--1 align-middle ps-0 py-3">
-                                        <p class="mb-0 text-1100 fw-bold"><%=cmt.getID()%></p>
+                                        <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
+                                        <p class="mb-0 text-1100 fw-bold"><%=c.getID()%></p>
                                     </td>
                                     <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
-                                        <p class="mb-0 text-1100 fw-bold"><%=ProductService.getInstance().getProductDetail(cmt.getProductID()).getProductName()%></p>
+                                        <p class="mb-0 text-1100 fw-bold"><%=p.getProductName()%></p>
                                     </a></td>
-                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href=""><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></a></td>
+                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href=""><%=c.getCustomerID()%></a></td>
+                                    <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href=""><%=c.getDescription()%></a></td>
+                                    <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
 
-                                    <td class="city align-middle white-space-nowrap text-900"><%=cmt.getDescription()%></td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-end"><%=cmt.getCommentDate()%></td>
-                                    <td class="last-order align-middle white-space-nowrap text-700 text-center">
-                                        <a class="btn_2 edit btn btn-primary" href="RemoveCmt?CmtId=<%=cmt.getID()%>" style="background-color: crimson; color: white">Xóa</a>
+                                    <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getCommentDate()%></td>
+                                    <td class="last-seen align-middle white-space-nowrap text-700 text-end">
+                                        <a class="btn_2 edit btn btn-primary" href="RemoveCmt?CmtId=<%=c.getID()%>" style="background-color: crimson; color: white">Xóa</a>
                                     </td>
                                 </tr>
+                                <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
 
-                                    <%}%>
+                                <%  } %>
                                 </tbody>
                             </table>
                         </div>

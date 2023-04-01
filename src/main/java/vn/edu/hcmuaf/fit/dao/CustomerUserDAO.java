@@ -1,12 +1,12 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.CustomerUser;
-import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
 
+
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -138,11 +138,8 @@ public class CustomerUserDAO {
     }
 
     public List<CustomerUser> listUser() {
-        String query = "SELECT u.user_name, u.id,ifu.email, SUM(od.Price) as Price, SUM(od.Quantity) AS Quantity \n" +
-                "FROM user_account u join infor_user ifu on u.id = ifu.id_user \n" +
-                "join orders o on o.CustomerID = ifu.id_user\n" +
-                "join orderdetail od on o.OrderID = od.OrderID\n" +
-                "GROUP BY u.user_name, u.id;\n";
+        String query = "SELECT u.user_name, u.id,ifu.email, ifu.address FROM user_account u join infor_user ifu on u.id = ifu.id_user\n" +
+                "where role=0";
         String FinalQuery = query;
         List<CustomerUser> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(FinalQuery)
                 .mapToBean(CustomerUser.class)
@@ -256,10 +253,31 @@ public class CustomerUserDAO {
             return true;
         });
     }
+
+    public CustomerUser getUserByEmail(String email) {
+        Optional<CustomerUser> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.role, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
+                .bind(0, email)
+                .mapToBean(CustomerUser.class)
+                .findFirst()
+        );
+        return user.orElse(null);
+    }
+
+    public String getIdUserByName(String username) {
+        Optional<String> Statement = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("SELECT ua.id" +
+                                " FROM infor_user i INNER JOIN user_account ua ON i.id_user = ua.id WHERE ua.status = 1 AND ua.user_name=? ")
+                        .bind(0, username)
+                        .mapTo(String.class)
+                        .findFirst()
+        );
+        return Statement.orElse(null);
+    }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
 //        System.out.println(new CustomerUserDAO().listUser());
 //        System.out.println(new CustomerUserDAO().ListAdmin());
-        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        System.out.println(new CustomerUserDAO().getUserDetail("2201"));
+//        new CustomerUserDAO().insertAdmin("chó ngu", "123", "Ngoc Huy", "easfasf", "ầd", "áaf", 1);
     }
 }

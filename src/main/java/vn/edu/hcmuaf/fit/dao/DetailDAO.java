@@ -70,6 +70,7 @@ public class DetailDAO {
                 case "1" -> query += " and pc.ParentID = 1";
                 case "2" -> query += " and pc.ParentID = 2";
                 case "3" -> query += " and pc.ParentID = 3";
+                default -> query+=" and pc.ParentID != \"null\"  ";
             }
         }
         String finalquery = query;
@@ -260,10 +261,5 @@ public class DetailDAO {
                 "WHERE c.ParentID IS NOT NULL AND ParentID=3").mapToBean(Detail.class).stream().collect(Collectors.toList()));
 
     }
-    public static void main(String[] args) {
-        new DetailDAO();
-        System.out.println(new DetailDAO().getCateProduct("3001"));
-    }
-
 
 }

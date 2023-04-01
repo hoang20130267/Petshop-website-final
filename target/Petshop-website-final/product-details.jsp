@@ -540,7 +540,7 @@
                     </div>
                     <div class="product__item__text">
                         <h6><a href="product-details.jsp?id=<%=p.getProductId()%>"><%=p.getProductName()%></a></h6>
-                        <h5><%=p.getPrice()%></h5>
+                        <h5><%=format.format(p.getPrice())%>đ</h5>
                     </div>
                 </div>
             </div>
@@ -606,7 +606,6 @@
                     },
                     success: function (data) {
                         $(".header__second__cart--notice").each(function () {
-                            $(this).text(data)
                             const quantity2 = $(this).text();
                             $(this).text(parseInt(quantity2)+ parseInt(quantity))
                         })

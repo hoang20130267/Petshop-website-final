@@ -275,10 +275,6 @@
                                 </h5> -->
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0">
-                                    Xóa dữ liệu
-                                </button
-                                >
                                 <%if (request.getParameter("pid") != null) {%>
                                 <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
                                     Sửa phụ kiện
@@ -310,7 +306,7 @@
                                 <div class="mb-6">
                                     <h4 class="mb-3">Giới thiệu phụ kiện</h4>
                                     <textarea name="description" rows="20" cols="10" id="editor" required>
-                          <%=(p != null) ? p.getDescription() : ""%>
+                          <%=(p != null) ? p.getDital() : ""%>
                       </textarea>
                                     <script>
                                         CKEDITOR.replace('editor');
@@ -476,9 +472,9 @@
                                                                 <h5>Giảm bao nhiêu?(%)</h5>
                                                             </div>
                                                             <input name="PromotionalPrice" id="PromotionalPrice"
-                                                                   value="<%=(p != null) ? p.getPromotionalPrice() : ""%>"
+                                                                   value="<%=(p != null) ? p.getPromotionalPrice() : "0"%>"
                                                                    class="form-control mb-3" type="text"
-                                                                   placeholder="Ví dụ: 10" required/>
+                                                                   placeholder="Ví dụ: 10"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -682,7 +678,7 @@
                 name: name,
                 price: price,
                 image: imageLink,
-                descripsion: descripsion,
+                description: descripsion,
                 detail: detail,
                 status: status,
                 mausac: mausac,

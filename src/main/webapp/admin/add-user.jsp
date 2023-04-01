@@ -222,7 +222,7 @@
 					</div>
 					<div class="form-group col-md-6">
 						<label class="form-label" for="inputEmail4">Họ và tên</label>
-						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" <%=(users != null) ? users.getName() : ""%>>
+						<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" value="<%=(users != null) ? users.getName() : ""%>">
 					</div>
 
 				</div>
