@@ -22,10 +22,14 @@ public class SignUpService {
         return new CustomerUserDAO().checkUser(username);
     }
 
+
     public void insertUser(String userName, String passMaHoa, String pass, String fullName, String email, String phone){
         new SignUpDAO().insertUser(userName,passMaHoa,pass,fullName,email,phone);
     }
 
-    public static void main(String[] args) {
+
+    public boolean checkEmail(String email) {
+        return new SignUpDAO().checkMail(email);
     }
+
 }
