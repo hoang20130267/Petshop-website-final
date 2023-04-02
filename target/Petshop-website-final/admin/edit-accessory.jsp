@@ -3,6 +3,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +88,25 @@
         }
     </style>
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("product")) {
+                if (role.getPermission() == 1 || ((role.getPermission() == 2 && request.getParameter("id") != null)))
+                    check = true;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!" );
+</script>
+<%    } else {
+%>
 <body class="">
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -371,23 +391,30 @@
                                                 <div class="row">
                                                     <div class="col-12 col-sm-6 col-xl-12">
                                                         <div class="mb-4 border-dashed-bottom pb-4">
-                                                            <%List<Detail> listCate = DetailService.getInstance().listCateAccessory();%>
+                                                            <%
+                                                                List<Detail> listCate = DetailService.getInstance().listCateAccessory();%>
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Danh mục con</h5>
                                                             </div>
                                                             <select class="form-select mb-3" aria-label="category"
                                                                     id="cateChild" name="cateChild">
-                                                                <%if (p != null) {
-                                                                        for (Detail cate : listCate) {%>
-                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                        </option>
-                                                                        <%}
-                                                                }else {
-                                                                    for (Detail cate : listCate) {%>
-                                                                        <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
-                                                                        </option>
-                                                                    <%}
-                                                                }%>
+                                                                <%
+                                                                    if (p != null) {
+                                                                        for (Detail cate : listCate) {
+                                                                %>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%
+                                                                    }
+                                                                } else {
+                                                                    for (Detail cate : listCate) {
+                                                                %>
+                                                                <option value="<%=cate.getCatID()%>"><%=cate.getCatName()%>
+                                                                </option>
+                                                                <%
+                                                                        }
+                                                                    }
+                                                                %>
 
                                                             </select>
 
@@ -490,7 +517,10 @@
         </div>
     </div>
 </div>
-
+<%
+        }
+    }
+%>
 <!-- Required Js -->
 <script src="assets/js/vendor-all.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>

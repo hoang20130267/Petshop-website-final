@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
@@ -316,7 +316,7 @@ Created by IntelliJ IDEA.
 <!-- Humberger End -->
 
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
-<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+<% UserAccount user = (UserAccount) request.getSession().getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
     }

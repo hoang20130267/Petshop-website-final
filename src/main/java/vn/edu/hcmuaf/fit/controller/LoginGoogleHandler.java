@@ -65,7 +65,7 @@ public class LoginGoogleHandler extends HttpServlet {
             String accessToken = getToken(code);
             UserGoogle userGoogle = getUserInfo(accessToken);
        /*     System.out.println(userGoogle);*/
-            CustomerUser user = UserService.getInstance().getUserByEmail(userGoogle.getEmail());
+            UserAccount user = UserService.getInstance().getUserByEmail(userGoogle.getEmail());
             if (user != null) {
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("cart", new Cart());

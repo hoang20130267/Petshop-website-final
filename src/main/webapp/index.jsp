@@ -143,7 +143,7 @@
         }
     </style>
     </head>
-    <% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
+    <% UserAccount user = (UserAccount) request.getSession().getAttribute("user"); %>
     <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 
 <body>

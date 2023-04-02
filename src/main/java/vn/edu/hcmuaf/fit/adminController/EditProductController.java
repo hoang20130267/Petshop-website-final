@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -38,7 +38,7 @@ public class EditProductController extends HttpServlet {
         String Promotional = request.getParameter("Promotional");
         String PromotionalPrice = request.getParameter("PromotionalPrice");
 
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
+        UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {

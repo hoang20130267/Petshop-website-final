@@ -236,6 +236,15 @@ public class BlogDAO {
             return true;
         });
     }
+
+    //kiem tra danh muc co chua blog nao khong
+    public boolean isCateContainBl(String cateId) {
+        List<String> idCates = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("select bc.CateId from blogcategory c inner join blog_from_cate bc on c.CatId = bc.CateId where c.CatId=?")
+                        .bind(0, cateId).mapTo(String.class).stream().collect(Collectors.toList()));
+        if (idCates.contains(cateId)) return true;
+        else return false;
+    }
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().getListBlogs());
 //        System.out.println(new BlogDAO().getContent("101"));

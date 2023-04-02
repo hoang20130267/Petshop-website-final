@@ -1,5 +1,5 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Comment" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -22,7 +22,7 @@
 
               <span><small class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small class="font-weight-bold" style="padding-left: 10px; font-size: 14px"><%=cmt.getDescription()%></small></span>
             </div>
-            <% CustomerUser user1 = (CustomerUser) request.getSession().getAttribute("user");
+            <% UserAccount user1 = (UserAccount) request.getSession().getAttribute("user");
               if (user1 != null) {
                 if (user1.getId().equals(cmt.getCustomerID())) {
             %>

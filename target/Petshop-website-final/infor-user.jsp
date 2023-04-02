@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <head lang="zxx">
@@ -322,7 +322,7 @@
 </section>
 <!-- Breadcrumb Section End -->
 <%
-    CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
     }

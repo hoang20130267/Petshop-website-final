@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.ProductDAO" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
@@ -135,7 +135,7 @@
     </style>
 </head>
 <%
-    CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
 %>
 <body>
 <!-- Floatting -->

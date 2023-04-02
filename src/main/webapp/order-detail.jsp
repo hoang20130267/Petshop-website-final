@@ -4,7 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %><%--
   Created by IntelliJ IDEA.
   User: Nguyen Ngoc Huy
   Date: 1/2/2023
@@ -314,7 +314,7 @@
   List<OrderDetail> listOd = OrderService.getInstance().getOrderDetailsById(orderId);
   Orders order = OrderService.getInstance().getOrderByIdOrder(orderId);
 %>
-<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+<% UserAccount user = (UserAccount) request.getSession().getAttribute("user");
   if (user == null) {
     response.sendRedirect("login.jsp");
   }%>
