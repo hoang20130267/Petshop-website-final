@@ -392,11 +392,21 @@ public class ProductDAO {
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
 
+    //kiem tra san pham co trong don hang nao khong
     public boolean isProductInOrder(String productId) {
         List<String> idProduct = JDBIConnector.get().withHandle(handle ->
                 handle.createQuery("select ProductID from orderdetail where ProductID = ?")
                         .bind(0, productId).mapTo(String.class).stream().collect(Collectors.toList()));
         if (idProduct.contains(productId)) return true;
+        else return false;
+    }
+
+    //kiem tra danh muc co chua san pham nao khong
+    public boolean isCateContainPd(String cateId) {
+        List<String> idCates = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("select pc.cate_id from product_category c inner join product_from_cate pc on c.CatId = pc.cate_id where c.CatId=?")
+                        .bind(0, cateId).mapTo(String.class).stream().collect(Collectors.toList()));
+        if (idCates.contains(cateId)) return true;
         else return false;
     }
 

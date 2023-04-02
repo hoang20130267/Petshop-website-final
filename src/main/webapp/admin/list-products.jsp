@@ -47,7 +47,25 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link"/>
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("product")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -79,22 +97,6 @@
 </div>
 <!-- [ Mobile header ] End -->
 
-<%
-    if (request.getSession().getAttribute("admin") == null) {
-        response.sendRedirect("/login.jsp");
-    } else {
-        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
-        boolean check = false;
-        for (AdminRole role : admin.getRole()) {
-            if (role.getTableName().equals("product")) {
-                check = true;
-                break;
-            }
-        }
-        if (!check) {
-            response.sendRedirect("index.jsp");
-        } else {
-%>
 
 <!-- [ navigation menu ] start -->
 <nav class="pc-sidebar">

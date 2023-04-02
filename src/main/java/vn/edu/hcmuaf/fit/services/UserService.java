@@ -33,4 +33,8 @@ public class UserService {
     public void UpdateUserInfo(String id, String name, String email, Object o, Object o1, Object o2) {
 
     }
+
+    public boolean isUserInOrder(String userId){
+        return new CustomerUserDAO().isUserInOrder(userId);
+    }
 }

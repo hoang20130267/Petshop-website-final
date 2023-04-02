@@ -66,4 +66,8 @@ public class BlogService {
         BlogDAO dao = new BlogDAO();
         dao.deleteBlog(id);
     }
+
+    public boolean isCateContainBl(String cateId){
+        return new BlogDAO().isCateContainBl(cateId);
+    }
 }

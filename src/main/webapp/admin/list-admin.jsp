@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +71,25 @@
             href="bonus/css/skin.min.css"
     />
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("adminAccount")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -276,8 +296,21 @@
 
                                     <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
                                     <td class="last-seen align-middle white-space-nowrap text-700 text-end">
-                                        <a class="btn_2 edit btn btn-primary" href="add-admin.jsp?idUser=<%=c.getId()%>" style="color: white">Sửa</a>
+                                        <%
+                                            for (AdminRole role : admin.getRole()) {
+                                                if (role.getTableName().equals("adminAccount") && role.getPermission() == 2) {
+                                        %>
+                                        <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                                        <%
+                                            }
+                                            if (role.getTableName().equals("adminAccount") && role.getPermission() == 3) {
+                                                if (!UserService.getInstance().isUserInOrder(c.getId())) { %>
                                         <a class="btn_2 edit btn btn-primary" href="delete-user?idUser=<%=c.getId()%>" style="background-color: crimson; color: white">Xóa</a>
+                                        <%
+                                                    }
+                                                }
+                                            }
+                                        %>
                                     </td>
                                 </tr>
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
@@ -301,7 +334,10 @@
     </div>
     </main>
 </div>
-
+<%
+        }
+    }
+%>
 <!-- Required Js -->
 <script src="assets/js/vendor-all.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>

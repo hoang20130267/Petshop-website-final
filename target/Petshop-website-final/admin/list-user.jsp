@@ -5,6 +5,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +75,25 @@
       href="bonus/css/skin.min.css"
     />
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("userAccount")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -295,8 +315,23 @@
                         <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=format.format(OrderService.getInstance().getPriceOrder(od))%>đ</td>
                         <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=c.getAddress()%></td>
                         <td class="last-order align-middle white-space-nowrap text-700 text-end">
+                            <%
+                                for (AdminRole role : admin.getRole()) {
+                                    if (role.getTableName().equals("userAccount") && role.getPermission() == 2) {
+                            %>
                             <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                            <%
+                                }
+                                if (role.getTableName().equals("userAccount") && role.getPermission() == 3) {
+                                    if (!UserService.getInstance().isUserInOrder(c.getId())) { %>
                             <a class="btn_2 edit btn btn-primary" href="delete-user?idUser=<%=c.getId()%>" style="background-color: crimson; color: white">Xóa</a>
+                            <%
+                                        }
+                                    }
+                                }
+                            %>
+
+
                         </td>
                       </tr>
                         </tr>
@@ -320,7 +355,10 @@
         </div>
       </main>
 </div>
-
+    <%
+            }
+        }
+    %>
     <!-- Required Js -->
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>

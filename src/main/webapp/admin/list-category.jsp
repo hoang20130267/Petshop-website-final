@@ -10,6 +10,9 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +83,25 @@
             href="bonus/css/skin.min.css"
     />
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("productCategory")||role.getTableName().equals("blogCategory")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
@@ -338,8 +359,22 @@
                                         </td>
                                         <%}%>
                                         <td class="city align-middle white-space-nowrap text-900 ps-7">
+                                            <%
+                                                for (AdminRole role : admin.getRole()) {
+                                                    if (role.getTableName().equals("productCategory") && role.getPermission() == 2) {
+                                            %>
                                             <a href="add-category-product.jsp?cid=<%=cate.getCatID()%>" class="btn btn-primary ">Sửa</a>
+                                            <%
+                                                }
+                                                if (role.getTableName().equals("userAccount") && role.getPermission() == 3) {
+                                                    if (!ProductService.getInstance().isCateContainPd(cate.getCatID())) { %>
                                             <a href="RemoveCateProduct?cid=<%=cate.getCatID()%>" class="btn btn-primary " style="background-color:crimson;">Xóa</a>
+
+                                            <%
+                                                        }
+                                                    }
+                                                }
+                                            %>
                                         </td>
                                     </tr>
                                     <%}%>
@@ -426,9 +461,24 @@
                                         </td>
                                         <%}%>
                                         <td class="city align-middle white-space-nowrap text-900 ps-7">
+                                            <%
+                                                for (AdminRole role : admin.getRole()) {
+                                                    if (role.getTableName().equals("productCategory") && role.getPermission() == 2) {
+                                            %>
                                             <a href="add-category-blog.jsp?cbid=<%=cate.getCatID()%>" class="btn btn-primary ">Sửa</a>
+
+                                            <%
+                                                }
+                                                if (role.getTableName().equals("userAccount") && role.getPermission() == 3) {
+                                                    if (!BlogService.getInstance().isCateContainBl(cate.getCatID())) { %>
                                             <a href="RemoveCateBlog?cbid=<%=cate.getCatID()%>" class="btn btn-primary "
                                                style="background-color:crimson;">Xóa</a>
+                                            <%
+                                                        }
+                                                    }
+                                                }
+                                            %>
+
                                         </td>
                                     </tr>
                                     <%}%>
@@ -445,7 +495,10 @@
     </div>
     </main>
 </div>
-
+<%
+        }
+    }
+%>
 <!-- Required Js -->
 <script src="assets/js/vendor-all.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>

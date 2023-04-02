@@ -273,6 +273,15 @@ public class CustomerUserDAO {
         );
         return Statement.orElse(null);
     }
+
+    //kiem tra tai khoan co trong don hang nao khong
+    public boolean isUserInOrder(String userId) {
+        List<String> idUsers = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("select CustomerID from orders where CustomerID=?")
+                        .bind(0, userId).mapTo(String.class).stream().collect(Collectors.toList()));
+        if (idUsers.contains(userId)) return true;
+        else return false;
+    }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
 //        System.out.println(new CustomerUserDAO().listUser());
