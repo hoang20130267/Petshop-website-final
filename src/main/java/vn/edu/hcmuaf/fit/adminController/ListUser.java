@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
 
 import javax.servlet.*;
@@ -16,7 +16,7 @@ public class ListUser extends HttpServlet {
     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<CustomerUser> list = new CustomerUserDAO().listUser();
+        List<UserAccount> list = new CustomerUserDAO().listUser();
         request.setAttribute("list", list);
         request.getRequestDispatcher("list-user.jsp").forward(request,response);
     }

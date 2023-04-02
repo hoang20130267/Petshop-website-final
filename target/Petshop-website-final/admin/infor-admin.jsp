@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %><%--
   Created by IntelliJ IDEA.
   User: ADMIN
   Date: 15/12/2022
@@ -253,7 +253,7 @@
 <!-- [ navigation menu ] end -->
 <!-- [ Header ] start -->
 <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
-<% CustomerUser user = (CustomerUser) session.getAttribute("admin"); %>
+<% UserAccount user = (UserAccount) session.getAttribute("admin"); %>
 <div class="pc-container">
   <div class="pcoded-content">
     <!-- [ breadcrumb ] start -->

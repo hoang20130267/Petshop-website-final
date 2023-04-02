@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Cart" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
@@ -247,7 +247,7 @@
 </div>
 <!-- Humberger End -->
 <%
-    CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
     }

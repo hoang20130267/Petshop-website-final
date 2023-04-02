@@ -1,8 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
-import vn.edu.hcmuaf.fit.services.SignUpService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -34,7 +33,7 @@ public class UpdateInforAdminController extends HttpServlet {
         String oldImg = request.getParameter("oldImg");
         System.out.println(image);
 
-        CustomerUser user = (CustomerUser) request.getSession().getAttribute("admin");
+        UserAccount user = (UserAccount) request.getSession().getAttribute("admin");
         if (image != "") {
             if (newpass.equals(newpassconfirm)) {
                 new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass, image);

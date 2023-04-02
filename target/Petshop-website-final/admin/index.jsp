@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +32,15 @@
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
 
 </head>
-<% CustomerUser user = (CustomerUser) session.getAttribute("user"); %>
+<% UserAccount user = (UserAccount) session.getAttribute("user"); %>
+<%
+    //----------------------Kiểm tra thử đăng nhập hay chưa--------------------//
+    if (request.getSession().getAttribute("admin") == null) {
+        // Sendredirect tới login
+        response.sendRedirect("login.jsp");
 
+    }
+%>
 <body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -162,6 +169,7 @@
 	<!-- [ Header ] start -->
     <jsp:include page="layout-admin/header-admin.jsp"></jsp:include>
 	<!-- [ Header ] end -->
+
 
 <!-- [ Main Content ] start -->
 <div class="pc-container">

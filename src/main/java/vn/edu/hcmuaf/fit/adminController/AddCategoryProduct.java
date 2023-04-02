@@ -1,7 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
-import vn.edu.hcmuaf.fit.beans.Detail;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.services.DetailService;
 
 import javax.servlet.*;
@@ -24,7 +23,7 @@ public class AddCategoryProduct extends HttpServlet {
         String cateparent=request.getParameter("cateparent");
         String status = request.getParameter("status");
         String cid = request.getParameter("cid");
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
+        UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
 
         if(cid==""){
             DetailService.getInstance().insertCateProduct(AdminUser.getId(),CateName,cateparent);

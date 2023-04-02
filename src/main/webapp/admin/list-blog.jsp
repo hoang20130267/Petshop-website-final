@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Blogs" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +99,25 @@
       }
     </style>
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("blog")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -265,8 +285,20 @@
                             <h5><a href="" style="font-size: 22px;font-weight: 600;color: #0b5ed7"><%=b.getBlogName()%>
                             </a></h5>
                             <p><%=b.getDescription()%></p>
+                            <%
+                                for (AdminRole role : admin.getRole()) {
+                                    if (role.getTableName().equals("blog") && role.getPermission() == 2) {
+                            %>
                             <a href="add-blog.jsp?id=<%=b.getBlogId()%>" class="blog_btn">Chỉnh sửa  <i data-feather="arrow-right"></i></a>
+                            <%
+                                }
+                                if (role.getTableName().equals("product") && role.getPermission() == 3) {
+                                     %>
                             <a href="DeleteBlog?id=<%=b.getBlogId()%>" class="blog_btn">Xóa  <i data-feather="arrow-right"></i></a>
+                            <%
+                                        }
+                                }
+                            %>
                         </div>
                     </div>
                 </div>
@@ -277,7 +309,10 @@
           </div>
         </div>
 </div>
-
+    <%
+            }
+        }
+    %>
     <!-- Required Js -->
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>

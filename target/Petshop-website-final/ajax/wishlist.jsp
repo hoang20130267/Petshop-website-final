@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Wishlist" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %><%--
@@ -9,7 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");%>
+<%UserAccount user = (UserAccount) request.getSession().getAttribute("user");%>
 <%NumberFormat formatter = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <div class="container">
     <div class="row">

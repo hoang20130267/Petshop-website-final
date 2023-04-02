@@ -2,7 +2,6 @@ package vn.edu.hcmuaf.fit.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.jdbi.v3.core.Jdbi;
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.beans.Product;
 
 import java.sql.SQLException;

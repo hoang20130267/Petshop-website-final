@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.beans.Wishlist;
 import vn.edu.hcmuaf.fit.services.LoginService;
 
@@ -24,9 +24,10 @@ public class LoginController extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
 
-        CustomerUser account = LoginService.getInstance().getAccountCustomer(username, pass);
+        UserAccount account = LoginService.getInstance().getAccountCustomer(username, pass);
         if (account != null) {
-            if(account.isRole()){
+            if(account.isAdmin()){
+                account.setRole(LoginService.getInstance().getListRoleAdmin(account.getId()));
                 HttpSession session = request.getSession();
                 session.setAttribute("admin", account);
                 response.sendRedirect("admin/index.jsp");
@@ -41,5 +42,9 @@ public class LoginController extends HttpServlet {
             request.setAttribute("loginStatus", LoginService.getInstance().getStatus());
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }

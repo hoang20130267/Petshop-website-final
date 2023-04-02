@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %><%--
 <%--
   Created by IntelliJ IDEA.
   User: ADMIN
@@ -7,7 +7,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("admin"); %>
+<% UserAccount user = (UserAccount) request.getSession().getAttribute("admin"); %>
+<%
+    //----------------------Kiểm tra thử đăng nhập hay chưa--------------------//
+    if (request.getSession().getAttribute("admin") == null) {
+        // Sendredirect tới login
+        response.sendRedirect("login.jsp");
+
+    }
+%>
 <header class="pc-header ">
     <div class="header-wrapper">
         <div class="page-header-title">
