@@ -1,8 +1,9 @@
 package vn.edu.hcmuaf.fit.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class CustomerUser implements Serializable {
+public class UserAccount implements Serializable {
     private String id;
     private String username;
     private String passMaHoa;
@@ -13,16 +14,18 @@ public class CustomerUser implements Serializable {
     private String phone;
     private String address;
     private String avt;
-    private boolean role;
+    private boolean isAdmin;
+
+    private List<AdminRole> role;
 
     private int price;
 
     private int quantity;
 
-    public CustomerUser() {
+    public UserAccount() {
     }
 
-    public CustomerUser(String id, String username, String passMaHoa, String pass, boolean status, String name, String email, String phone, String address, String avt, boolean role, int price, int quantity) {
+    public UserAccount(String id, String username, String passMaHoa, String pass, boolean status, String name, String email, String phone, String address, String avt, boolean isAdmin,List<AdminRole> role, int price, int quantity) {
         this.id = id;
         this.username = username;
         this.passMaHoa = passMaHoa;
@@ -33,16 +36,25 @@ public class CustomerUser implements Serializable {
         this.phone = phone;
         this.address = address;
         this.avt = avt;
-        this.role = role;
+        this.isAdmin = isAdmin;
+        this.role =role;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public boolean isRole() {
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public List<AdminRole> getRole() {
         return role;
     }
 
-    public void setRole(boolean role) {
+    public void setRole(List<AdminRole> role) {
         this.role = role;
     }
 
@@ -126,6 +138,7 @@ public class CustomerUser implements Serializable {
         this.passMaHoa = passMaHoa;
     }
 
+
     public int getPrice() {
         return price;
     }
@@ -155,7 +168,7 @@ public class CustomerUser implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", avt='" + avt + '\'' +
-                ", role=" + role +
+                ", role=" + isAdmin +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';

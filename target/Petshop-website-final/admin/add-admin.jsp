@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -212,7 +212,7 @@
             <% } %>
             <% String error = (String) request.getAttribute("addAdminerror"); %>
             <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-            <% CustomerUser users = null;
+            <% UserAccount users = null;
             if(request.getParameter("idUser") != null)
                     users = UserService.getInstance().getUserDetail(request.getParameter("idUser"));
             %>

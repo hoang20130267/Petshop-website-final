@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -257,8 +257,8 @@
                                     <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Sửa xóa</th>
                                 </tr>
                                 </thead>
-                                <% List<CustomerUser> list = new CustomerUserDAO().ListAdmin();
-                                    for ( CustomerUser c: list) {
+                                <% List<UserAccount> list = new CustomerUserDAO().ListAdmin();
+                                    for ( UserAccount c: list) {
                                 %>
                                 <tbody class="list" id="table-latest-review-body">
                                 <tr class="hover-actions-trigger btn-reveal-trigger position-static">

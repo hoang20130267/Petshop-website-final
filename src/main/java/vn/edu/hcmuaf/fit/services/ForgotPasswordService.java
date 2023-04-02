@@ -1,9 +1,6 @@
 package vn.edu.hcmuaf.fit.services;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
-
-import java.util.Random;
 
 public class ForgotPasswordService {
     private static ForgotPasswordService forgotPassWordService;

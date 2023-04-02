@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.CustomerUserDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.OrderService" %>
@@ -277,8 +277,8 @@
                     </thead>
                       <%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
                       <%
-                          List<CustomerUser> listAccount = new CustomerUserDAO().listUser();
-                            for(CustomerUser c : listAccount) {
+                          List<UserAccount> listAccount = new CustomerUserDAO().listUser();
+                            for(UserAccount c : listAccount) {
                                 List<Orders> od =OrderService.getInstance().getOrdersByUser(c.getId());
                       %>
                     <tbody class="list" id="table-latest-review-body"><tr class="hover-actions-trigger btn-reveal-trigger position-static">

@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Comment;
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CommentDAO;
 
 import javax.servlet.*;
@@ -18,7 +18,7 @@ public class CommentController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        CustomerUser cusID = (CustomerUser) request.getSession().getAttribute("user");
+        UserAccount cusID = (UserAccount) request.getSession().getAttribute("user");
         String desc = request.getParameter("desc");
         System.out.println(desc);
         int status = 1;

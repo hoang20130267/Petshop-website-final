@@ -90,8 +90,8 @@ public class ProductDAO {
         });
     }
 
-    public static void insertProduct(String idAdmin,String name, String image, String price, String description,
-                                     String detail,String quantity, String giong, String mausac,
+    public static void insertProduct(String idAdmin, String name, String image, String price, String description,
+                                     String detail, String quantity, String giong, String mausac,
                                      String cannang, String cateParent, String cateChild, String status, String promotional,
                                      String PromotionalPrice) {
         String id = taoIDProduct();
@@ -101,7 +101,7 @@ public class ProductDAO {
                             "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/" + image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
@@ -109,26 +109,26 @@ public class ProductDAO {
                     .bind(7, idAdmin)
                     .bind(8, date)
                     .bind(9, giong)
-                    .bind(10,mausac)
-                    .bind(11,cannang)
-                    .bind(12,Integer.parseInt(status))
-                    .bind(13,Double.parseDouble(PromotionalPrice))
-                    .bind(14,Integer.parseInt(promotional))
+                    .bind(10, mausac)
+                    .bind(11, cannang)
+                    .bind(12, Integer.parseInt(status))
+                    .bind(13, Double.parseDouble(PromotionalPrice))
+                    .bind(14, Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0,id)
-                    .bind(1,cateParent)
+                    .bind(0, id)
+                    .bind(1, cateParent)
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0,id)
-                    .bind(1,cateChild)
+                    .bind(0, id)
+                    .bind(1, cateChild)
                     .execute();
             return true;
         });
     }
 
-    public static void insertAccessory(String idAdmin,String name, String image, String price, String description,
-                                       String detail,String quantity, String mausac,
+    public static void insertAccessory(String idAdmin, String name, String image, String price, String description,
+                                       String detail, String quantity, String mausac,
                                        String cannang, String cateParent, String cateChild, String status, String promotional,
                                        String PromotionalPrice) {
         String id = taoIDProduct();
@@ -138,41 +138,41 @@ public class ProductDAO {
                             "Dital, Quantity, CreateBy, CreateDate, mausac, cannang, `Status`, PromotionalPrice,Promotional) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/" + image)
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
                     .bind(6, quantity)
                     .bind(7, idAdmin)
                     .bind(8, date)
-                    .bind(9,mausac)
-                    .bind(10,cannang)
-                    .bind(11,Integer.parseInt(status))
-                    .bind(12,Double.parseDouble(PromotionalPrice))
-                    .bind(13,Integer.parseInt(promotional))
+                    .bind(9, mausac)
+                    .bind(10, cannang)
+                    .bind(11, Integer.parseInt(status))
+                    .bind(12, Double.parseDouble(PromotionalPrice))
+                    .bind(13, Integer.parseInt(promotional))
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0,id)
-                    .bind(1,cateParent)
+                    .bind(0, id)
+                    .bind(1, cateParent)
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
-                    .bind(0,id)
-                    .bind(1,cateChild)
+                    .bind(0, id)
+                    .bind(1, cateChild)
                     .execute();
             return true;
         });
     }
 
-    public static void updateProduct(String id, String idAdmin,String name, String image, String price, String description,
-                                     String detail,String quantity, String giong, String mausac,
-                                     String cannang,String status, String Promotional, String PromotionalPrice) {
+    public static void updateProduct(String id, String idAdmin, String name, String image, String price, String description,
+                                     String detail, String quantity, String giong, String mausac,
+                                     String cannang, String status, String Promotional, String PromotionalPrice) {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE product SET ProductName=?,`Status`=?,Image=?,Price=?,Quantity=?,Description=?,Dital=?,UpdateBy=?,UpdateDate=?,giong=?,mausac=?,cannang=?,PromotionalPrice=?, Promotional=?\n" +
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/" + image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -180,24 +180,25 @@ public class ProductDAO {
                     .bind(7, idAdmin)
                     .bind(8, date)
                     .bind(9, giong)
-                    .bind(10,mausac)
-                    .bind(11,cannang)
-                    .bind(12,Double.parseDouble(PromotionalPrice))
-                    .bind(13,Integer.parseInt(Promotional))
-                    .bind(14,id)
+                    .bind(10, mausac)
+                    .bind(11, cannang)
+                    .bind(12, Double.parseDouble(PromotionalPrice))
+                    .bind(13, Integer.parseInt(Promotional))
+                    .bind(14, id)
                     .execute();
         });
     }
-    public static void updateAccessory(String id, String idAdmin,String name, String image, String price, String description,
-                                       String detail,String quantity, String mausac,
-                                       String cannang,String status, String Promotional, String PromotionalPrice) {
+
+    public static void updateAccessory(String id, String idAdmin, String name, String image, String price, String description,
+                                       String detail, String quantity, String mausac,
+                                       String cannang, String status, String Promotional, String PromotionalPrice) {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             return handle.createUpdate("UPDATE product SET ProductName=?,`Status`=?,Image=?,Price=?,Quantity=?,Description=?,Dital=?,UpdateBy=?,UpdateDate=?,mausac=?,cannang=?,PromotionalPrice=?, Promotional=?\n" +
                             "WHERE productId=?;\n")
                     .bind(0, name)
                     .bind(1, Integer.parseInt(status))
-                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/"+image)
+                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/" + image)
                     .bind(3, price)
                     .bind(4, quantity)
                     .bind(5, description)
@@ -205,18 +206,18 @@ public class ProductDAO {
                     .bind(7, idAdmin)
                     .bind(8, date)
                     .bind(9, mausac)
-                    .bind(10,cannang)
-                    .bind(11,Double.parseDouble(PromotionalPrice))
-                    .bind(12,Integer.parseInt(Promotional))
-                    .bind(13,id)
+                    .bind(10, cannang)
+                    .bind(11, Double.parseDouble(PromotionalPrice))
+                    .bind(12, Integer.parseInt(Promotional))
+                    .bind(13, id)
                     .execute();
         });
     }
 
-    public List<Product> getFullProduct(String category,String price, String size, String order_by) {
+    public List<Product> getFullProduct(String category, String price, String size, String order_by) {
         String query = "select distinct p.productId,p.ProductName,p.Image,p.Price, p.cannang from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
-        if ( category != null) {
+        if (category != null) {
             if (!category.equals("all")) {
                 query += "AND pfc.cate_id= ? \n";
             }
@@ -252,8 +253,7 @@ public class ProductDAO {
 
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
-        } else
-        {
+        } else {
             list = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery(Finalquery)
 
@@ -264,12 +264,11 @@ public class ProductDAO {
     }
 
 
-
-    public List<Product> getNext9Product(int amount, String category,String price, String size, String order_by) {
+    public List<Product> getNext9Product(int amount, String category, String price, String size, String order_by) {
 
         String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
-        if ( category != null) {
+        if (category != null) {
             if (!category.equals("all")) {
                 query += "AND pfc.cate_id= ? \n";
             }
@@ -305,14 +304,13 @@ public class ProductDAO {
                         .bind(1, amount)
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
-        } else
-        {
+        } else {
             list = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery(Finalquery)
                         .bind(0, amount)
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
-            }
+        }
         return list;
     }
 
@@ -330,7 +328,6 @@ public class ProductDAO {
     }
 
 
-
     public Product getProductDetail(String id) {
         Product detail = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from product where productId = ?")
@@ -339,24 +336,26 @@ public class ProductDAO {
         });
         return detail;
     }
-        public static String taoIDProduct() {
-            String numbers = "0123456789";
-            StringBuilder stringBuilder = new StringBuilder("P");
-            Random rd = new Random();
 
-            for (int i = 0; i < 4; i++) {
-                int index = rd.nextInt(numbers.length());
-                char rdC = numbers.charAt(index);
-                stringBuilder.append(rdC);
-            }
-            List<String> listId = JDBIConnector.get().withHandle(
-                    handle -> handle.createQuery("SELECT productId FROM product")
-                            .mapTo(String.class)
-                            .stream()
-                            .collect(Collectors.toList()));
-            if (listId.contains(stringBuilder.toString())) return taoIDProduct();
-            else return stringBuilder.toString();
+    public static String taoIDProduct() {
+        String numbers = "0123456789";
+        StringBuilder stringBuilder = new StringBuilder("P");
+        Random rd = new Random();
+
+        for (int i = 0; i < 4; i++) {
+            int index = rd.nextInt(numbers.length());
+            char rdC = numbers.charAt(index);
+            stringBuilder.append(rdC);
         }
+        List<String> listId = JDBIConnector.get().withHandle(
+                handle -> handle.createQuery("SELECT productId FROM product")
+                        .mapTo(String.class)
+                        .stream()
+                        .collect(Collectors.toList()));
+        if (listId.contains(stringBuilder.toString())) return taoIDProduct();
+        else return stringBuilder.toString();
+    }
+
     public static String taoIDCate() {
         String numbers = "0123456789";
         StringBuilder stringBuilder = new StringBuilder("D");
@@ -376,7 +375,7 @@ public class ProductDAO {
         else return stringBuilder.toString();
     }
 
-    public List<Product> listProductSale(){
+    public List<Product> listProductSale() {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
@@ -389,8 +388,16 @@ public class ProductDAO {
                         "\tWHERE p1.productId = ?\n" +
                         "\t) AND p.productId != ? and `Status` =1\n" +
                         "ORDER BY pfc.cate_id DESC\n" +
-                        "LIMIT 4;").bind(0,id).bind(1,id)
+                        "LIMIT 4;").bind(0, id).bind(1, id)
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
+    }
+
+    public boolean isProductInOrder(String productId) {
+        List<String> idProduct = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("select ProductID from orderdetail where ProductID = ?")
+                        .bind(0, productId).mapTo(String.class).stream().collect(Collectors.toList()));
+        if (idProduct.contains(productId)) return true;
+        else return false;
     }
 
 }

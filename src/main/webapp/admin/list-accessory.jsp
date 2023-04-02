@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,7 +77,22 @@
       </div>
     </div>
     <!-- [ Mobile header ] End -->
-
+    <%
+        if (request.getSession().getAttribute("admin") == null) {
+            response.sendRedirect("/login.jsp");
+        } else {
+            UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+            boolean check = false;
+            for (AdminRole role : admin.getRole()) {
+                if (role.getTableName().equals("product")) {
+                    check = true;
+                    break;
+                }
+            }
+            if (!check) {
+                response.sendRedirect("index.jsp");
+            } else {
+    %>
     <!-- [ navigation menu ] start -->
     <nav class="pc-sidebar">
       <div class="navbar-wrapper">
@@ -257,8 +275,23 @@
                     </div>
                   </div>
                   <div class="d-grid">
-                      <a class="btn_2" href="edit-accessory.jsp?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
-                      <a class="btn_2" href="delete-accessory?pid=<%=p.getProductId()%>" style="margin-top: 3px; text-align: center;">Xóa</a>
+                      <%
+                          for (AdminRole role : admin.getRole()) {
+                              if (role.getTableName().equals("product") && role.getPermission() == 2) {
+                      %>
+                      <a class="btn_2" href="edit-product.jsp?pid=<%=p.getProductId()%>"
+                         style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
+                      <%
+                          }
+                          if (role.getTableName().equals("product") && role.getPermission() == 3) {
+                              if (!ProductService.getInstance().isProductInOrder(p.getProductId())) { %>
+                      <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>"
+                         style="margin-top: 3px; text-align: center;">Xóa</a>
+                      <%
+                                  }
+                              }
+                          }
+                      %>
                   </div>
                 </div>
               </div>
@@ -271,7 +304,10 @@
         <!-- [ Main Content ] end -->
       </div>
     </div>
-
+    <%
+            }
+        }
+    %>
     <!-- Required Js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
