@@ -549,7 +549,6 @@
         </div>
     </div>
 </section>
-
 <% HttpSession session1 = request.getSession();
     List<String> history = (List<String>) session1.getAttribute("history");
     if (history == null) {
