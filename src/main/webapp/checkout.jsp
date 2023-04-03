@@ -4,7 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -218,7 +218,7 @@
 </div>
 <!-- Humberger End -->
 <%
-    CustomerUser user = (CustomerUser) request.getSession().getAttribute("user");
+    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp");
     }

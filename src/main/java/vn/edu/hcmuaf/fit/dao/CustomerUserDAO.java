@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.Utils;
 
@@ -11,12 +11,12 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class CustomerUserDAO {
-    private List<CustomerUser> users;
+    private List<UserAccount> users;
 
     public CustomerUserDAO(){
         users= JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id")
-                    .mapToBean(CustomerUser.class).stream().collect(Collectors.toList());
+                    .mapToBean(UserAccount.class).stream().collect(Collectors.toList());
         });
     }
 
@@ -40,16 +40,16 @@ public class CustomerUserDAO {
     }
 
     public boolean isExits(String username) {
-        for (CustomerUser user : this.users) {
+        for (UserAccount user : this.users) {
             if (user.getUsername().equals(username))
                 return true;
         }
         return false;
     }
 
-    public CustomerUser checkLogin(String username, String password) {
-        CustomerUser cust = null;
-        for (CustomerUser user : this.users) {
+    public UserAccount checkLogin(String username, String password) {
+        UserAccount cust = null;
+        for (UserAccount user : this.users) {
             if (user.getUsername().equals(username) && Utils.checkPass(user.getPassMaHoa(), Utils.maHoaMK(password))) {
                 cust = user;
                 return cust;
@@ -59,7 +59,7 @@ public class CustomerUserDAO {
     }
 
     public boolean checkStatus(String username) {
-        for (CustomerUser user : this.users) {
+        for (UserAccount user : this.users) {
             if (user.getUsername().equals(username)) {
                 return user.isStatus();
             }
@@ -68,7 +68,7 @@ public class CustomerUserDAO {
     }
 
     public String checkEmailExits(String email) {
-        List<String> id_account = JDBIConnector.get().withHandle(handle -> handle.createQuery("select us.id from user_account us INNER JOIN infor_user iu ON iu.id_user = us.id where us.role = 0 and iu.email =?")
+        List<String> id_account = JDBIConnector.get().withHandle(handle -> handle.createQuery("select us.id from user_account us INNER JOIN infor_user iu ON iu.id_user = us.id where us.isAdmin = 0 and iu.email =?")
                 .bind(0, email)
                 .mapTo(String.class)
                 .stream()
@@ -137,28 +137,28 @@ public class CustomerUserDAO {
         });
     }
 
-    public List<CustomerUser> listUser() {
+    public List<UserAccount> listUser() {
         String query = "SELECT u.user_name, u.id,ifu.email, ifu.address FROM user_account u join infor_user ifu on u.id = ifu.id_user\n" +
-                "where role=0";
+                "where isAdmin=0";
         String FinalQuery = query;
-        List<CustomerUser> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(FinalQuery)
-                .mapToBean(CustomerUser.class)
+        List<UserAccount> list = JDBIConnector.get().withHandle(handle -> handle.createQuery(FinalQuery)
+                .mapToBean(UserAccount.class)
                 .stream()
                 .collect(Collectors.toList()));
         return list;
     }
 
-    public List<CustomerUser> ListAdmin() {
+    public List<UserAccount> ListAdmin() {
         return JDBIConnector.get().withHandle((handle -> handle.createQuery("SELECT *\n" +
                 "FROM user_account u join infor_user ifu\n" +
                 "on u.id=ifu.id_user\n" +
-                "WHERE u.role=1;").mapToBean(CustomerUser.class).stream().collect(Collectors.toList())));
+                "WHERE u.isAdmin=1;").mapToBean(UserAccount.class).stream().collect(Collectors.toList())));
     }
 
     public void insertAdmin(String userName, String pass, String fullName, String email, String phone,String address,int status) {
         String id = taoIDCustomerAdminUser();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, ?, 1)")
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,isAdmin) VALUES (?, ?, ?,?, ?, 1)")
                     .bind(0, id)
                     .bind(1, userName)
                     .bind(2, Utils.maHoaMK(pass))
@@ -198,7 +198,7 @@ public class CustomerUserDAO {
     public void insertCustomer(String userName, String pass, String fullName, String email, String phone,String address,int status) {
         String id = new SignUpDAO().taoIDCustomerUser();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, ?, 0)")
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,isAdmin) VALUES (?, ?, ?,?, ?, 0)")
                     .bind(0, id)
                     .bind(1, userName)
                     .bind(2, Utils.maHoaMK(pass))
@@ -234,11 +234,11 @@ public class CustomerUserDAO {
             return null;
         });
     }
-    public CustomerUser getUserDetail(String id) {
-        CustomerUser detail = JDBIConnector.get().withHandle(handle -> {
+    public UserAccount getUserDetail(String id) {
+        UserAccount detail = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from infor_user iu inner join user_account uc on iu.id_user = uc.id where id_user = ?")
                     .bind(0, id)
-                    .mapToBean(CustomerUser.class).first();
+                    .mapToBean(UserAccount.class).first();
         });
         return detail;
     }
@@ -254,10 +254,10 @@ public class CustomerUserDAO {
         });
     }
 
-    public CustomerUser getUserByEmail(String email) {
-        Optional<CustomerUser> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.role, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
+    public UserAccount getUserByEmail(String email) {
+        Optional<UserAccount> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.isAdmin, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
                 .bind(0, email)
-                .mapToBean(CustomerUser.class)
+                .mapToBean(UserAccount.class)
                 .findFirst()
         );
         return user.orElse(null);
@@ -272,6 +272,15 @@ public class CustomerUserDAO {
                         .findFirst()
         );
         return Statement.orElse(null);
+    }
+
+    //kiem tra tai khoan co trong don hang nao khong
+    public boolean isUserInOrder(String userId) {
+        List<String> idUsers = JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("select CustomerID from orders where CustomerID=?")
+                        .bind(0, userId).mapTo(String.class).stream().collect(Collectors.toList()));
+        if (idUsers.contains(userId)) return true;
+        else return false;
     }
     public static void main(String[] args) {
 //        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));

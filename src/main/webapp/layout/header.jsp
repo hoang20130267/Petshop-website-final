@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.beans.CustomerUser" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
@@ -14,7 +14,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% CustomerUser user = (CustomerUser) request.getSession().getAttribute("user"); %>
+<% UserAccount user = (UserAccount) request.getSession().getAttribute("user"); %>
 <% Cart cart = (Cart) request.getSession().getAttribute("cart"); %>
 <% Wishlist wishlist = (Wishlist) request.getSession().getAttribute("wishlist"); %>
 <%NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>

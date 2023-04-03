@@ -1,9 +1,7 @@
 package vn.edu.hcmuaf.fit.services;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
-import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
-import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 public class UserService {
     private static UserService userService;
@@ -13,12 +11,12 @@ public class UserService {
         }
         return userService;
     }
-    public CustomerUser getUserDetail(String Id){
+    public UserAccount getUserDetail(String Id){
         CustomerUserDAO dao = new CustomerUserDAO();
         return dao.getUserDetail(Id);
     }
 
-    public CustomerUser getUserByEmail(String email) {
+    public UserAccount getUserByEmail(String email) {
         CustomerUserDAO dao = new CustomerUserDAO();
         return dao.getUserByEmail(email);
     }
@@ -34,5 +32,9 @@ public class UserService {
 
     public void UpdateUserInfo(String id, String name, String email, Object o, Object o1, Object o2) {
 
+    }
+
+    public boolean isUserInOrder(String userId){
+        return new CustomerUserDAO().isUserInOrder(userId);
     }
 }

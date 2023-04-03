@@ -83,6 +83,13 @@ public class ProductService {
     public List<Product> listRelateTo(String id) {
         return  new ProductDAO().listRelateTo(id);
     }
+
+    public boolean isProductInOrder(String productId){
+        return new ProductDAO().isProductInOrder(productId);
+    }
+    public boolean isCateContainPd(String cateId){
+        return new ProductDAO().isCateContainPd(cateId);
+    }
     public static void main(String[] args) {
         System.out.println(getData2());
     }

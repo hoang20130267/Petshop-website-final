@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -35,7 +35,7 @@ public class EditAccessoryController extends HttpServlet {
         String cannang = request.getParameter("cannang");
         String status = request.getParameter("status");
         String oldImg = request.getParameter("oldImg");
-        CustomerUser admin = (CustomerUser) request.getSession().getAttribute("admin");
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
         HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
         String cate = "3";

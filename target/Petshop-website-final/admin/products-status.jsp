@@ -4,6 +4,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,25 @@
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
 
 </head>
-
+<%
+    if (request.getSession().getAttribute("admin") == null) {
+        response.sendRedirect("/login.jsp");
+    } else {
+        UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        boolean check = false;
+        for (AdminRole role : admin.getRole()) {
+            if (role.getTableName().equals("order")) {
+                check = true;
+                break;
+            }
+        }
+        if (!check) {%>
+<script>
+    window.location.href = 'index.jsp';
+    alert("Tài khoản không có quyền này!");
+</script>
+<% } else {
+%>
 <body class="">
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -269,7 +289,17 @@
                                                     <%}else{%>
                                                         <td><%=od.getDeliveryDate()%></td>
                                                     <%}%>
+
+                                                    <%
+                                                        for (AdminRole role : admin.getRole()) {
+                                                            if (role.getTableName().equals("order") && role.getPermission() == 2) {
+                                                    %>
                                                     <td><button class="btn_2 edit btn btn-primary" type="submit">Lưu</button></td>
+                                                    <%
+                                                        }
+                                                        }
+                                                    %>
+
                                                 </tr>
                                             </form>
                                         <%}%>
@@ -284,7 +314,10 @@
         <!-- [ Main Content ] end -->
     </div>
 </div>
-
+    <%
+            }
+        }
+    %>
     <!-- Required Js -->
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>

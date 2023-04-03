@@ -1,9 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
-import vn.edu.hcmuaf.fit.beans.Blogs;
-import vn.edu.hcmuaf.fit.beans.CustomerUser;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.BlogDAO;
-import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -33,7 +31,7 @@ public class EditBlogController extends HttpServlet {
         String oldImg = request.getParameter("oldImg");
         String cate = request.getParameter("cate");
 
-        CustomerUser AdminUser = (CustomerUser) request.getSession().getAttribute("admin");
+        UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
         BlogDAO dao = new BlogDAO();
 
         if (id.equals("null")) {
