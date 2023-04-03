@@ -9,6 +9,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -544,6 +545,58 @@
                     </div>
                 </div>
             </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<% HttpSession session1 = request.getSession();
+    List<String> history = (List<String>) session1.getAttribute("history");
+    if (history == null) {
+        history = new ArrayList<>(4);
+    }
+    String productId = request.getParameter("id");
+    if (productId != null) {
+        if (history.size() == 4) {
+            history.remove(0);
+            history.add(3,productId);
+        } else {
+            history.add(productId);
+        }
+    }
+    session.setAttribute("history", history);
+%>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Các sản phẩm bạn vừa xem</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <%
+                if (history != null) {
+                    for (String pIdHistory : history) {
+                        Product productH = dao.getProductDetail(pIdHistory);
+            %>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" data-setbg="<%=productH.getImage()%>">
+                        <ul class="product__item__pic__hover">
+                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__item__text">
+                        <h6><a href="product-details.jsp?id=<%=productH.getProductId()%>"><%=productH.getProductName()%></a></h6>
+                        <h5><%=format.format(productH.getPrice())%>đ</h5>
+                    </div>
+                </div>
+            </div>
+            <% } %>
             <% } %>
         </div>
     </div>
