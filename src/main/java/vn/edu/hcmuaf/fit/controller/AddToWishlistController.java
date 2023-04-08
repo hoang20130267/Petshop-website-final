@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
+import vn.edu.hcmuaf.fit.beans.Log;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.beans.Wishlist;
 import vn.edu.hcmuaf.fit.services.ProductService;
@@ -29,6 +30,6 @@ public class AddToWishlistController extends HttpServlet {
         wishlist.put(product);
         request.getSession().setAttribute("wishlist", wishlist);
         request.setAttribute("productDetails", product);
-
+        Log.info("Khách hàng đã thêm sản phẩm "+ product.getProductName() +" vào yêu thích");
     }
 }

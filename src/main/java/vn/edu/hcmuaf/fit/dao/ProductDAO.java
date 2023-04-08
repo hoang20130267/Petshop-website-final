@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.Detail;
+import vn.edu.hcmuaf.fit.beans.Log;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.controller.Category;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
@@ -338,6 +339,7 @@ public class ProductDAO {
     }
 
     public static String taoIDProduct() {
+        Log.info("Tạo id bất kì");
         String numbers = "0123456789";
         StringBuilder stringBuilder = new StringBuilder("P");
         Random rd = new Random();
@@ -374,7 +376,6 @@ public class ProductDAO {
         if (listId.contains(stringBuilder.toString())) return taoIDCate();
         else return stringBuilder.toString();
     }
-
     public List<Product> listProductSale() {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
@@ -410,4 +411,7 @@ public class ProductDAO {
         else return false;
     }
 
+    public static void main(String[] args) {
+        System.out.println(taoIDProduct());
+    }
 }
