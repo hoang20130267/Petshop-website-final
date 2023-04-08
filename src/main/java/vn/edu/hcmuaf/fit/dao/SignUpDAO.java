@@ -32,7 +32,7 @@ public class SignUpDAO {
     public void insertUser(String userName, String passMaHoa, String pass, String fullName, String email, String phone) {
         String id = taoIDCustomerUser();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,role) VALUES (?, ?, ?,?, 1, 0)")
+            handle.createUpdate("INSERT INTO user_account(id, user_name, passMaHoa, pass, status,isAdmin) VALUES (?, ?, ?,?, 1, 0)")
                     .bind(0, id)
                     .bind(1, userName)
                     .bind(2, passMaHoa)
