@@ -322,8 +322,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <form method="post" action="UpdateStatusOrder" enctype="multipart/form-data"
-                                              class="infor_user">
+                                        <form method="post" action="UpdateStatusOrder" class="infor_user">
                                             <input type="text" value="<%=order.getOrderID()%>" name="orderId"
                                                    style="display: none">
                                             <input type="text" value="<%=order.getStatus()%>" name="status"

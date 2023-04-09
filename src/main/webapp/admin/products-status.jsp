@@ -257,8 +257,6 @@
                                     <%List<Orders> listod = OrderService.getInstance().ordersList();
                                         for (Orders od: listod) {%>
                                             <form action="" method="post">
-
-
                                                 <tr>
                                                     <td scope="row"><%=od.getOrderID()%></td>
                                                     <td><%=UserService.getInstance().getUserDetail(od.getCustomerID()).getName()%></td>
