@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.services;
 
+import vn.edu.hcmuaf.fit.beans.Contact;
 import vn.edu.hcmuaf.fit.dao.ContactDAO;
+
+import java.util.List;
 
 public class ContactService {
     private static ContactService contactService;
@@ -13,5 +16,12 @@ public class ContactService {
     }
     public void insertContact(String name, String email, String content){
         new ContactDAO().insertContact(name,email,content);
+    }
+    public List<Contact> listContact(){
+        return new ContactDAO().listContact();
+    }
+
+    public void updateStatus(String id){
+        new ContactDAO().updateStatus(id);
     }
 }

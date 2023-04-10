@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.beans.Contact;
 import vn.edu.hcmuaf.fit.beans.Log;
+import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -28,12 +30,30 @@ public class ContactDAO {
     }
     public void insertContact(String name, String email, String content){
         String id = taoIDContact();
+        String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            return handle.createUpdate("insert into contact (id, name, email, content, status) values (?,?,?,?,0)")
+            return handle.createUpdate("insert into contact (id, name, email, content, status, date) values (?,?,?,?,0,?)")
                     .bind(0,id)
                     .bind(1,name)
                     .bind(2,email)
                     .bind(3,content)
+                    .bind(4,date)
+                    .execute();
+        });
+    }
+
+    public List<Contact> listContact(){
+        List<Contact> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select id, name, email, content, status, date from contact")
+                    .mapToBean(Contact.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
+    public void updateStatus(String id){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("update contact set `status`= 1 where id=?")
+                    .bind(0,id)
                     .execute();
         });
     }

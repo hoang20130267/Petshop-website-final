@@ -191,6 +191,12 @@
                     <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
                             class="pc-mtext">Bình luận</span></a>
                 </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý liên hệ</label>
+                </li>
+                <li class="pc-item">
+                    <a href="list-contact.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Liên hệ</span></a>
+                </li>
             </ul>
         </div>
     </div>

@@ -159,11 +159,70 @@ public class MailService {
         return test;
     }
 
+    public boolean sendEmailContact(String email, String name, String content, String admin) {
+        boolean test = false;
+        String subject = "Phản hồi liên hệ từ PETSHOP";
+        String text = "<div style=\"background-color:#f2f2f2;padding:10px; font-size: 22px\">\n" +
+                "  <p>Xin chào <span style=\"font-weight: bold\">"+ name +"</span>,</p>\n" +
+                "  <p>Tôi là <span style=\"font-weight: bold\">"+admin+"</span>, đại diện cho <span style=\"font-weight: bold; color: #00BFFF\">PetShop</span>. Tôi muốn gửi email này để trả lời câu hỏi mà bạn đã gửi cho chúng tôi.</p>\n" +
+                "  <p>"+content+"</p>\n" +
+                "  <p>Cám ơn bạn đã liên hệ với chúng tôi!</p>\n" +
+                "  <p>Trân trọng,</p>\n" +
+                "  <p><span style=\"font-weight: bold\">"+admin+"</span></p>\n" +
+                "</div>";
+
+        String toEmail = email;
+        String fromEmail = Mail.USERNAME;
+        String password = Mail.PASSWORD;
+
+        try {
+            // your host email smtp server details
+            Properties pr = new Properties();
+            pr.setProperty(Mail.HOST, Mail.SERVER);
+            pr.setProperty(Mail.URL_PORT, Mail.PORT);
+            pr.setProperty(Mail.AUTH, Mail.AUTH_STATUS);
+            pr.setProperty(Mail.URL_TLS, Mail.TLS_STATUS);
+            pr.put("mail.smtp.socketFactory.port", "587");
+            pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+            //get session to authenticate the host email address and password
+            Session session = Session.getInstance(pr, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, password);
+                }
+            });
+
+            //set email message details
+            Message mess = new MimeMessage(session);
+
+            //set from email address
+            mess.setFrom(new InternetAddress(fromEmail));
+            //set to email address or destination email address
+            mess.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+
+            //set email subject
+            mess.setSubject(subject);
+
+            //set message text
+            mess.setContent(text, "text/html; charset=UTF-8");
+            //send the message
+            Transport.send(mess);
+            test=true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return test;
+    }
 
 
 
     public static void main(String[] args) {
         SignUp su = new SignUp("huyhuy","huynguyen.79039@gmail.com","huyhuy12","123","123123232","jdgfhjdgfhdf","123456");
         System.out.println( new MailService().sendEmailSignUp(su));
+        System.out.println( new MailService().sendEmailContact("20130281@st.hcmuaf.edu.vn","Huy","dạ không có ạ","admin1"));
+
     }
 }
