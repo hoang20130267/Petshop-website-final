@@ -57,4 +57,12 @@ public class ContactDAO {
                     .execute();
         });
     }
+
+    public void removeContact(String id){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM contact WHERE id= ?;")
+                    .bind(0,id)
+                    .execute();
+        });
+    }
 }

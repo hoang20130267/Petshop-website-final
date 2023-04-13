@@ -24,4 +24,8 @@ public class ContactService {
     public void updateStatus(String id){
         new ContactDAO().updateStatus(id);
     }
+
+    public void removeContact(String id){
+        new ContactDAO().removeContact(id);
+    }
 }

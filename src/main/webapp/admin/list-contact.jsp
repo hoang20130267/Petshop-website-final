@@ -326,11 +326,11 @@
                                     </th>
                                 </tr>
                                 </thead>
+                                <tbody class="list" id="table-latest-review-body">
                                 <% List<Contact> list = new ContactService().listContact();
                                     for (Contact c : list) {
                                 %>
-                                <tbody class="list" id="table-latest-review-body">
-                                <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                                <tr class="hover-actions-trigger btn-reveal-trigger position-static" id="sestion-ct-<%=c.getId()%>">
                                     <td class="fs--1 align-middle ps-0 py-3">
                                         <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
                                         <p class="mb-0 text-1100 fw-bold contact-id"><%=c.getId()%>
@@ -367,8 +367,8 @@
                                     <%}%>
                                     <td class="last-seen align-middle white-space-nowrap text-700 text-end"
                                         style="color: #00ff22">
-                                        <a class="btn_2 edit btn btn-primary" href=""
-                                           style="background-color: crimson; color: white">Xóa</a>
+                                        <a class="btn_2 edit btn btn-primary remove" href=""
+                                           style="background-color: crimson; color: white" id="remove-ct-<%=c.getId()%>">Xóa</a>
                                     </td>
                                 </tr>
                                 <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
@@ -502,15 +502,26 @@
 <script src="assets/js/pages/dashboard-sale.js"></script>
 
 <script>
-    // $(document).ready(function() {
-    //     $('#reply').click(function() {
-    //         $('#contact-dt').modal('show');
-    //         $('#contact-dt-name').val($('.contact-name').text());
-    //         $('#contact-dt-email').val($('.contact-email').text());
-    //         $('#contact-dt-question').val($('.contact-content').text());
-    //         $('#contact-dt-id').val($('.contact-id').text());
-    //     });
-    // });
+    $(document).ready(function (){
+        removeContact();
+    })
+
+    function removeContact() {
+        $(".remove").click(function (e) {
+            e.preventDefault();
+            const id = this.id.substring(10);
+            $.ajax({
+                url: "/Petshop_website_final_war/admin/RemoveContact",
+                type: "post",
+                data: {
+                    id: id,
+                },
+                success: function () {
+                    $("#sestion-ct-" + id).remove();
+                }
+            })
+        });
+    }
 </script>
 </body>
 

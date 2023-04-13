@@ -21,6 +21,6 @@ public class ContactController extends HttpServlet {
         String content = request.getParameter("content");
 
         ContactService.getInstance().insertContact(name,email,content);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("contact.jsp");
     }
 }
