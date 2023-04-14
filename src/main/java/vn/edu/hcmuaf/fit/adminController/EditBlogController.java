@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.BlogDAO;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -38,10 +39,18 @@ public class EditBlogController extends HttpServlet {
             dao.insertBlog(name, status, image,pdescription,dital,cate,AdminUser.getId());
             removeOldImg(oldImg, request);
             copyImage(request, image);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm tin tức "+dao.getBlog(id).getBlogId()+" làm tin tức mới");
         } else {
             dao.updateBlog(id,name,status, image,pdescription,dital,cate);
             removeOldImg(oldImg, request);
             copyImage(request, image);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa tin tức "+dao.getBlog(id).getBlogName());
         }
         response.sendRedirect("list-blog.jsp");
     }

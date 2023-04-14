@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -44,10 +45,18 @@ public class EditAccessoryController extends HttpServlet {
             dao.insertAccessory(admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm sản phẩm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
             dao.updateAccessory(pid,admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa sản phẩm phụ kiện "+dao.getProductDetail(pid).getProductName());
         }
         response.sendRedirect("list-accessory");
     }

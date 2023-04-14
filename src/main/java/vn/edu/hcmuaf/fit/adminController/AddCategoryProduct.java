@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.DetailService;
 
 import javax.servlet.*;
@@ -27,8 +28,16 @@ public class AddCategoryProduct extends HttpServlet {
 
         if(cid==""){
             DetailService.getInstance().insertCateProduct(AdminUser.getId(),CateName,cateparent);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm "+CateName+" vào thể loại sản phẩm mới");
         }else {
             DetailService.getInstance().updateCateProduct(cid,AdminUser.getId(),CateName,cateparent,status);
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thể loại sản phẩm "+CateName);
         }
         response.sendRedirect("list-category.jsp");
     }

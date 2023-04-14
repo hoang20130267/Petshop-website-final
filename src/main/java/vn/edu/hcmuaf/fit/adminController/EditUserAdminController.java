@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 
 import javax.servlet.*;
@@ -41,6 +43,9 @@ public class EditUserAdminController extends HttpServlet {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addAdminerror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
         } else {
             if (exe != null) {
                 request.setAttribute("addAdminerror", exe);
@@ -48,14 +53,28 @@ public class EditUserAdminController extends HttpServlet {
             } else if (!passwd.equals(passconfirm)) {
                 request.setAttribute("addAdminerror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
+
+                LogDAO logs = new LogDAO();
+                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             } else {
                     new CustomerUserDAO().insertAdmin(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-admin.jsp");
+
+
+                LogDAO logs = new LogDAO();
+                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm admin mới");
                     }
             }
         }else{
             new CustomerUserDAO().updateAdmin(id, username, passwd, fullname, email, phone, address, status);
             response.sendRedirect("list-admin.jsp");
+
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin admin");
         }
     }
 

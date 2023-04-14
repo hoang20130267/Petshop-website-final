@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.ContactService;
+import vn.edu.hcmuaf.fit.services.DetailService;
 import vn.edu.hcmuaf.fit.services.MailService;
 
 import javax.servlet.*;
@@ -38,8 +40,16 @@ public class replyContact extends HttpServlet {
             // cập nhật lại trạng thái
             ContactService.getInstance().updateStatus(id);
             response.sendRedirect("list-contact.jsp");
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã phản hồi qua email người dùng");
         } else {
             System.out.println("Gửi email không thành công!");
+
+            LogDAO logs = new LogDAO();
+            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logs.createAdminLog(adminAccount.getId(), "ERROR", "Gửi phản hồi không thành công");
         }
 
     }
