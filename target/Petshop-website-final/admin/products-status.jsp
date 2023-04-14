@@ -196,6 +196,12 @@
                         <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
                                 class="pc-mtext">Bình luận</span></a>
                     </li>
+                    <li class="pc-item pc-caption">
+                        <label>Quản lý liên hệ</label>
+                    </li>
+                    <li class="pc-item">
+                        <a href="list-contact.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Liên hệ</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -256,11 +262,7 @@
                                     <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
                                     <%List<Orders> listod = OrderService.getInstance().ordersList();
                                         for (Orders od: listod) {%>
-                                            <form action="UpdateStatusOrder" method="post">
-                                                <input type="text" value="<%=od.getOrderID()%>" name="orderId" style="display: none">
-                                                <input type="text" value="<%=od.getStatus()%>" name="status" style="display: none">
-                                                <input type="text" value="<%=od.getDelivered()%>" name="delivery" style="display: none">
-
+                                            <form action="" method="post">
                                                 <tr>
                                                     <td scope="row"><%=od.getOrderID()%></td>
                                                     <td><%=UserService.getInstance().getUserDetail(od.getCustomerID()).getName()%></td>
@@ -268,37 +270,24 @@
                                                     <td><%=od.getOrderDate()%></td>
                                                     <td>
                                                             <%if(od.getStatus()==0){%>
-                                                                <select class="form-select mb-3" name="udstatus" id="udstatus">
-                                                                    <option value="2" selected style="color: red; font-weight: bold">Đã hủy</option>
-                                                                </select>
+                                                                    <div style="color: red; font-weight: bold">Đã hủy</div>
                                                             <%}else{%>
                                                                     <%if(od.getDelivered()==0){%>
-                                                                        <select class="form-select mb-3" name="udstatus" id="status">
-                                                                            <option value="0" selected style="color: #00BFFF; font-weight: bold">Đang xử lý</option>
-                                                                            <option value="1" style="color: #35ff00; font-weight: bold">Hoàn thành</option>
-                                                                            <option value="2" style="color: red; font-weight: bold">Hủy đơn</option>
-                                                                        </select>
+                                                                            <div  style="color: #00BFFF; font-weight: bold">Đang xử lý</div>
                                                                     <%}else{%>
-                                                                        <select class="form-select mb-3" name="udstatus" id="status">
-                                                                            <option value="1" selected style="color: #35ff00; font-weight: bold">Hoàn thành</option>
-                                                                        </select>
+                                                                            <div style="color: #35ff00; font-weight: bold">Hoàn thành</div>
                                                                     <%}%>
                                                             <%}%>
+                                                    </td>
                                                     <%if (od.getDeliveryDate() == null){%>
                                                         <td>Chưa giao</td>
                                                     <%}else{%>
                                                         <td><%=od.getDeliveryDate()%></td>
                                                     <%}%>
 
-                                                    <%
-                                                        for (AdminRole role : admin.getRole()) {
-                                                            if (role.getTableName().equals("order") && role.getPermission() == 2) {
-                                                    %>
-                                                    <td><button class="btn_2 edit btn btn-primary" type="submit">Lưu</button></td>
-                                                    <%
-                                                        }
-                                                        }
-                                                    %>
+                                                    <td><a class="btn_2 edit btn btn-primary" type="submit" href="order-detail-ad.jsp?orderId=<%=od.getOrderID()%>">Chi tiết</a></td>
+
+
 
                                                 </tr>
                                             </form>

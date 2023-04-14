@@ -317,17 +317,17 @@
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form name="form-contact" action="ContactController" method="post" onsubmit="return validateForm()">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Họ và tên">
+                        <input type="text" placeholder="Họ và tên" name="name">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Email">
+                        <input type="email" placeholder="Email" name="email">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Lời nhắn"></textarea>
-                        <button type="submit" class="site-btn">GỬI TIN NHẮN</button>
+                        <textarea placeholder="Lời nhắn" name="content"></textarea>
+                        <button type="submit" class="site-btn">GỬI</button>
                     </div>
                 </div>
             </form>
@@ -350,7 +350,17 @@
     <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
-
+<script>
+    function validateForm() {
+        var name = document.forms["form-contact"]["name"].value;
+        var email = document.forms["form-contact"]["email"].value;
+        var content = document.forms["form-contact"]["content"].value;
+        if ((name == null || name == "") || (email == null || email == "") || (content == null || content == "")) {
+            alert("Vui lòng điền đủ thông tin!");
+            return false;
+        }
+    }
+</script>
 
 </body>
 
