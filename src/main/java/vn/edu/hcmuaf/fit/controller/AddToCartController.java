@@ -2,6 +2,8 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.ServletException;
@@ -32,5 +34,9 @@ public class AddToCartController extends HttpServlet {
         request.getSession().setAttribute("cart", cart);
         request.setAttribute("total", cart.total());
         request.getRequestDispatcher("ajax/ajax_total.jsp").forward(request, response);
+
+        LogDAO logs = new LogDAO();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã thêm sản phẩm "+ product.getProductName() +" vào giỏ hàng");
     }
 }

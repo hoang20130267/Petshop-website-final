@@ -1,10 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.beans.Cart;
-import vn.edu.hcmuaf.fit.beans.Log;
-import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.beans.Wishlist;
+import vn.edu.hcmuaf.fit.beans.*;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.ProductService;
+import vn.edu.hcmuaf.fit.services.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -30,6 +29,9 @@ public class AddToWishlistController extends HttpServlet {
         wishlist.put(product);
         request.getSession().setAttribute("wishlist", wishlist);
         request.setAttribute("productDetails", product);
-        Log.info("Khách hàng đã thêm sản phẩm "+ product.getProductName() +" vào yêu thích");
+
+        LogDAO logs = new LogDAO();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã thêm sản phẩm "+ product.getProductName() +" vào yêu thích");
     }
 }

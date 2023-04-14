@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -26,5 +28,9 @@ public class SearchMain extends HttpServlet {
         List<Product> list = dao.searchProductByName(txtSearch);
         request.setAttribute("list", list);
         request.getRequestDispatcher("ajax/ajax_searchmain.jsp").forward(request, response);
+
+        LogDAO logs = new LogDAO();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm sản phẩm với nội dung là "+txtSearch);
     }
 }
