@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -20,6 +22,10 @@ public class DeleteUser extends HttpServlet {
         CustomerUserDAO dao = new CustomerUserDAO();
         dao.deleteUser(id);
         response.sendRedirect("index.jsp");
+
+        LogDAO logs = new LogDAO();
+        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa người dùng "+dao.getUserDetail(id).getUsername());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

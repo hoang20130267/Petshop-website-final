@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -83,6 +85,9 @@ public class SearchControl extends HttpServlet {
                     "              </div>\n" +
                     "            </div>");
         }
+        LogDAO logs = new LogDAO();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" tìm kiếm sản phẩm thú cưng với nội dung là "+txtSearch);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

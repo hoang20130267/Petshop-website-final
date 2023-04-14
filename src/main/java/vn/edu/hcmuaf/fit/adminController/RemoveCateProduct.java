@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.DetailService;
 
 import javax.servlet.*;
@@ -22,5 +24,9 @@ public class RemoveCateProduct extends HttpServlet {
         String id = request.getParameter("cid");
         DetailService.getInstance().removeCateProduct(id);
         response.sendRedirect("list-category.jsp");
+
+        LogDAO logs = new LogDAO();
+        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa thể loại tin tức "+DetailService.getInstance().getCateProductById(id).getCatName());
     }
 }

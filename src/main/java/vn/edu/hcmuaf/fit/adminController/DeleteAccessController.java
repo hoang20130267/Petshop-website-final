@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 
 import javax.servlet.*;
@@ -19,6 +21,10 @@ public class DeleteAccessController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         dao.deleteProduct(id);
         response.sendRedirect("list-accessory");
+
+        LogDAO logs = new LogDAO();
+        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa sản phẩm phụ kiện "+dao.getProductDetail(id).getProductName());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

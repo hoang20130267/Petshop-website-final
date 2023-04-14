@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.BlogDAO;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 import vn.edu.hcmuaf.fit.services.BlogService;
 
@@ -23,7 +25,10 @@ public class DeleteBlog extends HttpServlet {
         BlogService service = new BlogService();
         service.deleteBlog(id);
         response.sendRedirect("list-blog.jsp");
-        System.out.println(id);
+
+        LogDAO logs = new LogDAO();
+        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa tin tức "+service.getContent(id).getBlogName());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
