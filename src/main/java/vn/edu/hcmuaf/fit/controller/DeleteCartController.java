@@ -1,6 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,5 +29,10 @@ public class DeleteCartController extends HttpServlet {
         cart.getData().remove(idP);
         request.getSession().setAttribute("cart", cart);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
+
+        LogDAO logs = new LogDAO();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+        ProductService product = new ProductService();
+        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã xóa sản phẩm "+ product.getProductDetail(idP).getProductName() +" khỏi giỏ hàng");
     }
 }

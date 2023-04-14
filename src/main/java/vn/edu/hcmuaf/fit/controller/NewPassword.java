@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.ForgotPassword;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.ForgotPasswordService;
 
 import javax.servlet.*;
@@ -28,9 +30,17 @@ public class NewPassword extends HttpServlet {
         if(newPass.equals(confirmNewPass)){
             ForgotPasswordService.getInstance().updatePasswordFromEmail(newPass,forgot.getEmail());
             response.sendRedirect("login.jsp");
+
+            LogDAO logs = new LogDAO();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đổi mật khẩu thành công");
         }else {
             request.setAttribute("errorConfirm", "Mật khẩu nhập lại không đúng! ");
             request.getRequestDispatcher("newPassword.jsp").forward(request, response);
+
+            LogDAO logs = new LogDAO();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng đổi mật khẩu không thành công");
         }
     }
 }

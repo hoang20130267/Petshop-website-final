@@ -2,6 +2,8 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.ForgotPassword;
 import vn.edu.hcmuaf.fit.beans.SignUp;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 
 import javax.servlet.*;
@@ -31,12 +33,20 @@ public class ConfirmOTP extends HttpServlet {
                 String error = "Mã xác nhận phải điền đủ 6 số";
                 request.setAttribute("errorOTP", error);
                 request.getRequestDispatcher("ConfirmOTP.jsp").forward(request, response);
+
+                LogDAO logs = new LogDAO();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập thiếu mã OTP");
             } else {
                 if (code.equals(forgot.getCode())) {
                     response.sendRedirect("newPassword.jsp");
                 } else {
                     request.setAttribute("errorOTP", "Mã xác nhận không đúng");
                     request.getRequestDispatcher("ConfirmOTP.jsp").forward(request, response);
+
+                    LogDAO logs = new LogDAO();
+                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                    logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập sai mã OTP");
                 }
             }
 

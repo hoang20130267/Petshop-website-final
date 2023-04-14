@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -20,6 +23,10 @@ public class LogoutController extends HttpServlet {
         if (session!=null){
             session.invalidate();
             response.sendRedirect("login.jsp");
+
+            LogDAO logs = new LogDAO();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đăng xuất khỏi hệ thống");
         }
     }
 }
