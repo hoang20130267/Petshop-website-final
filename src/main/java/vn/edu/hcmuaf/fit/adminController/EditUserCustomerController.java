@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 
 import javax.servlet.*;
@@ -44,9 +44,9 @@ public class EditUserCustomerController extends HttpServlet {
             request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập thiếu thông tin");
         } else {
             if (exe != null) {
                 request.setAttribute("addUsererror", exe);
@@ -55,25 +55,25 @@ public class EditUserCustomerController extends HttpServlet {
                 request.setAttribute("addUsererror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
+                LogService logService= new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             } else {
                     new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-user.jsp");
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm người dùng mới");
+                LogService logService= new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+username+" làm user mới");
             }
         }
         }else{
             new CustomerUserDAO().updateCustomer(id, username, passwd, fullname, email, phone, address, status);
             response.sendRedirect("list-user.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin người dùng");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa thông tin user "+username);
         }
     }
 }

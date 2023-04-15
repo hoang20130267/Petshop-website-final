@@ -1,9 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
-import vn.edu.hcmuaf.fit.services.BlogService;
 import vn.edu.hcmuaf.fit.services.DetailService;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,8 +25,8 @@ public class RemoveCateBlog extends HttpServlet {
         DetailService.getInstance().removeCateBlog(id);
         response.sendRedirect("list-category.jsp");
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa thể loại tin tức "+DetailService.getInstance().getCateBlogById(id).getCatName());
+        LogService logService= new LogService();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa danh mục tin tức "+DetailService.getInstance().getCateBlogById(id).getCatName());
     }
 }

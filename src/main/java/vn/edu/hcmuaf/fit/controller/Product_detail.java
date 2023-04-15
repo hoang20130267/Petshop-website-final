@@ -2,8 +2,9 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -23,9 +24,9 @@ public class Product_detail extends HttpServlet {
         request.setAttribute("detail",detail);
         request.getRequestDispatcher("product-details.jsp").forward(request,response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" vào xem chi tiết sản phẩm "+ dao.getProductDetail(id).getProductName());
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" xem chi tiết sản phẩm "+new ProductService().getProductDetail(id));
     }
 
     @Override

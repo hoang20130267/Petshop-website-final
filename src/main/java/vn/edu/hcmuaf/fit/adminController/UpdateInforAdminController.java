@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -44,16 +44,16 @@ public class UpdateInforAdminController extends HttpServlet {
                 removeOldImg(oldImg, request);
                 copyImage(request, image);
 
-                LogDAO logs = new LogDAO();
+                LogService logService= new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
             } else {
                 request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
                 request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
+                LogService logService= new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập lại mật khẩu không chính xác");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             }
         } else {
             user.setAvt("img/user/"+ image);
@@ -61,9 +61,9 @@ public class UpdateInforAdminController extends HttpServlet {
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
+            LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
         }
     }
 

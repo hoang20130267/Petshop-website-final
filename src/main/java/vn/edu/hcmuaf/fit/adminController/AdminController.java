@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,9 +24,9 @@ public class AdminController extends HttpServlet {
             session.invalidate();
             response.sendRedirect("../login.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã đăng xuất khỏi hệ thống");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã đăng xuất khỏi hệ thống");
         }
     }
 }

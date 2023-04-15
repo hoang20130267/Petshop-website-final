@@ -1,10 +1,9 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Comment;
-import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CommentDAO;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.*;
@@ -31,6 +30,11 @@ public class CommentController extends HttpServlet {
         String id = dao.InsertComment(cusID.getId(), desc, status, pID, vote);
         Comment cmt = dao.getComment(id);
         request.setAttribute("cmt", cmt);
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã bình luận vào sản phẩm "+new ProductService().getProductDetail(pID));
+
         request.getRequestDispatcher("ajax/ajax-comment.jsp").forward(request,response);
     }
     @Override

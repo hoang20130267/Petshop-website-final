@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.beans.Wishlist;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.LoginService;
 
 import javax.servlet.*;
@@ -33,9 +33,9 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("admin", account);
                 response.sendRedirect("admin/index.jsp");
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createAdminLog(userAccount.getId(), "INFOR", "Admin đã đăng nhập vào hệ thống");
+                LogService logService= new LogService();
+                UserAccount user = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createAdminLog(user.getId(), "INFOR", "Admin "+user.getUsername()+" đăng nhập vào hệ thống");
             }else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", account);
@@ -43,17 +43,13 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("wishlist", new Wishlist());
                 response.sendRedirect("index.jsp");
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đã đăng nhập vào hệ thống");
+                LogService logService= new LogService();
+                UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+                logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đăng nhập vào hệ thống");
             }
         } else {
             request.setAttribute("loginStatus", LoginService.getInstance().getStatus());
             request.getRequestDispatcher("login.jsp").forward(request, response);
-
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chưa đăng nhập");
         }
     }
 

@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 
 import javax.servlet.*;
@@ -33,24 +33,24 @@ public class VerifyCode extends HttpServlet {
                 request.setAttribute("errorCode", error);
                 request.getRequestDispatcher("verify.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
+                LogService logService= new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập thiếu số của mã xác nhận");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập thiếu mã xác nhận");
             } else {
                 if (code.equals(user.getCode())) {
                     SignUpService.getInstance().insertUser(user.getUserName(), user.getPassMaHoa(), user.getPasswd(), user.getFullName(), user.getEmail(), user.getPhone());
                     response.sendRedirect("login.jsp");
 
-                    LogDAO logs = new LogDAO();
+                    LogService logService= new LogService();
                     UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng quay lại trang đăng nhập");
+                    logService.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" chuyển sang trang đăng nhập");
                 } else {
                     request.setAttribute("errorCode", "Mã xác nhận không đúng");
                     request.getRequestDispatcher("verify.jsp").forward(request, response);
 
-                    LogDAO logs = new LogDAO();
+                    LogService logService= new LogService();
                     UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập sai mã xác nhận");
+                    logService.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" sai mã xác nhận");
                 }
             }
 

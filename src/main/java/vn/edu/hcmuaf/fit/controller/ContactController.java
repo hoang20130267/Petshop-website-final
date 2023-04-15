@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.services.ContactService;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,5 +24,9 @@ public class ContactController extends HttpServlet {
 
         ContactService.getInstance().insertContact(name,email,content);
         response.sendRedirect("contact.jsp");
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã gửi thông tin cần liên hệ");
     }
 }

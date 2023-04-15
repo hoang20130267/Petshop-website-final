@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.beans.Blogs;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.BlogDAO;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -43,10 +43,9 @@ public class SearchBlog extends HttpServlet {
                     "                            </div>\n" +
                     "                        </div>");
         }
-
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm tin tức với nội dung là "+txtSearch);
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" tìm kiếm tin tức với từ khóa "+txtSearch);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

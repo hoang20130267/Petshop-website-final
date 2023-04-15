@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.SignUp;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.MailService;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 import vn.edu.hcmuaf.fit.services.Utils;
@@ -41,25 +41,21 @@ public class SignUpController extends HttpServlet {
             request.setAttribute("registerError", "Không được bỏ trống!");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
+            LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng bỏ trống thông tin");
+            logService.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập thiếu thông tin đăng ký");
         } else {
             String exe = SignUpService.getInstance().checkUser(email, user);
             if (exe != null) {
                 request.setAttribute("registerError", exe);
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
-
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Lỗi tạo tài khoản");
             } else if (!passwd.equals(confirmpassword)) {
                 request.setAttribute("registerError", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
+                LogService logService= new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập lại mật khẩu không chính xác");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập sai mật khẩu nhập lại");
             } else {
                 SignUp users = (SignUp) request.getSession().getAttribute("Signup");
                 boolean test = ms.sendEmailSignUp(users);
@@ -69,15 +65,15 @@ public class SignUpController extends HttpServlet {
                     session.setAttribute("authcode", users);
                     response.sendRedirect("verify.jsp");
 
-                    LogDAO logs = new LogDAO();
+                    LogService logService= new LogService();
                     UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang trang nhập mã OTP");
+                    logService.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang trang xác thực");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
 
-                    LogDAO logs = new LogDAO();
+                    LogService logService= new LogService();
                     UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "ERROR", "Gửi mã OTP không thành công");
+                    logService.createUserLog(userAccount.getId(), "ERROR", "Mã code gửi đến người dùng không thành công");
                 }
             }
         }

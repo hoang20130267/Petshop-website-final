@@ -3,8 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
-import vn.edu.hcmuaf.fit.services.ProductService;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,11 +31,9 @@ public class IncDecQuantityController extends HttpServlet {
             product.setQuantityCart(amount);
         }
         request.getSession().setAttribute("cart", cart);
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" thay đổi số lượng sản phẩm trong giỏ hàng thành "+amount);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
-
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        ProductService product = new ProductService();
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã bình luận vào sản phẩm "+ product.getProductDetail(idUpdate).getProductName());
     }
 }

@@ -2,7 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.BlogDAO;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -40,17 +40,17 @@ public class EditBlogController extends HttpServlet {
             removeOldImg(oldImg, request);
             copyImage(request, image);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm tin tức "+dao.getBlog(id).getBlogId()+" làm tin tức mới");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getContent(id).getBlogName()+" làm tin tức mới");
         } else {
             dao.updateBlog(id,name,status, image,pdescription,dital,cate);
             removeOldImg(oldImg, request);
             copyImage(request, image);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa tin tức "+dao.getBlog(id).getBlogName());
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" chỉnh sửa tin tức "+dao.getContent(id).getBlogName());
         }
         response.sendRedirect("list-blog.jsp");
     }

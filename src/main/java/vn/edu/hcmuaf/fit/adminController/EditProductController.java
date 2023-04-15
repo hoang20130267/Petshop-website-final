@@ -1,8 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -47,17 +47,17 @@ public class EditProductController extends HttpServlet {
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm sản phẩm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
         }
         response.sendRedirect("list-products");
     }

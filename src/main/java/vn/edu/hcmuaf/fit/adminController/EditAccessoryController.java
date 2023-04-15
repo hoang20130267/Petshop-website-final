@@ -1,8 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -46,17 +46,17 @@ public class EditAccessoryController extends HttpServlet {
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm sản phẩm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
             dao.updateAccessory(pid,admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa sản phẩm phụ kiện "+dao.getProductDetail(pid).getProductName());
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa sản phẩm phụ kiện "+dao.getProductDetail(pid).getProductName());
         }
         response.sendRedirect("list-accessory");
     }

@@ -1,8 +1,8 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
-import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.DetailService;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -29,15 +29,13 @@ public class AddCategoryBlog extends HttpServlet {
         if (cbid == "") {
             DetailService.getInstance().insertCateBlog(AdminUser.getId(), CateName, cateparent);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm "+CateName+" vào thể loại tin tức mới");
+            LogService logService= new LogService();
+            logService.createUserLog(AdminUser.getId(), "INFOR", "Admin "+AdminUser.getUsername()+" đã thêm "+CateName+" làm danh mục tin tức mới");
         } else {
             DetailService.getInstance().updateCateBlog(cbid, AdminUser.getId(), CateName, cateparent, status);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thể loại tin tức "+CateName);
+            LogService logService= new LogService();
+            logService.createUserLog(AdminUser.getId(), "INFOR", "Admin "+AdminUser.getUsername()+" đã chỉnh sửa danh mục tin tức "+CateName);
         }
         response.sendRedirect("list-category.jsp");
     }
