@@ -34,9 +34,9 @@ public class IncDecQuantityController extends HttpServlet {
         request.getSession().setAttribute("cart", cart);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        ProductService product = new ProductService();
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã bình luận vào sản phẩm "+ product.getProductDetail(idUpdate).getProductName());
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        ProductService product = new ProductService();
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã bình luận vào sản phẩm "+ product.getProductDetail(idUpdate).getProductName());
     }
 }

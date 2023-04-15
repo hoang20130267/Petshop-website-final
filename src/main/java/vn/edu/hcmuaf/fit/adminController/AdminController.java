@@ -24,9 +24,9 @@ public class AdminController extends HttpServlet {
             session.invalidate();
             response.sendRedirect("../login.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã đăng xuất khỏi hệ thống");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã đăng xuất khỏi hệ thống");
         }
     }
 }

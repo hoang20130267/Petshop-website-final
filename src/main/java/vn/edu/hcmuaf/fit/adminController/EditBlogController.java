@@ -40,17 +40,17 @@ public class EditBlogController extends HttpServlet {
             removeOldImg(oldImg, request);
             copyImage(request, image);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm tin tức "+dao.getBlog(id).getBlogId()+" làm tin tức mới");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm tin tức "+dao.getBlog(id).getBlogId()+" làm tin tức mới");
         } else {
             dao.updateBlog(id,name,status, image,pdescription,dital,cate);
             removeOldImg(oldImg, request);
             copyImage(request, image);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa tin tức "+dao.getBlog(id).getBlogName());
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa tin tức "+dao.getBlog(id).getBlogName());
         }
         response.sendRedirect("list-blog.jsp");
     }

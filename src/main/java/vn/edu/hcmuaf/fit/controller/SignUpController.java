@@ -41,25 +41,25 @@ public class SignUpController extends HttpServlet {
             request.setAttribute("registerError", "Không được bỏ trống!");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng bỏ trống thông tin");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng bỏ trống thông tin");
         } else {
             String exe = SignUpService.getInstance().checkUser(email, user);
             if (exe != null) {
                 request.setAttribute("registerError", exe);
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Lỗi tạo tài khoản");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Lỗi tạo tài khoản");
             } else if (!passwd.equals(confirmpassword)) {
                 request.setAttribute("registerError", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập lại mật khẩu không chính xác");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập lại mật khẩu không chính xác");
             } else {
                 SignUp users = (SignUp) request.getSession().getAttribute("Signup");
                 boolean test = ms.sendEmailSignUp(users);
@@ -69,15 +69,15 @@ public class SignUpController extends HttpServlet {
                     session.setAttribute("authcode", users);
                     response.sendRedirect("verify.jsp");
 
-                    LogDAO logs = new LogDAO();
-                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang trang nhập mã OTP");
+//                    LogDAO logs = new LogDAO();
+//                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                    logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang trang nhập mã OTP");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
 
-                    LogDAO logs = new LogDAO();
-                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "ERROR", "Gửi mã OTP không thành công");
+//                    LogDAO logs = new LogDAO();
+//                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                    logs.createUserLog(userAccount.getId(), "ERROR", "Gửi mã OTP không thành công");
                 }
             }
         }

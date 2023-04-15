@@ -21,9 +21,9 @@ public class UpdateOrderSatus extends HttpServlet {
         OrderService.getInstance().updateStatus(id,0);
         response.sendRedirect("my-orders.jsp");
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" đã chỉnh sửa trạng thái đơn hàng");
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" đã chỉnh sửa trạng thái đơn hàng");
     }
 
     @Override

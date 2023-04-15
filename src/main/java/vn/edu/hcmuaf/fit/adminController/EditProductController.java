@@ -47,17 +47,17 @@ public class EditProductController extends HttpServlet {
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm sản phẩm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm sản phẩm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
         }
         response.sendRedirect("list-products");
     }

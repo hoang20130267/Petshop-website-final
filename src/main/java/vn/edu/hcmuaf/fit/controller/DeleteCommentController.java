@@ -23,8 +23,8 @@ public class DeleteCommentController extends HttpServlet {
         String id = request.getParameter("id");
         new CommentDAO().RemoveComment(id);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" xóa bình luận");
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" xóa bình luận");
     }
 }

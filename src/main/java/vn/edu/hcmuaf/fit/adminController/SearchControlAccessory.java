@@ -93,9 +93,9 @@ public class SearchControlAccessory extends HttpServlet {
                     "              </div>\n" +
                     "            </div>");
         }
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" tìm kiếm sản phẩm phụ kiện với nội dung là "+txtSearch);
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" tìm kiếm sản phẩm phụ kiện với nội dung là "+txtSearch);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

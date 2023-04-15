@@ -33,7 +33,7 @@ public class CheckoutController extends HttpServlet {
         request.getSession().setAttribute("cart",new Cart());
         response.sendRedirect("my-orders.jsp");
 
-        LogDAO logs = new LogDAO();
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" chuyển qua mục thanh toán");
+//        LogDAO logs = new LogDAO();
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" chuyển qua mục thanh toán");
     }
 }

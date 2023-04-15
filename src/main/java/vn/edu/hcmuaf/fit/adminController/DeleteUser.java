@@ -23,9 +23,9 @@ public class DeleteUser extends HttpServlet {
         dao.deleteUser(id);
         response.sendRedirect("index.jsp");
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa người dùng "+dao.getUserDetail(id).getUsername());
+//        LogDAO logs = new LogDAO();
+//        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa người dùng "+dao.getUserDetail(id).getUsername());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

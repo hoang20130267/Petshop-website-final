@@ -35,18 +35,18 @@ public class ForgotPasswordController extends HttpServlet {
             request.setAttribute("forgotError", "Hãy nhập email!");
             request.getRequestDispatcher("forget.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "ERROR", "Nguời dùng chưa nhập email để thay đổi mật khẩu");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "ERROR", "Nguời dùng chưa nhập email để thay đổi mật khẩu");
         } else {
             String id_user = ForgotPasswordService.getInstance().checkEmailExits(email);
             if (id_user.equals("")) {
                 request.setAttribute("forgotError", "Email chưa được liên kết với tài khoản. Hãy đăng ký!");
                 request.getRequestDispatcher("forget.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Email ngươi dùng chưa liên kết với tài khoản");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Email ngươi dùng chưa liên kết với tài khoản");
             } else {
                 ForgotPassword forgot = (ForgotPassword) request.getSession().getAttribute("forgot");
                 boolean test = ms.sendEmailForgot(forgot);
@@ -54,15 +54,15 @@ public class ForgotPasswordController extends HttpServlet {
                 if (test) {
                     response.sendRedirect("ConfirmOTP.jsp");
 
-                    LogDAO logs = new LogDAO();
-                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang bước nhập OTP để thay đổi mật khẩu");
+//                    LogDAO logs = new LogDAO();
+//                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                    logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang bước nhập OTP để thay đổi mật khẩu");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
 
-                    LogDAO logs = new LogDAO();
-                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "INFOR", "Code gửi đến người dùng không thành công");
+//                    LogDAO logs = new LogDAO();
+//                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                    logs.createUserLog(userAccount.getId(), "INFOR", "Code gửi đến người dùng không thành công");
                 }
             }
         }

@@ -25,8 +25,8 @@ public class RemoveCateProduct extends HttpServlet {
         DetailService.getInstance().removeCateProduct(id);
         response.sendRedirect("list-category.jsp");
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa thể loại tin tức "+DetailService.getInstance().getCateProductById(id).getCatName());
+//        LogDAO logs = new LogDAO();
+//        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa thể loại tin tức "+DetailService.getInstance().getCateProductById(id).getCatName());
     }
 }

@@ -44,9 +44,9 @@ public class SearchBlog extends HttpServlet {
                     "                        </div>");
         }
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm tin tức với nội dung là "+txtSearch);
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm tin tức với nội dung là "+txtSearch);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

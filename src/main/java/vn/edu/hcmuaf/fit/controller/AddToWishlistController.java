@@ -30,8 +30,8 @@ public class AddToWishlistController extends HttpServlet {
         request.getSession().setAttribute("wishlist", wishlist);
         request.setAttribute("productDetails", product);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã thêm sản phẩm "+ product.getProductName() +" vào yêu thích");
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã thêm sản phẩm "+ product.getProductName() +" vào yêu thích");
     }
 }

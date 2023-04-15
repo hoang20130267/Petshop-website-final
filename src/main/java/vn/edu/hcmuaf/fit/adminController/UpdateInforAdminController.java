@@ -44,16 +44,16 @@ public class UpdateInforAdminController extends HttpServlet {
                 removeOldImg(oldImg, request);
                 copyImage(request, image);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
             } else {
                 request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
                 request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập lại mật khẩu không chính xác");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập lại mật khẩu không chính xác");
             }
         } else {
             user.setAvt("img/user/"+ image);
@@ -61,9 +61,9 @@ public class UpdateInforAdminController extends HttpServlet {
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
         }
     }
 

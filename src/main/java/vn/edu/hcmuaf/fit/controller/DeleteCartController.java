@@ -30,9 +30,9 @@ public class DeleteCartController extends HttpServlet {
         request.getSession().setAttribute("cart", cart);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        ProductService product = new ProductService();
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã xóa sản phẩm "+ product.getProductDetail(idP).getProductName() +" khỏi giỏ hàng");
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        ProductService product = new ProductService();
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã xóa sản phẩm "+ product.getProductDetail(idP).getProductName() +" khỏi giỏ hàng");
     }
 }

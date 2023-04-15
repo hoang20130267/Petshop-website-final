@@ -23,9 +23,9 @@ public class Product_detail extends HttpServlet {
         request.setAttribute("detail",detail);
         request.getRequestDispatcher("product-details.jsp").forward(request,response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" vào xem chi tiết sản phẩm "+ dao.getProductDetail(id).getProductName());
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" vào xem chi tiết sản phẩm "+ dao.getProductDetail(id).getProductName());
     }
 
     @Override

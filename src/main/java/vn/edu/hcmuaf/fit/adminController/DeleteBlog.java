@@ -26,9 +26,9 @@ public class DeleteBlog extends HttpServlet {
         service.deleteBlog(id);
         response.sendRedirect("list-blog.jsp");
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa tin tức "+service.getContent(id).getBlogName());
+//        LogDAO logs = new LogDAO();
+//        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa tin tức "+service.getContent(id).getBlogName());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

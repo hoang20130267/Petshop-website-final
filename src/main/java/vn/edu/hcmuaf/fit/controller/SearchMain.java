@@ -29,8 +29,8 @@ public class SearchMain extends HttpServlet {
         request.setAttribute("list", list);
         request.getRequestDispatcher("ajax/ajax_searchmain.jsp").forward(request, response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm sản phẩm với nội dung là "+txtSearch);
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+userAccount.getUsername()+" tìm kiếm sản phẩm với nội dung là "+txtSearch);
     }
 }

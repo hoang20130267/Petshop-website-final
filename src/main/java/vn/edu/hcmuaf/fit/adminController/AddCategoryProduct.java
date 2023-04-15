@@ -29,15 +29,15 @@ public class AddCategoryProduct extends HttpServlet {
         if(cid==""){
             DetailService.getInstance().insertCateProduct(AdminUser.getId(),CateName,cateparent);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm "+CateName+" vào thể loại sản phẩm mới");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm "+CateName+" vào thể loại sản phẩm mới");
         }else {
             DetailService.getInstance().updateCateProduct(cid,AdminUser.getId(),CateName,cateparent,status);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thể loại sản phẩm "+CateName);
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thể loại sản phẩm "+CateName);
         }
         response.sendRedirect("list-category.jsp");
     }

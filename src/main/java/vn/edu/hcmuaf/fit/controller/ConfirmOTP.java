@@ -34,9 +34,9 @@ public class ConfirmOTP extends HttpServlet {
                 request.setAttribute("errorOTP", error);
                 request.getRequestDispatcher("ConfirmOTP.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập thiếu mã OTP");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập thiếu mã OTP");
             } else {
                 if (code.equals(forgot.getCode())) {
                     response.sendRedirect("newPassword.jsp");
@@ -44,9 +44,9 @@ public class ConfirmOTP extends HttpServlet {
                     request.setAttribute("errorOTP", "Mã xác nhận không đúng");
                     request.getRequestDispatcher("ConfirmOTP.jsp").forward(request, response);
 
-                    LogDAO logs = new LogDAO();
-                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                    logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập sai mã OTP");
+//                    LogDAO logs = new LogDAO();
+//                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                    logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+userAccount.getUsername()+" nhập sai mã OTP");
                 }
             }
 

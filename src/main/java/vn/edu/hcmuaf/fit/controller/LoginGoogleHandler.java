@@ -72,9 +72,9 @@ public class LoginGoogleHandler extends HttpServlet {
                 request.getSession().setAttribute("cart", new Cart());
                 request.getSession().setAttribute("wishlist", new Wishlist());
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đã đăng nhập bằng google");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đã đăng nhập bằng google");
             } else {
                 SignUpService.getInstance().insertUser(userGoogle.getName(), Utils.maHoaMK(userGoogle.getId()), userGoogle.getId(), userGoogle.getName(), userGoogle.getEmail(), null);
                 String id = UserService.getInstance().getIdUserByName(userGoogle.getEmail());

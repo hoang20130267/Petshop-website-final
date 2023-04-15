@@ -24,9 +24,9 @@ public class LogoutController extends HttpServlet {
             session.invalidate();
             response.sendRedirect("login.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đăng xuất khỏi hệ thống");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đăng xuất khỏi hệ thống");
         }
     }
 }

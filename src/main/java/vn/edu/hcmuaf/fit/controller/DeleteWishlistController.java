@@ -29,9 +29,9 @@ public class DeleteWishlistController extends HttpServlet {
         request.getSession().setAttribute("wishlist", wishlist);
         request.getRequestDispatcher("ajax/wishlist.jsp").forward(request, response);
 
-        LogDAO logs = new LogDAO();
-        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-        ProductService product = new ProductService();
-        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã xóa sản phẩm "+ product.getProductDetail(idP).getProductName() +" khỏi yêu thích");
+//        LogDAO logs = new LogDAO();
+//        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//        ProductService product = new ProductService();
+//        logs.createUserLog(userAccount.getId(), "INFOR", "Khách hàng "+userAccount.getUsername()+" đã xóa sản phẩm "+ product.getProductDetail(idP).getProductName() +" khỏi yêu thích");
     }
 }

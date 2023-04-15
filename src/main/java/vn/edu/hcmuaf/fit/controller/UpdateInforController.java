@@ -43,16 +43,16 @@ public class UpdateInforController extends HttpServlet {
                 removeOldImg(oldImg, request);
                 copyImage(request, image);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+user.getUsername()+" chỉnh sửa thông tin thành công");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+user.getUsername()+" chỉnh sửa thông tin thành công");
             } else {
                 request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
                 request.getRequestDispatcher("infor-user.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+user.getUsername()+" nhập lại mật khẩu không chính xác");
+//                LogDAO logs = new LogDAO();
+//                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//                logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng "+user.getUsername()+" nhập lại mật khẩu không chính xác");
             }
         } else {
             user.setAvt("img/user/"+ image);
@@ -60,9 +60,9 @@ public class UpdateInforController extends HttpServlet {
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-user.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+user.getUsername()+" chỉnh sửa thông tin thành công");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng "+user.getUsername()+" chỉnh sửa thông tin thành công");
         }
     }
 

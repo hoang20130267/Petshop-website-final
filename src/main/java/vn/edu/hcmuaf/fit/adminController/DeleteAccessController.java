@@ -22,9 +22,9 @@ public class DeleteAccessController extends HttpServlet {
         dao.deleteProduct(id);
         response.sendRedirect("list-accessory");
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa sản phẩm phụ kiện "+dao.getProductDetail(id).getProductName());
+//        LogDAO logs = new LogDAO();
+//        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa sản phẩm phụ kiện "+dao.getProductDetail(id).getProductName());
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

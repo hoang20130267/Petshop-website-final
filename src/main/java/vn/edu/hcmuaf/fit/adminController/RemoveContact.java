@@ -22,8 +22,8 @@ public class RemoveContact extends HttpServlet {
         String id = request.getParameter("id");
         ContactService.getInstance().removeContact(id);
 
-        LogDAO logs = new LogDAO();
-        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa liên hệ");
+//        LogDAO logs = new LogDAO();
+//        UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//        logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã xóa liên hệ");
     }
 }

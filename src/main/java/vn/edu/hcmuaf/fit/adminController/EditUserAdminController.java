@@ -43,9 +43,9 @@ public class EditUserAdminController extends HttpServlet {
         if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
             request.setAttribute("addAdminerror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
         } else {
             if (exe != null) {
                 request.setAttribute("addAdminerror", exe);
@@ -54,17 +54,17 @@ public class EditUserAdminController extends HttpServlet {
                 request.setAttribute("addAdminerror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
+//                LogDAO logs = new LogDAO();
+//                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             } else {
                     new CustomerUserDAO().insertAdmin(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-admin.jsp");
 
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm admin mới");
+//                LogDAO logs = new LogDAO();
+//                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm admin mới");
                     }
             }
         }else{
@@ -72,9 +72,9 @@ public class EditUserAdminController extends HttpServlet {
             response.sendRedirect("list-admin.jsp");
 
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin admin");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin admin");
         }
     }
 

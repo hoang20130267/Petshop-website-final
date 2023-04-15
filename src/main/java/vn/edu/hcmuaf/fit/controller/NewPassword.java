@@ -31,16 +31,16 @@ public class NewPassword extends HttpServlet {
             ForgotPasswordService.getInstance().updatePasswordFromEmail(newPass,forgot.getEmail());
             response.sendRedirect("login.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đổi mật khẩu thành công");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đổi mật khẩu thành công");
         }else {
             request.setAttribute("errorConfirm", "Mật khẩu nhập lại không đúng! ");
             request.getRequestDispatcher("newPassword.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
-            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng đổi mật khẩu không thành công");
+//            LogDAO logs = new LogDAO();
+//            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+//            logs.createUserLog(userAccount.getId(), "ERROR", "Người dùng đổi mật khẩu không thành công");
         }
     }
 }

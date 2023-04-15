@@ -44,9 +44,9 @@ public class EditUserCustomerController extends HttpServlet {
             request.setAttribute("addUsererror", "Không được bỏ trống!");
             request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập thiếu thông tin");
         } else {
             if (exe != null) {
                 request.setAttribute("addUsererror", exe);
@@ -55,25 +55,25 @@ public class EditUserCustomerController extends HttpServlet {
                 request.setAttribute("addUsererror", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
+//                LogDAO logs = new LogDAO();
+//                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createAdminLog(adminAccount.getId(), "ERROR", "Admin "+adminAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             } else {
                     new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-user.jsp");
 
-                LogDAO logs = new LogDAO();
-                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm người dùng mới");
+//                LogDAO logs = new LogDAO();
+//                UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//                logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã thêm người dùng mới");
             }
         }
         }else{
             new CustomerUserDAO().updateCustomer(id, username, passwd, fullname, email, phone, address, status);
             response.sendRedirect("list-user.jsp");
 
-            LogDAO logs = new LogDAO();
-            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin người dùng");
+//            LogDAO logs = new LogDAO();
+//            UserAccount adminAccount = (UserAccount) request.getSession().getAttribute("admin");
+//            logs.createAdminLog(adminAccount.getId(), "INFOR", "Admin "+adminAccount.getUsername()+" đã chỉnh sửa thông tin người dùng");
         }
     }
 }
