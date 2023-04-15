@@ -1,29 +1,40 @@
 package vn.edu.hcmuaf.fit.beans;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class Log {
-    private static final Logger Log = LogManager.getLogger(Log.class);
+    private String date;
+    private String level;
+    private String message;
 
-    //Log thông báo
-    public static void info (String message) {
-        Log.info(message);
+    public Log() {
     }
-    //Log cảnh báo
-    public static void warn (String message) {
-        Log.warn(message);
+
+    public Log(String date, String level, String message) {
+        this.date = date;
+        this.level = level;
+        this.message = message;
     }
-    //Log lỗi
-    public static void error (String message) {
-        Log.error(message);
+
+    public String getDate() {
+        return date;
     }
-    //Log fantal level
-    public static void fatal (String message) {
-        Log.fatal(message);
+
+    public void setDate(String date) {
+        this.date = date;
     }
-    //Log gỡ lỗi
-    public static void debug (String message) {
-        Log.debug(message);
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

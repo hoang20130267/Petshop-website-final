@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -42,15 +43,27 @@ public class UpdateInforAdminController extends HttpServlet {
                 request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
                 removeOldImg(oldImg, request);
                 copyImage(request, image);
+
+                LogService logService= new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
             } else {
                 request.setAttribute("passError", "Nhập lại mật khẩu không chính xác!");
                 request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
+
+                LogService logService= new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" nhập sai mật khẩu nhập lại");
             }
         } else {
             user.setAvt("img/user/"+ image);
             new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass);
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" cập nhật thông tin thành công");
         }
     }
 

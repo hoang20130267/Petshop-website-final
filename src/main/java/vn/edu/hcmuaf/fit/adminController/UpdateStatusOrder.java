@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.adminController;
 
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.OrderService;
 
 import javax.servlet.*;
@@ -38,8 +40,16 @@ public class UpdateStatusOrder extends HttpServlet {
 
         if(status!=newstatus){
             OrderService.getInstance().updateStatus(orderId,newstatus);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Đã cập nhật thông tin đơn hàng thành công");
         }else if(delivery!=newdelivery){
             OrderService.getInstance().updateDelivery(orderId,newdelivery);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Đã cập nhật thông tin vận chuyển thành công");
         }
         response.sendRedirect("products-status.jsp");
     }

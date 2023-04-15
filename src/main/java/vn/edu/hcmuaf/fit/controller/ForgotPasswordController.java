@@ -2,7 +2,9 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.ForgotPassword;
 import vn.edu.hcmuaf.fit.beans.SignUp;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.services.ForgotPasswordService;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.MailService;
 import vn.edu.hcmuaf.fit.services.Utils;
 
@@ -32,19 +34,35 @@ public class ForgotPasswordController extends HttpServlet {
         if (email == "") {
             request.setAttribute("forgotError", "Hãy nhập email!");
             request.getRequestDispatcher("forget.jsp").forward(request, response);
+
+            LogService logService= new LogService();
+            UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+            logService.createUserLog(user.getId(), "ERROR", "Người dùng chưa nhập email");
         } else {
             String id_user = ForgotPasswordService.getInstance().checkEmailExits(email);
             if (id_user.equals("")) {
                 request.setAttribute("forgotError", "Email chưa được liên kết với tài khoản. Hãy đăng ký!");
                 request.getRequestDispatcher("forget.jsp").forward(request, response);
+
+                LogService logService= new LogService();
+                UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+                logService.createUserLog(user.getId(), "ERROR", "Email người dùng chưa được liên kết với tài khoản");
             } else {
                 ForgotPassword forgot = (ForgotPassword) request.getSession().getAttribute("forgot");
                 boolean test = ms.sendEmailForgot(forgot);
                 //check if the email send successfully
                 if (test) {
                     response.sendRedirect("ConfirmOTP.jsp");
+
+                    LogService logService= new LogService();
+                    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+                    logService.createUserLog(user.getId(), "INFOR", "Người dùng chuyển sang nhập mã OTP");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
+
+                    LogService logService= new LogService();
+                    UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+                    logService.createUserLog(user.getId(), "ERROR", "Mã OTP gửi không thành công đến người dùng");
                 }
             }
         }
