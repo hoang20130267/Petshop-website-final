@@ -1,7 +1,10 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.beans.Wishlist;
+import vn.edu.hcmuaf.fit.services.LogService;
+import vn.edu.hcmuaf.fit.services.ProductService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,6 +27,10 @@ public class DeleteWishlistController extends HttpServlet {
         System.out.println(idP);
         wishlist.getData().remove(idP);
         request.getSession().setAttribute("wishlist", wishlist);
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã xóa "+new ProductService().getProductDetail(idP)+" khỏi yêu thích");
         request.getRequestDispatcher("ajax/wishlist.jsp").forward(request, response);
     }
 }

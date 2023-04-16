@@ -1,9 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
-import vn.edu.hcmuaf.fit.beans.Detail;
-import vn.edu.hcmuaf.fit.beans.Log;
 import vn.edu.hcmuaf.fit.beans.Product;
-import vn.edu.hcmuaf.fit.controller.Category;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
 import java.util.List;
@@ -339,7 +336,6 @@ public class ProductDAO {
     }
 
     public static String taoIDProduct() {
-        Log.info("Tạo id bất kì");
         String numbers = "0123456789";
         StringBuilder stringBuilder = new StringBuilder("P");
         Random rd = new Random();

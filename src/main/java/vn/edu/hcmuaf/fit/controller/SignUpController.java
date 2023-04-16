@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.SignUp;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.MailService;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 import vn.edu.hcmuaf.fit.services.Utils;
@@ -38,6 +40,10 @@ public class SignUpController extends HttpServlet {
         if (fullname == "" || email == "" || user == "" || passwd == "" || confirmpassword == "") {
             request.setAttribute("registerError", "Không được bỏ trống!");
             request.getRequestDispatcher("signup.jsp").forward(request, response);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+            logService.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập thiếu thông tin đăng ký");
         } else {
             String exe = SignUpService.getInstance().checkUser(email, user);
             if (exe != null) {
@@ -46,6 +52,10 @@ public class SignUpController extends HttpServlet {
             } else if (!passwd.equals(confirmpassword)) {
                 request.setAttribute("registerError", "Mật khẩu nhập lại không đúng!");
                 request.getRequestDispatcher("signup.jsp").forward(request, response);
+
+                LogService logService= new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Người dùng nhập sai mật khẩu nhập lại");
             } else {
                 SignUp users = (SignUp) request.getSession().getAttribute("Signup");
                 boolean test = ms.sendEmailSignUp(users);
@@ -54,8 +64,16 @@ public class SignUpController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("authcode", users);
                     response.sendRedirect("verify.jsp");
+
+                    LogService logService= new LogService();
+                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                    logService.createUserLog(userAccount.getId(), "INFOR", "Người dùng chuyển sang trang xác thực");
                 } else {
                     System.out.println("Gửi code đến email không thành công!");
+
+                    LogService logService= new LogService();
+                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                    logService.createUserLog(userAccount.getId(), "ERROR", "Mã code gửi đến người dùng không thành công");
                 }
             }
         }

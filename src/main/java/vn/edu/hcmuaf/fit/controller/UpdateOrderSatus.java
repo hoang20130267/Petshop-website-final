@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Orders;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.OrderService;
 
 import javax.servlet.*;
@@ -18,6 +20,10 @@ public class UpdateOrderSatus extends HttpServlet {
         String id = request.getParameter("orderId");
         OrderService.getInstance().updateStatus(id,0);
         response.sendRedirect("my-orders.jsp");
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Cập nhật order thành công");
     }
 
     @Override

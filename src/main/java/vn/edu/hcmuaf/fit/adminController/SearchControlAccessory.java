@@ -1,7 +1,9 @@
 package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -91,6 +93,9 @@ public class SearchControlAccessory extends HttpServlet {
                     "              </div>\n" +
                     "            </div>");
         }
+        LogService logService= new LogService();
+        UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã tìm kiếm sản phẩm phụ kiện với từ khóa "+txtSearch);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

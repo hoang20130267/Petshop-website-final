@@ -6,6 +6,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import vn.edu.hcmuaf.fit.beans.*;
+import vn.edu.hcmuaf.fit.dao.LogDAO;
 import vn.edu.hcmuaf.fit.services.SignUpService;
 import vn.edu.hcmuaf.fit.services.UserService;
 import vn.edu.hcmuaf.fit.services.Utils;
@@ -70,6 +71,10 @@ public class LoginGoogleHandler extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("cart", new Cart());
                 request.getSession().setAttribute("wishlist", new Wishlist());
+
+                LogDAO logs = new LogDAO();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
+                logs.createUserLog(userAccount.getId(), "INFOR", "Người dùng đã đăng nhập bằng google");
             } else {
                 SignUpService.getInstance().insertUser(userGoogle.getName(), Utils.maHoaMK(userGoogle.getId()), userGoogle.getId(), userGoogle.getName(), userGoogle.getEmail(), null);
                 String id = UserService.getInstance().getIdUserByName(userGoogle.getEmail());
