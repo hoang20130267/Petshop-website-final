@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.services;
 
+import vn.edu.hcmuaf.fit.beans.AdminRole;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.dao.AdminRoleDAO;
 import vn.edu.hcmuaf.fit.dao.CustomerUserDAO;
 
 public class UserService {
@@ -36,5 +38,12 @@ public class UserService {
 
     public boolean isUserInOrder(String userId){
         return new CustomerUserDAO().isUserInOrder(userId);
+    }
+
+    public boolean addRoleadmin(String idAdmin,String table, int permission){
+        return new AdminRoleDAO(idAdmin).addRoleadmin(table,permission);
+    }
+    public AdminRole getAdminRole(String idAdmin,String table, int per){
+        return new AdminRoleDAO(idAdmin).getAdminRole(table,per);
     }
 }
