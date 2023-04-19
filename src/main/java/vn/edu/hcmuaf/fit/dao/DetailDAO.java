@@ -2,9 +2,9 @@ package vn.edu.hcmuaf.fit.dao;
 
 import vn.edu.hcmuaf.fit.beans.Detail;
 import vn.edu.hcmuaf.fit.beans.Product;
+import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -261,5 +261,4 @@ public class DetailDAO {
                 "WHERE c.ParentID IS NOT NULL AND ParentID=3").mapToBean(Detail.class).stream().collect(Collectors.toList()));
 
     }
-
 }

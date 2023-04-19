@@ -72,7 +72,7 @@ public class LoginGoogleHandler extends HttpServlet {
                 request.getSession().setAttribute("wishlist", new Wishlist());
             } else {
                 SignUpService.getInstance().insertUser(userGoogle.getName(), Utils.maHoaMK(userGoogle.getId()), userGoogle.getId(), userGoogle.getName(), userGoogle.getEmail(), null);
-                String id = UserService.getInstance().getIdUserByName(userGoogle.getEmail());
+                String id = UserService.getInstance().getIdUserByName(userGoogle.getName());
                 UserService.getInstance().updateInforUser(id, userGoogle.getName(), null, null,userGoogle.getId(),null);
                 user = UserService.getInstance().getUserByEmail(userGoogle.getEmail());
                 request.getSession().setAttribute("user", user);
