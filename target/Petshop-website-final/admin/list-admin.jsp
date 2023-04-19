@@ -306,7 +306,7 @@
                                             for (AdminRole role : admin.getRole()) {
                                                 if (role.getTableName().equals("adminAccount") && role.getPermission() == 2) {
                                         %>
-                                        <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                                        <a class="btn_2 edit btn btn-primary" href="add-admin.jsp?idUser=<%=c.getId()%>">Sửa</a>
                                         <%
                                             }
                                             if (role.getTableName().equals("adminAccount") && role.getPermission() == 3) {
