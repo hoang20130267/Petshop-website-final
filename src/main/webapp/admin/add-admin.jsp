@@ -1,6 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="java.util.List" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.LoginService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,9 +53,9 @@
         if (!check) {%>
 <script>
     window.location.href = 'index.jsp';
-    alert("Tài khoản không có quyền này!" );
+    alert("Tài khoản không có quyền này!");
 </script>
-<%    } else {
+<% } else {
 %>
 <body class="">
 <!-- [ Pre-loader ] start -->
@@ -157,7 +159,8 @@
                             class="pc-mtext">Thêm danh mục</span><span class="pc-arrow"><i
                             data-feather="chevron-right"></i></span></a>
                     <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a></li>
+                        <li class="pc-item"><a class="pc-link" href="add-category-product.jsp">Danh mục sản phẩm</a>
+                        </li>
                         <li class="pc-item"><a class="pc-link" href="add-category-blog.jsp">Danh mục tin tức</a></li>
                     </ul>
                 </li>
@@ -191,6 +194,13 @@
                     <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
                             class="pc-mtext">Bình luận</span></a>
                 </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý liên hệ</label>
+                </li>
+                <li class="pc-item">
+                    <a href="list-contact.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span
+                            class="pc-mtext">Liên hệ</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -222,70 +232,77 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <%if (request.getParameter("idUser") != null) {%>
-            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa admin</h2>
+            <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Chỉnh sửa
+                admin</h2>
             <hr>
-            <% }else{ %>
+            <% } else { %>
             <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm admin
                 mới</h2>
             <hr>
             <% } %>
             <% String error = (String) request.getAttribute("addAdminerror"); %>
             <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= error == null ? "" : error%>
-            <% UserAccount users = null;
+                    <% UserAccount users = null;
             if(request.getParameter("idUser") != null)
                     users = UserService.getInstance().getUserDetail(request.getParameter("idUser"));
             %>
             <form method="post" action="EditUserAdminController">
-            <input type="text" id="id" name="id"
-                   value="<%=(users != null) ? request.getParameter("idUser") : ""%>"
-                   style="display: none">
+                <input type="text" id="id" name="id"
+                       value="<%=(users != null) ? request.getParameter("idUser") : ""%>"
+                       style="display: none">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Tài khoản</label>
-                        <input type="text" class="form-control" id="username" name="username" value="<%=(users != null) ? users.getUsername() : ""%>"
+                        <input type="text" class="form-control" id="username" name="username"
+                               value="<%=(users != null) ? users.getUsername() : ""%>"
                                placeholder="Tên tài khoản">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputPassword4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email" value="<%=(users != null) ? users.getEmail() : ""%>">
+                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email"
+                               value="<%=(users != null) ? users.getEmail() : ""%>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="validationTooltip05" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="validationTooltip05" name="phone" value="<%=(users != null) ? users.getPhone() : ""%>" required
+                        <input type="text" class="form-control" id="validationTooltip05" name="phone"
+                               value="<%=(users != null) ? users.getPhone() : ""%>" required
                                placeholder="+84">
 
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Họ và tên</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" value="<%=(users != null) ? users.getName() : ""%>">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên"
+                               value="<%=(users != null) ? users.getName() : ""%>">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-3 position-relative">
                         <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd" value="<%=(users != null) ? users.getPass() : ""%>"
+                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                               value="<%=(users != null) ? users.getPass() : ""%>"
                                placeholder="Mật khẩu">
                     </div>
-                    <div class="col-md-3 position-relative">
+                    <div class="col-md-3 </div>">
                         <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" value="<%=(users != null) ? users.getPass() : ""%>" required
+                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm"
+                               value="<%=(users != null) ? users.getPass() : ""%>" required
                                placeholder="Nhập lại mật khẩu">
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
                         <select class="form-select" id="validationTooltip04" name="address" required>
-                            <% if(request.getParameter("idUser") != null) {
-                                if(users.getAddress().equals("TP.HCM")) {%>
+                            <% if (request.getParameter("idUser") != null) {
+                                if (users.getAddress().equals("TP.HCM")) {%>
                             <option value="TP.HCM" selected>TP.HCM</option>
                             <option value="Hà nội">Hà Nội</option>
-                                <%} else {%>
+                            <%} else {%>
                             <option value="TP.HCM">TP.HCM</option>
                             <option value="Hà nội" selected>Hà Nội</option>
                             <% }
-                            }else{%>
+                            } else {%>
                             <option value="TP.HCM">TP.HCM</option>
                             <option value="Hà nội">Hà Nội</option>
                             <% } %>
@@ -297,15 +314,15 @@
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
                         <select class="form-select" id="validationTooltip04" name="status" required>
-                            <% if(request.getParameter("idUser") != null) {
-                                if(users.isStatus() == false) {%>
+                            <% if (request.getParameter("idUser") != null) {
+                                if (users.isStatus() == false) {%>
                             <option>Mở khóa</option>
                             <option selected>Khóa</option>
                             <%} else {%>
                             <option selected>Mở khóa</option>
                             <option>Khóa</option>
                             <% }
-                            }else{%>
+                            } else {%>
                             <option selected>Mở khóa</option>
                             <option>Khóa</option>
                             <% } %>
@@ -315,24 +332,122 @@
                         <%--            </div>--%>
                     </div>
                 </div>
+
                 <%--        <div class="form-group">--%>
                 <%--          <div class="form-check" style="margin-top: 10px;">--%>
                 <%--            <input class="form-check-input" type="checkbox" id="gridCheck">--%>
                 <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
                 <%--          </div>--%>
                 <%--        </div>--%>
-            <%if (request.getParameter("idUser") != null) {%>
-                    <button type="submit" class="btn  btn-primary"
-                            style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                        Sửa admin
-                    </button>
-            <%} else {%>
-            <button type="submit" class="btn  btn-primary"
-                    style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                Thêm admin
-            </button>
-            <%}%>
+                <%if (request.getParameter("idUser") != null) {%>
+                <button type="submit" class="btn  btn-primary"
+                        style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+                    Lưu thay đổi
+                </button>
+                <%} else {%>
+                <button type="submit" class="btn  btn-primary"
+                        style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+                    Thêm admin
+                </button>
+                <%}%>
             </form>
+
+            <div class="row mt-3">
+                <div class="form-group col-md-6">
+                    <label class="form-label">Quyền hiện tại</label>
+                    <table class="table table-bordered border-dark" id="table-role">
+                        <tr>
+                            <th class="text-md-center border-dark border-1">Bảng</th>
+                            <th class="text-md-center border-dark border-1">Quyền</th>
+                            <th class="text-md-center border-dark border-1"> Xóa</th>
+                        </tr>
+                        <%
+                            List<AdminRole> listrole = LoginService.getInstance().getListRoleAdmin(request.getParameter("idUser"));
+                            for (AdminRole role : listrole) {
+                                String table = "";
+                                String permission = "";
+                                switch (role.getTableName()) {
+                                    case "product":
+                                        table = "Quản lý sản phẩm";
+                                        break;
+                                    case "blog":
+                                        table = "Quản lý tin tức";
+                                        break;
+                                    case "order":
+                                        table = "Quản lý đơn hàng";
+                                        break;
+                                    case "productCategory":
+                                        table = "Quản lý danh mục sản phẩm";
+                                        break;
+                                    case "blogCategory":
+                                        table = "Quản lý danh mục tin tức";
+                                        break;
+                                    case "adminAccount":
+                                        table = "Quản lý tài khoản admin";
+                                        break;
+                                    case "userAccount":
+                                        table = "Quản lý tài khoản người dùng";
+                                        break;
+                                    case "comment":
+                                        table = "Quản lý bình luận";
+                                        break;
+                                    case "contact":
+                                        table = "Quản lý liên hệ";
+                                        break;
+                                }
+                                switch (role.getPermission()) {
+                                    case 1:
+                                        permission = "Thêm";
+                                        break;
+                                    case 2:
+                                        permission = "Sửa";
+                                        break;
+                                    case 3:
+                                        permission = "Xóa";
+                                        break;
+                                }
+                        %>
+                        <tr>
+                            <td class="text-center border-dark border-1"><%=table%>
+                            </td>
+                            <td class="text-center border-dark border-1"><%=permission%>
+                            </td>
+                            <td class="text-center border-dark border-1">
+                                <a class="btn_2 edit btn btn-primary" href="#">Xóa</a>
+                            </td>
+                        </tr>
+                        <% }%>
+                    </table>
+                </div>
+                <div class="form-group col-md-6 m-t-30">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="select-table">Bảng</label>
+                        <select class="form-select" id="select-table">
+                            <option value="none" selected>Chọn</option>
+                            <option value="product">Quản lý sản phẩm</option>
+                            <option value="blog">Quản lý tin tức</option>
+                            <option value="order">Quản lý đơn hàng</option>
+                            <option value="productCategory">Quản lý danh mục sản phẩm</option>
+                            <option value="blogCategory">Quản lý danh mục tin tức</option>
+                            <option value="adminAccount">Quản lý tài khoản admin</option>
+                            <option value="userAccount">Quản lý tài khoản người dùng</option>
+                            <option value="comment">Quản lý bình luận</option>
+                            <option value="contact">Quản lý liên hệ</option>
+
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="select-per">Quyền</label>
+                        <select class="form-select" id="select-per">
+                            <option value="0" selected>Chọn</option>
+                            <option value="1">Thêm</option>
+                            <option value="2">Sửa</option>
+                            <option value="3">Xóa</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary " type="submit" id="add-role">Thêm</button>
+                </div>
+            </div>
         </div>
         <!-- [ Main Content ] end -->
     </div>
@@ -354,6 +469,36 @@
 <script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
 <script src="assets/js/pages/dashboard-sale.js"></script>
+<script>
+    $("#add-role").click(function (e) {
+        e.preventDefault();
+        let idAdmin = $("#id").val();
+        let table = $("#select-table").val();
+        let per = $("#select-per").val();
+        console.log(idAdmin)
+        console.log(table)
+        console.log(per)
+        if (table === "none" || per === 0) {
+            alert("Vui lòng chọn Bảng và Quyền");
+        } else {
+            $.ajax({
+                type: 'get',
+                url: '/Petshop_website_final_war/admin/AddRoleAdmin',
+                data: {
+                    idAdmin: idAdmin,
+                    table: table,
+                    per: per
+                },
+                success: function (data) {
+                    window.location.href="http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
+                },
+                error: function (data) {
+                    window.location.href="http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
+                }
+            })
+        }
+    })
+</script>
 </body>
 
 </html>

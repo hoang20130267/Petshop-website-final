@@ -25296,3 +25296,7 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
     width: 100%;
     height: 250px;
 }
+
+.update-status-order{
+    display: inline;
+}

@@ -210,6 +210,12 @@
                 <li class="pc-item">
                     <a href="list-comment.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Bình luận</span></a>
                 </li>
+                <li class="pc-item pc-caption">
+                    <label>Quản lý liên hệ</label>
+                </li>
+                <li class="pc-item">
+                    <a href="list-contact.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Liên hệ</span></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -300,7 +306,7 @@
                                             for (AdminRole role : admin.getRole()) {
                                                 if (role.getTableName().equals("adminAccount") && role.getPermission() == 2) {
                                         %>
-                                        <a class="btn_2 edit btn btn-primary" href="add-user.jsp?idUser=<%=c.getId()%>">Sửa</a>
+                                        <a class="btn_2 edit btn btn-primary" href="add-admin.jsp?idUser=<%=c.getId()%>">Sửa</a>
                                         <%
                                             }
                                             if (role.getTableName().equals("adminAccount") && role.getPermission() == 3) {

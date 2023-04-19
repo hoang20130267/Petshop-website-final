@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -45,10 +46,18 @@ public class EditProductController extends HttpServlet {
         dao.insertProduct(AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice);
             removeOldImg(oldImg, request);
             copyImage(request, pimage);
+
+            LogService logService= new LogService();
+            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa sản phẩm thú cưng "+dao.getProductDetail(pid).getProductName());
         }
         response.sendRedirect("list-products");
     }

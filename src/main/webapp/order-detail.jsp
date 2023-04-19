@@ -320,8 +320,6 @@
   }%>
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 
-<!-- Hero Section Begin -->
-<!-- Hero Section End -->
 
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg"

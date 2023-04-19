@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.beans.Cart;
 import vn.edu.hcmuaf.fit.beans.UserAccount;
+import vn.edu.hcmuaf.fit.services.LogService;
 import vn.edu.hcmuaf.fit.services.OrderService;
 
 import javax.servlet.*;
@@ -31,5 +32,9 @@ public class CheckoutController extends HttpServlet {
         OrderService.getInstance().insertOrder(userAccount.getId(),fulname,phone,address,email,notice,cart);
         request.getSession().setAttribute("cart",new Cart());
         response.sendRedirect("my-orders.jsp");
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã chuyển sang mục thanh toán");
     }
 }

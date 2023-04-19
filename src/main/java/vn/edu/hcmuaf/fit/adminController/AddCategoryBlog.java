@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.adminController;
 
 import vn.edu.hcmuaf.fit.beans.UserAccount;
 import vn.edu.hcmuaf.fit.services.DetailService;
+import vn.edu.hcmuaf.fit.services.LogService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -27,8 +28,14 @@ public class AddCategoryBlog extends HttpServlet {
 
         if (cbid == "") {
             DetailService.getInstance().insertCateBlog(AdminUser.getId(), CateName, cateparent);
+
+            LogService logService= new LogService();
+            logService.createUserLog(AdminUser.getId(), "INFOR", "Admin "+AdminUser.getUsername()+" đã thêm "+CateName+" làm danh mục tin tức mới");
         } else {
             DetailService.getInstance().updateCateBlog(cbid, AdminUser.getId(), CateName, cateparent, status);
+
+            LogService logService= new LogService();
+            logService.createUserLog(AdminUser.getId(), "INFOR", "Admin "+AdminUser.getUsername()+" đã chỉnh sửa danh mục tin tức "+CateName);
         }
         response.sendRedirect("list-category.jsp");
     }
