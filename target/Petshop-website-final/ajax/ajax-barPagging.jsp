@@ -9,6 +9,17 @@
      li.active {
         background: blue;
     }
+     ul.pagination{
+         text-align: center;
+     }
+
+     ul.pagination li{
+         display:inline;
+     }
+
+     ul.pagination li a{
+         display:inline-block;
+     }
 </style>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -40,7 +51,7 @@
           }
        %>--%>
       <%  for(int i=1 ; i <= totalPages; i++) {  %>
-      <div style="margin-left: 20px">
+      <div style="margin-left: 10px">
           <li class="page-item <%="item" + i%> <%=(i==indexPage)? "active" : ""%>" value="<%=i%>">
               <a onclick="pagging(this.id)" class="page-link " id="<%=i%>"><%=i%></a>
           </li>

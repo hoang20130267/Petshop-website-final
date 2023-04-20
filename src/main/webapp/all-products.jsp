@@ -244,6 +244,60 @@
 <section class="product spad">
     <div class="container">
         <div class="row">
+            <div class="col-lg-12">
+                     <div class="product__discount">
+                    <div class="section-title product__discount__title">
+                        <h2>Giảm Giá</h2>
+                    </div>
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
+                            <%
+                                List<Product> listSale = ProductService.getInstance().listProductSale();
+                                for (Product pd : listSale) {
+                            %>
+                            <div class="col-lg-4">
+                                <div class="product__discount__item">
+                                    <div class="product__discount__item__pic set-bg"
+                                         data-setbg="<%=pd.getImage()%>">
+                                        <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
+                                        <ul class="product__item__pic__hover">
+                                            <%
+                                                if (user != null) {
+                                                    Product product = new ProductDAO().getProductDetail(pd.getProductId());
+                                            %>
+                                            <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
+                                            <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
+                                                    class="fa fa-heart"></i></a></li>
+                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
+                                            <%}%>
+                                            <%
+                                            } else {%>
+                                            <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a>
+                                            </li>
+                                            <li><a class="shopnow2" href="login.jsp"><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
+                                            <% }
+                                            %>
+                                        </ul>
+                                    </div>
+                                    <div class="product__discount__item__text">
+                                        <h5>
+                                            <a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%>
+                                            </a></h5>
+                                        <div class="product__item__price"><%=format.format(pd.getPrice() - (pd.getPrice() * pd.getPromotionalPrice() / 100))%>
+                                            đ<span><%=pd.getPrice()%>đ</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }%>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
@@ -325,7 +379,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
-                <div class="product__discount">
+           <%--     <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
@@ -374,11 +428,10 @@
 
                         </div>
                     </div>
-                </div>
+                </div>--%>
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5"></div>
-                        `
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span style="margin-left: 20px"><%=request.getAttribute("numb")%></span> Sản Phẩm
@@ -389,10 +442,10 @@
                 </div>
                 <div class="row" id="items">
                 </div>
-                <button onclick="loadMore()"
+                <%--<button onclick="loadMore()"
                         style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;"
                         class="loadmore-btn site-btn">Tải thêm
-                </button>
+                </button>--%>
                 <div class="bar" id="pagging_bar">
 
                 </div>

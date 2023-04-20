@@ -3,8 +3,12 @@ package vn.edu.hcmuaf.fit.dao;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
-import java.util.List;
-import java.util.Random;
+import java.awt.image.ImageProducer;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductDAO {
@@ -407,7 +411,7 @@ public class ProductDAO {
         else return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println(taoIDProduct());
-    }
+
+        public static void main(String[] args) {
+        }
 }
