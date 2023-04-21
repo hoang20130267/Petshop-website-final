@@ -18,7 +18,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <![endif]-->
+<![endif]-->
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -52,7 +52,6 @@
     }
 %>
 <body class="">
-<<<<<<< HEAD
 <!-- [ Pre-loader ] start -->
 <div class="loader-bg">
     <div class="loader-track">
@@ -65,13 +64,13 @@
     <div class="pcm-logo">
         <img src="assets/images/logo.png" alt="" class="logo logo-lg">
     </div>
-    <div class="pcm-toolbar">
-        <a href="#!" class="pc-head-link" id="mobile-collapse">
-            <div class="hamburger hamburger--arrowturn">
-                <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
-                </div>
-=======
+<%--    <div class="pcm-toolbar">--%>
+<%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
+<%--            <div class="hamburger hamburger--arrowturn">--%>
+<%--                <div class="hamburger-box">--%>
+<%--                    <div class="hamburger-inner"></div>--%>
+<%--                </div>--%>
+
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
 		<div class="loader-track">
@@ -198,16 +197,15 @@
                         <a href="list-contact.jsp" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Liên hệ</span></a>
                     </li>
                 </ul>
->>>>>>> 5cea17e3c20207a0e8407764c4c0be389166c0d1
             </div>
-        </a>
-        <a href="#!" class="pc-head-link" id="headerdrp-collapse">
-            <i data-feather="align-right"></i>
-        </a>
-        <a href="#!" class="pc-head-link" id="header-collapse">
-            <i data-feather="more-vertical"></i>
-        </a>
+<%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
+<%--            <i data-feather="align-right"></i>--%>
+<%--        </a>--%>
+<%--        <a href="#!" class="pc-head-link" id="header-collapse">--%>
+<%--            <i data-feather="more-vertical"></i>--%>
+<%--        </a>--%>
     </div>
+    </nav>
 </div>
 <!-- [ Mobile header ] End -->
 
@@ -379,7 +377,7 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>
+<%--                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>--%>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalRevenue%> Đ</h5>
@@ -390,7 +388,7 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>
+<%--                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>--%>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProduct%>
@@ -404,7 +402,7 @@
                         <div class="col-sm-6 card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>
+<%--                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>--%>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProSold%>
@@ -416,7 +414,7 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>
+<%--                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>--%>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrder%>
@@ -428,7 +426,7 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>
+<%--                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>--%>
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrderCancel%>

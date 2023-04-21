@@ -30,7 +30,12 @@ public class SearchMain extends HttpServlet {
         request.getRequestDispatcher("ajax/ajax_searchmain.jsp").forward(request, response);
 
         LogService logService= new LogService();
-        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
-        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" tìm kiếm sản phẩm với từ khóa "+txtSearch);
+        HttpSession session = request.getSession();
+        if(!session.getAttributeNames().equals("user")){
+            logService.createNonUserLog("INFOR", "Người dùng tìm kiếm tin tức với từ khóa "+txtSearch);
+        } else {
+            UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+            logService.createUserLog(user.getId(), "INFOR", "Người dùng " + user.getUsername() + " tìm kiếm tin tức với từ khóa " + txtSearch);
+        }
     }
 }

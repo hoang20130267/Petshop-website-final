@@ -265,6 +265,24 @@ public class ProductDAO {
         return list;
     }
 
+    public List<Product> getFullAdminProduct() {
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(query)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        return list;
+    }
+
+    public List<Product> getFullAdminAccessory() {
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery(query)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
 
     public List<Product> getNext9Product(int amount, String category, String price, String size, String order_by) {
 
@@ -313,6 +331,30 @@ public class ProductDAO {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }
+        return list;
+    }
+
+    public List<Product> getNext6ProductAdmin(int amount) {
+
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
+                "limit ?,6;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(query)
+                        .bind(0, amount)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        return list;
+    }
+
+    public List<Product> getNext6AccessoriesAdmin(int amount) {
+
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
+                "limit ?,6;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery(query)
+                    .bind(0, amount)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
         return list;
     }
 
@@ -413,5 +455,6 @@ public class ProductDAO {
 
 
         public static void main(String[] args) {
+            System.out.println(new ProductDAO().getNext6ProductAdmin(2));
         }
 }
