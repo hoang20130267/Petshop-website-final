@@ -375,9 +375,9 @@
 
                             </tbody>
                         </table>
-                        <div class="bar" id="pagging_bar" style="margin-left: 500px">
+                    </div>
+                    <div class="bar" id="pagging_bar" style="margin-left: 600px">
 
-                        </div>
                     </div>
                     <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
 <%--                    <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">--%>
@@ -404,7 +404,7 @@
 <script>
     $(document).ready(function () {
         barPagging();
-        load9Products();
+        load6Products();
     })
 
     function barPagging() {
@@ -463,11 +463,11 @@
         });
     }
 
-    function load9Products() {
+    function load6Products() {
         var amount = 0;
         $.ajax({
             type: 'post',
-            url: "Load9ProductsController",
+            url: "Load6ProductsController",
             data: {
                 amount: amount,
             },

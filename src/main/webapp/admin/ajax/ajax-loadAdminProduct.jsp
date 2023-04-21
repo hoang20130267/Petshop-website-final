@@ -28,7 +28,7 @@
 </script>
 <% } else {
 %>
-<% List<Product> list = (List<Product>) request.getAttribute("listnext9");
+<% List<Product> list = (List<Product>) request.getAttribute("listnext6");
   for (Product p : list) { %>
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <tr class="hover-actions-trigger btn-reveal-trigger position-static">

@@ -29,7 +29,7 @@ public class PaggingProductController extends HttpServlet {
         int index = (positionPage-1) * 9;
         System.out.println(positionPage + "     " + index);
 
-        List<Product> list = new ProductDAO().getNext9ProductAdmin(index);
+        List<Product> list = new ProductDAO().getNext6ProductAdmin(index);
         request.setAttribute("listProductPagging", list);
         request.getRequestDispatcher("admin/ajax/ajax-ProductAdminPagging.jsp").forward(request, response);
     }
