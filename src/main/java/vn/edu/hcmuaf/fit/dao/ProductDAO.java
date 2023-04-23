@@ -3,8 +3,12 @@ package vn.edu.hcmuaf.fit.dao;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
-import java.util.List;
-import java.util.Random;
+import java.awt.image.ImageProducer;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductDAO {
@@ -261,6 +265,24 @@ public class ProductDAO {
         return list;
     }
 
+    public List<Product> getFullAdminProduct() {
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(query)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        return list;
+    }
+
+    public List<Product> getFullAdminAccessory() {
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery(query)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
+        return list;
+    }
+
 
     public List<Product> getNext9Product(int amount, String category, String price, String size, String order_by) {
 
@@ -309,6 +331,30 @@ public class ProductDAO {
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
             });
         }
+        return list;
+    }
+
+    public List<Product> getNext6ProductAdmin(int amount) {
+
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
+                "limit ?,6;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+                return handle.createQuery(query)
+                        .bind(0, amount)
+                        .mapToBean(Product.class).stream().collect(Collectors.toList());
+            });
+        return list;
+    }
+
+    public List<Product> getNext6AccessoriesAdmin(int amount) {
+
+        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
+                "limit ?,6;";
+        List<Product> list = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery(query)
+                    .bind(0, amount)
+                    .mapToBean(Product.class).stream().collect(Collectors.toList());
+        });
         return list;
     }
 
@@ -407,7 +453,8 @@ public class ProductDAO {
         else return false;
     }
 
-    public static void main(String[] args) {
-        System.out.println(taoIDProduct());
-    }
+
+        public static void main(String[] args) {
+            System.out.println(new ProductDAO().getNext6ProductAdmin(2));
+        }
 }

@@ -13,6 +13,9 @@ public class LogService {
     public void createUserLog(String userID, String levels, String message) {
         new LogDAO().createUserLog(userID, levels, message);
     }
+    public void createNonUserLog(String levels, String message){
+        new LogDAO().createNonUserLog(levels, message);
+    }
     public void createAdminLog(String userID, String levels, String message) {
         new LogDAO().createUserLog(userID, levels, message);
     }

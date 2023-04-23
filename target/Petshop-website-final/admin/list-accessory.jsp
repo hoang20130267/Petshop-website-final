@@ -243,89 +243,154 @@
         <div class="row">
             <div id="content" class="row">
                 <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách phụ kiện</h2>
-                <% List<Product> list = (List<Product>) request.getAttribute("list");
-                    for (Product p : list) { %>
-                <div class="col-md-3">
-                    <div class="white_card position-relative mb_20">
-                        <div class="card-body">
-                            <!-- <div class="ribbon1 rib1-primary">
-                              <span class="text-white text-center rib1-primary"
-                                >50% off</span
-                              >
-                            </div> -->
-                            <img
-                                    src="<%=p.getImage()%>" style="height: 150px; width: 150px; object-fit: cover"
-                                    alt=""
-                                    class="d-block mx-auto my-4"
-                                    height="150"
-                            />
-                            <div class="row my-4">
-                                <div class="col">
-                                    <!-- <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span> -->
-                                    <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
-                                       style="text-align: center;"><%=p.getProductName()%>
-                                    </a
-                                    >
-                                </div>
-                                <div class="col-auto">
-                                    <h4 class="text-dark mt-0" style="margin-left: 65px;">
-                                        <%=format.format(p.getPrice())%>đ
+<%--                <% List<Product> list = (List<Product>) request.getAttribute("list");--%>
+<%--                    for (Product p : list) { %>--%>
+<%--                <div class="col-md-3">--%>
+<%--                    <div class="white_card position-relative mb_20">--%>
+<%--                        <div class="card-body">--%>
+<%--                            <!-- <div class="ribbon1 rib1-primary">--%>
+<%--                              <span class="text-white text-center rib1-primary"--%>
+<%--                                >50% off</span--%>
+<%--                              >--%>
+<%--                            </div> -->--%>
+<%--                            <img--%>
+<%--                                    src="<%=p.getImage()%>" style="height: 150px; width: 150px; object-fit: cover"--%>
+<%--                                    alt=""--%>
+<%--                                    class="d-block mx-auto my-4"--%>
+<%--                                    height="150"--%>
+<%--                            />--%>
+<%--                            <div class="row my-4">--%>
+<%--                                <div class="col">--%>
+<%--                                    <!-- <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span> -->--%>
+<%--                                    <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"--%>
+<%--                                       style="text-align: center;"><%=p.getProductName()%>--%>
+<%--                                    </a--%>
+<%--                                    >--%>
+<%--                                </div>--%>
+<%--                                <div class="col-auto">--%>
+<%--                                    <h4 class="text-dark mt-0" style="margin-left: 65px;">--%>
+<%--                                        <%=format.format(p.getPrice())%>đ--%>
 
-                                    </h4>
-                                    <ul
-                                            class="list-inline mb-0 product-review align-self-center"
-                                            style="margin-left: 35px;"
-                                    >
-                                        <li class="list-inline-item">
-                                            <i class="fas fa-star text-warning font-16"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i
-                                                    class="fas fa-star text-warning font-16 ms -n2"
-                                            ></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i
-                                                    class="fas fa-star text-warning font-16 ms -n2"
-                                            ></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i
-                                                    class="fas fa-star text-warning font-16 ms -n2"
-                                            ></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i
-                                                    class="fas fa-star-half text-warning font-16 ms -n2"
-                                            ></i>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="d-grid">
-                                <%
-                                    for (AdminRole role : admin.getRole()) {
-                                        if (role.getTableName().equals("product") && role.getPermission() == 2) {
-                                %>
-                                <a class="btn_2" href="edit-product.jsp?pid=<%=p.getProductId()%>"
-                                   style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>
-                                <%
-                                    }
-                                    if (role.getTableName().equals("product") && role.getPermission() == 3) {
-                                        if (!ProductService.getInstance().isProductInOrder(p.getProductId())) { %>
-                                <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>"
-                                   style="margin-top: 3px; text-align: center;">Xóa</a>
-                                <%
-                                            }
-                                        }
-                                    }
-                                %>
-                            </div>
-                        </div>
+<%--                                    </h4>--%>
+<%--                                    <ul--%>
+<%--                                            class="list-inline mb-0 product-review align-self-center"--%>
+<%--                                            style="margin-left: 35px;"--%>
+<%--                                    >--%>
+<%--                                        <li class="list-inline-item">--%>
+<%--                                            <i class="fas fa-star text-warning font-16"></i>--%>
+<%--                                        </li>--%>
+<%--                                        <li class="list-inline-item">--%>
+<%--                                            <i--%>
+<%--                                                    class="fas fa-star text-warning font-16 ms -n2"--%>
+<%--                                            ></i>--%>
+<%--                                        </li>--%>
+<%--                                        <li class="list-inline-item">--%>
+<%--                                            <i--%>
+<%--                                                    class="fas fa-star text-warning font-16 ms -n2"--%>
+<%--                                            ></i>--%>
+<%--                                        </li>--%>
+<%--                                        <li class="list-inline-item">--%>
+<%--                                            <i--%>
+<%--                                                    class="fas fa-star text-warning font-16 ms -n2"--%>
+<%--                                            ></i>--%>
+<%--                                        </li>--%>
+<%--                                        <li class="list-inline-item">--%>
+<%--                                            <i--%>
+<%--                                                    class="fas fa-star-half text-warning font-16 ms -n2"--%>
+<%--                                            ></i>--%>
+<%--                                        </li>--%>
+<%--                                    </ul>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="d-grid">--%>
+<%--                                <%--%>
+<%--                                    for (AdminRole role : admin.getRole()) {--%>
+<%--                                        if (role.getTableName().equals("product") && role.getPermission() == 2) {--%>
+<%--                                %>--%>
+<%--                                <a class="btn_2" href="edit-product.jsp?pid=<%=p.getProductId()%>"--%>
+<%--                                   style="margin-top: 3px; text-align: center;">Chỉnh sửa</a>--%>
+<%--                                <%--%>
+<%--                                    }--%>
+<%--                                    if (role.getTableName().equals("product") && role.getPermission() == 3) {--%>
+<%--                                        if (!ProductService.getInstance().isProductInOrder(p.getProductId())) { %>--%>
+<%--                                <a class="btn_2" href="delete-product?pid=<%=p.getProductId()%>"--%>
+<%--                                   style="margin-top: 3px; text-align: center;">Xóa</a>--%>
+<%--                                <%--%>
+<%--                                            }--%>
+<%--                                        }--%>
+<%--                                    }--%>
+<%--                                %>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <% }--%>
+<%--                %>--%>
+
+                <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
+                    <div class="table-responsive scrollbar mx-n1 px-1">
+                        <table class="table table-sm fs--1 mb-0">
+                            <thead>
+                            <tr>
+                                <th class="sort align-middle pe-5" scope="col" data-sort="customer" style="width:10%;">ID</th>
+                                <th class="sort align-middle pe-5" scope="col" data-sort="customer" style="width:10%;">Hình ảnh</th>
+                                <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">Tên phụ kiện</th>
+                                <th class="sort align-middle text-center ps-3" scope="col" data-sort="total-spent" style="width:10%">Giá tiền</th>
+                                <th class="sort align-middle ps-7 text-center" scope="col" data-sort="city" style="width:25%;">Kích thước</th>
+                                <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Sửa xóa</th>
+                            </tr>
+                            </thead>
+                            <tbody class="list" id="table-latest-review-body">
+<%--                            <tr class="hover-actions-trigger btn-reveal-trigger position-static">--%>
+<%--                                <td class="fs--1 align-middle ps-0 py-3">--%>
+<%--                                    <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->--%>
+<%--                                    <p class="mb-0 text-1100 fw-bold"><%=p.getProductId()%></p>--%>
+<%--                                </td>--%>
+<%--                                <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">--%>
+<%--                                    <p class="mb-0 ms-3 text-1100 fw-bold"><img src="<%=p.getImage()%>" style="height: 50px; width: 50px; object-fit: cover"></p>--%>
+<%--                                </a></td>--%>
+<%--                                <td class="email align-middle white-space-nowrap pe-5"><%=p.getProductName()%></td>--%>
+<%--                                <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=format.format(p.getPrice())%>đ</td>--%>
+<%--                                <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=(p.getCannang() != null) ? p.getCannang() : ""%></td>--%>
+<%--                                <td class="last-order align-middle white-space-nowrap text-700 text-end">--%>
+<%--                                    <%--%>
+<%--                                        for (AdminRole role : admin.getRole()) {--%>
+<%--                                            if (role.getTableName().equals("product") && role.getPermission() == 2) {--%>
+<%--                                    %>--%>
+<%--                                    <a class="btn_2 edit btn btn-primary" href="edit-product.jsp?pid=<%=p.getProductId()%>">Sửa</a>--%>
+<%--                                    <%--%>
+<%--                                        }--%>
+<%--                                        if (role.getTableName().equals("product") && role.getPermission() == 3) {--%>
+<%--                                            if (!ProductService.getInstance().isProductInOrder(p.getProductId())) { %>--%>
+<%--                                    <a class="btn_2 edit btn btn-primary" href="delete-product?pid=<%=p.getProductId()%>" style="background-color: crimson; color: white">Xóa</a>--%>
+<%--                                    <%--%>
+<%--                                                    }--%>
+<%--                                                }--%>
+<%--                                            }--%>
+<%--                                        }--%>
+<%--                                    %>--%>
+
+
+<%--                                </td>--%>
+<%--                            </tr>--%>
+<%--                            </tr>--%>
+
+                            </tbody>
+                        </table>
                     </div>
+                    <div class="bar" id="pagging_bar" style="margin-left: 800px">
+
+                    </div>
+                    <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
+<%--                    <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">--%>
+<%--                        <div class="col-auto d-flex">--%>
+<%--                            <!-- <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">1 đến 10 <span class="text-600"> trong </span>15</p><a class="fw-semi-bold" href="#!" data-list-view="*">Xem tất cả<svg class="svg-inline--fa fa-angle-right ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z" transform="translate(-128 -256)"></path></g></g></svg></a><a class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<svg class="svg-inline--fa fa-angle-right ms-1" data-fa-transform="down-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg="" style="transform-origin: 0.25em 0.5625em;"><g transform="translate(128 256)"><g transform="translate(0, 32)  scale(1, 1)  rotate(0 0 0)"><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z" transform="translate(-128 -256)"></path></g></g></svg></a> -->--%>
+<%--                        </div>--%>
+<%--                        <div class="col-auto d-flex"><button class="page-link disabled" data-list-pagination="prev" disabled=""><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"></path></svg><!-- <span class="fas fa-chevron-left"></span> Font Awesome fontawesome.com --></button>--%>
+<%--                            <ul class="mb-0 pagination"><li class="active"><button class="page" type="button" data-i="1" data-page="10">1</button></li><li><button class="page" type="button" data-i="2" data-page="10">2</button></li></ul><button class="page-link pe-0" data-list-pagination="next"><svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg><!-- <span class="fas fa-chevron-right"></span> Font Awesome fontawesome.com --></button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
-                <% }
-                %>
 
             </div>
         </div>
@@ -339,6 +404,63 @@
 <!-- Required Js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+        barPagging();
+        load6Products();
+    })
+
+    function barPagging() {
+        /* let page = $("#page").val();*/
+        let total = $("#total").val();
+        $.ajax({
+            url: "/Petshop_website_final_war/admin/ajax/ajax-barProductAdminPagging.jsp",
+            type: "get", //send it through get method
+            data: {
+                total: total,
+                /*          page: page*/
+            },
+            success: function (data) {
+                $("#pagging_bar").html(data);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
+
+    function pagging(page) {
+        $.ajax({
+            url: "/Petshop_website_final_war/PaggingAccessoryController",
+            type: "get", //send it through get method
+            data: {
+                page: page,
+            },
+            success: function (data) {
+                $("#table-latest-review-body").html(data);
+                $(".page-item").removeClass("active")
+                $(".page-item.item" + page).addClass("active")
+                console.log(page);
+
+            },
+            error: function (xhr) {
+            }
+        });
+    }
+    function load6Products() {
+        var amount = 0;
+        $.ajax({
+            type: 'post',
+            url: "Load6AccessoriesController",
+            data: {
+                amount: amount,
+            },
+            success: function (data) {
+                $("#table-latest-review-body").html(data);
+                /*      $(".filter__found h6 span").text($("#numb").val());*/
+                barPagging();
+            }
+        });
+    }
     function searchByName(param) {
         var txtSearch = param.value;
         $.ajax({

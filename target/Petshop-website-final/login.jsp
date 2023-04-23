@@ -28,6 +28,14 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 <body>
+<style>
+    .g-recaptcha {
+        position: absolute;
+        left: 50%;
+        top:56%;
+        transform: translate(-50%, -50%);
+    }
+</style>
      <!-- Floatting -->
      <div class="add-button">
         <div class="sub-button tl">
@@ -141,21 +149,22 @@
                                  <div class="mb-4">
                                      <h3>Đăng nhập</h3>
                                  </div>
-                                 <form action="LoginController" method="post">
+                                 <form action="LoginController" method="post" id="form">
                                      <div class="form-group first">
                                          <p> Tên đăng nhập</p>
                                          <input type="text" class="form-control" id="username" name="username">
                                      </div>
-                                     <div class="form-group last mb-4">
+                                     <div class="form-group last mb-3">
                                          <p>Mật khẩu</p>
                                          <input type="password" class="form-control" id="password" name="password">
                                      </div>
+
                                      <% String status = (String) request.getAttribute("loginStatus");%>
                                      <h5 style="text-align:left; color: red;">
                                          <%= status == null ? "" : status%>
                                      </h5>
 
-                                     <div class="d-flex mb-5 align-items-center">
+                                     <div class="align-items-center" style="margin-bottom: 95px">
                                          <!-- <label class="control control--checkbox mb-0">
 
                                            <span class="caption">Nhớ mật khẩu</span>
@@ -164,6 +173,8 @@
                                          </label> -->
                                          <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
+                                     <div id="error" style="text-align: center; color: red"> </div>
+                                     <div class="g-recaptcha" data-sitekey="6LeS6aMlAAAAAA_OljqI0WNcobXDu2tIqLU-JQtK"></div>
                                      <%--                  <a href="#" style="text-decoration: none;">--%>
                                      <%--                    <div class="button_login"> Đăng nhập</div>--%>
                                      <%--                  </a>--%>
@@ -183,7 +194,7 @@
                                              <span> <i class="fa-brands fa-google"></i></span>
                                          </a>
 
-                                         <span class="d-block text-center my-4 text-muted"><a href="signup.jsp" style="width: 60px; color: #6c757d;">Đăng kí</a> </span>
+                                         <span class="d-block text-center text-muted"><a href="signup.jsp" style="width: 60px; color: #6c757d;">Đăng kí</a> </span>
                                      </div>
                                  </form>
                              </div>
@@ -212,6 +223,24 @@
      <script src="js/main.js"></script>
      <script src="admin/assets/js/vendor-all.min.js"></script>
      <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
- 
+     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+     <script>
+         window.onload = function (){
+             let isValid = false;
+             const form = document.getElementById("form");
+             const error = document.getElementById("error");
+
+             form.addEventListener("submit", function (event){
+                 event.preventDefault();
+                 const response = grecaptcha.getResponse();
+                 if (response){
+                     form.submit();
+                 } else {
+                     error.innerHTML = "Vui lòng xác thực captcha!";
+                 }
+             });
+         }
+     </script>
 </body>
 </html>
