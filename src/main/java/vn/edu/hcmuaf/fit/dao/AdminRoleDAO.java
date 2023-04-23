@@ -54,6 +54,16 @@ public class AdminRoleDAO {
         return role;
     }
 
+    public void removePermission(String table, int per){
+        JDBIConnector.get().withHandle(handle -> {
+            return handle.createUpdate("DELETE FROM adminpermission WHERE idUser=? and tableName=? and permission=?;")
+                    .bind(0,idUser)
+                    .bind(1,table)
+                    .bind(2,per)
+                    .execute();
+        });
+    }
+
     public static void main(String[] args) {
 //        System.out.println(new AdminRoleDAO("2201").getListRole());
         System.out.println(new AdminRoleDAO("Ad063").addRoleadmin("product",2));

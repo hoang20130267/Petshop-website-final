@@ -21,12 +21,12 @@ public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session!=null){
-            session.invalidate();
-            response.sendRedirect("login.jsp");
-
             LogService logService= new LogService();
             UserAccount user = (UserAccount) request.getSession().getAttribute("user");
             logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đăng xuất khỏi hệ thống");
+            session.invalidate();
+            response.sendRedirect("login.jsp");
+
         }
     }
 }
