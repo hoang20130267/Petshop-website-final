@@ -339,19 +339,18 @@
                 <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
                 <%--          </div>--%>
                 <%--        </div>--%>
+                <div class="row">
+                    <div class="col text-center">
                 <%if (request.getParameter("idUser") != null) {%>
-                <button type="submit" class="btn  btn-primary"
-                        style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                    Lưu thay đổi
-                </button>
+                <button type="submit" class="btn  btn-primary" style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">Lưu thay đổi</button>
                 <%} else {%>
-                <button type="submit" class="btn  btn-primary"
-                        style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                    Thêm admin
-                </button>
+                <button type="submit" class="btn  btn-primary" style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">Thêm admin</button>
                 <%}%>
+                    </div>
+                </div>
             </form>
 
+            <%if (request.getParameter("idUser") != null) {%>
             <div class="row mt-3">
                 <div class="form-group col-md-6">
                     <label class="form-label">Quyền hiện tại</label>
@@ -362,7 +361,8 @@
                             <th class="text-md-center border-dark border-1"> Xóa</th>
                         </tr>
                         <%
-                            List<AdminRole> listrole = LoginService.getInstance().getListRoleAdmin(request.getParameter("idUser"));
+                            String idUser = request.getParameter("idUser");
+                            List<AdminRole> listrole = LoginService.getInstance().getListRoleAdmin(idUser);
                             for (AdminRole role : listrole) {
                                 String table = "";
                                 String permission = "";
@@ -407,13 +407,16 @@
                                         break;
                                 }
                         %>
-                        <tr>
+                        <tr class="<%=role.getPermission()%><%=idUser%><%=role.getTableName()%>">
                             <td class="text-center border-dark border-1"><%=table%>
                             </td>
                             <td class="text-center border-dark border-1"><%=permission%>
                             </td>
                             <td class="text-center border-dark border-1">
-                                <a class="btn_2 edit btn btn-primary" href="#">Xóa</a>
+                                <a class="btn_2 edit btn btn-primary remove" data-toggle="modal"
+                                   data-target="#confirm-modal"
+                                   id="delete<%=role.getPermission()%><%=idUser%><%=role.getTableName()%>"
+                                   href="#">Xóa</a>
                             </td>
                         </tr>
                         <% }%>
@@ -448,6 +451,10 @@
                     <button class="btn btn-primary " type="submit" id="add-role">Thêm</button>
                 </div>
             </div>
+            <%} else {%>
+            <div class="text-center m-t-30" style="font-size: 30px; color: #0bd2e0">Hãy thêm admin sau đó quay lại thêm quyền cho admin!</div>
+            <%}%>
+
         </div>
         <!-- [ Main Content ] end -->
     </div>
@@ -456,6 +463,28 @@
         }
     }
 %>
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa quyền này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary no" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary yes" data-dismiss="modal">Vẫn xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Required Js -->
 <script src="assets/js/vendor-all.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>
@@ -490,14 +519,44 @@
                     per: per
                 },
                 success: function (data) {
-                    window.location.href="http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
+                    window.location.href = "http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
                 },
                 error: function (data) {
-                    window.location.href="http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
+                    window.location.href = "http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
                 }
             })
         }
     })
+</script>
+<script>
+    $(document).ready(function () {
+        deletePermission()
+    })
+
+    function deletePermission() {
+        $(".remove").each(function () {
+            const per = $(this).attr("id").substring(6, 7);
+            const id = $(this).attr("id").substring(7, 11);
+            const table = $(this).attr("id").substring(11);
+            $(this).on("click", function (e) {
+                e.preventDefault();
+                $("button[type='button'].yes").on("click", function () {
+                    $.ajax({
+                        url: "/Petshop_website_final_war/admin/RemovePermission",
+                        type: "post",
+                        data: {
+                            id: id,
+                            per: per,
+                            table: table
+                        },
+                        success: function (data) {
+                            $("." + per + id + table).remove();
+                        }
+                    })
+                })
+            })
+        })
+    }
 </script>
 </body>
 
