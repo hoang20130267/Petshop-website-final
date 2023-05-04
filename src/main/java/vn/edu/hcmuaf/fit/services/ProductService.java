@@ -90,6 +90,10 @@ public class ProductService {
     public boolean isCateContainPd(String cateId){
         return new ProductDAO().isCateContainPd(cateId);
     }
+
+    public int getQuantityProduct(String idProduct){
+        return new ProductDAO().getQuantityProduct(idProduct);
+    }
     public static void main(String[] args) {
         System.out.println(getData2());
     }

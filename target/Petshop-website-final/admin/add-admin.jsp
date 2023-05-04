@@ -452,7 +452,7 @@
                 </div>
             </div>
             <%} else {%>
-            <div class="text-center m-t-30" style="font-size: 30px; color: #0bd2e0">Hãy thêm admin sau đó quay lại thêm quyền cho admin!</div>
+            <div class="text-center m-t-30" style="font-size: 20px; color: red">Hãy thêm admin sau đó quay lại thêm quyền cho admin!</div>
             <%}%>
 
         </div>

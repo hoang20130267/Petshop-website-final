@@ -453,8 +453,14 @@ public class ProductDAO {
         else return false;
     }
 
+    public int getQuantityProduct(String idProduct){
+        int quantity =JDBIConnector.get().withHandle(handle ->
+                handle.createQuery("SELECT quantity FROM warehouse WHERE idProduct = ?;")
+                        .bind(0, idProduct).mapTo(Integer.class).first());
+        return quantity;
+    }
 
         public static void main(String[] args) {
-            System.out.println(new ProductDAO().getNext6ProductAdmin(2));
+            System.out.println(new ProductDAO().getQuantityProduct("3001"));
         }
 }
