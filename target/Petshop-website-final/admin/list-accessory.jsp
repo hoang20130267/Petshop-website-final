@@ -378,7 +378,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="bar" id="pagging_bar" style="margin-left: 800px">
+                    <div class="bar" id="pagging_bar" style="margin-left: 900px">
 
                     </div>
                     <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
