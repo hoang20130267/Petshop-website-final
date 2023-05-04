@@ -21,8 +21,8 @@ public class OrderService {
         return orderService;
     }
 
-    public void insertOrder(String CustomerID, String fullname, String phone, String address, String email, String notice, Cart cart) {
-        new OrderDAO().insertOrder(CustomerID, fullname, phone, address, email, notice, cart);
+    public String insertOrder(String CustomerID, String fullname, String phone, String address, String email, String notice, Cart cart) {
+      return   new OrderDAO().insertOrder(CustomerID, fullname, phone, address, email, notice, cart);
     }
 
     public List<Orders> ordersList() {

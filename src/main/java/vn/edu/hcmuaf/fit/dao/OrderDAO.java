@@ -32,7 +32,7 @@ public class OrderDAO {
         else return stringBuilder.toString();
     }
 
-    public void insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart){
+    public String insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart){
         String id = taoOrderID();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
@@ -56,13 +56,14 @@ public class OrderDAO {
                         .bind(3,cart.getData().get(idp).getQuantityCart() * cart.getData().get(idp).getPrice())
                         .bind(4,cart.getData().get(idp).getQuantityCart())
                         .execute();
-                handle.createUpdate("UPDATE product set Quantity=Quantity-? where productId = ?")
+                handle.createUpdate("UPDATE warehouse set quantity=quantity-? where idProduct = ?")
                         .bind(0,cart.getData().get(idp).getQuantityCart())
                         .bind(1,idp)
                         .execute();
             }
             return null;
         });
+        return id;
     }
 
     public List<Orders> ordersList (){

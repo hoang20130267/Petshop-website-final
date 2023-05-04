@@ -441,6 +441,7 @@
                     </div>
                 </div>
                 <div class="row" id="items">
+
                 </div>
                 <%--<button onclick="loadMore()"
                         style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;"

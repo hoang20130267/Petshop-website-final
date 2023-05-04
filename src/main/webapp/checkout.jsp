@@ -267,31 +267,31 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Họ Tên<span>*</span></p>
-                                    <input type="text" name="fullname" value="<%=user.getName()%>">
+                                    <input type="text" class="fullname" name="fullname" value="<%=user.getName()%>">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Số điện thoại<span>*</span></p>
-                                    <input type="text" name="phone" value="<%=user.getPhone()%>">
+                                    <input type="text" class="phone" name="phone" value="<%=user.getPhone()%>">
                                 </div>
                             </div>
                         </div>
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
                             <%if (user.getAddress() == null) {%>
-                            <input type="text" name="address" placeholder="Nhập địa chỉ nhận hàng">
+                            <input type="text" class="address" name="address" placeholder="Nhập địa chỉ nhận hàng">
                             <%} else {%>
-                            <input type="text" name="address" value="<%=user.getAddress()%>">
+                            <input type="text" class="address" name="address" value="<%=user.getAddress()%>">
                             <%}%>
                         </div>
                         <div class="checkout__input">
                             <p>Email<span>*</span></p>
-                            <input type="email" placeholder="+84" name="email" value="<%=user.getEmail()%>">
+                            <input type="email" class="email" name="email" value="<%=user.getEmail()%>">
                         </div>
                         <div class="checkout__input">
                             <p>Ghi chú</p>
-                            <input type="text"
+                            <input type="text" class="notice"
                                    placeholder="Ghi chú về đơn hàng của bạn, ví dụ: Giao hàng vào khung giờ nào..."
                                    name="notice">
                         </div>
@@ -334,7 +334,7 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="site-btn">Mua hàng</button>
+                            <button type="submit" class="site-btn" id="submitck">Mua hàng</button>
                         </div>
                     </div>
                 </div>
@@ -360,6 +360,31 @@
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 
+<script>
+    $("#submitck").click(function (e) {
+        e.preventDefault();
+        const fullname = $(".fullname").val();
+        const phone = $(".phone").val();
+        const address = $(".address").val();
+        const email = $(".email").val();
+        const notice = $(".notice").val();
+        $.ajax({
+            type: 'post',
+            url: '/Petshop_website_final_war/CheckoutController',
+            data: {
+                fullname: fullname,
+                phone: phone,
+                address: address,
+                email: email,
+                notice: notice
+            },
+            success: function (data) {
+                window.location.href="./my-orders.jsp"
+                alert(data)
+            }
+        })
+    })
+</script>
 
 </body>
 
