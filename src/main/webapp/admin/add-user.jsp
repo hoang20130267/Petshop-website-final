@@ -252,23 +252,14 @@
 
 				</div>
 				<div class="row">
-					<div class="col-md-3 position-relative">
-						<label class="form-label" for="inputPassword4">Mật khẩu</label>
-						<input type="password" class="form-control" id="inputPassword4" name="passwd"
-							   placeholder="Mật khẩu" value="<%=(users != null) ? users.getPass() : ""%>">
-					</div>
-					<div class="col-md-3 position-relative">
-						<label class="form-label">Nhập lại mật khẩu</label>
-						<input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
-							   placeholder="Nhập lại mật khẩu" value="<%=(users != null) ? users.getPass() : ""%>">
+					<div class="form-group col-md-6">
+						<label class="form-label" for="inputEmail4">Mật khẩu</label>
+						<input type="password" class="form-control" id="inputPassword4" name="passwd" placeholder="Mật khẩu" value="">
 					</div>
 					<div class="col-md-3 position-relative">
 						<label for="validationTooltip05" class="form-label">Số điện thoại</label>
 						<input type="text" class="form-control" id="phone" name="phone"
 							   placeholder="+84" value="<%=(users != null) ? users.getPhone() : ""%>">
-						<%--            <div class="invalid-tooltip">--%>
-						<%--              Bạn chưa chọn vị trí cho người này--%>
-						<%--            </div>--%>
 					</div>
 					<div class="col-md-3 position-relative">
 						<label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>

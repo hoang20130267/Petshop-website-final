@@ -16,6 +16,7 @@ public class EditUserCustomerController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
     /*
         Thêm và chỉnh sửa thông tin người dùng - Nguyễn Ngọc Huy 20130281, Nguyễn Sĩ Hoàng 20130267
     */
@@ -25,7 +26,6 @@ public class EditUserCustomerController extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String passwd = request.getParameter("passwd");
-        String passconfirm = request.getParameter("passwdconfirm");
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
@@ -39,41 +39,43 @@ public class EditUserCustomerController extends HttpServlet {
         System.out.println(status);
 
         String exe = SignUpService.getInstance().checkUser(email, username);
-        if(id.isEmpty()) {
-        if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
-            request.setAttribute("addUsererror", "Không được bỏ trống!");
-            request.getRequestDispatcher("add-admin.jsp").forward(request, response);
-
-            LogService logService= new LogService();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập thiếu thông tin");
-        } else {
-            if (exe != null) {
-                request.setAttribute("addUsererror", exe);
-                request.getRequestDispatcher("add-admin.jsp").forward(request, response);
-            } else if (!passwd.equals(passconfirm)) {
-                request.setAttribute("addUsererror", "Mật khẩu nhập lại không đúng!");
+        if (id.isEmpty()) {
+            if (fullname == "" || email == "" || username == "" || passwd == "") {
+                request.setAttribute("addUsererror", "Không được bỏ trống!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-                LogService logService= new LogService();
+                LogService logService = new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập sai mật khẩu nhập lại");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Admin " + userAccount.getUsername() + " nhập thiếu thông tin");
             } else {
+                if (exe != null) {
+                    request.setAttribute("addUsererror", exe);
+                    request.getRequestDispatcher("add-admin.jsp").forward(request, response);
+                } else
                     new CustomerUserDAO().insertCustomer(username, passwd, fullname, email, phone, address, status);
-                    response.sendRedirect("list-user.jsp");
+                response.sendRedirect("list-user.jsp");
 
-                LogService logService= new LogService();
+                LogService logService = new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+username+" làm user mới");
-            }
-        }
-        }else{
-            new CustomerUserDAO().updateCustomer(id, username, passwd, fullname, email, phone, address, status);
-            response.sendRedirect("list-user.jsp");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã thêm " + username + " làm user mới");
 
-            LogService logService= new LogService();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa thông tin user "+username);
+            }
+        } else {
+            if(passwd.equals("")){
+                new CustomerUserDAO().updateCustomer(id, username, fullname, email, phone, address, status);
+                response.sendRedirect("list-user.jsp");
+
+                LogService logService = new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã chỉnh sửa thông tin user " + username);
+            }else{
+                new CustomerUserDAO().updateCustomer(id, username, passwd, fullname, email, phone, address, status);
+                response.sendRedirect("list-user.jsp");
+
+                LogService logService = new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã chỉnh sửa thông tin user " + username);
+            }
         }
     }
 }
