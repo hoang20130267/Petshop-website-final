@@ -259,6 +259,7 @@
                                 <div class="col-lg-12 col-md-6">
                                     <div class="checkout__order">
                                         <h4>Chi tiết hóa đơn</h4>
+                                        <a href="GenerateBillPDF?idO=<%=orderId%>">Xuất PDF</a>
                                         <table class="table table-sm fs--1 mb-0">
                                             <thead>
                                             <tr>
