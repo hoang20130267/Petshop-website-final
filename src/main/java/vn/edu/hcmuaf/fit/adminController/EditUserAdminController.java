@@ -16,6 +16,7 @@ public class EditUserAdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
     /*
         Thêm và chỉnh sửa thông tin admin - Nguyễn Ngọc Huy 20130281, Nguyễn Sĩ Hoàng 20130267
     */
@@ -25,56 +26,59 @@ public class EditUserAdminController extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String passwd = request.getParameter("passwd");
-        String passconfirm = request.getParameter("passwdconfirm");
         String fullname = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         int status;
 
-        if(request.getParameter("status").equals("Mở khóa")){
-            status=1;
-        }else {
-            status=0;
+        if (request.getParameter("status").equals("Mở khóa")) {
+            status = 1;
+        } else {
+            status = 0;
         }
         System.out.println(status);
 
-        String exe = SignUpService.getInstance().checkUser(email,username);
-        if(id.isEmpty()) {
-        if (fullname == "" || email == "" || username == "" || passwd == "" || passconfirm == "") {
-            request.setAttribute("addAdminerror", "Không được bỏ trống!");
-            request.getRequestDispatcher("add-admin.jsp").forward(request, response);
-
-            LogService logService= new LogService();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập thiếu thông tin");
-        } else {
-            if (exe != null) {
-                request.setAttribute("addAdminerror", exe);
-                request.getRequestDispatcher("add-admin.jsp").forward(request, response);
-            } else if (!passwd.equals(passconfirm)) {
-                request.setAttribute("addAdminerror", "Mật khẩu nhập lại không đúng!");
+        String exe = SignUpService.getInstance().checkUser(email, username);
+        if (id.isEmpty()) {
+            if (fullname == "" || email == "" || username == "" || passwd == "") {
+                request.setAttribute("addAdminerror", "Không được bỏ trống!");
                 request.getRequestDispatcher("add-admin.jsp").forward(request, response);
 
-                LogService logService= new LogService();
+                LogService logService = new LogService();
                 UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logService.createUserLog(userAccount.getId(), "ERROR", "Admin "+userAccount.getUsername()+" nhập sai mật khẩu nhập lại");
+                logService.createUserLog(userAccount.getId(), "ERROR", "Admin " + userAccount.getUsername() + " nhập thiếu thông tin");
             } else {
+                if (exe != null) {
+                    request.setAttribute("addAdminerror", exe);
+                    request.getRequestDispatcher("add-admin.jsp").forward(request, response);
+                } else {
                     new CustomerUserDAO().insertAdmin(username, passwd, fullname, email, phone, address, status);
                     response.sendRedirect("list-admin.jsp");
 
-                LogService logService= new LogService();
-                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-                logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+username+" làm admin mới");
-                    }
+                    LogService logService = new LogService();
+                    UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                    logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã thêm " + username + " làm admin mới");
+                }
             }
-        }else{
-            new CustomerUserDAO().updateAdmin(id, username, passwd, fullname, email, phone, address, status);
-            response.sendRedirect("list-admin.jsp");
+        } else {
+            if(passwd.equals("")){
+                new CustomerUserDAO().updateAdmin(id, username, fullname, email, phone, address, status);
+                response.sendRedirect("list-admin.jsp");
 
-            LogService logService= new LogService();
-            UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã chỉnh sửa thông tin admin "+username);
-        }
+                LogService logService = new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã chỉnh sửa thông tin admin " + username);
+
+            }else {
+                new CustomerUserDAO().updateAdmin(id, username, passwd, fullname, email, phone, address, status);
+                response.sendRedirect("list-admin.jsp");
+
+                LogService logService = new LogService();
+                UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
+                logService.createUserLog(userAccount.getId(), "INFOR", "Admin " + userAccount.getUsername() + " đã chỉnh sửa thông tin admin " + username);
+
+            }
+            }
     }
 
 }
