@@ -6,9 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <style>
-  li.active {
-    background: blue;
-  }
   ul.pagination{
     text-align: center;
   }

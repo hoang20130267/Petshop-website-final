@@ -242,7 +242,7 @@
         <!-- [ Main Content ] start -->
         <div class="row">
             <div id="content" class="row">
-                <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách phụ kiện</h2>
+                <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 10px;">Danh sách phụ kiện</h2>
 <%--                <% List<Product> list = (List<Product>) request.getAttribute("list");--%>
 <%--                    for (Product p : list) { %>--%>
 <%--                <div class="col-md-3">--%>
@@ -470,8 +470,7 @@
                 txt: txtSearch
             },
             success: function (data) {
-                var row = document.getElementById("content");
-                row.innerHTML = data;
+                $("#table-latest-review-body").html(data)
             },
             error: function (xhr) {
                 //Do Something to handle error

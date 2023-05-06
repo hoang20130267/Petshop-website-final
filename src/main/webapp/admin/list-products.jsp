@@ -446,7 +446,7 @@
     }
 
     function searchByName(param) {
-        var txtSearch = param.value;
+        const txtSearch = param.value;
         $.ajax({
             url: "/Petshop_website_final_war/search",
             type: "get",
@@ -454,8 +454,7 @@
                 txt: txtSearch
             },
             success: function (data) {
-                var row = document.getElementById("content");
-                row.innerHTML = data;
+                $("#table-latest-review-body").html(data)
             },
             error: function (xhr) {
                 //Do Something to handle error
