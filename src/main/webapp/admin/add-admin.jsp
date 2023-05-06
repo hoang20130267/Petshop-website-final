@@ -279,17 +279,9 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-3 position-relative">
-                        <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                               value="<%=(users != null) ? users.getPass() : ""%>"
-                               placeholder="Mật khẩu">
-                    </div>
-                    <div class="col-md-3 </div>">
-                        <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm"
-                               value="<%=(users != null) ? users.getPass() : ""%>" required
-                               placeholder="Nhập lại mật khẩu">
+                    <div class="form-group col-md-6">
+                        <label class="form-label" for="inputEmail4">Mật khẩu</label>
+                        <input type="password" class="form-control" id="inputPassword4" name="passwd" placeholder="Mật khẩu" value="">
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
@@ -307,13 +299,10 @@
                             <option value="Hà nội">Hà Nội</option>
                             <% } %>
                         </select>
-                        <%--            <div class="invalid-tooltip">--%>
-                        <%--              Bạn chưa chọn vị trí cho người này--%>
-                        <%--            </div>--%>
                     </div>
                     <div class="col-md-3 position-relative">
-                        <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
-                        <select class="form-select" id="validationTooltip04" name="status" required>
+                        <label for="validationTooltip" class="form-label">Trạng thái tài khoản</label>
+                        <select class="form-select" id="validationTooltip" name="status" required>
                             <% if (request.getParameter("idUser") != null) {
                                 if (users.isStatus() == false) {%>
                             <option>Mở khóa</option>
@@ -327,18 +316,9 @@
                             <option>Khóa</option>
                             <% } %>
                         </select>
-                        <%--            <div class="invalid-tooltip">--%>
-                        <%--              Bạn chưa nhập vào ô này hoặc nhập chưa đúng định dạng số điện thoại--%>
-                        <%--            </div>--%>
                     </div>
                 </div>
 
-                <%--        <div class="form-group">--%>
-                <%--          <div class="form-check" style="margin-top: 10px;">--%>
-                <%--            <input class="form-check-input" type="checkbox" id="gridCheck">--%>
-                <%--            <label class="form-check-label" for="gridCheck">Tôi chắc chắn muốn thêm người này vào vị trí admin</label>--%>
-                <%--          </div>--%>
-                <%--        </div>--%>
                 <div class="row">
                     <div class="col text-center">
                 <%if (request.getParameter("idUser") != null) {%>
