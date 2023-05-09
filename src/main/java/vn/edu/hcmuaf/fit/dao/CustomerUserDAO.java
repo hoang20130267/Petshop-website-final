@@ -173,6 +173,23 @@ public class CustomerUserDAO {
             return null;
         });
     }
+    public void updateAdmin(String id, String userName, String fullName, String email, String phone,String address,int status) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update user_account set user_name = ?, status = ? where id = ?")
+                    .bind(0, userName)
+                    .bind(1, status)
+                    .bind(2, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name = ?, email = ?, phone = ?, address = ? where id_user = ?")
+                    .bind(0, fullName)
+                    .bind(1, email)
+                    .bind(2, phone)
+                    .bind(3, address)
+                    .bind(4, id)
+                    .execute();
+            return null;
+        });
+    }
     public void updateAdmin(String id, String userName, String pass, String fullName, String email, String phone,String address,int status) {
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("update user_account set user_name = ?, passMaHoa = ?, pass = ?, status = ? where id = ?")
@@ -192,7 +209,6 @@ public class CustomerUserDAO {
             return null;
         });
     }
-
     public void insertCustomer(String userName, String pass, String fullName, String email, String phone,String address,int status) {
         String id = new SignUpDAO().taoIDCustomerUser();
         JDBIConnector.get().withHandle(handle -> {
@@ -209,6 +225,23 @@ public class CustomerUserDAO {
                     .bind(2, email)
                     .bind(3, phone)
                     .bind(4,address)
+                    .execute();
+            return null;
+        });
+    }
+    public void updateCustomer(String id, String userName, String fullName, String email, String phone,String address,int status) {
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("update user_account set user_name = ?, status = ? where id = ?")
+                    .bind(0, userName)
+                    .bind(1, status)
+                    .bind(2, id)
+                    .execute();
+            handle.createUpdate("update infor_user set name = ?, email = ?, phone = ?, address = ? where id_user = ?")
+                    .bind(0, fullName)
+                    .bind(1, email)
+                    .bind(2, phone)
+                    .bind(3, address)
+                    .bind(4, id)
                     .execute();
             return null;
         });
