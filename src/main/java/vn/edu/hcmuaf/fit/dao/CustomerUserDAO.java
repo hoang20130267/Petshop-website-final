@@ -253,7 +253,8 @@ public class CustomerUserDAO {
     }
 
     public UserAccount getUserByEmail(String email) {
-        Optional<UserAccount> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.isAdmin, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
+        Optional<UserAccount> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
+                        "select a.id, a.user_name, a.pass,a.isAdmin, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
                 .bind(0, email)
                 .mapToBean(UserAccount.class)
                 .findFirst()

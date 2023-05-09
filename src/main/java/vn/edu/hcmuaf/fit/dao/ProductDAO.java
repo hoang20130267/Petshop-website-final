@@ -458,7 +458,7 @@ public class ProductDAO {
 
     public List<ImageProduct> getListImg(String id) {
         List<ImageProduct> listImg = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
-                "SELECT * FROM `product_img` WHERE ID_Product = ? ;").bind(0, id).mapToBean(ImageProduct.class).stream().collect(Collectors.toList()));
+                "SELECT ID_Product, img FROM `product_img` WHERE ID_Product = ? ;").bind(0, id).mapToBean(ImageProduct.class).stream().collect(Collectors.toList()));
         return listImg;
     }
 
