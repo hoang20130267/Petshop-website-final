@@ -368,30 +368,19 @@
                 <div class="product__details__text">
                     <h3><%=product.getProductName()%>
                     </h3>
-<<<<<<< HEAD
+
                     <p></p>
-                    <%--<div class="product__details__rating">
-=======
-                    <div class="product__details__rating">
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <span>(18 người đã mua)</span>
-                    </div>--%>
                     <%if (product.getPromotional() == 1) {%>
                     <div class="product__details__price"
                          style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice() - (product.getPrice() * product.getPromotionalPrice() / 100))%>
                         đ
                         <span style="margin-left: 12px;font-size: 18px;color: black;text-decoration: line-through;"><%=format.format(product.getPrice())%>đ</span>
                     </div>
-<<<<<<< HEAD
+
                     <%} else {%>
                     <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
                     <%}%>
-=======
+
                     <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
                     <div class="product__details__price">Tạm hết hàng!</div>
                     <%} else {%>
@@ -407,7 +396,7 @@
                             }
                         }
                     %>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
+
                     <p><%=product.getDescription()%>
                     </p>
                     <div class="product__details__quantity">
