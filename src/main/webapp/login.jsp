@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-
     <head>
         <meta charset="UTF-8">
         <meta name="description" content="Ogani Template">
@@ -32,8 +31,14 @@
     .g-recaptcha {
         position: absolute;
         left: 50%;
-        top:56%;
+        top:365px;
         transform: translate(-50%, -50%);
+    }
+    .form-block {
+        padding-top: 25px;
+    }
+    .forgot-pass:hover {
+        color: black;
     }
 </style>
      <!-- Floatting -->
@@ -164,13 +169,7 @@
                                          <%= status == null ? "" : status%>
                                      </h5>
 
-                                     <div class="align-items-center" style="margin-bottom: 95px">
-                                         <!-- <label class="control control--checkbox mb-0">
-
-                                           <span class="caption">Nhớ mật khẩu</span>
-                                           <input type="checkbox" checked="checked"/>
-                                           <div class="control__indicator"></div>
-                                         </label> -->
+                                     <div class="align-items-center" style="margin-bottom: 115px">
                                          <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
                                      <div id="error" style="text-align: center; color: red"> </div>
