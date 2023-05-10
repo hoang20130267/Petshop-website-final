@@ -142,6 +142,10 @@
                     </ul>
                 </li>
                 <li class="pc-item">
+                    <a href="import.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">home</i></span><span class="pc-mtext">Nhập sản phẩm</span></a>
+                </li>
+                <li class="pc-item">
                     <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i
                             class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
                 </li>
@@ -259,6 +263,7 @@
                                 <div class="col-lg-12 col-md-6">
                                     <div class="checkout__order">
                                         <h4>Chi tiết hóa đơn</h4>
+                                        <a href="GenerateBillPDF?idO=<%=orderId%>">Xuất PDF</a>
                                         <table class="table table-sm fs--1 mb-0">
                                             <thead>
                                             <tr>

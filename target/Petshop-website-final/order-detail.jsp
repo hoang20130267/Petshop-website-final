@@ -380,8 +380,6 @@
                     <div class="site-btn" style="background-color: #00BFFF;">Hoàn thành</div>
             <% }
             }%>
-
-
           </div>
         </div>
 

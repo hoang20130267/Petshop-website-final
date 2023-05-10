@@ -130,6 +130,10 @@
                     </ul>
                 </li>
                 <li class="pc-item">
+                    <a href="import.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">home</i></span><span class="pc-mtext">Nhập sản phẩm</span></a>
+                </li>
+                <li class="pc-item">
                     <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i
                             class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
                 </li>
@@ -374,6 +378,9 @@
                                     case "contact":
                                         table = "Quản lý liên hệ";
                                         break;
+                                    case "import":
+                                    table = "Quản lý nhập hàng";
+                                    break;
                                 }
                                 switch (role.getPermission()) {
                                     case 1:
@@ -408,6 +415,7 @@
                         <select class="form-select" id="select-table">
                             <option value="none" selected>Chọn</option>
                             <option value="product">Quản lý sản phẩm</option>
+                            <option value="import">Quản lý nhập hàng</option>
                             <option value="blog">Quản lý tin tức</option>
                             <option value="order">Quản lý đơn hàng</option>
                             <option value="productCategory">Quản lý danh mục sản phẩm</option>
