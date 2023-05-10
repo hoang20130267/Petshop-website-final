@@ -132,6 +132,10 @@
                         </ul>
                     </li>
                     <li class="pc-item">
+                        <a href="import.jsp" class="pc-link "><span class="pc-micon"><i
+                                class="material-icons-two-tone">home</i></span><span class="pc-mtext">Nhập sản phẩm</span></a>
+                    </li>
+                    <li class="pc-item">
                         <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i
                                 class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
                     </li>
