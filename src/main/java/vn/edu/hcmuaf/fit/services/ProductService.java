@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.services;
 
+import vn.edu.hcmuaf.fit.beans.ImageProduct;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.dao.ProductDAO;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
@@ -15,6 +16,10 @@ public class ProductService {
             productService = new ProductService();
         }
         return productService;
+    }
+    public List<ImageProduct> getListImg(String id) {
+        ProductDAO dao = new ProductDAO();
+        return dao.getListImg(id);
     }
 
     public static List<Product> getData() {
@@ -61,11 +66,15 @@ public class ProductService {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
+    public void AddViewCountProduct(String id) {
+        new ProductDAO().AddViewCountProduct(id);
+    }
 
     public Product getProductDetail(String Id) {
         ProductDAO dao = new ProductDAO();
         return dao.getProductDetail(Id);
     }
+
 
     public List<Product> Filter(int amount, String category, String price, String size, String orderby) {
         ProductDAO dao = new ProductDAO();
