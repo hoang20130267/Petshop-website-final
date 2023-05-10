@@ -162,6 +162,10 @@
                     </ul>
                 </li>
                 <li class="pc-item">
+                    <a href="import.jsp" class="pc-link "><span class="pc-micon"><i
+                            class="material-icons-two-tone">home</i></span><span class="pc-mtext">Nhập sản phẩm</span></a>
+                </li>
+                <li class="pc-item">
                     <a href="products-status.jsp" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
                 </li>
                 <li class="pc-item pc-caption">
@@ -241,9 +245,8 @@
                             <h5 class="m-b-10">Dashboard sale</h5>
                         </div> -->
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item">Tài khoản</li>
-                            <li class="breadcrumb-item">Admin</li>
-                            <li class="breadcrumb-item">Danh sách admin</li>
+                            <li class="breadcrumb-item">Quản lý bình luận</li>
+                            <li class="breadcrumb-item">Danh sách bình luận</li>
                         </ul>
                     </div>
                 </div>
