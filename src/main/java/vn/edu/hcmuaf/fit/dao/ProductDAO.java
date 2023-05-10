@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.beans.ImageProduct;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
@@ -418,6 +419,7 @@ public class ProductDAO {
         if (listId.contains(stringBuilder.toString())) return taoIDCate();
         else return stringBuilder.toString();
     }
+
     public List<Product> listProductSale() {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
@@ -451,6 +453,13 @@ public class ProductDAO {
                         .bind(0, cateId).mapTo(String.class).stream().collect(Collectors.toList()));
         if (idCates.contains(cateId)) return true;
         else return false;
+    }
+
+
+    public List<ImageProduct> getListImg(String id) {
+        List<ImageProduct> listImg = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
+                "SELECT ID_Product, img FROM `product_img` WHERE ID_Product = ? ;").bind(0, id).mapToBean(ImageProduct.class).stream().collect(Collectors.toList()));
+        return listImg;
     }
 
     public int getQuantityProduct(String idProduct){
