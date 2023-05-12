@@ -286,14 +286,16 @@ public class CustomerUserDAO {
     }
 
     public UserAccount getUserByEmail(String email) {
-        Optional<UserAccount> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("select a.id, a.user_name, a.pass,a.isAdmin, a.status from user_account a inner join infor_user ai on a.id = ai.id_user WHERE ai.email = ?")
+        Optional<UserAccount> user = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
+                        "SELECT ua.id,ua.pass,ua.passMaHoa,ua.user_name,iu.`name`,iu.email,iu.address,iu.avt,iu.phone FROM user_account ua join infor_user iu\n" +
+                        "on ua.id = iu.id_user\n" +
+                        "WHERE iu.email = ?")
                 .bind(0, email)
                 .mapToBean(UserAccount.class)
                 .findFirst()
         );
         return user.orElse(null);
     }
-
     public String getIdUserByName(String username) {
         Optional<String> Statement = JDBIConnector.get().withHandle(handle ->
                 handle.createQuery("SELECT ua.id" +
@@ -316,9 +318,6 @@ public class CustomerUserDAO {
 
 
     public static void main(String[] args) {
-//        System.out.println(new CustomerUserDAO().checkEmailExits("huynguyen.79039@gmail.com"));
-/*        System.out.println(new CustomerUserDAO().listUser());*/
-/*        System.out.println(new CustomerUserDAO().getUserDetail("2201"));*/
-//        new CustomerUserDAO().insertAdmin("chó ngu", "123", "Ngoc Huy", "easfasf", "ầd", "áaf", 1);
+
     }
 }
