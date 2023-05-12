@@ -31,29 +31,29 @@ public class EditProductController extends HttpServlet {
         String pgiong = request.getParameter("giong");
         String pmausac = request.getParameter("mausac");
         String pcannang = request.getParameter("cannang");
-        String pimage = request.getParameter("image");
         String oldImg = request.getParameter("oldImg");
         String CateParent = request.getParameter("CateParent");
         String cateChild = request.getParameter("cateChild");
         String status = request.getParameter("status");
         String Promotional = request.getParameter("Promotional");
         String PromotionalPrice = request.getParameter("PromotionalPrice");
+        String[] imgFile = request.getParameterValues("imgFile[]");
 
         UserAccount AdminUser = (UserAccount) request.getSession().getAttribute("admin");
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {
-        dao.insertProduct(AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice);
+        dao.insertProduct(AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);
-            copyImage(request, pimage);
+            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
-            dao.updateProduct(pid,AdminUser.getId(),pname,pimage,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice);
+            dao.updateProduct(pid,AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);
-            copyImage(request, pimage);
+            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
@@ -76,7 +76,7 @@ public class EditProductController extends HttpServlet {
         }
     }
 
-    public void copyImage(HttpServletRequest request, String imgFile) throws IOException {
+    public void copyImage(HttpServletRequest request, String[] imgFile) throws IOException {
         if (imgFile != null) {
                 File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + imgFile);
                 FileInputStream fis = new FileInputStream(file);

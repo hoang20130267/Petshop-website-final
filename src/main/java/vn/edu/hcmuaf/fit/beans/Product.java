@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.beans;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 public class Product implements Serializable {
@@ -30,11 +31,13 @@ public class Product implements Serializable {
 
     private String cate_id;
 
+    private List<ImageProduct> images;
+
 
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id, List<ImageProduct> images) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -57,6 +60,7 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
+        this.images = images;
     }
 
     public void setPromotional(int promotional) {
@@ -237,6 +241,14 @@ public class Product implements Serializable {
 
     public void setQuantityWishlist(int quantityWishlist) {
         this.quantityWishlist = quantityWishlist;
+    }
+
+    public List<ImageProduct> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageProduct> images) {
+        this.images = images;
     }
 
     @Override
