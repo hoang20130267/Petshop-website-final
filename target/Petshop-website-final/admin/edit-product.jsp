@@ -1,12 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.Detail" %>
 <%@ page import="vn.edu.hcmuaf.fit.controller.Category" %>
 <%@ page import="vn.edu.hcmuaf.fit.dao.DetailDAO" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -340,8 +337,8 @@
                                     <% int i = 0;
                                         if (p != null) {
                                             if (p.getImage() != null) {%>
-                                    <div class="image-container">
-                                        <div id="container<%=i%>" class="dz-message text-600"
+                                    <div class="image-container" style="display: inline-flex">
+                                        <div id="container<%=i%>"
                                              data-dz-message="data-dz-message">
                                             <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
                                                  style="height:80px;width:80px;">
@@ -364,6 +361,37 @@
                                     </div>
                                     <%
                                                 i++;
+                                            }
+                                        }
+                                    %>
+                                    <%if (p != null) {
+                                            if (p.getImages() != null) {
+                                            for(ImageProduct img : p.getImages()){%>
+                                    <div class="image-container" style="display: inline-flex">
+                                        <div id="container<%=i%>"
+                                             data-dz-message="data-dz-message">
+                                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
+                                                 style="height:80px;width:80px;">
+                                                <img class="img-product-review dz-image" src="<%=img.getImg()%>">
+                                                <div class="control">
+                                                    <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
+                                                       data-dz-remove="">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                             height="16px" viewBox="0 0 24 24" fill="none"
+                                                             stroke="currentColor" stroke-width="2"
+                                                             stroke-linecap="round" stroke-linejoin="round"
+                                                             class="feather feather-x">
+                                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                                    i++;
+                                                }
                                             }
                                         }
                                     %>
@@ -694,7 +722,9 @@
                     //success
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    $("#container" + id).empty()
+                    $("#container" + id).empty();
+                    $(".image-container").css("display", "inline-flex");
+                    $("#container" + id).removeClass("dz-message text-600")
                     $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
                                                 <img class="img-product-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/products/` + name + `">
                                                 <div class="control">
@@ -707,9 +737,8 @@
                                                 </div>
                                             </div>`)
                     $("#my-awesome-dropzone").append(`<div class="image-container">
-
-                                        <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
-                                            <input type="file" id="image` + id + `" name="files" class="input-file" accept="image/*" />
+                                        <div id="container` + (parseInt(id) + 1) + `" class="dz-message text-600" data-dz-message="data-dz-message">
+                                            <input type="file" id="image` + (parseInt(id) + 1) + `" name="files" class="input-file" accept="image/*" />
                                             <br>
                                             <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png" width="40" alt="">
                                         </div>
@@ -749,8 +778,7 @@
         const PromotionalPrice = $("#PromotionalPrice").val();
 
 
-        const imageLink = $(".img-product-review").attr("src").substring(61);
-        console.log(imageLink);
+        // const imageLink = $(".img-product-review").attr("src").substring(61);
         let imgFile = []
         $(".img-product-review").each(function () {
             let nameFile = $(this).attr("src");
@@ -770,7 +798,6 @@
                 id: id,
                 name: name,
                 price: price,
-                image: imageLink,
                 description: descripsion,
                 mausac: mausac,
                 cannang: cannang,
