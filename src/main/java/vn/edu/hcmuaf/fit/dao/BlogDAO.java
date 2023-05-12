@@ -245,6 +245,14 @@ public class BlogDAO {
         if (idCates.contains(cateId)) return true;
         else return false;
     }
+
+    public void AddViewCountBlog(String id) {
+        JDBIConnector.get().withHandle(handle ->
+                handle.createUpdate("UPDATE blogs SET ViewCount = ViewCount + 1 WHERE BlogId=?")
+                        .bind(0, id)
+                        .execute());
+    }
+
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().getListBlogs());
 //        System.out.println(new BlogDAO().getContent("101"));

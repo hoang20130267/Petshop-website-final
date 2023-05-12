@@ -29,12 +29,13 @@ public class Product implements Serializable {
     private int quantityWishlist;
 
     private String cate_id;
+    private String ViewCount;
 
 
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, String viewCount) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -43,7 +44,7 @@ public class Product implements Serializable {
         this.promotionalPrice = promotionalPrice;
         this.quantity = quantity;
         this.warranty = warranty;
-        this.Promotional = Promotional;
+        Promotional = promotional;
         this.description = description;
         this.dital = dital;
         this.createBy = createBy;
@@ -57,6 +58,7 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
+        ViewCount = viewCount;
     }
 
     public void setPromotional(int promotional) {
@@ -239,6 +241,14 @@ public class Product implements Serializable {
         this.quantityWishlist = quantityWishlist;
     }
 
+    public String getViewCount() {
+        return ViewCount;
+    }
+
+    public void setViewCount(String viewCount) {
+        ViewCount = viewCount;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -247,10 +257,10 @@ public class Product implements Serializable {
                 ", status=" + status +
                 ", image='" + image + '\'' +
                 ", price=" + price +
-                ", promotionalPrice='" + promotionalPrice + '\'' +
+                ", promotionalPrice=" + promotionalPrice +
                 ", quantity='" + quantity + '\'' +
                 ", warranty=" + warranty +
-                ", newProduct=" + Promotional +
+                ", Promotional=" + Promotional +
                 ", description='" + description + '\'' +
                 ", dital='" + dital + '\'' +
                 ", createBy='" + createBy + '\'' +
@@ -264,6 +274,7 @@ public class Product implements Serializable {
                 ", quantityCart=" + quantityCart +
                 ", quantityWishlist=" + quantityWishlist +
                 ", cate_id='" + cate_id + '\'' +
+                ", ViewCount='" + ViewCount + '\'' +
                 '}';
     }
 
