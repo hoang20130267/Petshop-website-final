@@ -261,6 +261,7 @@ public class DetailDAO {
     public List<Detail> listCateAccessory(){
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT c.CatId, c.CatName,c.`Status`,c.Sort,c.ParentID,c.CreateBy,c.CreateDate,c.UpdateBy,c.UpdateDate FROM product_category c \n" +
                 "WHERE c.ParentID IS NOT NULL AND ParentID=3").mapToBean(Detail.class).stream().collect(Collectors.toList()));
-
     }
+
+
 }

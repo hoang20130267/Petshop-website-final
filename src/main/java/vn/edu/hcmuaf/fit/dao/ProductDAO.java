@@ -481,7 +481,12 @@ public class ProductDAO {
                         .bind(0, idProduct).mapTo(Integer.class).first());
         return quantity;
     }
-
+    public void AddViewCountProduct(String id) {
+        JDBIConnector.get().withHandle(handle ->
+                handle.createUpdate("UPDATE product_category SET ViewCount = ViewCount + 1 WHERE CatId=?")
+                        .bind(0, id)
+                        .execute());
+    }
         public static void main(String[] args) {
             System.out.println(new ProductDAO().getQuantityProduct("3001"));
         }

@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.BlogService" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -235,6 +236,15 @@
                 <%  String id = request.getParameter("id");
                     BlogService service = new BlogService();
                     Blogs blogs = service.getContent(id);
+                    List<String> ViewCount = (List<String>) request.getSession().getAttribute("ViewCount");
+                    if (ViewCount == null) {
+                        ViewCount = new ArrayList<>();
+                        request.getSession().setAttribute("ViewCount", ViewCount);
+                    }
+                    if (!ViewCount.contains(blogs.getBlogId())) {
+                        ViewCount.add(blogs.getBlogId());
+                        BlogService.getInstance().AddViewCountBlog(blogs.getBlogId());
+                    }
                 %>
                 <div class="col-lg-12">
                     <div class="blog__details__hero__text">
@@ -307,12 +317,13 @@
                                         <img src="admin/assets/images/user/avatar-2.png" alt="">
                                     </div>
                                     <div class="blog__details__author__text">
-                                        <h6>LTW_Nhom10</h6>
+                                       <%-- <h6>LTW_Nhom10</h6>--%>
+                                        <span>Tác giả:<%=UserService.getInstance().getUserDetail(blogs.getCreateBy()).getName()%></span>
 
-                                        <span><%=UserService.getInstance().getUserDetail(blogs.getCreateBy()).getName()%></span>
                                     </div>
                                 </div>
                             </div>
+                            <span><%=blogs.getViewCount()%></span>
                             <div class="col-lg-6">
                                 <div class="blog__details__widget">
                                     <ul>

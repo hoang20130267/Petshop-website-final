@@ -11,6 +11,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.ImageProduct" %>
+<%@ page import="java.security.Provider" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -315,10 +316,20 @@
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
-            <% ProductDAO dao = new ProductDAO();
+            <%
                 String id = request.getParameter("id");
-                Product product = dao.getProductDetail(id);
-                List<ImageProduct> img = dao.getListImg(id);
+                ProductService service = new ProductService();
+                Product product = service.getInstance().getProductDetail(id);
+                List<ImageProduct> img = service.getListImg(id);
+                List<String> visiteds = (List<String>) request.getSession().getAttribute("listVisited");
+                if (visiteds == null) {
+                    visiteds = new ArrayList<>();
+                    request.getSession().setAttribute("listVisited", visiteds);
+                }
+                if (!visiteds.contains(product.getCate_id())) {
+                    visiteds.add(product.getCate_id());
+                    ProductService.getInstance().AddViewCountProduct(product.getCate_id());
+                }
             %>
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
@@ -368,7 +379,7 @@
                 <div class="product__details__text">
                     <h3><%=product.getProductName()%>
                     </h3>
-
+                    <span>Lượt xem: <%=product.getViewCount()%></span>
                     <p></p>
                     <%if (product.getPromotional() == 1) {%>
                     <div class="product__details__price"
@@ -621,7 +632,7 @@
             <%
                 if (history != null) {
                     for (String pIdHistory : history) {
-                        Product productH = dao.getProductDetail(pIdHistory);
+                        Product productH = service.getProductDetail(pIdHistory);
             %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
