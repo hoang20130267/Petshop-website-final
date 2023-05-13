@@ -32,27 +32,27 @@ public class EditAccessoryController extends HttpServlet {
         String cateChild = request.getParameter("cateChild");
         String Promotional = request.getParameter("Promotional");
         String pquantity = request.getParameter("quantity");
-        String pimage = request.getParameter("image");
         String cannang = request.getParameter("cannang");
         String status = request.getParameter("status");
         String oldImg = request.getParameter("oldImg");
+        String[] imgFile = request.getParameterValues("imgFile[]");
         UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
         HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
         String cate = "3";
         System.out.println(pid);
         if (pid.length() < 1) {
-            dao.insertAccessory(admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice);
+            dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);
-            copyImage(request, pimage);
+            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
-            dao.updateAccessory(pid,admin.getId(),pname,pimage,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice);
+            dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);
-            copyImage(request, pimage);
+            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
@@ -75,7 +75,7 @@ public class EditAccessoryController extends HttpServlet {
         }
     }
 
-    public void copyImage(HttpServletRequest request, String imgFile) throws IOException {
+    public void copyImage(HttpServletRequest request, String[] imgFile) throws IOException {
         if (imgFile != null) {
             File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + imgFile);
             FileInputStream fis = new FileInputStream(file);
