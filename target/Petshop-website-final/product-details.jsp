@@ -321,13 +321,13 @@
                 ProductService service = new ProductService();
                 Product product = service.getInstance().getProductDetail(id);
                 List<ImageProduct> img = service.getListImg(id);
-                List<String> visiteds = (List<String>) request.getSession().getAttribute("listVisited");
-                if (visiteds == null) {
-                    visiteds = new ArrayList<>();
-                    request.getSession().setAttribute("listVisited", visiteds);
+                List<String> ViewCount = (List<String>) request.getSession().getAttribute("ViewCount1");
+                if (ViewCount == null) {
+                    ViewCount = new ArrayList<>();
+                    request.getSession().setAttribute("ViewCount1", ViewCount);
                 }
-                if (!visiteds.contains(product.getCate_id())) {
-                    visiteds.add(product.getCate_id());
+                if (!ViewCount.contains(product.getProductId())) {
+                    ViewCount.add(product.getProductId());
                     ProductService.getInstance().AddViewCountProduct(product.getCate_id());
                 }
             %>
