@@ -61,4 +61,5 @@
             </div>
         </div>
     </div>
+    <div class="overlayT" onclick="hideTable()" id="overlayT"></div>
 </footer>

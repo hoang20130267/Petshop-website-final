@@ -326,8 +326,8 @@
                     ViewCount = new ArrayList<>();
                     request.getSession().setAttribute("ViewCount1", ViewCount);
                 }
-                if (!ViewCount.contains(product.getCate_id())) {
-                    ViewCount.add(product.getCate_id());
+                if (!ViewCount.contains(product.getProductId())) {
+                    ViewCount.add(product.getProductId());
                     ProductService.getInstance().AddViewCountProduct(product.getCate_id());
                 }
             %>

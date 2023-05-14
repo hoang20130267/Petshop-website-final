@@ -38,11 +38,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-<<<<<<< HEAD
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int Promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id, List<ImageProduct> images) {
-=======
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, String viewCount) {
->>>>>>> f59ffac554358fca9d1815b8c69e849e882a13af
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, String viewCount, List<ImageProduct> images) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -65,12 +61,10 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
-<<<<<<< HEAD
-        this.images = images;
-=======
         ViewCount = viewCount;
->>>>>>> f59ffac554358fca9d1815b8c69e849e882a13af
+        this.images = images;
     }
+
 
     public void setPromotional(int promotional) {
         Promotional = promotional;
@@ -252,21 +246,21 @@ public class Product implements Serializable {
         this.quantityWishlist = quantityWishlist;
     }
 
-<<<<<<< HEAD
+
     public List<ImageProduct> getImages() {
         return images;
     }
 
     public void setImages(List<ImageProduct> images) {
         this.images = images;
-=======
+    }
+
     public String getViewCount() {
         return ViewCount;
     }
 
     public void setViewCount(String viewCount) {
         ViewCount = viewCount;
->>>>>>> f59ffac554358fca9d1815b8c69e849e882a13af
     }
 
     @Override
