@@ -40,7 +40,7 @@
 </head>
 <%
     if (request.getSession().getAttribute("admin") == null) {
-        response.sendRedirect("/Petshop_website_final_war/login.jsp");
+        response.sendRedirect("login.jsp");
     } else {
         UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
         boolean check = false;

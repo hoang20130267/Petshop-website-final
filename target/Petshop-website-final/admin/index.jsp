@@ -64,20 +64,7 @@
     <div class="pcm-logo">
         <img src="assets/images/logo.png" alt="" class="logo logo-lg">
     </div>
-<<<<<<< HEAD
-    <%--    <div class="pcm-toolbar">--%>
-    <%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
-    <%--            <div class="hamburger hamburger--arrowturn">--%>
-    <%--                <div class="hamburger-box">--%>
-    <%--                    <div class="hamburger-inner"></div>--%>
-    <%--                </div>--%>
-=======
-<%--    <div class="pcm-toolbar">--%>
-<%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
-<%--            <div class="hamburger hamburger--arrowturn">--%>
-<%--                <div class="hamburger-box">--%>
-<%--                    <div class="hamburger-inner"></div>--%>
-<%--                </div>--%>
+
 
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -108,7 +95,6 @@
 		</div>
 	</div>
 	<!-- [ Mobile header ] End -->
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
 
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
@@ -117,28 +103,6 @@
         </div>
     </div>
     <!-- [ Pre-loader ] End -->
-    <!-- [ Mobile header ] start -->
-    <div class="pc-mob-header pc-header">
-        <div class="pcm-logo">
-            <img src="assets/images/logo.png" alt="" class="logo logo-lg">
-        </div>
-        <div class="pcm-toolbar">
-            <a href="#!" class="pc-head-link" id="mobile-collapse">
-                <div class="hamburger hamburger--arrowturn">
-                    <div class="hamburger-box">
-                        <div class="hamburger-inner"></div>
-                    </div>
-                </div>
-            </a>
-            <a href="#!" class="pc-head-link" id="headerdrp-collapse">
-                <i data-feather="align-right"></i>
-            </a>
-            <a href="#!" class="pc-head-link" id="header-collapse">
-                <i data-feather="more-vertical"></i>
-            </a>
-        </div>
-    </div>
-    <!-- [ Mobile header ] End -->
 
     <!-- [ navigation menu ] start -->
     <nav class="pc-sidebar ">
@@ -237,23 +201,7 @@
                     </li>
                 </ul>
             </div>
-<<<<<<< HEAD
-            <%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
-            <%--            <i data-feather="align-right"></i>--%>
-            <%--        </a>--%>
-            <%--        <a href="#!" class="pc-head-link" id="header-collapse">--%>
-            <%--            <i data-feather="more-vertical"></i>--%>
-            <%--        </a>--%>
         </div>
-=======
-<%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
-<%--            <i data-feather="align-right"></i>--%>
-<%--        </a>--%>
-<%--        <a href="#!" class="pc-head-link" id="header-collapse">--%>
-<%--            <i data-feather="more-vertical"></i>--%>
-<%--        </a>--%>
-    </div>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
     </nav>
 </div>
 <!-- [ Mobile header ] End -->
@@ -430,11 +378,6 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalRevenue%> Đ</h5>
@@ -445,11 +388,6 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProduct%>
@@ -463,11 +401,6 @@
                         <div class="col-sm-6 card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProSold%>
@@ -479,11 +412,6 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrder%>
@@ -495,11 +423,6 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrderCancel%>

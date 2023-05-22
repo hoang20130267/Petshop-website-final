@@ -369,18 +369,6 @@
                     <h3><%=product.getProductName()%>
                     </h3>
 
-                    <p></p>
-                    <%if (product.getPromotional() == 1) {%>
-                    <div class="product__details__price"
-                         style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice() - (product.getPrice() * product.getPromotionalPrice() / 100))%>
-                        đ
-                        <span style="margin-left: 12px;font-size: 18px;color: black;text-decoration: line-through;"><%=format.format(product.getPrice())%>đ</span>
-                    </div>
-
-                    <%} else {%>
-                    <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
-                    <%}%>
-
                     <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
                     <div class="product__details__price">Tạm hết hàng!</div>
                     <%} else {%>
