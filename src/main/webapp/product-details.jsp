@@ -11,7 +11,6 @@
 <%@ page import="vn.edu.hcmuaf.fit.services.DetailService" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.ImageProduct" %>
-<%@ page import="java.security.Provider" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -316,20 +315,10 @@
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
-            <%
+            <% ProductDAO dao = new ProductDAO();
                 String id = request.getParameter("id");
-                ProductService service = new ProductService();
-                Product product = service.getInstance().getProductDetail(id);
-                List<ImageProduct> img = service.getListImg(id);
-                List<String> ViewCount = (List<String>) request.getSession().getAttribute("ViewCount1");
-                if (ViewCount == null) {
-                    ViewCount = new ArrayList<>();
-                    request.getSession().setAttribute("ViewCount1", ViewCount);
-                }
-                if (!ViewCount.contains(product.getCate_id())) {
-                    ViewCount.add(product.getCate_id());
-                    ProductService.getInstance().AddViewCountProduct(product.getCate_id());
-                }
+                Product product = dao.getProductDetail(id);
+                List<ImageProduct> img = dao.getListImg(id);
             %>
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
@@ -379,18 +368,8 @@
                 <div class="product__details__text">
                     <h3><%=product.getProductName()%>
                     </h3>
-                    <span>Lượt xem: <%=product.getViewCount()%></span>
-                    <p></p>
-                    <%if (product.getPromotional() == 1) {%>
-                    <div class="product__details__price"
-                         style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice() - (product.getPrice() * product.getPromotionalPrice() / 100))%>
-                        đ
-                        <span style="margin-left: 12px;font-size: 18px;color: black;text-decoration: line-through;"><%=format.format(product.getPrice())%>đ</span>
-                    </div>
 
-                    <%} else {%>
-                    <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
-                    <%}%>
+
 
                     <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
                     <div class="product__details__price">Tạm hết hàng!</div>
@@ -632,7 +611,7 @@
             <%
                 if (history != null) {
                     for (String pIdHistory : history) {
-                        Product productH = service.getProductDetail(pIdHistory);
+                        Product productH = dao.getProductDetail(pIdHistory);
             %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">

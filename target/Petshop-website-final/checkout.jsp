@@ -133,6 +133,56 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+        #myTable {
+            display: none;
+            width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid black;
+            z-index: 1;
+            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+        }
+        #myTable label {
+            display: inline-block;
+            width: 85px;
+        }
+        .overlayT {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+        }
+        .overlayT.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .bt1 {
+            background-color: #007bff;
+            border-radius: 5px;
+            width: 140px;
+            padding: 7px;
+            text-align: center;
+            color: white;
+        }
+        .bt2 {
+            background-color: #007bff;
+            border-radius: 5px;
+            width: 90px;
+            padding: 7px;
+            display: inline-block;
+            text-align: center;
+            color: white;
+        }
     </style>
 </head>
 
@@ -284,6 +334,21 @@
                             <%} else {%>
                             <input type="text" class="address" name="address" value="<%=user.getAddress()%>">
                             <%}%>
+                            <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
+                            <div id="myTable">
+                                <h2>Địa chỉ:</h2>
+                                <label>Số nhà:</label>
+                                <input type="text" id="soNha"><br><br>
+                                <label>Phường/Xã:</label>
+                                <input type="text" id="xa"><br><br>
+                                <label>Quận/Huyện:</label>
+                                <input type="text" id="huyen"><br><br>
+                                <label>Tỉnh/TP:</label>
+                                <input type="text" id="tinh"><br><br>
+                                <div id="error" style="text-align: center; color: red"> </div>
+                                <div onclick="hideTable()" class="bt2">Hủy</div>
+                                <div onclick="validateInput()" class="bt2">Cập nhật</div>
+                            </div>
                         </div>
                         <div class="checkout__input">
                             <p>Email<span>*</span></p>
@@ -307,10 +372,10 @@
                             <ul>
                                 <%
                                     for (String id : cart.getData().keySet()) {
-                                        if (cart.getData().get(id).getSales() != null) {%>
+                                        if (cart.getData().get(id).getPromotional() ==1 ) {%>
                                 <li><%=cart.getData().get(id).getProductName()%>
                                     <span>
-                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount())))%>₫
+                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100)))%>₫
                                     </span>
                                 </li>
                                 <%} else {%>
@@ -385,7 +450,42 @@
         })
     })
 </script>
-
+<script>
+    function showTable() {
+        document.getElementById("myTable").style.display = "block";
+        document.getElementById("overlayT").classList.add("show");
+    }
+    function hideTable() {
+        document.getElementById("myTable").style.display = "none";
+        document.getElementById("overlayT").classList.remove("show");
+        document.getElementById("error").innerHTML = "";
+    }
+    function validateInput() {
+        var soNha = document.getElementById("soNha").value;
+        var xa = document.getElementById("xa").value;
+        var huyen = document.getElementById("huyen").value;
+        var tinh = document.getElementById("tinh").value;
+        var count = 0;
+        if (soNha == "") {
+            count++;
+        }
+        if (xa == "") {
+            count++;
+        }
+        if (huyen == "") {
+            count++;
+        }
+        if (tinh == "") {
+            count++;
+        }
+        if (count > 0) {
+            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
+        } else {
+            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+            hideTable();
+        }
+    }
+</script>
 </body>
 
 </html>

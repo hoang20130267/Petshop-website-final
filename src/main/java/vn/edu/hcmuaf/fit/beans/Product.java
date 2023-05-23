@@ -61,9 +61,10 @@ public class Product implements Serializable {
         this.quantityCart = quantityCart;
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
-        this.images = images;
         ViewCount = viewCount;
+        this.images = images;
     }
+
 
     public void setPromotional(int promotional) {
         Promotional = promotional;
