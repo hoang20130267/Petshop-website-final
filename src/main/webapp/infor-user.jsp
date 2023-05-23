@@ -62,7 +62,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            z-index: 1000;
+            z-index: 50;
             display: none;
             min-width: 12rem;
             padding: 0.5rem 0;
@@ -135,6 +135,7 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+
         .avatar-wrapper {
             position: relative;
             height: 200px;
@@ -145,36 +146,43 @@
             box-shadow: 1px 1px 15px -5px black;
             transition: all .3s ease;
         }
-        .avatar-wrapper :hover{
-             transform: scale(1.05);
-             cursor: pointer;
-         }
-        .avatar-wrapper :hover .profile-pic{
-             opacity: .5;
-         }
+
+        .avatar-wrapper :hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .avatar-wrapper :hover .profile-pic {
+            opacity: .5;
+        }
+
         .profile-pic {
             height: 100%;
             width: 100%;
             transition: all .3s ease;
         }
-        .profile-pic:after{
-             font-family: FontAwesome;
-             content: "\f007";
-             top: 0; left: 0;
-             width: 100%;
-             height: 100%;
-             position: absolute;
-             font-size: 190px;
-             background: #ecf0f1;
-             color: #34495e;
-             text-align: center;
+
+        .profile-pic:after {
+            font-family: FontAwesome;
+            content: "\f007";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            font-size: 190px;
+            background: #ecf0f1;
+            color: #34495e;
+            text-align: center;
         }
+
         .input-file {
             color: transparent;
             margin-left: 230px;
             margin-bottom: 50px;
 
         }
+
         .input-file::before {
             background: #00BFFF;
             border-radius: 50px;
@@ -182,6 +190,55 @@
             color: #fff;
             font-weight: 700;
             transition: all 0.3s;
+        }
+        #myTable {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid black;
+            z-index: 1;
+            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+        }
+        #myTable label {
+            display: inline-block;
+            width: 85px;
+        }
+        .overlayT {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+        }
+        .overlayT.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .bt1 {
+            background-color: #007bff;
+            border-radius: 5px;
+            width: 140px;
+            padding: 7px;
+            text-align: center;
+            color: white;
+        }
+        .bt2 {
+            background-color: #007bff;
+            border-radius: 5px;
+            width: 90px;
+            padding: 7px;
+            display: inline-block;
+            text-align: center;
+            color: white;
         }
     </style>
 
@@ -335,11 +392,12 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <% int i = 0;
                         if (user.getAvt() != null) {
-                        %>
+                    %>
                     <div class="image-container">
                         <div id="container<%=i%>">
                             <div class="avatar-wrapper">
-                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>" />
+                                <img class="img-avt-review profile-pic"
+                                     src="http://localhost:8080/Petshop_website_final_war/<%=user.getAvt()%>"/>
                             </div>
                         </div>
                     </div>
@@ -349,13 +407,14 @@
                         </div>
                     </div>
                     <%} else {%>
-                    <div class="image-container">
+                    <%--<div class="image-container">
                         <div id="container<%=i%>">
                             <div class="avatar-wrapper">
-                                <img class="img-avt-review profile-pic" src="http://localhost:8080/Petshop_website_final_war/img/user.png" />
+                                <img class="img-avt-review profile-pic"
+                                     src="http://localhost:8080/Petshop_website_final_war/img/user.png"/>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="image-container">
                         <div id="container<%=i%>">
                             <input type="file" id="image<%=i%>" name="files" class="input-file" accept="image/*"/>
@@ -381,7 +440,7 @@
                                                                                            name="username"
                                                                                            placeholder="Nhập username"
                                                                                            value="<%=user.getUsername()%>"
-                        readonly>
+                                                                                           readonly>
                         </div>
                         <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text" id="fullname"
                                                                                             class="form-control"
@@ -396,16 +455,42 @@
                                                                                          name="email"
                                                                                          placeholder="Nhập email tại đây"
                                                                                          value="<%=user.getEmail()%>"
-                        readonly>
+                                                                                         readonly>
                         </div>
                         <div class="col-md-12"><label class="labels" style="padding-top: 10px">Số điện
                             thoại</label><input id="phone"
-                                type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại tại đây"
-                                value="<%=user.getPhone()%>"></div>
-                        <div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input id="address"
+                                                type="text" class="form-control" name="phone"
+                                                placeholder="Nhập số điện thoại tại đây"
+                                                value="<%=user.getPhone()%>"></div>
+
+                        <div class="col-md-12"><label class="labels" style="padding-top: 10px; margin-bottom: 10px">Địa chỉ</label><input type="text" id="address"
+                                                                                           class="form-control"
+                                                                                           name="address"
+                                                                                           placeholder="Chưa có địa chỉ"
+                                                                                           value="<%=user.getAddress()%>"
+                                                                                           readonly>
+                        </div> <br>
+                        <div class="col-md-12">
+                            <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
+                            <div id="myTable">
+                                <h2>Địa chỉ:</h2>
+                                <label>Số nhà:</label>
+                                <input type="text" id="soNha"><br><br>
+                                <label>Phường/Xã:</label>
+                                <input type="text" id="xa"><br><br>
+                                <label>Quận/Huyện:</label>
+                                <input type="text" id="huyen"><br><br>
+                                <label>Tỉnh/TP:</label>
+                                <input type="text" id="tinh"><br><br>
+                                <div id="error" style="text-align: center; color: red"> </div>
+                                <div onclick="hideTable()" class="bt2">Hủy</div>
+                                <div onclick="validateInput()" class="bt2">Cập nhật</div>
+                            </div>
+                        </div>
+                        <%--<div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input id="address"
                                 type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
                                 value="<%=user.getAddress()%>">
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -414,17 +499,21 @@
                     <div class="d-flex justify-content-between align-items-center experience"><span>Đổi mật khẩu</span>
                     </div>
                     <br>
-                    <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="password" id="newpass"
+                    <div class="col-md-12"><label class="labels">Nhập mật khẩu mới</label><input type="password"
+                                                                                                 id="newpass"
                                                                                                  class="form-control"
                                                                                                  name="newpass"
                                                                                                  placeholder="Nhập mật khẩu"
-                                                                                                 value="<%=user.getPass()%>"></div>
+                                                                                                 value="<%=user.getPass()%>">
+                    </div>
                     <br>
-                    <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="password" id="newpassconfirm"
+                    <div class="col-md-12"><label class="labels">Nhập lại mật khẩu</label><input type="password"
+                                                                                                 id="newpassconfirm"
                                                                                                  class="form-control"
                                                                                                  name="newpassconfirm"
                                                                                                  placeholder="Nhập lại mật khẩu"
-                                                                                                 value="<%=user.getPass()%>"></div>
+                                                                                                 value="<%=user.getPass()%>">
+                    </div>
                     <% String errorpass = (String) request.getAttribute("passError"); %>
                     <p style="color: red; text-align: center; text-transform: none !important;padding-top: 5px; text-align: center"><%= errorpass == null ? "" : errorpass%>
                     </p>
@@ -470,6 +559,7 @@
             })
         });
     }
+
     $(".input-file").each(function () {
         $(this).on('change', function (e) {
             const idName = $(this).attr("id");
@@ -480,10 +570,11 @@
                 name = value.substring(value.lastIndexOf("\\") + 1);
             else
                 name = value.substring(value.lastIndexOf("/") + 1);
-            console.log(id +", " + name + ", ")
+            console.log(id + ", " + name + ", ")
             uploadFile(id, name, e)
         })
     });
+
     function uploadFile(id, name, event) {
         event.stopPropagation();
         event.preventDefault();
@@ -494,6 +585,7 @@
         });
         postFilesData(id, name, data);
     }
+
     function postFilesData(id, name, data) {
         let bool = false;
         $(".img-avt-review").each(function () {
@@ -561,19 +653,56 @@
                 oldImg: oldImg,
                 username: username,
                 fullname: fullname,
-                phone : phone,
-                avt : imageLink,
-                address : address,
-                newpass : newpass,
-                newpassconfirm : newpassconfirm,
+                phone: phone,
+                avt: imageLink,
+                address: address,
+                newpass: newpass,
+                newpassconfirm: newpassconfirm,
                 imgFile: imgFile,
             },
             success: function () {
-                    alert("Cập nhật thông tin thành công");
+                alert("Cập nhật thông tin thành công");
                 window.location.href = "infor-user.jsp"
             }
         })
     })
 </script>
+<script>
+    function showTable() {
+        document.getElementById("myTable").style.display = "block";
+        document.getElementById("overlayT").classList.add("show");
+    }
+    function hideTable() {
+        document.getElementById("myTable").style.display = "none";
+        document.getElementById("overlayT").classList.remove("show");
+        document.getElementById("error").innerHTML = "";
+    }
+    function validateInput() {
+        var soNha = document.getElementById("soNha").value;
+        var xa = document.getElementById("xa").value;
+        var huyen = document.getElementById("huyen").value;
+        var tinh = document.getElementById("tinh").value;
+        var count = 0;
+        if (soNha == "") {
+            count++;
+        }
+        if (xa == "") {
+            count++;
+        }
+        if (huyen == "") {
+            count++;
+        }
+        if (tinh == "") {
+            count++;
+        }
+        if (count > 0) {
+            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
+        } else {
+            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+            hideTable();
+        }
+    }
+</script>
+
 </body>
 </html>

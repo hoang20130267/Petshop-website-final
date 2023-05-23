@@ -13,9 +13,11 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/admin/update-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/ajax/ajax-barPagging.jsp" value="file://$PROJECT_DIR$/src/main/webapp/ajax" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/ajax/ajax_loadProduct.jsp" value="file://$PROJECT_DIR$/src/main/webapp/ajax" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/ajax/ajax_searchmain.jsp" value="file://$PROJECT_DIR$/src/main/webapp/ajax" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/all-products.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/blog.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/infor-user.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/my-orders.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/product-details.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/products-dog.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />

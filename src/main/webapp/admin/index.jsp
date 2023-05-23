@@ -693,7 +693,8 @@
 <script src="assets/js/plugins/clipboard.min.js"></script>
 <script src="assets/js/uikit.min.js"></script>
 
-
+<!-- Apex Chart -->
+<script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- scrolling js -->
 <script src="assets/js/pages/dashboard-sale.js"></script>
 

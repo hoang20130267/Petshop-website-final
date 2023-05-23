@@ -15,6 +15,7 @@ public class Detail implements Serializable {
     private String UpdateDate;
 
     private List<Product> productsOfCate;
+    private String ViewCount;
 
 
     public Detail() {

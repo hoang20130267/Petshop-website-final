@@ -369,6 +369,8 @@
                     <h3><%=product.getProductName()%>
                     </h3>
 
+
+
                     <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
                     <div class="product__details__price">Tạm hết hàng!</div>
                     <%} else {%>
