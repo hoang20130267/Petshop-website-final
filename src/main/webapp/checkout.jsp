@@ -384,10 +384,10 @@
                             <ul>
                                 <%
                                     for (String id : cart.getData().keySet()) {
-                                        if (cart.getData().get(id).getSales() != null) {%>
+                                        if (cart.getData().get(id).getPromotional() ==1 ) {%>
                                 <li><%=cart.getData().get(id).getProductName()%>
                                     <span>
-                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() * 0.01 * (100 - cart.getData().get(id).getSales().getDiscount())))%>₫
+                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100)))%>₫
                                     </span>
                                 </li>
                                 <%} else {%>

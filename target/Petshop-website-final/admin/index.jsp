@@ -65,6 +65,7 @@
         <img src="assets/images/logo.png" alt="" class="logo logo-lg">
     </div>
 
+<<<<<<< HEAD
     <%--    <div class="pcm-toolbar">--%>
     <%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
     <%--            <div class="hamburger hamburger--arrowturn">--%>
@@ -78,6 +79,8 @@
 <%--                <div class="hamburger-box">--%>
 <%--                    <div class="hamburger-inner"></div>--%>
 <%--                </div>--%>
+=======
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
 
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -108,7 +111,10 @@
 		</div>
 	</div>
 	<!-- [ Mobile header ] End -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
 
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
@@ -117,28 +123,6 @@
         </div>
     </div>
     <!-- [ Pre-loader ] End -->
-    <!-- [ Mobile header ] start -->
-    <div class="pc-mob-header pc-header">
-        <div class="pcm-logo">
-            <img src="assets/images/logo.png" alt="" class="logo logo-lg">
-        </div>
-        <div class="pcm-toolbar">
-            <a href="#!" class="pc-head-link" id="mobile-collapse">
-                <div class="hamburger hamburger--arrowturn">
-                    <div class="hamburger-box">
-                        <div class="hamburger-inner"></div>
-                    </div>
-                </div>
-            </a>
-            <a href="#!" class="pc-head-link" id="headerdrp-collapse">
-                <i data-feather="align-right"></i>
-            </a>
-            <a href="#!" class="pc-head-link" id="header-collapse">
-                <i data-feather="more-vertical"></i>
-            </a>
-        </div>
-    </div>
-    <!-- [ Mobile header ] End -->
 
     <!-- [ navigation menu ] start -->
     <nav class="pc-sidebar ">
@@ -237,6 +221,7 @@
                     </li>
                 </ul>
             </div>
+<<<<<<< HEAD
 
             <%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
             <%--            <i data-feather="align-right"></i>--%>
@@ -253,6 +238,9 @@
 <%--            <i data-feather="more-vertical"></i>--%>
 <%--        </a>--%>
     </div>
+=======
+        </div>
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
     </nav>
 </div>
 <!-- [ Mobile header ] End -->
