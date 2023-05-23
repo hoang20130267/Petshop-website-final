@@ -201,8 +201,11 @@ public class ProductDAO {
                     .bind(13, Integer.parseInt(Promotional))
                     .bind(14, id)
                     .execute();
+            handle.createUpdate("DELETE FROM product_img WHERE ID_Product=?")
+                    .bind(0, id)
+                    .execute();
             for (int i = 1; i < imgFile.length; i++) {
-                handle.createUpdate("UPDATE product_img SET ID_Product=?, img=?")
+                handle.createUpdate("INSERT INTO product_img VALUES(?, ?)")
                         .bind(0, id)
                         .bind(1, "http://localhost:8080/Petshop_website_final_war/img/products/" + imgFile[i])
                         .execute();
@@ -233,8 +236,11 @@ public class ProductDAO {
                     .bind(12, Integer.parseInt(Promotional))
                     .bind(13, id)
                     .execute();
+            handle.createUpdate("DELETE FROM product_img WHERE ID_Product=?")
+                    .bind(0, id)
+                    .execute();
             for (int i = 1; i < imgFile.length; i++) {
-                handle.createUpdate("UPDATE product_img SET ID_Product=?, img=?")
+                handle.createUpdate("INSERT INTO product_img VALUES(?, ?)")
                         .bind(0, id)
                         .bind(1, "http://localhost:8080/Petshop_website_final_war/img/products/" + imgFile[i])
                         .execute();
