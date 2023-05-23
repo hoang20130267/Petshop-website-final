@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         .dropdown {
             position: relative;
@@ -166,6 +169,9 @@
             opacity: 1;
             visibility: visible;
         }
+        select.pdw {
+            min-width: 162px;
+        }
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -183,6 +189,7 @@
             text-align: center;
             color: white;
         }
+
     </style>
 </head>
 
@@ -339,12 +346,17 @@
                                 <h2>Địa chỉ:</h2>
                                 <label>Số nhà:</label>
                                 <input type="text" id="soNha"><br><br>
-                                <label>Phường/Xã:</label>
-                                <input type="text" id="xa"><br><br>
-                                <label>Quận/Huyện:</label>
-                                <input type="text" id="huyen"><br><br>
                                 <label>Tỉnh/TP:</label>
-                                <input type="text" id="tinh"><br><br>
+                                <select id="province" class="pdw">
+                                </select><br><br>
+                                <label>Quận/Huyện:</label>
+                                <select id="district" class="pdw">
+                                    <option value="">Quận/Huyện</option>
+                                </select><br><br>
+                                <label>Phường/Xã:</label>
+                                <select id="ward" class="pdw">
+                                    <option value="">Phường/xã</option>
+                                </select><br><br>
                                 <div id="error" style="text-align: center; color: red"> </div>
                                 <div onclick="hideTable()" class="bt2">Hủy</div>
                                 <div onclick="validateInput()" class="bt2">Cập nhật</div>
@@ -461,30 +473,53 @@
         document.getElementById("error").innerHTML = "";
     }
     function validateInput() {
-        var soNha = document.getElementById("soNha").value;
-        var xa = document.getElementById("xa").value;
-        var huyen = document.getElementById("huyen").value;
-        var tinh = document.getElementById("tinh").value;
-        var count = 0;
-        if (soNha == "") {
-            count++;
-        }
-        if (xa == "") {
-            count++;
-        }
-        if (huyen == "") {
-            count++;
-        }
-        if (tinh == "") {
-            count++;
-        }
-        if (count > 0) {
-            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
+        const provincecheck = $("#province").val();
+        const districtcheck = $("#district").val();
+        const wardcheck = $("ward").val();
+
+        if (provincecheck.value === '' || districtcheck.value === '' || wardcheck.value === '' || sonha === '') {
+            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
         } else {
-            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+            document.getElementById("address").value =  soNha + ", " + $("#province option:selected").text() +
+                ", " + $("#district option:selected").text() + ", " +
+                $("#ward option:selected").text();
             hideTable();
         }
     }
+</script>
+<script>
+    axios.post('http://140.238.54.136/api/auth/login', {
+        email: '20130266@st.hcmuaf.edu.vn',
+        password: '123456'
+    })
+        .then(response => {
+            document.querySelector("#token").setAttribute("value", token);
+            callProvince(response.data.access_token);
+        });
+
+    var callProvince = (access_token) => {
+        return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
+            const provinces = response.data.original.data;
+            renderDataProvince(response.data.original.data,"province");
+        });
+    }
+
+    var renderDataProvince = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.ProvinceID}">${element.ProvinceName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        // Lấy giá trị của option được chọn
+        const provinceID = $("#province").val();
+        console.log(provinceID);
+        const tokenElement = document.querySelector("#token");
+        const token = tokenElement.getAttribute("value");
+        console.log(token);
+    });
 </script>
 </body>
 

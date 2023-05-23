@@ -191,6 +191,7 @@
             font-weight: 700;
             transition: all 0.3s;
         }
+
         #myTable {
             display: none;
             position: absolute;
@@ -201,12 +202,14 @@
             padding: 20px;
             border: 1px solid black;
             z-index: 1;
-            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+            box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
         }
+
         #myTable label {
             display: inline-block;
             width: 85px;
         }
+
         .overlayT {
             position: fixed;
             top: 0;
@@ -219,10 +222,16 @@
             z-index: 0;
             transition: opacity 0.5s ease;
         }
+
         .overlayT.show {
             opacity: 1;
             visibility: visible;
         }
+
+        select.pdw {
+            min-width: 162px;
+        }
+
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -231,6 +240,7 @@
             text-align: center;
             color: white;
         }
+
         .bt2 {
             background-color: #007bff;
             border-radius: 5px;
@@ -463,26 +473,33 @@
                                                 placeholder="Nhập số điện thoại tại đây"
                                                 value="<%=user.getPhone()%>"></div>
 
-                        <div class="col-md-12"><label class="labels" style="padding-top: 10px; margin-bottom: 10px">Địa chỉ</label><input type="text" id="address"
-                                                                                           class="form-control"
-                                                                                           name="address"
-                                                                                           placeholder="Chưa có địa chỉ"
-                                                                                           value="<%=user.getAddress()%>"
-                                                                                           readonly>
-                        </div> <br>
+                        <div class="col-md-12"><label class="labels" style="padding-top: 10px; margin-bottom: 10px">Địa
+                            chỉ</label><input type="text" id="address"
+                                              class="form-control"
+                                              name="address"
+                                              placeholder="Chưa có địa chỉ"
+                                              value="<%=user.getAddress()%>"
+                                              readonly>
+                        </div>
+                        <br>
                         <div class="col-md-12">
                             <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
                             <div id="myTable">
                                 <h2>Địa chỉ:</h2>
                                 <label>Số nhà:</label>
                                 <input type="text" id="soNha"><br><br>
-                                <label>Phường/Xã:</label>
-                                <input type="text" id="xa"><br><br>
-                                <label>Quận/Huyện:</label>
-                                <input type="text" id="huyen"><br><br>
                                 <label>Tỉnh/TP:</label>
-                                <input type="text" id="tinh"><br><br>
-                                <div id="error" style="text-align: center; color: red"> </div>
+                                <select id="province" class="pdw">
+                                </select><br><br>
+                                <label>Quận/Huyện:</label>
+                                <select id="district" class="pdw">
+                                    <option value="">Quận/Huyện</option>
+                                </select><br><br>
+                                <label>Phường/Xã:</label>
+                                <select id="ward" class="pdw">
+                                    <option value="">Phường/xã</option>
+                                </select><br><br>
+                                <div id="error" style="text-align: center; color: red"></div>
                                 <div onclick="hideTable()" class="bt2">Hủy</div>
                                 <div onclick="validateInput()" class="bt2">Cập nhật</div>
                             </div>
@@ -672,37 +689,60 @@
         document.getElementById("myTable").style.display = "block";
         document.getElementById("overlayT").classList.add("show");
     }
+
     function hideTable() {
         document.getElementById("myTable").style.display = "none";
         document.getElementById("overlayT").classList.remove("show");
         document.getElementById("error").innerHTML = "";
     }
+
     function validateInput() {
-        var soNha = document.getElementById("soNha").value;
-        var xa = document.getElementById("xa").value;
-        var huyen = document.getElementById("huyen").value;
-        var tinh = document.getElementById("tinh").value;
-        var count = 0;
-        if (soNha == "") {
-            count++;
-        }
-        if (xa == "") {
-            count++;
-        }
-        if (huyen == "") {
-            count++;
-        }
-        if (tinh == "") {
-            count++;
-        }
-        if (count > 0) {
-            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
+        const provincecheck = $("#province").val();
+        const districtcheck = $("#district").val();
+        const wardcheck = $("ward").val();
+
+        if (provincecheck.value === '' || districtcheck.value === '' || wardcheck.value === '' || sonha === '') {
+            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
         } else {
-            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+            document.getElementById("address").value =  soNha + ", " + $("#province option:selected").text() +
+                ", " + $("#district option:selected").text() + ", " +
+                $("#ward option:selected").text();
             hideTable();
         }
     }
 </script>
+<script>
+    axios.post('http://140.238.54.136/api/auth/login', {
+        email: '20130266@st.hcmuaf.edu.vn',
+        password: '123456'
+    })
+        .then(response => {
+            document.querySelector("#token").setAttribute("value", token);
+            callProvince(response.data.access_token);
+        });
 
+    var callProvince = (access_token) => {
+        return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
+            const provinces = response.data.original.data;
+            renderDataProvince(response.data.original.data,"province");
+        });
+    }
+
+    var renderDataProvince = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.ProvinceID}">${element.ProvinceName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+    $("#province").change(() => {
+        // Lấy giá trị của option được chọn
+        const provinceID = $("#province").val();
+        console.log(provinceID);
+        const tokenElement = document.querySelector("#token");
+        const token = tokenElement.getAttribute("value");
+        console.log(token);
+    });
+</script>
 </body>
 </html>

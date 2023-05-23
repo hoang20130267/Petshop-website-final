@@ -64,14 +64,14 @@
     <div class="pcm-logo">
         <img src="assets/images/logo.png" alt="" class="logo logo-lg">
     </div>
-<<<<<<< HEAD
+
     <%--    <div class="pcm-toolbar">--%>
     <%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
     <%--            <div class="hamburger hamburger--arrowturn">--%>
     <%--                <div class="hamburger-box">--%>
     <%--                    <div class="hamburger-inner"></div>--%>
     <%--                </div>--%>
-=======
+
 <%--    <div class="pcm-toolbar">--%>
 <%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
 <%--            <div class="hamburger hamburger--arrowturn">--%>
@@ -108,7 +108,7 @@
 		</div>
 	</div>
 	<!-- [ Mobile header ] End -->
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
+
 
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
@@ -237,7 +237,7 @@
                     </li>
                 </ul>
             </div>
-<<<<<<< HEAD
+
             <%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
             <%--            <i data-feather="align-right"></i>--%>
             <%--        </a>--%>
@@ -245,7 +245,7 @@
             <%--            <i data-feather="more-vertical"></i>--%>
             <%--        </a>--%>
         </div>
-=======
+
 <%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
 <%--            <i data-feather="align-right"></i>--%>
 <%--        </a>--%>
@@ -253,7 +253,6 @@
 <%--            <i data-feather="more-vertical"></i>--%>
 <%--        </a>--%>
     </div>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
     </nav>
 </div>
 <!-- [ Mobile header ] End -->
@@ -430,11 +429,6 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-sack-dollar" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalRevenue%> Đ</h5>
@@ -445,11 +439,6 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-duotone fa-paw" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProduct%>
@@ -463,11 +452,6 @@
                         <div class="col-sm-6 card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-arrow-right-arrow-left" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalProSold%>
@@ -479,11 +463,6 @@
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-solid fa-hands-holding-dollar" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrder%>
@@ -495,11 +474,6 @@
                         <div class="col-sm-6 card-body">
                             <div class="row">
                                 <div class="col-sm-4">
-<<<<<<< HEAD
-                                    <%--                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>--%>
-=======
-<%--                                    <i class="fa-sharp fa-solid fa-ban" style="color: #00bfff;"></i>--%>
->>>>>>> d48b1336a13e5390e9fe0ce339fce9427907fd18
                                 </div>
                                 <div class="col-sm-8 text-md-center">
                                     <h5><%=totalOrderCancel%>
@@ -547,88 +521,12 @@
                                         </td>
                                     </tr>
                                     <% } %>
-                                    <%-- <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Nhập 40 áo len cún</td>
-                                         <td style="text-align: center;">2</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16  text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Thêm tin tức mới</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-success">Hoàn thành</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Chỉnh sửa trang chủ</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-success">Hoàn thành</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Nhập 15 mèo Anh</td>
-                                         <td style="text-align: center;">3</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Vận chuyển 7 đơn hàng</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-warning">Đang thực hiện</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Thêm user mới</td>
-                                         <td style="text-align: center;">2</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%--  <div class="card flat-card">
-                      <div class="card-header">
-                          <h5>Top sản phẩm bán chạy</h5>
-                      </div>
-                      <div class="feed-scroll">
-                          <div class="card-body">
-                              <% for (Product p : Top5ProductBestSeller) {%>
-                              <div class="row m-b-25 align-items-center">
-                                  <div class="col-auto p-r-0">
-                                      <i data-feather="bell" class="bg-light-primary feed-icon p-2 wid-30 hei-30"></i>
-                                  </div>
-                                  <div class="col">
-                                      <a>
-                                          <h6 class="m-b-5"><%=p.getProductName()%>
-                                          </h6>
-                                      </a>
-                                  </div>
-                              </div>
-                              <% } %>
-                          </div>
-                      </div>
-                  </div>--%>
             </div>
             <div class="col-xl-6 col-md-12">
                 <div class="card">
