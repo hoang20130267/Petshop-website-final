@@ -33,7 +33,6 @@
 <% NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));%>
 <tr class="hover-actions-trigger btn-reveal-trigger position-static">
   <td class="fs--1 align-middle ps-0 py-3">
-    <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
     <p class="mb-0 text-1100 fw-bold"><%=p.getProductId()%></p>
   </td>
   <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
