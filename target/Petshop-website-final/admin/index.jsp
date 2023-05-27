@@ -65,6 +65,22 @@
         <img src="assets/images/logo.png" alt="" class="logo logo-lg">
     </div>
 
+<<<<<<< HEAD
+    <%--    <div class="pcm-toolbar">--%>
+    <%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
+    <%--            <div class="hamburger hamburger--arrowturn">--%>
+    <%--                <div class="hamburger-box">--%>
+    <%--                    <div class="hamburger-inner"></div>--%>
+    <%--                </div>--%>
+
+<%--    <div class="pcm-toolbar">--%>
+<%--        <a href="#!" class="pc-head-link" id="mobile-collapse">--%>
+<%--            <div class="hamburger hamburger--arrowturn">--%>
+<%--                <div class="hamburger-box">--%>
+<%--                    <div class="hamburger-inner"></div>--%>
+<%--                </div>--%>
+=======
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
 
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
@@ -95,6 +111,10 @@
 		</div>
 	</div>
 	<!-- [ Mobile header ] End -->
+<<<<<<< HEAD
+
+=======
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
 
     <!-- [ Pre-loader ] start -->
     <div class="loader-bg">
@@ -201,7 +221,26 @@
                     </li>
                 </ul>
             </div>
+<<<<<<< HEAD
+
+            <%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
+            <%--            <i data-feather="align-right"></i>--%>
+            <%--        </a>--%>
+            <%--        <a href="#!" class="pc-head-link" id="header-collapse">--%>
+            <%--            <i data-feather="more-vertical"></i>--%>
+            <%--        </a>--%>
         </div>
+
+<%--        <a href="#!" class="pc-head-link" id="headerdrp-collapse">--%>
+<%--            <i data-feather="align-right"></i>--%>
+<%--        </a>--%>
+<%--        <a href="#!" class="pc-head-link" id="header-collapse">--%>
+<%--            <i data-feather="more-vertical"></i>--%>
+<%--        </a>--%>
+    </div>
+=======
+        </div>
+>>>>>>> 02f51d9c47fb6cf2436639931e03b64d7b73a930
     </nav>
 </div>
 <!-- [ Mobile header ] End -->
@@ -470,88 +509,12 @@
                                         </td>
                                     </tr>
                                     <% } %>
-                                    <%-- <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Nhập 40 áo len cún</td>
-                                         <td style="text-align: center;">2</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16  text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Thêm tin tức mới</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-success">Hoàn thành</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Chỉnh sửa trang chủ</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-success">Hoàn thành</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Nhập 15 mèo Anh</td>
-                                         <td style="text-align: center;">3</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Vận chuyển 7 đơn hàng</td>
-                                         <td style="text-align: center;">1</td>
-                                         <td>
-                                             <div><label class="badge bg-light-warning">Đang thực hiện</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>
-                                     <tr>
-                                         <td><i data-feather="file-text" class="bg-light-success feed-icon p-2 wid-30 hei-30"></i></td>
-                                         <td>Thêm user mới</td>
-                                         <td style="text-align: center;">2</td>
-                                         <td>
-                                             <div><label class="badge bg-light-danger">Đã hủy</label></div>
-                                         </td>
-                                         <td style="text-align: center;"><a href="#!"><i class="icon feather icon-edit f-16 text-success"></i></a><a href="#!"><i class="feather icon-trash-2 ml-3 f-16 text-danger"></i></a></td>
-                                     </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%--  <div class="card flat-card">
-                      <div class="card-header">
-                          <h5>Top sản phẩm bán chạy</h5>
-                      </div>
-                      <div class="feed-scroll">
-                          <div class="card-body">
-                              <% for (Product p : Top5ProductBestSeller) {%>
-                              <div class="row m-b-25 align-items-center">
-                                  <div class="col-auto p-r-0">
-                                      <i data-feather="bell" class="bg-light-primary feed-icon p-2 wid-30 hei-30"></i>
-                                  </div>
-                                  <div class="col">
-                                      <a>
-                                          <h6 class="m-b-5"><%=p.getProductName()%>
-                                          </h6>
-                                      </a>
-                                  </div>
-                              </div>
-                              <% } %>
-                          </div>
-                      </div>
-                  </div>--%>
             </div>
             <div class="col-xl-6 col-md-12">
                 <div class="card">

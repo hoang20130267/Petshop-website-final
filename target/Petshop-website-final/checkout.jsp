@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <style>
         .dropdown {
             position: relative;
@@ -484,6 +487,76 @@
             document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
             hideTable();
         }
+    }
+</script>
+<script>
+    var token = (api) => {
+        return axios.post('http://140.238.54.136/api/auth/login', {
+            email: '20130266@st.hcmuaf.edu.vn',
+            password: '123456'
+        })
+            .then(response => {
+                const accessToken = response.data.access_token;
+                return accessToken;
+            })
+    }
+    console.log(token);
+
+
+
+    const EMAIL = "20130266@st.hcmuaf.edu.vn"
+    const PASSWORD = "123456"
+    var token = async function () {
+        const url = "http://140.238.54.136/api/auth/login";
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                email: EMAIL,
+                password: PASSWORD
+            })
+        };
+        const response = await fetch(url, options);
+        const jsonResponse = await response.json();
+        const token1 = jsonResponse.access_token;
+        return token1;
+    }
+    var ListProvince = async function() {
+        const url = "http://140.238.54.136/api/auth/login";
+        const option = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                })
+            };
+                return  await fetch(url, options).then(response => response.json()).then(data => {
+            renderData()
+        })
+    }
+
+
+
+
+    var province = async function () {
+        const url = "http://140.238.54.136/api/auth/login";
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+            })
+        };
+        const response = await fetch(url, options);
+        const jsonResponse = await response.json();
+        return jsonResponse.access_token;
     }
 </script>
 </body>
