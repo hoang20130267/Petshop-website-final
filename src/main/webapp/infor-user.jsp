@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<%--        <link rel="stylesheet" href="css/nice-select.css" type="text/css">--%>
         <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
@@ -194,22 +194,22 @@
 
         #myTable {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
             padding: 20px;
-            border: 1px solid black;
+            background-image: url(img/breadcrumb.jpg);
+            background-position: top right;
             z-index: 1;
-            box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px black;
+            width: 380px;
         }
-
         #myTable label {
             display: inline-block;
-            width: 85px;
+            width: 100px;
         }
-
         .overlayT {
             position: fixed;
             top: 0;
@@ -222,16 +222,15 @@
             z-index: 0;
             transition: opacity 0.5s ease;
         }
-
         .overlayT.show {
             opacity: 1;
             visibility: visible;
         }
-
         select.pdw {
-            min-width: 162px;
+            min-width: 200px;
+            height: 30px;
+            border-radius: 4px;
         }
-
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -249,6 +248,7 @@
             display: inline-block;
             text-align: center;
             color: white;
+            margin-left: 40px;
         }
     </style>
 
@@ -482,14 +482,31 @@
                                               readonly>
                         </div>
                         <br>
+<%--                        <div class="col-md-12">--%>
+<%--                            <div>--%>
+<%--                                <section id="infomation">--%>
+<%--                                    <select id="tinh" title="chon tinh">--%>
+<%--                                        <option  value="" selected>Tỉnh/TP</option>--%>
+<%--                                    </select>--%>
+<%--                                    <select id="district">--%>
+<%--                                        <option  value="" selected>Quận/Huyện</option>--%>
+<%--                                    </select>--%>
+<%--                                    <select id="ward">--%>
+<%--                                        <option value="" selected>Phường/Xã</option>--%>
+<%--                                    </select>--%>
+<%--                                </section>--%>
+<%--                            </div>--%>
+<%--                            <button class="btn btn-primary profile-button" id="update-address" style="padding-top: 10px; margin-bottom: 10px">Chỉnh sửa địa chỉ</button>--%>
+<%--                        </div>--%>
+                        <br>
                         <div class="col-md-12">
-                            <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
+                            <div onclick="showTable()" class="bt1" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
                             <div id="myTable">
-                                <h2>Địa chỉ:</h2>
                                 <label>Số nhà:</label>
                                 <input type="text" id="soNha"><br><br>
                                 <label>Tỉnh/TP:</label>
                                 <select id="province" class="pdw">
+                                    <option value="">Tỉnh/Thành phố</option>
                                 </select><br><br>
                                 <label>Quận/Huyện:</label>
                                 <select id="district" class="pdw">
@@ -499,10 +516,22 @@
                                 <select id="ward" class="pdw">
                                     <option value="">Phường/xã</option>
                                 </select><br><br>
+<%--&lt;%&ndash;                                <label>Tỉnh/TP:</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <select id="province" class="pdw">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </select><br><br>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <label>Quận/Huyện:</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <select id="district" class="pdw">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <option value="">Quận/Huyện</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </select><br><br>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <label>Phường/Xã:</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <select id="ward" class="pdw">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <option value="">Phường/xã</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </select><br><br>&ndash;%&gt;--%>
                                 <div id="error" style="text-align: center; color: red"></div>
                                 <div onclick="hideTable()" class="bt2">Hủy</div>
                                 <div onclick="validateInput()" class="bt2">Cập nhật</div>
                             </div>
+<%--                            <div class="overlayT" onclick="hideTable()" id="overlayT"></div>--%>
                         </div>
                         <%--<div class="col-md-12"><label class="labels" style="padding-top: 10px">Địa chỉ</label><input id="address"
                                 type="text" class="form-control" name="address" placeholder="Nhập địa chỉ"
@@ -538,7 +567,6 @@
                         <button class="btn btn-primary profile-button" type="submit">Lưu thông tin</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </form>
@@ -552,7 +580,7 @@
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
+<%--<script src="js/jquery.nice-select.min.js"></script>--%>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
@@ -560,6 +588,8 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+<script src="js/axios.min.js"></script>
+
 <script>
     function reloadUpLoadFile() {
         $(".input-file").each(function () {
@@ -685,64 +715,90 @@
     })
 </script>
 <script>
+    const provinces = document.getElementById("province");
+    const districts = document.getElementById("district");
+    const wards = document.getElementById("ward");
+
+
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data, "province");
+            });
+    }
+
+    var callApiDistrict = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.districts, "district");
+            });
+    }
+    var callApiWard = (api) => {
+        return axios.get(api)
+            .then((response) => {
+                renderData(response.data.wards, "ward");
+            });
+    }
+
+    function renderData(array, select) {
+        switch (select) {
+            case "province":
+                for (const item of array) {
+                    const option = new Option(item.name, item.code);
+                    document.getElementById("province").add(option);
+                }
+                break;
+
+            case "district":
+                for (const item of array) {
+                    const option = new Option(item.name, item.code);
+                    document.getElementById("district").add(option);
+                }
+                break;
+
+            case "ward":
+                for (const item of array) {
+                    const option = new Option(item.name, item.code);
+                    document.getElementById("ward").add(option);
+                }
+                break;
+
+            default:
+                console.log("Invalid select value.");
+        }
+    }
+
+    $("#province").change(() => {
+        callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+    });
+    $("#district").change(() => {
+        callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+    });
     function showTable() {
         document.getElementById("myTable").style.display = "block";
         document.getElementById("overlayT").classList.add("show");
+        callAPI('https://provinces.open-api.vn/api/?depth=1');
     }
-
     function hideTable() {
         document.getElementById("myTable").style.display = "none";
         document.getElementById("overlayT").classList.remove("show");
         document.getElementById("error").innerHTML = "";
     }
 
+    var getsoNha = document.getElementById("soNha").value;
     function validateInput() {
-        const provincecheck = $("#province").val();
-        const districtcheck = $("#district").val();
-        const wardcheck = $("ward").val();
-
-        if (provincecheck.value === '' || districtcheck.value === '' || wardcheck.value === '' || sonha === '') {
-            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
-        } else {
-            document.getElementById("address").value =  soNha + ", " + $("#province option:selected").text() +
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "" && $("#soNha").val() != "") {
+            document.getElementById("address").value  = $("#soNha").val() + ", " + $("#ward option:selected").text() +
                 ", " + $("#district option:selected").text() + ", " +
-                $("#ward option:selected").text();
+                $("#province option:selected").text();
             hideTable();
         }
+        else {
+            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
+        }
     }
-</script>
-<script>
-    axios.post('http://140.238.54.136/api/auth/login', {
-        email: '20130266@st.hcmuaf.edu.vn',
-        password: '123456'
-    })
-        .then(response => {
-            document.querySelector("#token").setAttribute("value", token);
-            callProvince(response.data.access_token);
-        });
-
-    var callProvince = (access_token) => {
-        return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
-            const provinces = response.data.original.data;
-            renderDataProvince(response.data.original.data,"province");
-        });
-    }
-
-    var renderDataProvince = (array, select) => {
-        let row = ' <option disable value="">chọn</option>';
-        array.forEach(element => {
-            row += `<option value="${element.ProvinceID}">${element.ProvinceName}</option>`
-        });
-        document.querySelector("#" + select).innerHTML = row
-    }
-    $("#province").change(() => {
-        // Lấy giá trị của option được chọn
-        const provinceID = $("#province").val();
-        console.log(provinceID);
-        const tokenElement = document.querySelector("#token");
-        const token = tokenElement.getAttribute("value");
-        console.log(token);
-    });
 </script>
 </body>
 </html>

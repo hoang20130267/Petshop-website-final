@@ -501,6 +501,7 @@
             },
             success: function (data) {
                 $("#pagging_bar").html(data);
+                addwishlist();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -533,7 +534,7 @@
                 $(".page-item").removeClass("active")
                 $(".page-item.item" + page).addClass("active")
                 console.log(page);
-
+                addwishlist()
             },
             error: function (xhr) {
             }
