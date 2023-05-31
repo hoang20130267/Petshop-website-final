@@ -501,6 +501,8 @@
             },
             success: function (data) {
                 $("#pagging_bar").html(data);
+                addcart();
+                addwishlist();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -533,7 +535,8 @@
                 $(".page-item").removeClass("active")
                 $(".page-item.item" + page).addClass("active")
                 console.log(page);
-
+                addcart();
+                addwishlist();
             },
             error: function (xhr) {
             }
@@ -563,7 +566,7 @@
                 var row = document.getElementById("items");
                 row.innerHTML += data;
                 addcart();
-                addwishlist()
+                addwishlist();
             },
             error: function (xhr) {
                 //Do Something to handle error

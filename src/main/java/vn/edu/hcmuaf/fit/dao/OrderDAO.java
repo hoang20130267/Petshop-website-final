@@ -141,7 +141,7 @@ public class OrderDAO {
     }
     public List<Orders> Last5Order() {
         List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
-                        "SELECT  OrderID,OrderDate FROM orders \n" +
+                        "SELECT  OrderID,OrderDate,CustomerID FROM orders \n" +
                         "ORDER BY OrderDate DESC\n" +
                         "LIMIT 5 ")
                 .mapToBean(Orders.class).stream().collect(Collectors.toList()));
