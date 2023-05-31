@@ -143,14 +143,14 @@
             padding: 20px;
             background-image: url(img/breadcrumb.jpg);
             background-position: top right;
-            /* background-color: white; */
             z-index: 1;
-            border-radius: 5px;
+            border-radius: 10px;
             border: 1px black;
+            width: 380px;
         }
         #myTable label {
             display: inline-block;
-            width: 85px;
+            width: 100px;
         }
         .overlayT {
             position: fixed;
@@ -169,8 +169,8 @@
             visibility: visible;
         }
         select.pdw {
-            min-width: 169px;
-            height: 21px;
+            min-width: 200px;
+            height: 30px;
             border-radius: 4px;
         }
         .bt1 {
@@ -190,6 +190,7 @@
             display: inline-block;
             text-align: center;
             color: white;
+            margin-left: 40px;
         }
     </style>
 </head>

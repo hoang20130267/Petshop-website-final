@@ -386,7 +386,7 @@
                             }
                         }
                     %>
-
+                    <p><%=product.getViewCount()%></p>
                     <p><%=product.getDescription()%>
                     </p>
                     <div class="product__details__quantity">
