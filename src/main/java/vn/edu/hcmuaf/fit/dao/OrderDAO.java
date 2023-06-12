@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import com.mysql.cj.xdevapi.Collection;
 import vn.edu.hcmuaf.fit.beans.*;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.ProductService;
@@ -191,7 +192,7 @@ public class OrderDAO {
         LocalDate currentDate = LocalDate.now();
 
         // Thêm 6 tháng gần nhất vào list
-        for (int i = 0; i < 6; i++) {
+        for (int i = 6; i > 0; i--) {
             String date = currentDate.format(formatter);
             String month = date.substring(0,2);
             String year = date.substring(3,7);
@@ -218,6 +219,7 @@ public class OrderDAO {
         }
         return list;
     }
+
 
     public List<Map<String, Object>> SaleChartinWeek() {
         List<Map<String, Object>> listMap = new ArrayList<>();
@@ -268,8 +270,7 @@ public class OrderDAO {
     }
 
     public static void main(String[] args) {
-        System.out.println(new OrderDAO().SaleChartinWeek());
-   /*     System.out.println(new OrderDAO().SaleChartinWeek());*/
+        System.out.println(new OrderDAO().MonthlyChart());
 
 //        System.out.println(new OrderDAO().getOrdersByUser("1101"));
 

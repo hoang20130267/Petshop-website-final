@@ -18,6 +18,7 @@ public class Detail implements Serializable {
     private String ViewCount;
 
 
+
     public Detail() {
     }
 

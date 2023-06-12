@@ -252,7 +252,7 @@
                         <ul>
                             <li>Tác giả: <%=UserService.getInstance().getUserDetail(blogs.getCreateBy()).getName()%></li>
                             <li><%=blogs.getCreateDate()%></li>
-                            <li><%=blogs.getViewCount()%> lượt xem</li>
+                            <li><%=blogs.getViewCount() != null ? blogs.getViewCount() : 0 %> lượt xem</li>
 <%--                            <li>0 Bình Luận</li>--%>
                         </ul>
                     </div>

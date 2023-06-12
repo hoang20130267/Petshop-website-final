@@ -1,10 +1,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.StatisticalService" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Objects" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -272,6 +270,7 @@
                 int totalOrderCancel = service.totalOrderCancel();
                 List<Map<String, Integer>> StatisticalComment = service.StatisticalComment();
                 List<Map<String, Object>> MonthlyChart = service.MonthlyChart();
+                Collections.reverse(MonthlyChart);
                 List<Map<String, Object>> SaleChartinWeek = service.SaleChartinWeek();
                 List<Orders> Last5Order = service.Last5Order();
                 List<Product> Top10ProductBestSeller = service.Top10ProductBestSeller();

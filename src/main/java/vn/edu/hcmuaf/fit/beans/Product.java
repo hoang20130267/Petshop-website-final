@@ -31,6 +31,7 @@ public class Product implements Serializable {
 
     private String cate_id;
     private String ViewCount;
+    private String size;
 
     private List<ImageProduct> images;
 
@@ -38,7 +39,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart,int quantityWishlist, String cate_id, List<ImageProduct> images, String viewCount) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, String viewCount, String size, List<ImageProduct> images) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -62,9 +63,9 @@ public class Product implements Serializable {
         this.quantityWishlist = quantityWishlist;
         this.cate_id = cate_id;
         ViewCount = viewCount;
+        this.size = size;
         this.images = images;
     }
-
 
     public void setPromotional(int promotional) {
         Promotional = promotional;
@@ -261,6 +262,14 @@ public class Product implements Serializable {
         ViewCount = viewCount;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -287,6 +296,8 @@ public class Product implements Serializable {
                 ", quantityWishlist=" + quantityWishlist +
                 ", cate_id='" + cate_id + '\'' +
                 ", ViewCount='" + ViewCount + '\'' +
+                ", size='" + size + '\'' +
+                ", images=" + images +
                 '}';
     }
 
