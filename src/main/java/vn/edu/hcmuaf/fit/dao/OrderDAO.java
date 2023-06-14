@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import com.mysql.cj.xdevapi.Collection;
 import vn.edu.hcmuaf.fit.beans.*;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 import vn.edu.hcmuaf.fit.services.ProductService;
@@ -32,11 +33,11 @@ public class OrderDAO {
         else return stringBuilder.toString();
     }
 
-    public String insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart){
+    public String insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart, String idT){
         String id = taoOrderID();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO orders (OrderID, OrderDate,`Status`,Delivered,CustomerID,Notice,Price,RecipientName,Email,Phone,Address) VALUES(?,?,1,0,?,?,?,?,?,?,?)")
+            handle.createUpdate("INSERT INTO orders (OrderID, OrderDate,`Status`,Delivered,CustomerID,Notice,Price,RecipientName,Email,Phone,Address,IdTransport) VALUES(?,?,1,0,?,?,?,?,?,?,?,?)")
                     .bind(0,id)
                     .bind(1,date)
                     .bind(2,CustomerID)
@@ -46,6 +47,7 @@ public class OrderDAO {
                     .bind(6,email)
                     .bind(7,phone)
                     .bind(8,address)
+                    .bind(9,idT)
                     .execute();
             for (String idp: cart.getData().keySet()) {
                 Product p = ProductDAO.getProductById(idp);
@@ -73,7 +75,7 @@ public class OrderDAO {
     }
 
     public List<OrderDetail> getOrderDetailsById (String id){
-        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
+        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT o.idTransport, od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
                         "                WHERE o.OrderID = ?")
                 .bind(0,id)
                 .mapToBean(OrderDetail.class).stream().collect(Collectors.toList())
@@ -191,7 +193,7 @@ public class OrderDAO {
         LocalDate currentDate = LocalDate.now();
 
         // Thêm 6 tháng gần nhất vào list
-        for (int i = 0; i < 6; i++) {
+        for (int i = 6; i > 0; i--) {
             String date = currentDate.format(formatter);
             String month = date.substring(0,2);
             String year = date.substring(3,7);
@@ -218,6 +220,7 @@ public class OrderDAO {
         }
         return list;
     }
+
 
     public List<Map<String, Object>> SaleChartinWeek() {
         List<Map<String, Object>> listMap = new ArrayList<>();
@@ -268,8 +271,7 @@ public class OrderDAO {
     }
 
     public static void main(String[] args) {
-        System.out.println(new OrderDAO().SaleChartinWeek());
-   /*     System.out.println(new OrderDAO().SaleChartinWeek());*/
+        System.out.println(new OrderDAO().MonthlyChart());
 
 //        System.out.println(new OrderDAO().getOrdersByUser("1101"));
 

@@ -458,7 +458,7 @@ public class ProductDAO {
     }
 
     public List<Product> listRelateTo(String id) {
-        return JDBIConnector.get().withHandle(handle -> handle.createQuery("\tSELECT p.productId,p.ProductName,p.Price, p.Image\n" +
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("\tSELECT DISTINCT p.productId,p.ProductName,p.Price, p.Image\n" +
                         "\tfrom product p join product_from_cate pfc on p.productId = pfc.product_id\n" +
                         "\tWHERE pfc.cate_id in (SELECT pfc1.cate_id\n" +
                         "\tFROM product p1 join product_from_cate pfc1 on p1.productId = pfc1.product_id \n" +
@@ -502,11 +502,13 @@ public class ProductDAO {
     }
     public void AddViewCountProduct(String id) {
         JDBIConnector.get().withHandle(handle ->
-                handle.createUpdate("UPDATE product_category SET ViewCount = ViewCount + 1 WHERE CatId=?")
+                handle.createUpdate("UPDATE product SET ViewCount = ViewCount + 1 WHERE ProductId=?")
                         .bind(0, id)
                         .execute());
     }
         public static void main(String[] args) {
             System.out.println(new ProductDAO().getQuantityProduct("3001"));
+            System.out.println(new ProductDAO().listRelateTo("1010"));
         }
+
 }

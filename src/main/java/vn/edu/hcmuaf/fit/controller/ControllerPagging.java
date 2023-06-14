@@ -30,7 +30,6 @@ public class ControllerPagging extends HttpServlet {
         request.setAttribute("positionPage",positionPage);
         int index = (positionPage-1) * 9;
         System.out.println(positionPage + "     " + index);
-
         List<Product> list = new ProductDAO().getNext9Product(index,category,price, size, orderby);
         request.setAttribute("listPagging", list);
         request.getRequestDispatcher("ajax/ajax-Pagging.jsp").forward(request, response);

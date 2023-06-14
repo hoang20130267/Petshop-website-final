@@ -31,7 +31,7 @@ public class CheckoutController extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String notice = request.getParameter("notice");
-
+        String idT = request.getParameter("idT");
         UserAccount userAccount = (UserAccount) request.getSession().getAttribute("user");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         boolean checkInventory= true;
@@ -46,7 +46,7 @@ public class CheckoutController extends HttpServlet {
             }
         }
         if(checkInventory){
-            String id = OrderService.getInstance().insertOrder(userAccount.getId(),fullname,phone,address,email,notice,cart);
+            String id = OrderService.getInstance().insertOrder(userAccount.getId(),fullname,phone,address,email,notice,cart,idT);
             request.getSession().setAttribute("cart",new Cart());
             response.getWriter().print("Đã đặt hàng thành công! Mã đơn hàng của bạn là " + id );
             LogService logService= new LogService();

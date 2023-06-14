@@ -315,10 +315,20 @@
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
-            <% ProductDAO dao = new ProductDAO();
+            <%
                 String id = request.getParameter("id");
-                Product product = dao.getProductDetail(id);
-                List<ImageProduct> img = dao.getListImg(id);
+                ProductService service = new ProductService();
+                Product product = service.getInstance().getProductDetail(id);
+                List<ImageProduct> img = service.getListImg(id);
+                List<String> ViewCount1 = (List<String>) request.getSession().getAttribute("ViewCount1");
+                if (ViewCount1 == null) {
+                    ViewCount1 = new ArrayList<>();
+                    request.getSession().setAttribute("ViewCount1", ViewCount1);
+                }
+                if (!ViewCount1.contains(product.getProductId())) {
+                    ViewCount1.add(product.getProductId());
+                    ProductService.getInstance().AddViewCountProduct(product.getProductId());
+                }
             %>
             <div class="col-lg-12 text-center">
                 <div class="breadcrumb__text">
@@ -368,9 +378,6 @@
                 <div class="product__details__text">
                     <h3><%=product.getProductName()%>
                     </h3>
-
-
-
                     <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
                     <div class="product__details__price">Tạm hết hàng!</div>
                     <%} else {%>
@@ -386,7 +393,7 @@
                             }
                         }
                     %>
-                    <p><%=product.getViewCount()%></p>
+                    <p><%=product.getViewCount() != null ? product.getViewCount() : "0"%> lượt xem</p>
                     <p><%=product.getDescription()%>
                     </p>
                     <div class="product__details__quantity">
@@ -416,7 +423,7 @@
                     <ul>
                         <li><b>Giống: </b> <span><%=product.getGiong()%></span></li>
                         <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
-                        <li><b>Cân nặng: </b> <span><%=product.getCannang()%></span></li>
+                        <li><b>Cân nặng: </b> <span><%=product.getCannang()%> kg</span></li>
                         <li><b>Chia sẻ thông tin </b>
                             <div class="share">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -428,8 +435,10 @@
                     </ul>
                     <% } else { %>
                     <ul>
-                        <li><b>Màu Sắc: </b> <span><%=product.getMausac()%></span></li>
-                        <li><b>Kích thước: </b> <span><%=product.getCannang()%></span></li>
+                        <% if (product.getSize() != null) { %>
+                        <li><b>kích thước: </b> <span><%=product.getSize()%> ( rộng × dài × cao)</span></li>
+                        <% } %>
+                        <li><b>Khối lượng: </b> <span><%=product.getCannang()%> kg</span></li>
                         <li><b>Chia sẻ thông tin </b>
                             <div class="share">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -463,7 +472,6 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Giới thiệu về thú cưng</h6>
                                 <p><%=product.getDital()%>
                                 </p>
                             </div>
@@ -587,7 +595,7 @@
         history = new ArrayList<>(4);
     }
     String productId = request.getParameter("id");
-    if (productId != null) {
+    if (productId != null && !history.contains(productId)) {
         if (history.size() == 4) {
             history.remove(0);
             history.add(3, productId);
@@ -611,7 +619,7 @@
             <%
                 if (history != null) {
                     for (String pIdHistory : history) {
-                        Product productH = dao.getProductDetail(pIdHistory);
+                        Product productH = service.getProductDetail(pIdHistory);
             %>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
