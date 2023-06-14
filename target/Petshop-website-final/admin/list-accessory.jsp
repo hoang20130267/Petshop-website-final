@@ -308,8 +308,8 @@
                             <p class="mb-0 ms-3 text-1100 fw-bold"><img src="<%=i.getImage()%>" style="height: 50px; width: 50px; object-fit: cover"></p>
                         </a></td>
                         <td class="email align-middle white-space-nowrap pe-5"><%=i.getProductName()%></td>
-                        <td class="total-spent align-middle white-space-nowrap fw-bold text-end ps-3"><%=format.format(i.getPrice())%>đ</td>
-                        <td class="city align-middle white-space-nowrap text-900 ps-7 text-center"><%=(i.getCannang() != null) ? i.getCannang() : ""%></td>
+                        <td class="total-spent align-middle white-space-nowrap fw-bold ps-3"><%=format.format(i.getPrice())%>đ</td>
+                        <td class="city align-middle white-space-nowrap text-900 ps-7"><%=(i.getCannang() != null) ? i.getCannang() : ""%></td>
                         <td>
                             <%
                                 for (AdminRole role : admin.getRole()) {
