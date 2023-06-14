@@ -9,15 +9,18 @@ public class OrderDetail implements Serializable {
     private double Price;
     private int Quantity;
 
+    private String idTransport;
+
     public OrderDetail() {
     }
 
-    public OrderDetail(String orderID, String productID, String productName, double price, int quantity) {
+    public OrderDetail(String orderID, String productID, String productName, double price, int quantity, String idTransport) {
         OrderID = orderID;
         ProductID = productID;
         ProductName = productName;
         Price = price;
         Quantity = quantity;
+        this.idTransport = idTransport;
     }
 
     public String getOrderID() {
@@ -60,6 +63,14 @@ public class OrderDetail implements Serializable {
         Quantity = quantity;
     }
 
+    public String getIdTransport() {
+        return idTransport;
+    }
+
+    public void setIdTransport(String idTransport) {
+        this.idTransport = idTransport;
+    }
+
     @Override
     public String toString() {
         return "OrderDetail{" +
@@ -68,6 +79,7 @@ public class OrderDetail implements Serializable {
                 ", ProductName='" + ProductName + '\'' +
                 ", Price=" + Price +
                 ", Quantity=" + Quantity +
+                ", idTransport='" + idTransport + '\'' +
                 '}';
     }
 }

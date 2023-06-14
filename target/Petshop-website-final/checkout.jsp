@@ -449,7 +449,6 @@
 <script src="js/axios.min.js"></script>
 <%--<script src="js/API.js"></script>--%>
 <script>
-
     $("#submitck").click(function (e) {
         e.preventDefault();
         const fullname = $(".fullname").val();
@@ -459,30 +458,56 @@
         const email = $(".email").val();
         const notice = $(".notice").val();
         const error = document.getElementById("errorOrder");
-        if (fullname == "" || phone =="" || address =="" || email=="" || notice=="") {
-            error.innerHTML = "Vui lòng xác thực captcha!";
+        const getWard = $("#getWard").val();
+        const getDistrict = $("#getDistrict").val();
+        if (fullname == "" || phone =="" || address =="" || email=="") {
+            error.innerHTML = "Vui lòng điền và chọn đủ cái thông tin!";
         } else {
-            $.ajax({
-                type: 'post',
-                url: '/Petshop_website_final_war/CheckoutController',
-                data: {
-                    fullname: fullname,
-                    phone: phone,
-                    address: address,
-                    email: email,
-                    notice: notice
-                },
-                success: function (data) {
-                    window.location.href="./my-orders.jsp"
-                    alert(data)
-                }
+            axios.post('http://140.238.54.136/api/auth/login', {
+                email: EMAIL,
+                password: PASSWORD
             })
+                .then(response => {
+                    register(response.data.access_token);
+                });
+            function register(token) {
+                url = "http://140.238.54.136/api/registerTransport"
+                body = {
+                    from_district_id:DISTRICT,
+                    from_ward_id: WARD,
+                    to_district_id: getDistrict,
+                    to_ward_id: getWard,
+                    height: "100",
+                    length: "100",
+                    width:"100",
+                    weight:"100",
+                    token: token
+                }
+                axios.post(url,body).then(response => {
+                    const idT = response.data.Transport.id;
+                    $.ajax({
+                        type: 'post',
+                        url: '/Petshop_website_final_war/CheckoutController',
+                        data: {
+                            idT: idT,
+                            fullname: fullname,
+                            phone: phone,
+                            address: address,
+                            email: email,
+                            notice: notice
+                        },
+                        success: function (data) {
+                            window.location.href="./my-orders.jsp"
+                            alert(data)
+                        }
+                    })
+                })
+            }
         }
     })
 
 </script>
 <script>
-
     const EMAIL = "20130266@st.hcmuaf.edu.vn";
     const PASSWORD = "123456";
     const WARD = "90737";
@@ -587,8 +612,6 @@
         }
     }
 
-
-
     function login() {
         const address_info = $("#address").val();
         if (address_info !== null && address_info !== "null" && address_info !== "") {
@@ -626,6 +649,7 @@
             let getdistrict = addressParts[2];
             var findDistrict = response.data.original.data.find(obj => getdistrict.indexOf(obj.DistrictName) !== -1)
             var districtid = findDistrict.DistrictID;
+            $("#getDistrict").val(districtid);
             checkWard(token,districtid);
         })
     }
@@ -640,6 +664,7 @@
             let getward = addressParts[1];
             var findWard = response.data.original.data.find(obj => getward.indexOf(obj.WardName) !== -1)
             var wardid = findWard.WardCode;
+            $("#getWard").val(wardid);
             fee(token,districtid, wardid);
             time(token,districtid,wardid);
         })
@@ -695,6 +720,7 @@
             document.getElementById("Time").innerHTML = formattedString;
         })
     }
+    console.log()
 </script>
 </body>
 

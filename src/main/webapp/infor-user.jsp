@@ -648,6 +648,7 @@
         const newpassconfirm = $("#newpassconfirm").val();
         const imageLink = $(".img-avt-review").attr("src").substring(57);
         console.log(imageLink);
+        console.log(phone);
         let imgFile = []
         $(".img-avt-review").each(function () {
             let nameFile = $(this).attr("src");

@@ -31,7 +31,6 @@ public class UpdateInforController extends HttpServlet {
         String newpassconfirm = request.getParameter("newpassconfirm");
         String image = request.getParameter("avt");
         String oldImg = request.getParameter("oldImg");
-        System.out.println(image);
 
         UserAccount user = (UserAccount) request.getSession().getAttribute("user");
         if (image != "") {

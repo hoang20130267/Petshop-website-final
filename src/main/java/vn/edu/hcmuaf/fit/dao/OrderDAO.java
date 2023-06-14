@@ -33,11 +33,11 @@ public class OrderDAO {
         else return stringBuilder.toString();
     }
 
-    public String insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart){
+    public String insertOrder(String CustomerID,String fullname, String phone, String address, String email, String notice, Cart cart, String idT){
         String id = taoOrderID();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("INSERT INTO orders (OrderID, OrderDate,`Status`,Delivered,CustomerID,Notice,Price,RecipientName,Email,Phone,Address) VALUES(?,?,1,0,?,?,?,?,?,?,?)")
+            handle.createUpdate("INSERT INTO orders (OrderID, OrderDate,`Status`,Delivered,CustomerID,Notice,Price,RecipientName,Email,Phone,Address,IdTransport) VALUES(?,?,1,0,?,?,?,?,?,?,?,?)")
                     .bind(0,id)
                     .bind(1,date)
                     .bind(2,CustomerID)
@@ -47,6 +47,7 @@ public class OrderDAO {
                     .bind(6,email)
                     .bind(7,phone)
                     .bind(8,address)
+                    .bind(9,idT)
                     .execute();
             for (String idp: cart.getData().keySet()) {
                 Product p = ProductDAO.getProductById(idp);
@@ -74,7 +75,7 @@ public class OrderDAO {
     }
 
     public List<OrderDetail> getOrderDetailsById (String id){
-        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
+        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT o.idTransport, od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
                         "                WHERE o.OrderID = ?")
                 .bind(0,id)
                 .mapToBean(OrderDetail.class).stream().collect(Collectors.toList())
