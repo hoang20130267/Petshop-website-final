@@ -122,10 +122,10 @@
         loop: true,
         margin: 0,
         items: 3,
-        dots: true,
+        // dots: true,
         smartSpeed: 1200,
         autoHeight: false,
-        autoplay: true,
+        autoplay: false,
         responsive: {
 
             320: {
