@@ -510,5 +510,4 @@ public class ProductDAO {
             System.out.println(new ProductDAO().getQuantityProduct("3001"));
             System.out.println(new ProductDAO().listRelateTo("1010"));
         }
-
 }

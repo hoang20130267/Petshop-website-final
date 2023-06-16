@@ -132,6 +132,58 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+        }
+        .pagination ul{
+            display: flex;
+            flex-wrap: wrap;
+            background: #00BFFF;
+            padding: 8px;
+            border-radius: 50px;
+        }
+        .pagination ul li{
+            color: #fff;
+            list-style: none;
+            line-height: 45px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        .pagination ul li.numb{
+            list-style: none;
+            height: 45px;
+            width: 45px;
+            margin: 0 3px;
+            line-height: 45px;
+            border-radius: 50%;
+        }
+        .pagination ul li.numb.first{
+            margin: 0px 3px 0 -5px;
+        }
+        .pagination ul li.numb.last{
+            margin: 0px -5px 0 3px;
+        }
+        .pagination ul li.dots{
+            font-size: 22px;
+            cursor: default;
+        }
+        .pagination ul li.btn{
+            padding: 0 20px;
+            border-radius: 50px;
+        }
+        .pagination li.active,
+        .pagination ul li.numb:hover,
+        .pagination ul li:first-child:hover,
+        .pagination ul li:last-child:hover{
+            color: #00BFFF;
+            background: #fff;
+        }
     </style>
 </head>
 <%
@@ -453,6 +505,9 @@
                 <input id="total" name="total" value="<%=request.getAttribute("numb")%>" type="text" style="display: none">
                 <input id="category" name="category" value="<%=request.getParameter("category")%>"
                        style="display: none">
+                    <div class="pagination">
+                        <ul> </ul>
+                    </div>
             </div>
         </div>
     </div>
@@ -474,11 +529,10 @@
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
 <script>
     $(document).ready(function () {
-        loadMore();
-        barPagging();
+        total = $("#total").val();
+        pagging(1);
         addcart();
         addwishlist();
         $("input[type='radio']").each(function () {
@@ -487,26 +541,6 @@
             })
         })
     })
-
-    function barPagging() {
-        /* let page = $("#page").val();*/
-        let total = $("#total").val();
-        $.ajax({
-            url: "/Petshop_website_final_war/ajax/ajax-barPagging.jsp",
-            type: "get", //send it through get method
-            data: {
-                total: total,
-            },
-            success: function (data) {
-                $("#pagging_bar").html(data);
-                addcart();
-                addwishlist();
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-    }
 
     function  pagging(page) {
         let category = $("#category").val();
@@ -520,7 +554,7 @@
 
         $.ajax({
             url: "/Petshop_website_final_war/ControllerPagging",
-            type: "get", //send it through get method
+            type: "get",
             data: {
                 category: category,
                 orderby: orderby,
@@ -530,45 +564,10 @@
             },
             success: function (data) {
                 $("#items").html(data);
-                $(".page-item").removeClass("active")
-                $(".page-item.item" + page).addClass("active")
-                console.log(page);
-                // barPagging(page);
                 addcart();
                 addwishlist();
             },
             error: function (xhr) {
-            }
-        });
-    }
-    function loadMore() {
-        var amount = document.getElementsByClassName("amount-pd").length;
-        let category = $("#category").val();
-        const price = $("input[type='radio']:checked.checkGia").val();
-        const orderby = $("input[type='radio']:checked.sapxep").val();
-        const size = $("input[type='radio']:checked.checkSize").val();
-        const listcate = $("input[type='radio']:checked.checkcate").val();
-        if (listcate != null) {
-            category = listcate;
-        }
-        $.ajax({
-            url: "/Petshop_website_final_war/loadMore",
-            type: "get", //send it through get method
-            data: {
-                amount: amount,
-                category: category,
-                orderby: orderby,
-                price: price,
-                size: size
-            },
-            success: function (data) {
-                var row = document.getElementById("items");
-                row.innerHTML += data;
-                addcart();
-                addwishlist();
-            },
-            error: function (xhr) {
-                //Do Something to handle error
             }
         });
     }
@@ -647,17 +646,62 @@
                 $("#items").html(data);
                 $(".filter__found h6 span").text($("#numb").val());
                 $("#total").attr("value", $("#numb").val());
-                barPagging();
+                let total = $("#total").val()
+                let totalP
+                if (total % 9 == 0 ) {
+                    totalP = Math.floor(total/9);
+                } else  {totalP = Math.floor(total/9) + 1;}
+                createPagination(totalP,1);
             }
         });
     }
 </script>
 <script>
+    const element = document.querySelector(".pagination ul");
+    let totalProduct = $("#total").val();
+    let totalPages;
+    if (totalProduct % 9 ==0 ) {
+        totalPages = totalProduct/9;
+    } else {totalPages = Math.floor(totalProduct/9) +1;}
+    let page = 1;
+    element.innerHTML = createPagination(totalPages, page);
+    function createPagination(totalPages, page){
+        let liTag = '';
+        let active;
+        let beforePage = page - 1;
+        let afterPage = page + 1;
 
+        if(page > 2){
+            liTag += `<li class="first numb" onclick="createPagination(${totalPages}, 1); pagging(${1})"><span>1</span></li>`;
+            if(page > 3){
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+        }
 
+        for (var plength = beforePage; plength <= afterPage; plength++) {
+            if (plength > totalPages) {
+                continue;
+            }
+            if (plength == 0) {
+                plength = plength + 1;
+            }
+            if(page == plength){
+                active = "active";
+            }else{
+                active = "";
+            }
+            liTag += `<li class="numb ${active}" onclick="createPagination(${totalPages}, ${plength}); pagging(${plength})"><span>${plength}</span></li>`;
+        }
+        if(page < totalPages - 1){
+            if(page < totalPages - 2){
+                liTag += `<li class="dots"><span>...</span></li>`;
+            }
+            liTag += `<li class="last numb" onclick="createPagination(${totalPages}, ${totalPages}), pagging(${plength})"><span>${totalPages}</span></li>`;
+        }
+        element.innerHTML = liTag;
+        return liTag;
+    }
 </script>
-
-
 </body>
 
 </html>

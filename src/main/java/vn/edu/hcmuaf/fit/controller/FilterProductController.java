@@ -26,8 +26,15 @@ public class FilterProductController extends HttpServlet {
         int amount_int = Integer.parseInt(amount);
         List<Product> list = new ProductDAO().getNext9Product(amount_int,category,price, size, orderby);
         List<Product> list1 = new ProductDAO().getFullProduct(category,price, size, orderby);
+        int totalPro = list1.size();
+        int totalPa = 0;
+        if (totalPro % 9 == 0) {
+            totalPa = totalPro/9;
+        } else {totalPa = totalPro/9 + 1;}
+        request.setAttribute("totalPa", totalPa);
         request.setAttribute("listnext9", list);
         request.setAttribute("numb", list1.size());
+        System.out.println(totalPa);
         request.getRequestDispatcher("ajax/ajax_loadProduct.jsp").forward(request, response);
     }
 

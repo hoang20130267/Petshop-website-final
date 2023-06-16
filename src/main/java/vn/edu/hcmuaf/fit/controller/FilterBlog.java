@@ -20,8 +20,11 @@ public class FilterBlog extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String theloai = request.getParameter("theloai");
+        int amount = 0;
         BlogDAO dao = new BlogDAO();
-        List<Blogs> list = dao.filterBlog(theloai);
+        List<Blogs> list = dao.get6Blog(amount,theloai);
+        List<Blogs> list1 = dao.filterBlog(theloai);
+        request.setAttribute("totalPageBlog", list1.size());
         PrintWriter out = response.getWriter();
         for (Blogs b : list) {
             out.println("<div class=\"col-lg-6 col-md-6 col-sm-6\">\n" +
@@ -40,11 +43,11 @@ public class FilterBlog extends HttpServlet {
                     "                            </div>\n" +
                     "                        </div>");
         }
+        out.println( "<input style=\"display: none\" value=\"" +request.getAttribute("totalPageBlog") + "\" id=\"totalPageInBlogs\">");
     }
-
-        @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            processRequest(request, response);
+        processRequest(request, response);
     }
 
     @Override
