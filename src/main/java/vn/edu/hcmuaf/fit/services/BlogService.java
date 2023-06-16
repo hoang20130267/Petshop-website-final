@@ -67,6 +67,9 @@ public class BlogService {
         dao.deleteBlog(id);
     }
 
+    public static List<Blogs> get6Blog(int count, String theloai) {
+        return new BlogDAO().get6Blog(count,theloai);
+    }
 
     public boolean isCateContainBl(String cateId){
         return new BlogDAO().isCateContainBl(cateId);

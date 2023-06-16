@@ -368,7 +368,7 @@
               <%}%>
             </table>
             <div style="border-top: 1px solid #e1e1e1;">Tạm tính: <span style="float: right;"><%=format.format(order.getPrice())%> ₫</span></div>
-            <input value="<%=order.getPrice()%>" id="provisional">
+            <input value="<%=order.getPrice()%>" id="provisional" style="display: none">
             <div>Phí vận chuyển: <span style="float: right" id="fee"></span> </div>
             <div >Phương thức thanh toán: <span style="float: right">Thanh toán khi nhận hàng</span></div>
             <div >Ghi chú đơn hàng: <span style="float: right"><%=order.getNotice()%></span></div>

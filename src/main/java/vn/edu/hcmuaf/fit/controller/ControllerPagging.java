@@ -23,13 +23,9 @@ public class ControllerPagging extends HttpServlet {
         String orderby = request.getParameter("orderby");
         String size = request.getParameter("size");
         String positionIPage = request.getParameter("page");
-        if (positionIPage == null) {
-            positionIPage = "1";
-        }
         int positionPage = Integer.parseInt(positionIPage);
         request.setAttribute("positionPage",positionPage);
         int index = (positionPage-1) * 9;
-        System.out.println(positionPage + "     " + index);
         List<Product> list = new ProductDAO().getNext9Product(index,category,price, size, orderby);
         request.setAttribute("listPagging", list);
         request.getRequestDispatcher("ajax/ajax-Pagging.jsp").forward(request, response);

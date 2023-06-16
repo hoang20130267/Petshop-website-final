@@ -98,21 +98,6 @@ public class BlogDAO {
                     .first());
     }
 
-    public boolean test(String id) {
-        List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT b.BlogId, b.BlogName, bfc.CateId\n" +
-                            "from blogs b join blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
-                            "join blogcategory bc on bc.CatId = bfc.CateId\n" +
-                            "where bc.CatId = ?;"
-                    ).bind(0,id)
-                    .mapToBean(Blogs.class)
-                    .stream().collect(Collectors.toList());
-        });
-        if (list.contains("102")) {
-            return true;
-        }
-        return false;
-    }
     public List<Blogs> searchByNameBlog(String txtSearch) {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from blogs where BlogName like ?")
@@ -147,12 +132,36 @@ public class BlogDAO {
         }
         return list;
     }
-//       List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-//            return handle.createQuery(finalquery)
-//                    .bind(0,theloai)
-//                    .mapToBean(Blogs.class).stream().collect(Collectors.toList());
-//        });
+    public int allBlog() {
+        int total = JDBIConnector.get().withHandle(handle -> handle.createQuery("" +
+                "SELECT COUNT(DISTINCT BlogId) FROM `blogs` WHERE `Status` = 1").mapTo(Integer.class).first());
+        return total;
+    }
+    public List<Blogs> get6Blog(int count, String theloai) {
+        String query = "SELECT b.BlogId, b.BlogName, b.CreateDate,b.Description,b.Image from blogs b JOIN blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
+                "join blogcategory bc on bc.CatId = bfc.CateId\n" +
+                "WHERE b.`Status` = 1\n";
+            if (!theloai.equals("-1")) {
+                query += "and bc.CatId = ?\n";
+            } else {
+                query += " \n";
+            }
 
+            String finalquery = query + "limit ?, 6 ";
+            List<Blogs> list = null;
+            if (theloai.equals("-1")) {
+                list = JDBIConnector.get().withHandle(handle -> {
+                    return handle.createQuery(finalquery).bind(0, count)
+                            .mapToBean(Blogs.class).stream().collect(Collectors.toList());
+                });
+            } else {
+                list = JDBIConnector.get().withHandle(handle -> {
+                    return handle.createQuery(finalquery).bind(0, theloai).bind(1, count)
+                            .mapToBean(Blogs.class).stream().collect(Collectors.toList());
+                });
+            }
+        return list;
+    }
     public static String taoIDBlog() {
         String numbers = "0123456789";
         StringBuilder stringBuilder = new StringBuilder("CB");
@@ -172,20 +181,6 @@ public class BlogDAO {
         else return stringBuilder.toString();
     }
 
-    public String test1(String theloai) {
-        String query = "SELECT b.* from blogs b JOIN blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
-                "join blogcategory bc on bc.CatId = bfc.CateId\n" +
-                "WHERE b.`Status` = 1\n";
-        if ( theloai != null) {
-            if (!theloai.equals("-1")) {
-                query += "and bc.CatId = ?\n";
-            } else {
-                query += "\n ";
-            }
-        }
-        String finalquery = query;
-        return finalquery;
-    }
     public static void insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
         String id = taoIDBlog();
         String date = java.time.LocalDate.now().toString();
@@ -254,13 +249,8 @@ public class BlogDAO {
     }
 
     public static void main(String[] args) {
-//        System.out.println(new BlogDAO().getListBlogs());
-//        System.out.println(new BlogDAO().getContent("101"));
-//        System.out.println(new BlogDAO().getBlog("101"));
-//        System.out.println(new BlogDAO().listBlogCateById("2"));
-//        System.out.println(new BlogDAO().test("1"));
-            deleteBlog("101");
-//        System.out.println(new BlogDAO().test1("2"));
-        //        System.out.println(new BlogDAO().listBlogCateById("101"));
+//        System.out.println(new BlogDAO().test("0","1"));
+        System.out.println(new BlogDAO().get6Blog(0,"-1"));
+//        System.out.println(new BlogDAO().allBlog());
     }
 }
