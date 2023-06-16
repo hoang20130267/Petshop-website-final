@@ -16,12 +16,13 @@ public class Orders implements Serializable {
     private String Email;
     private String Phone;
     private String Address;
+    private String idTransport;
 
     public Orders() {
     }
 
 
-    public Orders(String orderID, String orderDate, int status, int delivered, String deliveryDate, String customerID, double discount, String notice, double price, String recipientName, String email, String phone, String address) {
+    public Orders(String orderID, String orderDate, int status, int delivered, String deliveryDate, String customerID, double discount, String notice, double price, String recipientName, String email, String phone, String address, String idTransport) {
         OrderID = orderID;
         OrderDate = orderDate;
         Status = status;
@@ -35,6 +36,7 @@ public class Orders implements Serializable {
         Email = email;
         Phone = phone;
         Address = address;
+        this.idTransport = idTransport;
     }
 
     public double getPrice() {
@@ -141,6 +143,14 @@ public class Orders implements Serializable {
         Notice = notice;
     }
 
+    public String getIdTransport() {
+        return idTransport;
+    }
+
+    public void setIdTransport(String idTransport) {
+        this.idTransport = idTransport;
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -152,6 +162,12 @@ public class Orders implements Serializable {
                 ", CustomerID='" + CustomerID + '\'' +
                 ", Discount=" + Discount +
                 ", Notice='" + Notice + '\'' +
+                ", Price=" + Price +
+                ", RecipientName='" + RecipientName + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Phone='" + Phone + '\'' +
+                ", Address='" + Address + '\'' +
+                ", idTransport='" + idTransport + '\'' +
                 '}';
     }
 }

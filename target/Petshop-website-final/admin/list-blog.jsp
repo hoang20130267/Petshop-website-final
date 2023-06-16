@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="assets/fonts/material.css" />
     <link rel="stylesheet" href="assets/css/list/style1.css" />
     <link rel="stylesheet" href="assets/css/list/bootstrap1.min.css" />
+    <link rel="stylesheet" href="assets/js/datatables/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/js/datatables/datatables.min.css">
 
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
@@ -278,52 +280,69 @@
             </div>
         </div>
         <div class="row">
-            <div class="row gx-3 gy-2 mb-3" id="content">
-              <h2 style=" font-weight: 800; text-align: center; margin-bottom: 30px;">Danh sách tin tức</h2>
-                <% List<Blogs> list = new BlogService().AdminListBlog();
-                for (Blogs b : list) {
-        %>
-                <div class="row1 col-lg-6 col-md-6 col-sm-6" style="width: min-content;padding-right: 80px;padding-left: 80px;padding-bottom: 20px">
-                    <div class="blog__item">
-                        <div class="blog__item__pic">
-                            <img src="<%=b.getImage()%>" alt="" width="400px" height="200px" style="object-fit: cover">
-                        </div>
-                        <div class="blog__item__text">
-                            <ul>
-                                <li><i class="fa fa-calendar-o"></i> <%=b.getCreateDate()%></li>
-                            </ul>
-                            <h5><a href="" style="font-size: 22px;font-weight: 600;color: #0b5ed7"><%=b.getBlogName()%>
-                            </a></h5>
-                            <p><%=b.getDescription()%></p>
+            <div class="mb-9">
+                <div class="row g-2 mb-4">
+                    <div class="">
+                        <h2 class="" style="margin-top: 20px; text-align: center;font-weight: bolder">Danh sách bài viết</h2>
+                    </div>
+                </div>
+
+                <table id="blog-table" class="table table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên bài viết</th>
+                        <th>Mô tả ngắn</th>
+                        <th>Ngày tạo</th>
+                        <th>Sửa xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% List<Blogs> list = new BlogService().AdminListBlog();
+                                    for (Blogs b : list) {%>
+                    <tr>
+                        <td class="fs--1 align-middle ps-0 py-3">
+                            <p class="mb-0 text-1100 fw-bold"><%=b.getBlogId()%></p>
+                        </td>
+                        <td class="customer align-middle white-space-nowrap pe-5"><a class="d-flex align-items-center" href="#!">
+                            <p class="mb-0 ms-3 text-1100 fw-bold"><img src="<%=b.getImage()%>" style="height: 50px; width: 50px; object-fit: cover"></p>
+                        </a></td>
+                        <td class="email align-middle white-space-nowrap fw-bold pe-5"><%=b.getBlogName()%></td>
+                        <td class="total-spent align-middle white-space-nowrap ps-3"><%=b.getDescription().substring(0,25)%>...</td>
+                        <td class="total-spent align-middle white-space-nowrap ps-3"><%=b.getCreateDate()%></td>
+                        <td>
                             <%
                                 for (AdminRole role : admin.getRole()) {
                                     if (role.getTableName().equals("blog") && role.getPermission() == 2) {
                             %>
-                            <a href="add-blog.jsp?id=<%=b.getBlogId()%>" class="blog_btn">Chỉnh sửa  <i data-feather="arrow-right"></i></a>
+                            <a class="btn_2 edit btn btn-primary" href="add-blog.jsp?id=<%=b.getBlogId()%>">Sửa</a>
                             <%
                                 }
                                 if (role.getTableName().equals("product") && role.getPermission() == 3) {
-                                     %>
-                            <a href="DeleteBlog?id=<%=b.getBlogId()%>" class="blog_btn">Xóa  <i data-feather="arrow-right"></i></a>
+                            %>
+                            <a class="btn_2 edit btn btn-primary" href="DeleteBlog?id=<%=b.getBlogId()%>" style="background-color: crimson; color: white">Xóa</a>
                             <%
-                                        }
+                                    }
                                 }
                             %>
-                        </div>
-                    </div>
-                </div>
-                <% } %>
+                        </td>
+                    </tr>
+                    <%}
+                    }%>
+
+                    </tbody>
+                </table>
             </div>
-            <div class="d-flex justify-content-end">
-            </div>
-          </div>
         </div>
+    </div>
+    </main>
 </div>
     <%
-            }
         }
     %>
     <!-- Required Js -->
+    <script src="assets/js/datatables/dataTables.bootstrap5.min.js"></script>
     <script src="assets/js/vendor-all.min.js"></script>
     <script src="assets/js/plugins/bootstrap.min.js"></script>
     <script src="assets/js/plugins/feather.min.js"></script>
@@ -331,6 +350,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="assets/js/plugins/clipboard.min.js"></script>
     <script src="assets/js/uikit.min.js"></script>
+    <script src="assets/js/datatables/datatables.min.js"></script>
 
     <script src="bonus/js/popper.min.js"></script>
     <script src="bonus/js/bootstrap.min.js"></script>
@@ -371,7 +391,11 @@
             });
         }
     </script>
-
+    <script>
+        $(document).ready(function () {
+            $('#blog-table').DataTable();
+        });
+    </script>
 
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>

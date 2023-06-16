@@ -356,6 +356,7 @@
               </tr>
               </thead>
               <%for (OrderDetail od:listOd) {%>
+              <input id="idTransport" value="<%=od.getIdTransport()%>" type="text" style="display: none">
                   <tbody class="list" id="table-latest-review-body">
                     <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                       <td class="fs--1 align-middle ps-0 py-3"><%=od.getProductID()%></td>
@@ -366,11 +367,12 @@
                   </tbody>
               <%}%>
             </table>
-            <div style="border-top: 1px solid #e1e1e1;">Tạm tính: <span style="float: right;"><%=format.format(order.getPrice())%>đ</span></div>
-            <div >Phí vận chuyển: <span style="float: right"><%=format.format(30000)%>đ</span></div>
+            <div style="border-top: 1px solid #e1e1e1;">Tạm tính: <span style="float: right;"><%=format.format(order.getPrice())%> ₫</span></div>
+            <input value="<%=order.getPrice()%>" id="provisional">
+            <div>Phí vận chuyển: <span style="float: right" id="fee"></span> </div>
             <div >Phương thức thanh toán: <span style="float: right">Thanh toán khi nhận hàng</span></div>
             <div >Ghi chú đơn hàng: <span style="float: right"><%=order.getNotice()%></span></div>
-            <div class="checkout__order__total">Tổng tiền <span><%=format.format(order.getPrice()+30000)%>đ</span></div>
+            <div class="checkout__order__total">Tổng tiền <span id="tongtien"></span></div>
             <%if(order.getStatus()==0){%>
                 <div class="site-btn" style="background-color: red;">Đã hủy</div>
             <%}else {
@@ -405,6 +407,45 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
-
+<script src="js/axios.min.js"></script>
+<script>
+  var idTransport = $("#idTransport").val();
+  console.log(idTransport);
+  EMAIL = "20130266@st.hcmuaf.edu.vn";
+  PASSWORD = "123456";
+  axios.post('http://140.238.54.136/api/auth/login', {
+    email: EMAIL,
+    password: PASSWORD
+  }).then(response => { console.log(response.data.access_token);
+    getOrder(response.data.access_token);
+          })
+    var getOrder = (token) => {
+    url = "http://140.238.54.136/api/getInfoTransport"
+    body = {
+      id: idTransport,
+      token: token
+    }
+    axios.post(url,body).then(response => {
+      var data = response.data;
+      var content = data.data[0];
+      var fee = parseInt(content.fee);
+      var feeFormat = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(content.fee);
+      console.log(fee);
+      console.log(parseFloat($("#provisional").val()));
+      var active = content.active;
+      var total = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(fee + parseFloat($("#provisional").val()))
+      console.log(total)
+      $("#active").text(active == 1 ? "đang vận chuyển" : "đã giao");
+      $("#fee").text(feeFormat);
+      $("#tongtien").text(total);
+    })
+  }
+</script>
 </body>
 </html>

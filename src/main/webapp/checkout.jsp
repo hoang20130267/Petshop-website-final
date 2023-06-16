@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+<%--    <link rel="stylesheet" href="css/nice-select.css" type="text/css">--%>
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
@@ -135,20 +135,21 @@
         }
         #myTable {
             display: none;
-            width: 300px;
-            position: absolute;
+            position: fixed;
             top: 50%;
-            left: 100%;
+            left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
             padding: 20px;
-            border: 1px solid black;
+            background-image: url(img/breadcrumb.jpg);
+            background-position: top right;
             z-index: 1;
-            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            border: 1px black;
+            width: 380px;
         }
         #myTable label {
             display: inline-block;
-            width: 85px;
+            width: 100px;
         }
         .overlayT {
             position: fixed;
@@ -166,6 +167,11 @@
             opacity: 1;
             visibility: visible;
         }
+        select.pdw {
+            min-width: 200px;
+            height: 30px;
+            border-radius: 4px;
+        }
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -174,6 +180,7 @@
             text-align: center;
             color: white;
         }
+
         .bt2 {
             background-color: #007bff;
             border-radius: 5px;
@@ -182,6 +189,7 @@
             display: inline-block;
             text-align: center;
             color: white;
+            margin-left: 40px;
         }
     </style>
 </head>
@@ -330,22 +338,27 @@
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
                             <%if (user.getAddress() == null) {%>
-                            <input type="text" class="address" name="address" placeholder="Nhập địa chỉ nhận hàng">
+                            <input type="text" id="address" class="address" name="address" placeholder="Nhập địa chỉ nhận hàng">
                             <%} else {%>
-                            <input type="text" class="address" name="address" value="<%=user.getAddress()%>">
+                            <input type="text" id="address" placeholder="Nhập địa chỉ nhận hàng" class="address" name="address" value="<%=user.getAddress()%>"readonly>
                             <%}%>
                             <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
                             <div id="myTable">
-                                <h2>Địa chỉ:</h2>
                                 <label>Số nhà:</label>
                                 <input type="text" id="soNha"><br><br>
-                                <label>Phường/Xã:</label>
-                                <input type="text" id="xa"><br><br>
-                                <label>Quận/Huyện:</label>
-                                <input type="text" id="huyen"><br><br>
                                 <label>Tỉnh/TP:</label>
-                                <input type="text" id="tinh"><br><br>
-                                <div id="error" style="text-align: center; color: red"> </div>
+                                <select id="province" class="pdw">
+                                    <option value="">Tỉnh/Thành phố</option>
+                                </select><br><br>
+                                <label>Quận/Huyện:</label>
+                                <select id="district" class="pdw">
+                                    <option value="">Quận/Huyện</option>
+                                </select><br><br>
+                                <label>Phường/Xã:</label>
+                                <select id="ward" class="pdw">
+                                    <option value="">Phường/xã</option>
+                                </select><br><br>
+                                <div id="error" style="text-align: center; color: red"></div>
                                 <div onclick="hideTable()" class="bt2">Hủy</div>
                                 <div onclick="validateInput()" class="bt2">Cập nhật</div>
                             </div>
@@ -386,9 +399,18 @@
                                 </li>
                                 <%}%>
                                 <% }%>
+                                <li> Phí vận chuyển
+                                    <span id="Fee">
+                                    </span>
+                                </li>
+                                <li> Thời gian nhận dự kiến
+                                    <span id="Time">
+                                    </span>
+                                </li>
                             </ul>
                             <div class="checkout__order__total">Tổng tiền
-                                <span><%=cart != null ? format.format(cart.total()) : 0%>₫</span></div>
+                                <input value="<%=cart != null ? cart.total() : 0%>" id="totalPrice" style="display: none">
+                                <span id="sum"></span></div>
 
                             <p>Kiểm tra lại thông tin đơn hàng và những thông tin tôi đã nhập trước khi đặt hàng.</p>
                             <div class="checkout__input__checkbox">
@@ -398,7 +420,7 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-
+                            <div id="errorOrder" style="text-align: center; color: red"> </div>
                             <button type="submit" class="site-btn" id="submitck">Mua hàng</button>
                         </div>
                     </div>
@@ -416,7 +438,7 @@
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
+<%--<script src="js/jquery.nice-select.min.js"></script>--%>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
@@ -424,67 +446,281 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
-
+<script src="js/axios.min.js"></script>
+<%--<script src="js/API.js"></script>--%>
 <script>
     $("#submitck").click(function (e) {
         e.preventDefault();
         const fullname = $(".fullname").val();
         const phone = $(".phone").val();
         const address = $(".address").val();
+        console.log(address);
         const email = $(".email").val();
         const notice = $(".notice").val();
-        $.ajax({
-            type: 'post',
-            url: '/Petshop_website_final_war/CheckoutController',
-            data: {
-                fullname: fullname,
-                phone: phone,
-                address: address,
-                email: email,
-                notice: notice
-            },
-            success: function (data) {
-                window.location.href="./my-orders.jsp"
-                alert(data)
+        const error = document.getElementById("errorOrder");
+        const getWard = $("#getWard").val();
+        const getDistrict = $("#getDistrict").val();
+        if (fullname == "" || phone =="" || address =="" || email=="") {
+            error.innerHTML = "Vui lòng điền và chọn đủ cái thông tin!";
+        } else {
+            axios.post('http://140.238.54.136/api/auth/login', {
+                email: EMAIL,
+                password: PASSWORD
+            })
+                .then(response => {
+                    register(response.data.access_token);
+                });
+            function register(token) {
+                url = "http://140.238.54.136/api/registerTransport"
+                body = {
+                    from_district_id:DISTRICT,
+                    from_ward_id: WARD,
+                    to_district_id: getDistrict,
+                    to_ward_id: getWard,
+                    height: "100",
+                    length: "100",
+                    width:"100",
+                    weight:"100",
+                    token: token
+                }
+                axios.post(url,body).then(response => {
+                    const idT = response.data.Transport.id;
+                    $.ajax({
+                        type: 'post',
+                        url: '/Petshop_website_final_war/CheckoutController',
+                        data: {
+                            idT: idT,
+                            fullname: fullname,
+                            phone: phone,
+                            address: address,
+                            email: email,
+                            notice: notice
+                        },
+                        success: function (data) {
+                            window.location.href="./my-orders.jsp"
+                            alert(data)
+                        }
+                    })
+                })
             }
-        })
+        }
     })
+
 </script>
 <script>
+    const EMAIL = "20130266@st.hcmuaf.edu.vn";
+    const PASSWORD = "123456";
+    const WARD = "90737";
+    const DISTRICT = "3695";
+    axios.post('http://140.238.54.136/api/auth/login', {
+        email: EMAIL,
+        password: PASSWORD
+    })
+        .then(response => {
+            callProvince(response.data.access_token);
+        });
+
+    var callProvince = (access_token) => {
+        return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
+            renderDataProvince(response.data.original.data,"province");
+        });
+    }
+
+    var renderDataProvince = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.ProvinceID}">${element.ProvinceName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+        axios.post('http://140.238.54.136/api/auth/login', {
+            email: EMAIL,
+            password: PASSWORD
+        })
+            .then(response => {
+                callDistrict(response.data.access_token);
+            });
+        var callDistrict = (access_token) => {
+            return axios.get(`http://140.238.54.136/api/district?token=${access_token}`, {
+                params: {
+                    provinceID: $("#province").val()
+                }
+            }).then((response) => {
+                renderDataDistrict(response.data.original.data,"district");
+            });
+        }
+    });
+    var renderDataDistrict = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.DistrictID}">${element.DistrictName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#district").change(() => {
+        axios.post('http://140.238.54.136/api/auth/login', {
+            email: EMAIL,
+            password: PASSWORD
+        })
+            .then(response => {
+                callWard(response.data.access_token);
+            });
+        var callWard = (access_token) => {
+            return axios.get(`http://140.238.54.136/api/ward?token=${access_token}`, {
+                params: {
+                    districtID: $("#district").val()
+                }
+            }).then((response) => {
+                renderDataWard(response.data.original.data,"ward");
+            });
+        }
+        var renderDataWard = (array, select) => {
+            let row = ' <option disable value="">chọn</option>';
+            array.forEach(element => {
+                row += `<option value="${element.WardCode}">${element.WardName}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row
+        }
+    })
+
     function showTable() {
         document.getElementById("myTable").style.display = "block";
         document.getElementById("overlayT").classList.add("show");
+
     }
     function hideTable() {
         document.getElementById("myTable").style.display = "none";
         document.getElementById("overlayT").classList.remove("show");
         document.getElementById("error").innerHTML = "";
     }
+
+    var soNha = document.getElementById("soNha").value;
     function validateInput() {
-        var soNha = document.getElementById("soNha").value;
-        var xa = document.getElementById("xa").value;
-        var huyen = document.getElementById("huyen").value;
-        var tinh = document.getElementById("tinh").value;
-        var count = 0;
-        if (soNha == "") {
-            count++;
-        }
-        if (xa == "") {
-            count++;
-        }
-        if (huyen == "") {
-            count++;
-        }
-        if (tinh == "") {
-            count++;
-        }
-        if (count > 0) {
-            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
-        } else {
-            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "" && $("#soNha").val() != "") {
+            document.getElementById("address").value  = $("#soNha").val() + ", " + $("#ward option:selected").text() +
+                ", " + $("#district option:selected").text() + ", " +
+                $("#province option:selected").text();
+            login();
             hideTable();
         }
+        else {
+            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
+        }
     }
+
+    function login() {
+        const address_info = $("#address").val();
+        if (address_info !== null && address_info !== "null" && address_info !== "") {
+            document.getElementById("Fee").innerHTML = "";
+            document.getElementById("Time").innerHTML = "";
+            var url = 'http://140.238.54.136/api/auth/login';
+            var body = {
+                email: EMAIL,
+                password: PASSWORD
+            }
+            axios.post(url, body).then(response => {
+                token = response.data.access_token;
+                checkProvince(token);
+            })
+        }
+    }
+    var checkProvince = (token) => {
+        const address_info = $("#address").val();
+        let addressParts = address_info.split(", ");
+        let getprovince = addressParts[3];
+        axios.get(`http://140.238.54.136/api/province?token=${token}`).then(response => {
+            var findDistrict = response.data.original.data.find(obj => getprovince.indexOf(obj.ProvinceName) !== -1)
+            var provinceid = findDistrict.ProvinceID;
+            checkDistrict(token,provinceid);
+    })
+    }
+    var checkDistrict = (token, provinceid) => {
+        axios.get(`http://140.238.54.136/api/district?token=${token}`, {
+            params: {
+                provinceID: provinceid
+            }
+        }).then(response => {
+            const address_info = $("#address").val();
+            let addressParts = address_info.split(", ");
+            let getdistrict = addressParts[2];
+            var findDistrict = response.data.original.data.find(obj => getdistrict.indexOf(obj.DistrictName) !== -1)
+            var districtid = findDistrict.DistrictID;
+            $("#getDistrict").val(districtid);
+            checkWard(token,districtid);
+        })
+    }
+    var checkWard = (token, districtid) => {
+        axios.get(`http://140.238.54.136/api/ward?token=${token}`, {
+            params: {
+                districtID: districtid
+            }
+        }).then(response => {
+            const address_info = $("#address").val();
+            let addressParts = address_info.split(", ");
+            let getward = addressParts[1];
+            var findWard = response.data.original.data.find(obj => getward.indexOf(obj.WardName) !== -1)
+            var wardid = findWard.WardCode;
+            $("#getWard").val(wardid);
+            fee(token,districtid, wardid);
+            time(token,districtid,wardid);
+        })
+    }
+    var fee = async (token, districtid, wardid) => {
+        var url=`http://140.238.54.136/api/calculateFee`;
+        var body= {
+            token: token,
+            from_district_id:DISTRICT,
+            from_ward_id: WARD,
+            to_district_id: districtid,
+            to_ward_id: wardid,
+            height: "100",
+            length: "100",
+            width:"100",
+            weight:"100",
+        }
+
+        axios.post(url,body).then(response => {
+            var data = response.data.data;
+            var service_fee = parseInt(data[0].service_fee);
+            let fee = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(service_fee)
+            let total = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(service_fee + parseFloat($("#totalPrice").val()))
+            document.getElementById("Fee").innerHTML = fee;
+            document.getElementById("sum").innerHTML = total;
+        })
+    }
+
+    var time = async (token, districtid, wardid) => {
+        var url=`http://140.238.54.136/api/leadTime`;
+        var body= {
+            token: token,
+            from_district_id:DISTRICT,
+            from_ward_id: WARD,
+            to_district_id: districtid,
+            to_ward_id: wardid,
+            height: "100",
+            length: "100",
+            width:"100",
+            weight:"100",
+        }
+        axios.post(url,body).then(response => {
+            var data = response.data.data;
+            var formattedDate = data[0].formattedDate;
+            var date = new Date(formattedDate);
+            var formattedString = date.getUTCDate() + "/" + (date.getUTCMonth() + 1) + "/" + date.getUTCFullYear();
+            document.getElementById("Time").innerHTML = formattedString;
+        })
+    }
+    console.log()
 </script>
 </body>
 

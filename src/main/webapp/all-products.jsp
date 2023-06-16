@@ -245,7 +245,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                     <div class="product__discount">
+                <div class="product__discount">
                     <div class="section-title product__discount__title">
                         <h2>Giảm Giá</h2>
                     </div>
@@ -379,56 +379,56 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-7">
-           <%--     <div class="product__discount">
-                    <div class="section-title product__discount__title">
-                        <h2>Giảm Giá</h2>
-                    </div>
-                    <div class="row">
-                        <div class="product__discount__slider owl-carousel">
-                            <%
-                                List<Product> listSale = ProductService.getInstance().listProductSale();
-                                for (Product pd : listSale) {
-                            %>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item">
-                                    <div class="product__discount__item__pic set-bg"
-                                         data-setbg="<%=pd.getImage()%>">
-                                        <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
-                                        <ul class="product__item__pic__hover">
-                                            <%
-                                                if (user != null) {
-                                                    Product product = new ProductDAO().getProductDetail(pd.getProductId());
-                                            %>
-                                            <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
-                                            <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
-                                                    class="fa fa-heart"></i></a></li>
-                                            <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
-                                                    class="fa fa-shopping-cart"></i></a></li>
-                                            <%}%>
-                                            <%
-                                            } else {%>
-                                            <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a>
-                                            </li>
-                                            <li><a class="shopnow2" href="login.jsp"><i
-                                                    class="fa fa-shopping-cart"></i></a></li>
-                                            <% }
-                                            %>
-                                        </ul>
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <h5>
-                                            <a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%>
-                                            </a></h5>
-                                        <div class="product__item__price"><%=format.format(pd.getPrice() - (pd.getPrice() * pd.getPromotionalPrice() / 100))%>
-                                            đ<span><%=pd.getPrice()%>đ</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <% }%>
+                <%--     <div class="product__discount">
+                         <div class="section-title product__discount__title">
+                             <h2>Giảm Giá</h2>
+                         </div>
+                         <div class="row">
+                             <div class="product__discount__slider owl-carousel">
+                                 <%
+                                     List<Product> listSale = ProductService.getInstance().listProductSale();
+                                     for (Product pd : listSale) {
+                                 %>
+                                 <div class="col-lg-4">
+                                     <div class="product__discount__item">
+                                         <div class="product__discount__item__pic set-bg"
+                                              data-setbg="<%=pd.getImage()%>">
+                                             <div class="product__discount__percent"><%=pd.getPromotionalPrice()%>%</div>
+                                             <ul class="product__item__pic__hover">
+                                                 <%
+                                                     if (user != null) {
+                                                         Product product = new ProductDAO().getProductDetail(pd.getProductId());
+                                                 %>
+                                                 <%if (Integer.parseInt(product.getQuantity()) > 0) {%>
+                                                 <li><a class="add-wishlist" id="addWishlist-<%=pd.getProductId()%>"><i
+                                                         class="fa fa-heart"></i></a></li>
+                                                 <li><a class="shopnow2" id="addCart-<%=pd.getProductId()%>"><i
+                                                         class="fa fa-shopping-cart"></i></a></li>
+                                                 <%}%>
+                                                 <%
+                                                 } else {%>
+                                                 <li><a class="add-wishlist" href="login.jsp"><i class="fa fa-heart"></i></a>
+                                                 </li>
+                                                 <li><a class="shopnow2" href="login.jsp"><i
+                                                         class="fa fa-shopping-cart"></i></a></li>
+                                                 <% }
+                                                 %>
+                                             </ul>
+                                         </div>
+                                         <div class="product__discount__item__text">
+                                             <h5>
+                                                 <a href="product-details.jsp?id=<%=pd.getProductId()%>"><%=pd.getProductName()%>
+                                                 </a></h5>
+                                             <div class="product__item__price"><%=format.format(pd.getPrice() - (pd.getPrice() * pd.getPromotionalPrice() / 100))%>
+                                                 đ<span><%=pd.getPrice()%>đ</span></div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <% }%>
 
-                        </div>
-                    </div>
-                </div>--%>
+                             </div>
+                         </div>
+                     </div>--%>
                 <div class="filter__item">
                     <div class="row">
                         <div class="col-lg-4 col-md-5"></div>
@@ -479,7 +479,6 @@
     $(document).ready(function () {
         loadMore();
         barPagging();
-/*        pagging();*/
         addcart();
         addwishlist();
         $("input[type='radio']").each(function () {
@@ -497,10 +496,11 @@
             type: "get", //send it through get method
             data: {
                 total: total,
-                /*          page: page*/
             },
             success: function (data) {
                 $("#pagging_bar").html(data);
+                addcart();
+                addwishlist();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -533,7 +533,9 @@
                 $(".page-item").removeClass("active")
                 $(".page-item.item" + page).addClass("active")
                 console.log(page);
-
+                // barPagging(page);
+                addcart();
+                addwishlist();
             },
             error: function (xhr) {
             }
@@ -563,7 +565,7 @@
                 var row = document.getElementById("items");
                 row.innerHTML += data;
                 addcart();
-                addwishlist()
+                addwishlist();
             },
             error: function (xhr) {
                 //Do Something to handle error

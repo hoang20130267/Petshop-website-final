@@ -24,7 +24,6 @@
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-        <link rel="stylesheet" href="css/nice-select.css" type="text/css">
         <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
         <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
         <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
@@ -193,19 +192,21 @@
         }
         #myTable {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: white;
             padding: 20px;
-            border: 1px solid black;
+            background-image: url(img/breadcrumb.jpg);
+            background-position: top right;
             z-index: 1;
-            box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            border: 1px black;
+            width: 380px;
         }
         #myTable label {
             display: inline-block;
-            width: 85px;
+            width: 100px;
         }
         .overlayT {
             position: fixed;
@@ -223,6 +224,11 @@
             opacity: 1;
             visibility: visible;
         }
+        select.pdw {
+            min-width: 200px;
+            height: 30px;
+            border-radius: 4px;
+        }
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -231,6 +237,7 @@
             text-align: center;
             color: white;
         }
+
         .bt2 {
             background-color: #007bff;
             border-radius: 5px;
@@ -239,6 +246,7 @@
             display: inline-block;
             text-align: center;
             color: white;
+            margin-left: 40px;
         }
     </style>
 
@@ -464,25 +472,30 @@
                                                 value="<%=user.getPhone()%>"></div>
 
                         <div class="col-md-12"><label class="labels" style="padding-top: 10px; margin-bottom: 10px">Địa chỉ</label><input type="text" id="address"
-                                                                                           class="form-control"
-                                                                                           name="address"
-                                                                                           placeholder="Chưa có địa chỉ"
-                                                                                           value="<%=user.getAddress()%>"
-                                                                                           readonly>
+                                                                                                                                          class="form-control"
+                                                                                                                                          name="address"
+                                                                                                                                          placeholder="Chưa có địa chỉ"
+                                                                                                                                          value="<%=user.getAddress()%>"
+                                                                                                                                          readonly>
                         </div> <br>
                         <div class="col-md-12">
                             <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
                             <div id="myTable">
-                                <h2>Địa chỉ:</h2>
                                 <label>Số nhà:</label>
                                 <input type="text" id="soNha"><br><br>
-                                <label>Phường/Xã:</label>
-                                <input type="text" id="xa"><br><br>
-                                <label>Quận/Huyện:</label>
-                                <input type="text" id="huyen"><br><br>
                                 <label>Tỉnh/TP:</label>
-                                <input type="text" id="tinh"><br><br>
-                                <div id="error" style="text-align: center; color: red"> </div>
+                                <select id="province" class="pdw">
+                                    <option value="">Tỉnh/Thành phố</option>
+                                </select><br><br>
+                                <label>Quận/Huyện:</label>
+                                <select id="district" class="pdw">
+                                    <option value="">Quận/Huyện</option>
+                                </select><br><br>
+                                <label>Phường/Xã:</label>
+                                <select id="ward" class="pdw">
+                                    <option value="">Phường/xã</option>
+                                </select><br><br>
+                                <div id="error" style="text-align: center; color: red"></div>
                                 <div onclick="hideTable()" class="bt2">Hủy</div>
                                 <div onclick="validateInput()" class="bt2">Cập nhật</div>
                             </div>
@@ -535,7 +548,6 @@
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.slicknav.js"></script>
 <script src="js/mixitup.min.js"></script>
@@ -543,6 +555,7 @@
 <script src="js/main.js"></script>
 <script src="admin/assets/js/vendor-all.min.js"></script>
 <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+<script src="js/axios.min.js"></script>
 <script>
     function reloadUpLoadFile() {
         $(".input-file").each(function () {
@@ -627,7 +640,6 @@
 <script>
     $("button[type='submit']").click(function (e) {
         e.preventDefault();
-
         const username = $("#username").val();
         const fullname = $("#fullname").val();
         const phone = $("#phone").val();
@@ -636,6 +648,7 @@
         const newpassconfirm = $("#newpassconfirm").val();
         const imageLink = $(".img-avt-review").attr("src").substring(57);
         console.log(imageLink);
+        console.log(phone);
         let imgFile = []
         $(".img-avt-review").each(function () {
             let nameFile = $(this).attr("src");
@@ -665,44 +678,114 @@
                 window.location.href = "infor-user.jsp"
             }
         })
+
     })
 </script>
 <script>
+
+    const EMAIL = "20130266@st.hcmuaf.edu.vn";
+    const PASSWORD = "123456";
+    const WARD = "90737";
+    const DISTRICT = "3695";
+    axios.post('http://140.238.54.136/api/auth/login', {
+        email: EMAIL,
+        password: PASSWORD
+    })
+        .then(response => {
+            callProvince(response.data.access_token);
+        });
+
+    var callProvince = (access_token) => {
+        return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
+            renderDataProvince(response.data.original.data,"province");
+        });
+    }
+
+    var renderDataProvince = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.ProvinceID}">${element.ProvinceName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#province").change(() => {
+
+        axios.post('http://140.238.54.136/api/auth/login', {
+            email: EMAIL,
+            password: PASSWORD
+        })
+            .then(response => {
+                callDistrict(response.data.access_token);
+            });
+        var callDistrict = (access_token) => {
+            return axios.get(`http://140.238.54.136/api/district?token=${access_token}`, {
+                params: {
+                    provinceID: $("#province").val()
+                }
+            }).then((response) => {
+                renderDataDistrict(response.data.original.data,"district");
+            });
+        }
+    });
+    var renderDataDistrict = (array, select) => {
+        let row = ' <option disable value="">chọn</option>';
+        array.forEach(element => {
+            row += `<option value="${element.DistrictID}">${element.DistrictName}</option>`
+        });
+        document.querySelector("#" + select).innerHTML = row
+    }
+
+    $("#district").change(() => {
+        axios.post('http://140.238.54.136/api/auth/login', {
+            email: EMAIL,
+            password: PASSWORD
+        })
+            .then(response => {
+                callWard(response.data.access_token);
+            });
+        var callWard = (access_token) => {
+            return axios.get(`http://140.238.54.136/api/ward?token=${access_token}`, {
+                params: {
+                    districtID: $("#district").val()
+                }
+            }).then((response) => {
+                renderDataWard(response.data.original.data,"ward");
+            });
+        }
+        var renderDataWard = (array, select) => {
+            let row = ' <option disable value="">chọn</option>';
+            array.forEach(element => {
+                row += `<option value="${element.WardCode}">${element.WardName}</option>`
+            });
+            document.querySelector("#" + select).innerHTML = row
+        }
+    })
+
     function showTable() {
         document.getElementById("myTable").style.display = "block";
         document.getElementById("overlayT").classList.add("show");
+
     }
     function hideTable() {
         document.getElementById("myTable").style.display = "none";
         document.getElementById("overlayT").classList.remove("show");
         document.getElementById("error").innerHTML = "";
     }
+
+    var soNha = document.getElementById("soNha").value;
     function validateInput() {
-        var soNha = document.getElementById("soNha").value;
-        var xa = document.getElementById("xa").value;
-        var huyen = document.getElementById("huyen").value;
-        var tinh = document.getElementById("tinh").value;
-        var count = 0;
-        if (soNha == "") {
-            count++;
-        }
-        if (xa == "") {
-            count++;
-        }
-        if (huyen == "") {
-            count++;
-        }
-        if (tinh == "") {
-            count++;
-        }
-        if (count > 0) {
-            document.getElementById("error").innerHTML = "Vui lòng điền đủ thông tin";
-        } else {
-            document.getElementById("address").value =  soNha + ", " + xa + ", "  + huyen  + ", " + tinh;
+        if ($("#district").val() != "" && $("#province").val() != "" &&
+            $("#ward").val() != "" && $("#soNha").val() != "") {
+            document.getElementById("address").value  = $("#soNha").val() + ", " + $("#ward option:selected").text() +
+                ", " + $("#district option:selected").text() + ", " +
+                $("#province option:selected").text();
             hideTable();
+        }
+        else {
+            document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
         }
     }
 </script>
-
 </body>
 </html>
