@@ -5,6 +5,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.services.UserService" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="vn.edu.hcmuaf.fit.beans.BlogComment" %>
+<%@ page import="vn.edu.hcmuaf.fit.dao.CommentDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -137,6 +139,81 @@
             display: -webkit-box;
             -webkit-box-orient: vertical;
         }
+        .card {
+
+            border: none;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+            border-radius: 4px;
+        }
+
+
+        .dots {
+
+            height: 4px;
+            width: 4px;
+            margin-bottom: 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .badge {
+
+            padding: 7px;
+            padding-right: 9px;
+            padding-left: 16px;
+            box-shadow: 5px 6px 6px 2px #e9ecef;
+        }
+
+        .user-img {
+
+            margin-top: 4px;
+        }
+
+        .check-icon {
+
+            font-size: 17px;
+            color: #c3bfbf;
+            top: 1px;
+            position: relative;
+            margin-left: 3px;
+        }
+
+        .form-check-input {
+            margin-top: 6px;
+            margin-left: -24px !important;
+            cursor: pointer;
+        }
+
+
+        .form-check-input:focus {
+            box-shadow: none;
+        }
+
+
+        .icons i {
+
+            margin-left: 8px;
+        }
+
+        .reply {
+
+            margin-left: 12px;
+        }
+
+        .remove small {
+
+            color: #b7b4b4;
+
+        }
+
+
+        .remove small:hover {
+
+            color: crimson;
+            cursor: pointer;
+
+        }
     </style>
 </head>
 
@@ -228,7 +305,7 @@
 
     <!-- Hero Section Begin -->
     <!-- Hero Section End -->
-
+     <%UserAccount user = (UserAccount) request.getSession().getAttribute("user");%>
     <!-- Blog Details Hero Begin -->
     <section class="blog-details-hero set-bg" data-setbg="img/blog/details/details-hero.jpg">
         <div class="container">
@@ -261,7 +338,6 @@
         </div>
     </section>
     <!-- Blog Details Hero End -->
-
     <!-- Blog Details Section Begin -->
     <section class="blog-details spad">
         <div class="container">
@@ -346,6 +422,97 @@
         </div>
     </section>
     <!-- Blog Details Section End -->
+     <section class="product-details spad">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <div class="product__details__tab">
+                         <ul class="nav nav-tabs" role="tablist">
+                             <li class="nav-item">
+                                 <% List<BlogComment> listCmt1 = new CommentDAO().getListCommentByBlogID(request.getParameter("id"));%>
+                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="false">Đánh giá <span>(<%=listCmt1.size()%>)</span></a>
+                             </li>
+                         </ul>
+                         <div class="tab-content">
+                             <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                 <div class="product__details__tab__desc">
+                                     <%if (user == null) {%>
+                                     <div class="comment-section" style="margin-top: 50px; margin-left: 400px">
+                                         <p><b>Bạn phải đăng nhập mới có thể bình luận.</b></p>
+                                     </div>
+                                     <% } else {%>
+                                     <div class="comment-section" style="margin-top: 50px; padding-left: 210px">
+                                         <form method="post" id="container">
+                                             <input type="text" id="cusID" value="<%=user.getId()%>" style="display: none">
+                                             <input type="text" id="bID" value="<%=blogs.getBlogId()%>"
+                                                    style="display: none">
+                                             <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(user.getId()).getAvt()%>"
+                                                  width="45" height="45" class="user-img rounded-circle mr-2">
+                                             <input type="text" id="contentBlog" name="content" placeholder="Viết bình luận..."
+                                                    style="padding-left: 5px;width: 560px;height: 45px;border-radius: 15px">
+                                             <button id="buttonPost" class="site-btn" style="border-radius: 10px">Đăng</button>
+                                         </form>
+                                     </div>
+                                     <div id="cmt-con" class="container-cmt"></div>
+                                     <%}%>
+                                     <% List<BlogComment> listCmt = new CommentDAO().getListCommentByBlogID(request.getParameter("id"));
+                                         for (BlogComment cmt : listCmt) {%>
+                                     <div id="cmt-con" class="container-cmt">
+                                         <div id="cmt-section<%=cmt.getID()%>">
+                                             <div class="container mt-5">
+                                                 <div class="row  d-flex justify-content-center">
+                                                     <div class="col-md-8">
+                                                         <div class="card p-3">
+
+                                                             <div class="d-flex justify-content-between align-items-center">
+
+                                                                 <div class="user d-flex flex-row align-items-center">
+                                                                     <img src="http://localhost:8080/Petshop_website_final_war/<%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getAvt()%>"
+                                                                          width="35" height="35"
+                                                                          class="user-img rounded-circle mr-2">
+
+                                                                     <span><small
+                                                                             class="font-weight-bold text-primary"><%=UserService.getInstance().getUserDetail(cmt.getCustomerID()).getName()%></small> <small
+                                                                             class="font-weight-bold"
+                                                                             style="padding-left: 10px; font-size: 14px"><%=cmt.getDescription()%></small></span>
+                                                                 </div>
+                                                                 <% UserAccount user1 = (UserAccount) request.getSession().getAttribute("user");
+                                                                     if (user1 != null) {
+                                                                         if (user1.getId().equals(cmt.getCustomerID())) {
+                                                                 %>
+                                                                 <a class="remove" id="remove<%=cmt.getID()%>"><small>Xóa
+                                                                     bình luận</small></a>
+                                                                 <% }
+                                                                 } %>
+                                                             </div>
+                                                             <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                                                 <div class="reply px-4">
+                                                                     <small><%=cmt.getCommentDate()%>
+                                                                     </small>
+                                                                 </div>
+                                                                 <div class="icons align-items-center">
+                                                                     <i class="fa fa-check-circle-o check-icon text-primary"></i>
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <%}%>
+
+                                 </div>
+
+                             </div>
+                             <%--                        <%}%>--%>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
 
     <!-- Related Blog Section Begin -->
      <section class="related-blog spad">
@@ -396,7 +563,48 @@
     <script src="js/main.js"></script>
      <script src="admin/assets/js/vendor-all.min.js"></script>
      <script src="admin/assets/js/plugins/bootstrap.min.js"></script>
+     <script>
+         $(document).ready(function () {
+             deletecomment();
+         })
+         function deletecomment() {
+             $(".remove").click(function (e) {
+                 e.preventDefault();
+                 const id = this.id.substring(6);
+                 $.ajax({
+                     url: "DeleteCommentBlogController",
+                     type: "post",
+                     data: {
+                         id: id,
+                     },
+                     success: function () {
+                         $("#cmt-section" + id).remove();
+                     }
+                 })
+             });
+         }
+     </script>
+     <script>
+         $("#buttonPost").click(function (e) {
+             e.preventDefault();
+             const comment = $("#contentBlog").val();
+             const bID = $("#bID").val();
+             $.ajax({
+                 type: 'post',
+                 url: '/Petshop_website_final_war/CommentBlogController',
+                 data: {
+                     desc: comment,
+                     bID: bID
+                 },
+                 success: function (data) {
+                     $("#cmt-con").prepend(data);
+                     deletecomment();
+                     document.getElementById('content').value = '';
+                 }
+             })
+         })
 
+     </script>
 
 </body>
 

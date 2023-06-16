@@ -33,7 +33,7 @@ public class CommentController extends HttpServlet {
 
         LogService logService= new LogService();
         UserAccount user = (UserAccount) request.getSession().getAttribute("user");
-        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã bình luận vào sản phẩm "+new ProductService().getProductDetail(pID));
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã bình luận vào sản phẩm "+new ProductService().getProductDetail(pID).getProductName());
 
         request.getRequestDispatcher("ajax/ajax-comment.jsp").forward(request,response);
     }

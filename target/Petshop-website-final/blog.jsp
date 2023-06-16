@@ -391,7 +391,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function searchByNameBlog(param){
+    function searchByNameBlog(para  m){
         var txtSearch = param.value;
         $.ajax({
             url: "/Petshop_website_final_war/SearchBlog",
