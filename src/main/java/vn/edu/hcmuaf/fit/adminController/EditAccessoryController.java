@@ -32,7 +32,7 @@ public class EditAccessoryController extends HttpServlet {
         String cateChild = request.getParameter("cateChild");
         String Promotional = request.getParameter("Promotional");
         String pquantity = request.getParameter("quantity");
-        String cannang = request.getParameter("cannang");
+        String size = request.getParameter("size");
         String status = request.getParameter("status");
         String oldImg = request.getParameter("oldImg");
         String[] imgFile = request.getParameterValues("imgFile[]");
@@ -42,7 +42,7 @@ public class EditAccessoryController extends HttpServlet {
         String cate = "3";
         System.out.println(pid);
         if (pid.length() < 1) {
-            dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cannang,cate,cateChild,status,Promotional,PromotionalPrice, imgFile);
+            dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild,status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
@@ -50,7 +50,7 @@ public class EditAccessoryController extends HttpServlet {
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
             logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
-            dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cannang,status,Promotional,PromotionalPrice, imgFile);
+            dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 

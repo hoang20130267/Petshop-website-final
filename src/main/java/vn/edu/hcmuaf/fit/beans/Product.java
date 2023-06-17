@@ -30,7 +30,7 @@ public class Product implements Serializable {
     private int quantityWishlist;
 
     private String cate_id;
-    private String ViewCount;
+    private int ViewCount;
     private String size;
 
     private List<ImageProduct> images;
@@ -39,7 +39,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, String viewCount, String size, List<ImageProduct> images) {
+    public Product(String productId, String productName, int status, String image, int price, int promotionalPrice, String quantity, int warranty, int promotional, String description, String dital, String createBy, String createDate, String updateBy, String updateDate, String giong, String mausac, String cannang, ProductSale sales, int quantityCart, int quantityWishlist, String cate_id, int viewCount, String size, List<ImageProduct> images) {
         this.productId = productId;
         this.productName = productName;
         this.status = status;
@@ -254,11 +254,11 @@ public class Product implements Serializable {
     public void setImages(List<ImageProduct> images) {
             this.images = images;
     }
-    public String getViewCount() {
+    public int getViewCount() {
         return ViewCount;
     }
 
-    public void setViewCount(String viewCount) {
+    public void setViewCount(int viewCount) {
         ViewCount = viewCount;
     }
 
