@@ -138,32 +138,33 @@ public class ProductDAO {
         });
     }
 
-    public static void insertAccessory(String idAdmin, String name, String price, String description,
-                                       String detail, String quantity, String mausac,
-                                       String cateChild, String status, String promotional,
-                                       String PromotionalPrice, String[] imgFile, String size) {
+    public static String insertAccessory(String idAdmin, String name, String price, String description,
+                                         String detail, String quantity, String mausac,
+                                         String cateChild, String status, String promotional,
+                                         String PromotionalPrice, String[] imgFile, String size) {
         String id = taoIDProduct();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("insert into product (productId, ProductName, Image, Price, Description, " +
-                            "Dital, Quantity, CreateBy, CreateDate, giong, mausac, cannang, `Status`, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+                            "Dital, Quantity, Warranty, CreateBy, CreateDate, giong, mausac, cannang, Status, PromotionalPrice,Promotional, size, ViewCount) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
-                    .bind(2, "http://localhost:8080/Petshop_website_final_war/img/products/" + imgFile[0])
+                    .bind(2, "http://34.143.250.88/Petshop_website_final_war/img/products/" + imgFile[0])
                     .bind(3, price)
                     .bind(4, description)
                     .bind(5, detail)
                     .bind(6, quantity)
-                    .bind(7, idAdmin)
-                    .bind(8, date)
-                    .bind(9,"")
-                    .bind(10, mausac)
-                    .bind(11, "")
-                    .bind(12, Integer.parseInt(status))
-                    .bind(13, Double.parseDouble(PromotionalPrice))
-                    .bind(14, Integer.parseInt(promotional))
-                    .bind(15, size)
-                    .bind(16, 0)
+                    .bind(7, 1)
+                    .bind(8, idAdmin)
+                    .bind(9, date)
+                    .bind(10, "")
+                    .bind(11, mausac)
+                    .bind(12, "")
+                    .bind(13, Integer.parseInt(status))
+                    .bind(14, Double.parseDouble(PromotionalPrice))
+                    .bind(15, Integer.parseInt(promotional))
+                    .bind(16, size)
+                    .bind(17, 0)
                     .execute();
             handle.createUpdate("insert into product_from_cate values (?,?)")
                     .bind(0, id)
@@ -172,15 +173,20 @@ public class ProductDAO {
             handle.createUpdate("insert into product_from_cate values (?,?)")
                     .bind(0, id)
                     .bind(1, cateChild)
+                    .execute();
+            handle.createUpdate("insert into warehouse values (?,?)")
+                    .bind(0, id)
+                    .bind(1, quantity)
                     .execute();
             for (int i = 1; i < imgFile.length; i++) {
                 handle.createUpdate("insert into product_img values (?,?)")
                         .bind(0, id)
-                        .bind(1,"http://localhost:8080/Petshop_website_final_war/img/products/" + imgFile[i])
+                        .bind(1, "http://34.143.250.88/Petshop_website_final_war/img/products/" + imgFile[i])
                         .execute();
             }
             return true;
         });
+        return id;
     }
 
     public static void updateProduct(String id, String idAdmin, String name, String price, String description,

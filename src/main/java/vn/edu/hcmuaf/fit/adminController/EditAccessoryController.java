@@ -42,17 +42,15 @@ public class EditAccessoryController extends HttpServlet {
         String cate = "3";
         System.out.println(pid);
         if (pid.length() < 1) {
-            dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild,status,Promotional,PromotionalPrice, imgFile, size);
+            String id = dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild,status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);
-            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
-            dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,"",status,Promotional,PromotionalPrice, imgFile, size);
+            dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild, status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);
-            copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
@@ -72,22 +70,6 @@ public class EditAccessoryController extends HttpServlet {
                 if (fileInLocal.exists())
                     fileInLocal.delete();
             }
-        }
-    }
-
-    public void copyImage(HttpServletRequest request, String[] imgFile) throws IOException {
-        if (imgFile != null) {
-            File file = new File(request.getServletContext().getAttribute("TEMPPRODUCT_DIR") + File.separator + imgFile);
-            FileInputStream fis = new FileInputStream(file);
-            File local = new File(request.getServletContext().getAttribute("FILEPRODUCT_DIR") + File.separator + imgFile);
-            FileOutputStream fos = new FileOutputStream(local);
-            byte[] bytes = new byte[1024];
-            int read;
-            while ((read = fis.read(bytes)) != -1) {
-                fos.write(bytes, 0, read);
-            }
-            fis.close();
-            fos.close();
         }
     }
     @Override
