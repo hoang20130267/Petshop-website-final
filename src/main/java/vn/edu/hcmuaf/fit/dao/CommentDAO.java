@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
+import vn.edu.hcmuaf.fit.beans.BlogComment;
 import vn.edu.hcmuaf.fit.beans.Comment;
+import vn.edu.hcmuaf.fit.beans.BlogComment;
 import vn.edu.hcmuaf.fit.beans.Product;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
 
@@ -27,6 +29,14 @@ public class CommentDAO  {
         });
         return cmt;
     }
+    public static List<BlogComment> getListCommentByBlogID(String id) {
+        List<BlogComment> cmt = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from blogcomment where BlogID = ?")
+                    .bind(0,id)
+                    .mapToBean(BlogComment.class).stream().collect(Collectors.toList());
+        });
+        return cmt;
+    }
     public static Comment getComment(String id){
         Comment cmt = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery("select * from productcomment where ID = ?")
@@ -38,6 +48,14 @@ public class CommentDAO  {
     public List<Comment> getComments() {
         return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
                 .mapToBean(Comment.class).stream().collect(Collectors.toList()));
+    }
+    public static BlogComment getCommentBlog(String id){
+        BlogComment cmt = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from blogcomment where ID = ?")
+                    .bind(0,id)
+                    .mapToBean(BlogComment.class).first();
+        });
+        return cmt;
     }
     public static String taoIDComment() {
         String numbers = "0123456789";
@@ -75,9 +93,35 @@ public class CommentDAO  {
         });
         return id;
     }
+    public static String InsertCommentBlog(String cusID, String desc, int status, String bID){
+        String id = taoIDComment();
+        String date = java.time.LocalDate.now().toString();
+        JDBIConnector.get().withHandle(handle -> {
+            handle.createUpdate("insert into blogcomment (ID ,CustomerID , Description , CommentDate, CommentStatus, BlogID) " +
+                            "values (?,?,?,?,?,?)")
+                    .bind(0,id)
+                    .bind(1, cusID)
+                    .bind(2, desc)
+                    .bind(3, date)
+                    .bind(4, status)
+                    .bind(5, bID)
+                    .execute();
+            return true;
+        });
+        return id;
+    }
     public void RemoveComment(String id) {
         JDBIConnector.get().withHandle(handle -> {
                     handle.createUpdate("DELETE FROM productcomment WHERE ID = ?")
+                            .bind(0, id)
+                            .execute();
+                    return true;
+                }
+        );
+    }
+    public void RemoveCommentBlog(String id) {
+        JDBIConnector.get().withHandle(handle -> {
+                    handle.createUpdate("DELETE FROM blogcomment WHERE ID = ?")
                             .bind(0, id)
                             .execute();
                     return true;

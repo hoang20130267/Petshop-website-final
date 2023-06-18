@@ -174,10 +174,10 @@
                                      </div>
                                      <div id="error" style="text-align: center; color: red"> </div>
                                      <div class="g-recaptcha" data-sitekey="6LfADqomAAAAACds58TJ9Ztpk4UiSSNdb8V6Y1CN"></div>
-                                                       <a href="#" style="text-decoration: none;">
-                                                         <div class="button_login"> Đăng nhập</div>
-                                                       </a>
-<%--                                     <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary">--%>
+<%--                                                       <a href="#" style="text-decoration: none;">--%>
+<%--                                                         <div class="button_login"> Đăng nhập</div>--%>
+<%--                                                       </a>--%>
+                                     <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary">
 
                                      <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
 

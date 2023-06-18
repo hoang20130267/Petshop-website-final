@@ -456,8 +456,8 @@
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Kích Thước</h5>
                                                             </div>
-                                                            <input name="cannang" id="cannang"
-                                                                   value="<%=(p != null) ? p.getCannang() : ""%>"
+                                                            <input name="size" id="size"
+                                                                   value="<%=(p != null) ? p.getSize() : ""%>"
                                                                    class="form-control mb-3" type="text"
                                                                    placeholder="" required/>
 
@@ -714,7 +714,7 @@
         const detail = CKEDITOR.instances.editor.getData();
         const status = $("#status").val();
         const mausac = $("#mausac").val();
-        const cannang = $("#cannang").val();
+        const size = $("#size").val();
         const cateChild = $("#cateChild").val();
         const Promotional = $("#Promotional").val();
         const PromotionalPrice = $("#PromotionalPrice").val();
@@ -747,7 +747,7 @@
                 detail: detail,
                 status: status,
                 mausac: mausac,
-                cannang: cannang,
+                size: size,
                 cateChild: cateChild,
                 Promotional: Promotional,
                 PromotionalPrice: PromotionalPrice,
