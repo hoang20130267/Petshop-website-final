@@ -19,12 +19,14 @@ public class FileLocationContextListener implements ServletContextListener, Http
         String rootPath = System.getProperty("catalina.home");
         String realRootPath = rootPath.substring(0, rootPath.lastIndexOf("\\"));
         ServletContext ctx = sce.getServletContext();
+        String font = ctx.getInitParameter("font.dir");
         String productRelativePath = ctx.getInitParameter("tempproduct.dir");
         String realProductPath = ctx.getInitParameter("saveproduct.dir");
         String avatarUserRelativePath = ctx.getInitParameter("tempavataruser.dir");
         String realAvatarUserPath = ctx.getInitParameter("saveavataruser.dir");
         String blogRealativePath = ctx.getInitParameter("tempblog.dir");
         String realBlogPath = ctx.getInitParameter("saveblog.dir");
+        File fontPath = new File(rootPath + File.separator + "webapps" + File.separator + font);
         File tempproduct = new File(rootPath + File.separator + "webapps" + File.separator + productRelativePath);
         File saveproduct = new File(realRootPath + File.separator + realProductPath);
         File tempavataruser = new File(rootPath + File.separator + "webapps" + File.separator + avatarUserRelativePath);
@@ -43,6 +45,8 @@ public class FileLocationContextListener implements ServletContextListener, Http
             tempblog.mkdirs();
         if (!saveblog.exists())
             saveblog.mkdirs();
+        if (!fontPath.exists())
+            fontPath.mkdirs();
         ctx.setAttribute("FILES_DIR_TEMPPRODUT", tempproduct);
         ctx.setAttribute("FILES_DIR_FILEPRODUCT", saveproduct);
         ctx.setAttribute("FILES_DIR_TEMPAVATARUSER", tempavataruser);
@@ -54,6 +58,7 @@ public class FileLocationContextListener implements ServletContextListener, Http
         ctx.setAttribute("TEMPAVATARUSER_DIR", rootPath + File.separator + "webapps" + File.separator + avatarUserRelativePath);
         ctx.setAttribute("FILEAVATARUSER_DIR", realRootPath + File.separator + realAvatarUserPath);
         ctx.setAttribute("TEMPBLOG_DIR", rootPath + File.separator + "webapps" + File.separator + blogRealativePath);
+        ctx.setAttribute("FONT_DIR", rootPath + File.separator + "webapps" + File.separator + font);
         ctx.setAttribute("FILEBLOG_DIR", realRootPath + File.separator + realBlogPath);
 
     }

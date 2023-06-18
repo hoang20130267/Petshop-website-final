@@ -84,7 +84,7 @@
         UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
         boolean check = false;
         for (AdminRole role : admin.getRole()) {
-            if (role.getTableName().equals("import")) {
+            if (role.getTableName().equals("product")) {
                 check = true;
                 break;
             }

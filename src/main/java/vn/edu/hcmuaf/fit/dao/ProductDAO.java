@@ -235,7 +235,7 @@ public class ProductDAO {
 
     public static void updateAccessory(String id, String idAdmin, String name, String price, String description,
                                        String detail, String quantity, String mausac,
-                                       String cannang, String status, String Promotional, String PromotionalPrice, String[] imgFile) {
+                                       String cannang, String status, String Promotional, String PromotionalPrice, String[] imgFile, String size) {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("UPDATE product SET ProductName=?,`Status`=?,Image=?,Price=?,Quantity=?,Description=?,Dital=?,UpdateBy=?,UpdateDate=?,giong=?,mausac=?,cannang=?,PromotionalPrice=?, Promotional=?, size=?, ViewCount=?\n" +
@@ -254,6 +254,8 @@ public class ProductDAO {
                     .bind(11, Double.parseDouble(PromotionalPrice))
                     .bind(12, Integer.parseInt(Promotional))
                     .bind(13, id)
+                    .bind(14, size)
+                    .bind(15, 0)
                     .execute();
             handle.createUpdate("DELETE FROM product_img WHERE ID_Product=?")
                     .bind(0, id)
@@ -422,15 +424,12 @@ public class ProductDAO {
         });
         return list;
     }
-
-
     public Product getProductDetail(String id) {
-        Product detail = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId = ?")
-                    .bind(0, id)
-                    .mapToBean(Product.class).first();
-        });
-        return detail;
+        Optional<Product> detail = JDBIConnector.get().withHandle(handle -> handle.createQuery("select p.productId, p.ProductName, p.Image, p.Price, p.Description, p.Dital, p.Quantity,p.Warranty, p.CreateBy, p.CreateDate, p.giong, p.mausac, p.cannang, p.`Status`, p.PromotionalPrice,p.Promotional, p.size, p.ViewCount from product p where p.productId = ?")
+                .bind(0, id)
+                .mapToBean(Product.class)
+                .findFirst());
+        return detail.orElse(null);
     }
 
     public static String taoIDProduct() {
@@ -528,6 +527,6 @@ public class ProductDAO {
         public static void main(String[] args) {
 //            System.out.println(new ProductDAO().getQuantityProduct("3001"));
 //            System.out.println(new ProductDAO().listRelateTo("1010"));
-            System.out.println(new ProductDAO().getFullAdminAccessory());
+            System.out.println(new ProductDAO().getProductDetail("1001"));
         }
 }
