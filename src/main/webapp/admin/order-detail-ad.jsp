@@ -14,6 +14,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.AdminRole" %>
 <%@ page import="vn.edu.hcmuaf.fit.beans.OrderDetail" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,9 +293,15 @@
                                                 <td class="email align-middle white-space-nowrap pe-5"
                                                     style="text-align: center;"><%=od.getQuantity()%>
                                                 </td>
-                                                <td class="email align-middle white-space-nowrap pe-5"
-                                                    style="text-align: right;"><%=format.format(od.getPrice())%>
+                                                <%if(ProductService.getInstance().getProductDetail(od.getProductID()).getPromotional() == 1){%>
+                                                <td class="email align-middle white-space-nowrap pe-5" style="text-align: right;">
+                                                    <%=format.format(od.getQuantity() * (ProductService.getInstance().getProductDetail(od.getProductID()).getPrice() - (ProductService.getInstance().getProductDetail(od.getProductID()).getPrice() * ProductService.getInstance().getProductDetail(od.getProductID()).getPromotionalPrice() / 100)))%>
                                                 </td>
+                                                <%}else {%>
+                                                <td class="email align-middle white-space-nowrap pe-5" style="text-align: right;">
+                                                    <%=format.format(od.getPrice())%>
+                                                </td>
+                                                <%}%>
                                             </tr>
                                             <%}%>
                                             <tr style="font-size: 14px; color: #1c1c1c; font-weight: 200; border-top: 2px solid #e1e1e1; width: 100%">

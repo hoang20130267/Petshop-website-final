@@ -4,7 +4,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Locale" %>
-<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.beans.UserAccount" %>
+<%@ page import="vn.edu.hcmuaf.fit.services.ProductService" %><%--
   Created by IntelliJ IDEA.
   User: Nguyen Ngoc Huy
   Date: 1/2/2023
@@ -337,7 +338,7 @@
 </section>
 <!-- Breadcrumb Section End -->
 
-<!-- Shoping Cart Section Begin -->
+<!--  Section Begin -->
 <div class="container rounded bg-white mt-5 mb-5">
   <form method="post" enctype="multipart/form-data" class="infor_user">
     <div class="row">
@@ -362,7 +363,17 @@
                       <td class="fs--1 align-middle ps-0 py-3"><%=od.getProductID()%></td>
                       <td class="customer align-middle white-space-nowrap pe-5"><%=od.getProductName()%></td>
                       <td class="email align-middle white-space-nowrap pe-5" style="text-align: center;"><%=od.getQuantity()%></td>
-                      <td class="email align-middle white-space-nowrap pe-5" style="text-align: right;"><%=format.format(od.getPrice())%></td>
+
+                        <%if(ProductService.getInstance().getProductDetail(od.getProductID()).getPromotional() == 1){%>
+                      <td class="email align-middle white-space-nowrap pe-5" style="text-align: right;">
+                        <%=format.format(od.getQuantity() * (ProductService.getInstance().getProductDetail(od.getProductID()).getPrice() - (ProductService.getInstance().getProductDetail(od.getProductID()).getPrice() * ProductService.getInstance().getProductDetail(od.getProductID()).getPromotionalPrice() / 100)))%>
+                      </td>
+                        <%}else {%>
+                      <td class="email align-middle white-space-nowrap pe-5" style="text-align: right;">
+                        <%=format.format(od.getPrice())%>
+                      </td>
+                        <%}%>
+
                     </tr>
                   </tbody>
               <%}%>
