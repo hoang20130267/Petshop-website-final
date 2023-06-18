@@ -283,6 +283,7 @@
                                             </thead>
                                             <tbody class="list" id="table-latest-review-body">
                                             <%for (OrderDetail od : listOd) {%>
+                                            <input id="idTransport" value="<%=od.getIdTransport()%>" style="display: none">
                                             <tr class="hover-actions-trigger btn-reveal-trigger position-static">
                                                 <td class="fs--1 align-middle ps-0 py-3"><%=od.getProductID()%>
                                                 </td>
@@ -308,7 +309,7 @@
                                                 <td style="text-align: left">Phí vận chuyển:</td>
                                                 <td></td>
                                                 <td></td>
-                                                <td style="text-align: right"><%=format.format(30000)%>đ</td>
+                                                <td id="fee" style="text-align: right"></td>
                                             </tr>
                                             <tr style="font-size: 14px; color: #1c1c1c; font-weight: 200;">
                                                 <td style="text-align: left">Phương thức thanh toán:</td>
@@ -324,11 +325,11 @@
                                                 </td>
                                             </tr>
                                             <tr style="font-size: 18px; color: #1c1c1c; font-weight: 700;">
+                                                <input value="<%=order.getPrice()%>" id="provisional" style="display: none">
                                                 <td style="text-align: left">Tổng tiền</td>
                                                 <td></td>
                                                 <td></td>
-                                                <td style="text-align: right"><%=format.format(order.getPrice() + 30000)%>
-                                                    đ
+                                                <td style="text-align: right" id="tongtien">
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -406,11 +407,53 @@
 <script src="assets/js/plugins/clipboard.min.js"></script>
 <script src="assets/js/uikit.min.js"></script>
 <script src="assets/css/status/bootstrap.min.js"></script>
+<script src="assets/js/axios.min.js"></script>
 
-<!-- Apex Chart -->
-<script src="assets/js/plugins/apexcharts.min.js"></script>
-<!-- custom-chart js -->
-<script src="assets/js/pages/dashboard-sale.js"></script>
+<%--<!-- Apex Chart -->--%>
+<%--<script src="assets/js/plugins/apexcharts.min.js"></script>--%>
+<%--<!-- custom-chart js -->--%>
+<%--<script src="assets/js/pages/dashboard-sale.js"></script>--%>
+
+<script>
+    var idTransport = $("#idTransport").val();
+    console.log(idTransport);
+    EMAIL = "20130266@st.hcmuaf.edu.vn";
+    PASSWORD = "123456";
+    axios.post('http://140.238.54.136/api/auth/login', {
+        email: EMAIL,
+        password: PASSWORD
+    }).then(response => { console.log(response.data.access_token);
+        console.log(response.data.access_token);
+        getOrder(response.data.access_token);
+    })
+    var getOrder = (token) => {
+        url = "http://140.238.54.136/api/getInfoTransport"
+        body = {
+            id: idTransport,
+            token: token
+        }
+        axios.post(url,body).then(response => {
+            var data = response.data;
+            var content = data.data[0];
+            var fee = parseInt(content.fee);
+            var feeFormat = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(content.fee);
+            console.log(fee);
+            console.log(parseFloat($("#provisional").val()));
+            // var active = content.active;
+            var total = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(fee + parseFloat($("#provisional").val()))
+            console.log(total)
+            // $("#active").text(active == 1 ? "đang vận chuyển" : "đã giao");
+            $("#fee").text(feeFormat);
+            $("#tongtien").text(total);
+        })
+    }
+</script>
 </body>
 
 </html>
