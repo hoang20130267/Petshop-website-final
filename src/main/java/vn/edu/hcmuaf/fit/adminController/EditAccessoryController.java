@@ -37,7 +37,6 @@ public class EditAccessoryController extends HttpServlet {
         String oldImg = request.getParameter("oldImg");
         String[] imgFile = request.getParameterValues("imgFile[]");
         UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
-        HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
         String cate = "3";
         System.out.println(pid);
