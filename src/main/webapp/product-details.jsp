@@ -378,9 +378,7 @@
                 <div class="product__details__text">
                     <h3><%=product.getProductName()%>
                     </h3>
-                    <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {%>
-                    <div class="product__details__price">Tạm hết hàng!</div>
-                    <%} else {%>
+
                     <%if (product.getPromotional() == 1) {%>
                     <div class="product__details__price"
                          style="display: flex; text-align: center; align-items: center;"><%=format.format(product.getPrice() - (product.getPrice() * product.getPromotionalPrice() / 100))%>
@@ -391,11 +389,19 @@
                     <div class="product__details__price"><%=format.format(product.getPrice())%>đ</div>
                     <%
                             }
-                        }
                     %>
                     <p><%=product.getViewCount() != null ? product.getViewCount() : "0"%> lượt xem</p>
                     <p><%=product.getDescription()%>
                     </p>
+
+                    <%if (ProductService.getInstance().getQuantityProduct(product.getProductId()) < 1) {
+                        Product p = new ProductDAO().getProductDetail(product.getProductId());%>
+<%--                    <div class="product__details__price">Tạm hết hàng!</div>--%>
+
+                    <a class="primary-btn" style="background-color: red; color: white">Tạm hết hàng!</a>
+                    <a href="#" class="heart-icon add-wishlist" id="addWishlist-<%=p.getProductId()%>"><span
+                            class="icon_heart_alt"></span></a>
+                    <%}else{%>
                     <div class="product__details__quantity">
                         <div class="quantity">
                             <div class="pro-qty">
@@ -404,9 +410,11 @@
                         </div>
                     </div>
                     <%
+
                         if (user != null) {
                             Product p = new ProductDAO().getProductDetail(product.getProductId());
                     %>
+
                     <%if (Integer.parseInt(p.getQuantity()) > 0) {%>
                     <a href="#" class="primary-btn snow" id="addCart-<%=product.getProductId()%>">Thêm vào giỏ hàng</a>
                     <a href="#" class="heart-icon add-wishlist" id="addWishlist-<%=p.getProductId()%>"><span
@@ -418,6 +426,8 @@
                     <a href="login.jsp" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <% }
                     %>
+                    <%}%>
+
 
                     <%if (!DetailService.getInstance().getPentCateProduct(product.getProductId()).getCatID().equals("3")) {%>
                     <ul>
