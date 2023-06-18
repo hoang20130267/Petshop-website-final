@@ -234,8 +234,8 @@ public class ProductDAO {
     }
 
     public static void updateAccessory(String id, String idAdmin, String name, String price, String description,
-                                       String detail, String quantity, String mausac,
-                                       String cannang, String status, String Promotional, String PromotionalPrice, String[] imgFile) {
+                                       String detail, String quantity, String mausac,String cateChild,
+                                       String status, String Promotional, String PromotionalPrice, String[] imgFile, String size) {
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("UPDATE product SET ProductName=?,`Status`=?,Image=?,Price=?,Quantity=?,Description=?,Dital=?,UpdateBy=?,UpdateDate=?,giong=?,mausac=?,cannang=?,PromotionalPrice=?, Promotional=?, size=?, ViewCount=?\n" +
@@ -249,11 +249,21 @@ public class ProductDAO {
                     .bind(6, detail)
                     .bind(7, idAdmin)
                     .bind(8, date)
-                    .bind(9, mausac)
-                    .bind(10, cannang)
-                    .bind(11, Double.parseDouble(PromotionalPrice))
-                    .bind(12, Integer.parseInt(Promotional))
-                    .bind(13, id)
+                    .bind(9, "")
+                    .bind(10, mausac)
+                    .bind(11, "")
+                    .bind(12, Double.parseDouble(PromotionalPrice))
+                    .bind(13, Integer.parseInt(Promotional))
+                    .bind(14, size)
+                    .bind(15, 0)
+                    .bind(16, id)
+                    .execute();
+            handle.createUpdate("DELETE FROM product_from_cate WHERE ID_Product=?")
+                    .bind(0, id)
+                    .execute();
+            handle.createUpdate("insert into product_from_cate values (?,?)")
+                    .bind(0, id)
+                    .bind(1, cateChild)
                     .execute();
             handle.createUpdate("DELETE FROM product_img WHERE ID_Product=?")
                     .bind(0, id)
