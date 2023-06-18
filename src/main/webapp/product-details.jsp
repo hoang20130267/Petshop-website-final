@@ -390,7 +390,7 @@
                     <%
                             }
                     %>
-                    <p><%=product.getViewCount() != null ? product.getViewCount() : "0"%> lượt xem</p>
+                    <p><%=product.getViewCount() != 0 ? product.getViewCount() : 0%> lượt xem</p>
                     <p><%=product.getDescription()%>
                     </p>
 
