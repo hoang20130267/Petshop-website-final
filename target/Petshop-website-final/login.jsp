@@ -173,16 +173,18 @@
                                          <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
                                      <div id="error" style="text-align: center; color: red"> </div>
-<%--                                     <div class="g-recaptcha" data-sitekey="6LeS6aMlAAAAAA_OljqI0WNcobXDu2tIqLU-JQtK"></div>--%>
-                                     <%--                  <a href="#" style="text-decoration: none;">--%>
-                                     <%--                    <div class="button_login"> Đăng nhập</div>--%>
-                                     <%--                  </a>--%>
+                                     <div class="g-recaptcha" data-sitekey="6LfADqomAAAAACds58TJ9Ztpk4UiSSNdb8V6Y1CN"></div>
+<%--                                                       <a href="#" style="text-decoration: none;">--%>
+<%--                                                         <div class="button_login"> Đăng nhập</div>--%>
+<%--                                                       </a>--%>
                                      <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary">
 
                                      <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
 
                                      <div class="social-login text-center">
-                                         <a href="#" class="facebook">
+                                         <a href="https://www.facebook.com/dialog/oauth?client_id=1344526122794000&redirect_uri=https://localhost:8443/Petshop-website-final/login-facebook" class="facebook">
+<%--                                     <a href="https://www.facebook.com/dialog/oauth?client_id=1344526122794000&redirect_uri=https://redirectmeto.com/http://34.143.250.88/Petshop_website_final_war/login-facebook--%>
+<%--                                     class="facebook">--%>
                                              <span ><i class="fa-brands fa-facebook-f"></i></span>
                                          </a>
                                          <a href="#" class="twitter">
@@ -190,6 +192,8 @@
                                          </a>
                                          <a href="https://accounts.google.com/o/oauth2/auth?scope=profile+email&redirect_uri=http://localhost:8080/Petshop_website_final_war/LoginGoogleHandler&response_type=code
 		   &client_id=863418616412-fi3ia9v25cl6jun5jbmgr4j9m0km6bof.apps.googleusercontent.com&approval_prompt=force" class="google">
+<%--                                             <a href="https://accounts.google.com/o/oauth2/auth?scope=profile+email&redirect_uri=https://redirectmeto.com/http://34.143.250.88/Petshop_website_final_war/LoginGoogleHandler&response_type=code--%>
+<%--		   &client_id=863418616412-fi3ia9v25cl6jun5jbmgr4j9m0km6bof.apps.googleusercontent.com&approval_prompt=force" class="google">--%>
                                              <span> <i class="fa-brands fa-google"></i></span>
                                          </a>
 
