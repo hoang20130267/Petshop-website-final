@@ -73,7 +73,7 @@ public class LoginFacebookHandler extends HttpServlet {
             } else {
                 SignUpService.getInstance().insertUser(userFacebook.getName(), Utils.maHoaMK(userFacebook.getId()), userFacebook.getId(), userFacebook.getName(), userFacebook.getEmail(), null);
                 String id = UserService.getInstance().getIdUserByName(userFacebook.getName());
-                UserService.getInstance().updateInforUser(id, userFacebook.getName(), null, null,userFacebook.getId(),null);
+                UserService.getInstance().updateInforUser(id, userFacebook.getId(), null, null,userFacebook.getId(),null);
                 user = UserService.getInstance().getUserByEmail(userFacebook.getEmail());
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("cart", new Cart());
