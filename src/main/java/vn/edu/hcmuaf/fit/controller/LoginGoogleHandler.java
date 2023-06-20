@@ -28,7 +28,6 @@ public class LoginGoogleHandler extends HttpServlet {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         UserGoogle user = getUserInfo(accessToken);
-        System.out.println(user);
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -38,7 +37,6 @@ public class LoginGoogleHandler extends HttpServlet {
                         .add("client_secret", ConstantsGoogle.GOOGLE_CLIENT_SECRET)
                         .add("redirect_uri", ConstantsGoogle.GOOGLE_REDIRECT_URI).add("code", code)
                         .add("grant_type", ConstantsGoogle.GOOGLE_GRANT_TYPE).build()).execute().returnContent().asString();
-
         JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
         String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
         return accessToken;
@@ -48,7 +46,6 @@ public class LoginGoogleHandler extends HttpServlet {
         String link = ConstantsGoogle.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
         UserGoogle googlePojo = new Gson().fromJson(response, UserGoogle.class);
-        System.out.println(googlePojo);
         return googlePojo;
     }
 
@@ -82,7 +79,6 @@ public class LoginGoogleHandler extends HttpServlet {
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("cart", new Cart());
                 request.getSession().setAttribute("wishlist", new Wishlist());
-                System.out.println(user);
             }
             response.sendRedirect("index.jsp");
         }

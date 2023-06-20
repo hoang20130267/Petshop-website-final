@@ -182,7 +182,7 @@
                                      <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
 
                                      <div class="social-login text-center">
-                                         <a href="https://www.facebook.com/dialog/oauth?client_id=1344526122794000&redirect_uri=https://localhost:8443/Petshop-website-final/login-facebook" class="facebook">
+                                         <a href="https://www.facebook.com/dialog/oauth?client_id=184690387905300&redirect_uri=https://redirectmeto.com/http://localhost:8080/Petshop_website_final_war/login-facebook" class="facebook">
 <%--                                     <a href="https://www.facebook.com/dialog/oauth?client_id=1344526122794000&redirect_uri=https://redirectmeto.com/http://34.143.250.88/Petshop_website_final_war/login-facebook--%>
 <%--                                     class="facebook">--%>
                                              <span ><i class="fa-brands fa-facebook-f"></i></span>

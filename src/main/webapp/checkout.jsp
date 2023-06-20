@@ -431,6 +431,8 @@
                             </div>
                             <div id="errorOrder" style="text-align: center; color: red"></div>
                             <button type="submit" class="site-btn" id="submitck">Mua hàng</button>
+                            <input id="getDistrict" value="" type="text" style="display: none">
+                            <input id="getWard"  value="" type="text" style="display: none" >
                         </div>
                     </div>
                 </div>
