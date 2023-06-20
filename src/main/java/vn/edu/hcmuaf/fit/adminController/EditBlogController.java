@@ -42,7 +42,7 @@ public class EditBlogController extends HttpServlet {
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getContent(id).getBlogName()+" làm tin tức mới");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm một tin tức mới");
         } else {
             dao.updateBlog(id,name,status, image,pdescription,dital,cate);
             removeOldImg(oldImg, request);

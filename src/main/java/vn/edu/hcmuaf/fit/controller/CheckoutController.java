@@ -48,16 +48,10 @@ public class CheckoutController extends HttpServlet {
         if(checkInventory){
             String id = OrderService.getInstance().insertOrder(userAccount.getId(),fullname,phone,address,email,notice,cart,idT);
             request.getSession().setAttribute("cart",new Cart());
-            response.getWriter().print("Đã đặt hàng thành công! Mã đơn hàng của bạn là " + id );
+            response.getWriter().print(id);
             LogService logService= new LogService();
             UserAccount user = (UserAccount) request.getSession().getAttribute("user");
             logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã chuyển sang mục thanh toán");
-        }else {
-            String s= "";
-            for (String n:insufficient) {
-                s=s+n+", ";
-            }
-            response.getWriter().print("Số lượng tồn kho của sản phẩm "+s+" không đáp ứng đủ!");
         }
 
     }

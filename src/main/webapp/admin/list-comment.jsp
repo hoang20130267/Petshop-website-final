@@ -314,7 +314,8 @@
                                             for (AdminRole role : admin.getRole()) {
                                                 if (role.getTableName().equals("comment") && role.getPermission() == 3) {
                                         %>
-                                        <a class="btn_2 edit btn btn-primary" href="RemoveCmt?CmtId=<%=c.getID()%>" style="background-color: crimson; color: white">Xóa</a>
+                                        <a data-toggle="modal" data-target="#confirm-modal" class="btn_2 edit btn btn-primary remove" id="delete<%=c.getID()%>" href="#" style="background-color: crimson; color: white">Xóa</a>
+
                                         <%
                                             }}
                                         %>
@@ -340,6 +341,27 @@
         </div>
     </div>
     </main>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn xóa bình luận này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary no" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary yes" data-dismiss="modal">Xóa</button>
+            </div>
+        </div>
+    </div>
 </div>
 <%
         }
@@ -374,7 +396,33 @@
 <script src="bonus/js/utils.js"></script>
 <script src="bonus/js/image.js"></script>
 
+<script>
+    $(document).ready(function () {
+        deletePermission()
+    })
 
+    function deletePermission() {
+        $(".remove").each(function () {
+            const id = $(this).attr("id").substring(6);
+            $(this).on("click", function (e) {
+                e.preventDefault();
+                $("button[type='button'].yes").on("click", function () {
+                    $.ajax({
+                        url: "/Petshop_website_final_war/admin/RemoveCmt",
+                        type: "post",
+                        data: {
+                            CmtId: id
+                        },
+                        success: function (data) {
+                            window.alert("Xóa thành công")
+                            window.location.href= "list-comment.jsp"
+                        }
+                    })
+                })
+            })
+        })
+    }
+</script>
 <!-- Apex Chart -->
 <script src="assets/js/plugins/apexcharts.min.js"></script>
 <!-- custom-chart js -->
