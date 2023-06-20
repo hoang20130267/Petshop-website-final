@@ -468,7 +468,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary no" data-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-primary yes" data-dismiss="modal">Vẫn xóa</button>
+                <button type="button" class="btn btn-primary yes" data-dismiss="modal">Xóa</button>
             </div>
         </div>
     </div>
@@ -507,9 +507,6 @@
                     per: per
                 },
                 success: function (data) {
-                    window.location.href = "http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
-                },
-                error: function (data) {
                     window.location.href = "http://localhost:8080/Petshop_website_final_war/admin/add-admin.jsp?idUser=" + idAdmin
                 }
             })

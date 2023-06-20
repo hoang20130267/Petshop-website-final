@@ -507,8 +507,14 @@
                             notice: notice
                         },
                         success: function (data) {
-                            window.location.href = "./my-orders.jsp"
-                            alert(data)
+                            if (data.length > 0){
+                                window.location.href = "./my-orders.jsp"
+                                alert("Đã đặt hàng thành công! Mã đơn hàng của bạn là " + data)
+                            } else {
+                                window.location.href = "./shoping-cart.jsp"
+                                alert("Số lượng tồn kho của sản phẩm không đáp ứng đủ!")
+                            }
+
                         }
                     })
                 })
