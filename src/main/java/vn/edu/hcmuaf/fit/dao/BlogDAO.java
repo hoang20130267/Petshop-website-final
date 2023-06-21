@@ -185,7 +185,7 @@ public class BlogDAO {
         String id = taoIDBlog();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("insert into blogs (BlogId, BlogName, Status, Image, Description, Dital, CreateBy, CreateDate) values(?,?,?,?,?,?,?,?)")
+            handle.createUpdate("insert into blogs (BlogId, BlogName, Status, Image, Description, Dital, CreateBy, CreateDate, ViewCount) values(?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
                     .bind(2, status)
@@ -194,6 +194,7 @@ public class BlogDAO {
                     .bind(5, dital)
                     .bind(6, createBy)
                     .bind(7, date)
+                    .bind(8, 0)
                     .execute();
             handle.createUpdate("insert into blog_from_cate values (?,?)")
                     .bind(0,id)
@@ -251,7 +252,8 @@ public class BlogDAO {
 
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().test("0","1"));
-        System.out.println(new BlogDAO().getContent(null));
+//        System.out.println(new BlogDAO().getContent(null));
 //        System.out.println(new BlogDAO().allBlog());
+        System.out.println(new BlogDAO().AdminListBlog());
     }
 }

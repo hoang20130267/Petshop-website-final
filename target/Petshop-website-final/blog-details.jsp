@@ -344,22 +344,6 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5 order-md-1 order-2">
                     <div class="blog__sidebar">
-                        <div class="blog__sidebar__search">
-                            <form action="#">
-                                <input type="text" placeholder="Tìm kiếm...">
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="blog__sidebar__item">
-                            <h4>Thể loại</h4>
-                            <ul>
-                                <li><a href="#">Tất Cả</a></li>
-                                <li><a href="#">Chó</a></li>
-                                <li><a href="#">Mèo</a></li>
-                                <li><a href="#">Life Style</a></li>
-                                <li><a href="#">Chăm sóc</a></li>
-                            </ul>
-                        </div>
                         <div class="blog__sidebar__item">
                             <h4>Tin mới nhất</h4>
                             <div class="blog__sidebar__recent">
