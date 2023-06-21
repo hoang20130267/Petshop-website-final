@@ -56,14 +56,14 @@ public class DetailDAO {
 
     public List<Detail> listCategory() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product_category where ParentID IS NOT NULL")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from product_category where ParentID IS NOT NULL")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;
     }
 
     public static List<Detail> listProCateClassify(String category) {
-        String query = "SELECT DISTINCT pc.* FROM  product_category pc join product_from_cate pfc on pfc.cate_id = pc.CatId JOIN product p on p.productId = pfc.product_id Where p.`Status` =1";
+        String query = "SELECT DISTINCT pc.CatId,pc.CatName,pc.`Status`,pc.Sort,pc.ParentID,pc.CreateBy,pc.CreateDate,pc.UpdateBy,pc.UpdateDate FROM  product_category pc join product_from_cate pfc on pfc.cate_id = pc.CatId JOIN product p on p.productId = pfc.product_id Where p.`Status` =1";
         if (category != null)
         {
             switch (category) {
@@ -83,7 +83,7 @@ public class DetailDAO {
 
     public List<Detail> listCategoryProduct() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product_category ")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from product_category ")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -91,7 +91,7 @@ public class DetailDAO {
 
     public List<Detail> listCategoryBlog() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogcategory ")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from blogcategory ")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -99,7 +99,7 @@ public class DetailDAO {
 
     public Detail getCateProductById(String id) {
         Detail cate = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product_category where CatId = ?")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from product_category where CatId = ?")
                     .bind(0, id).mapToBean(Detail.class).one();
         });
         return cate;
@@ -107,7 +107,7 @@ public class DetailDAO {
 
     public Detail getCateBlogById(String id) {
         Detail cate = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogcategory where CatId = ?")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from blogcategory where CatId = ?")
                     .bind(0, id).mapToBean(Detail.class).one();
         });
         return cate;
@@ -115,7 +115,7 @@ public class DetailDAO {
 
     public List<Detail> listCategoryParentPd() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT * FROM product_category WHERE ParentID is null ")
+            return handle.createQuery("SELECT CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate FROM product_category WHERE ParentID is null ")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -123,7 +123,7 @@ public class DetailDAO {
 
     public List<Detail> listCategoryParentBl() {
         List<Detail> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT * FROM blogcategory WHERE ParentID is null ")
+            return handle.createQuery("SELECT CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate FROM blogcategory WHERE ParentID is null ")
                     .mapToBean(Detail.class).stream().collect(Collectors.toList());
         });
         return list;

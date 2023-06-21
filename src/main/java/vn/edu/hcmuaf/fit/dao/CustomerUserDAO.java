@@ -270,6 +270,14 @@ public class CustomerUserDAO {
         });
         return detail;
     }
+    public UserAccount getUserLoginFace(String user) {
+        UserAccount detail = JDBIConnector.get().withHandle(handle -> {
+            return handle.createQuery("select * from infor_user iu inner join user_account uc on iu.id_user = uc.id WHERE user_name = ?")
+                    .bind(0, user)
+                    .mapToBean(UserAccount.class).first();
+        });
+        return detail;
+    }
     public static void deleteUser(String id) {
         JDBIConnector.get().withHandle(handle -> {
             handle.createUpdate("delete from user_account where id = ?")

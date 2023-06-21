@@ -43,6 +43,7 @@ public class UserService {
     public boolean addRoleadmin(String idAdmin,String table, int permission){
         return new AdminRoleDAO(idAdmin).addRoleadmin(table,permission);
     }
+    public UserAccount getUserLoginFace(String user) { return new CustomerUserDAO().getUserLoginFace(user);}
     public void removePermission(String idAdmin,String table, int permission){
          new AdminRoleDAO(idAdmin).removePermission(table,permission);
     }
