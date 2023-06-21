@@ -11,9 +11,7 @@ import java.util.stream.Collectors;
 public class BlogDAO {
     public List<Blogs> getListBlogs() {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogs\n" +
-                                    "WHERE `Status` = 1"
-                            )
+            return handle.createQuery("select BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount from blogs WHERE `Status` = 1")
                     .mapToBean(Blogs.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -21,7 +19,7 @@ public class BlogDAO {
 
     public  Blogs getContent(String id) {
         Blogs blog = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogs b where b.BlogId = ?\n" +
+            return handle.createQuery("select BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount from blogs b where b.BlogId = ?\n" +
                                     "and `Status` =1"
                             ).bind(0, id)
                     .mapToBean(Blogs.class).one();
@@ -43,7 +41,7 @@ public class BlogDAO {
 
     public List<Blogs> NewBlogs() {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT  * from blogs b\n" +
+            return handle.createQuery("SELECT  BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount from blogs b\n" +
                             "Where b.`Status` = 1 \n" +
                             "ORDER BY CreateDate DESC \n" +
                             "LIMIT 3;")
@@ -54,7 +52,7 @@ public class BlogDAO {
 
     public List<Blogs> AdminListBlog() {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT  * FROM blogs")
+            return handle.createQuery("SELECT  BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount FROM blogs")
                     .mapToBean(Blogs.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -62,7 +60,7 @@ public class BlogDAO {
 
     public Blogs getBlog(String id) {
         Blogs blog =   JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT  * FROM blogs where BlogId = ?").bind(0,id)
+            return handle.createQuery("SELECT  BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount FROM blogs where BlogId = ?").bind(0,id)
                     .mapToBean(Blogs.class).first();
         });
         return blog;
@@ -70,10 +68,7 @@ public class BlogDAO {
 
     public List<BlogCategory> listBlogCate() {
         List<BlogCategory> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("SELECT DISTINCT bc. *\n" +
-                            "                            from blogs b join blog_from_cate bfc on b.BlogId = bfc.BlogId\n" +
-                            "                            join blogcategory bc on bc.CatId = bfc.CateId;"
-                    )
+            return handle.createQuery("SELECT CatId, CatName, `Status`, Sort, ParentID, CreateBy, CreateDate, UpdateBy, UpdateDate from blogcategory;")
                     .mapToBean(BlogCategory.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -100,7 +95,7 @@ public class BlogDAO {
 
     public List<Blogs> searchByNameBlog(String txtSearch) {
         List<Blogs> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogs where BlogName like ?")
+            return handle.createQuery("select BlogId, BlogName, `Status`, Image, Description, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, ViewCount from blogs where BlogName like ?")
                     .bind(0, "%" + txtSearch + "%")
                     .mapToBean(Blogs.class).stream().collect(Collectors.toList());
         });
@@ -181,11 +176,11 @@ public class BlogDAO {
         else return stringBuilder.toString();
     }
 
-    public static void insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
+    public static String insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
         String id = taoIDBlog();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
-            handle.createUpdate("insert into blogs (BlogId, BlogName, Status, Image, Description, Dital, CreateBy, CreateDate) values(?,?,?,?,?,?,?,?)")
+            handle.createUpdate("insert into blogs (BlogId, BlogName, Status, Image, Description, Dital, CreateBy, CreateDate, ViewCount) values(?,?,?,?,?,?,?,?,?)")
                     .bind(0, id)
                     .bind(1, name)
                     .bind(2, status)
@@ -194,6 +189,7 @@ public class BlogDAO {
                     .bind(5, dital)
                     .bind(6, createBy)
                     .bind(7, date)
+                    .bind(8, 0)
                     .execute();
             handle.createUpdate("insert into blog_from_cate values (?,?)")
                     .bind(0,id)
@@ -201,6 +197,7 @@ public class BlogDAO {
                     .execute();
             return true;
         });
+        return id;
     }
 
     public static void deleteBlog(String id) {
@@ -250,7 +247,8 @@ public class BlogDAO {
 
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().test("0","1"));
-        System.out.println(new BlogDAO().getContent(null));
+//        System.out.println(new BlogDAO().getContent(null));
 //        System.out.println(new BlogDAO().allBlog());
+        System.out.println(new BlogDAO().AdminListBlog());
     }
 }

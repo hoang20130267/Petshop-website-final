@@ -13,7 +13,7 @@ public class CustomerUserDAO {
 
     public CustomerUserDAO(){
         users= JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from user_account u inner join infor_user i on i.id_user = u.id")
+            return handle.createQuery("select u.id, u.user_name, u.passMaHoa, u.pass, u.`status`, u.isAdmin, i.`name`, i.email, i.phone, i.address, i.avt from user_account u inner join infor_user i on i.id_user = u.id")
                     .mapToBean(UserAccount.class).stream().collect(Collectors.toList());
         });
     }
@@ -147,10 +147,7 @@ public class CustomerUserDAO {
     }
 
     public List<UserAccount> ListAdmin() {
-        return JDBIConnector.get().withHandle((handle -> handle.createQuery("SELECT *\n" +
-                "FROM user_account u join infor_user ifu\n" +
-                "on u.id=ifu.id_user\n" +
-                "WHERE u.isAdmin=1;").mapToBean(UserAccount.class).stream().collect(Collectors.toList())));
+        return JDBIConnector.get().withHandle((handle -> handle.createQuery("SELECT u.id, u.user_name, u.passMaHoa, u.pass, u.`status`, u.isAdmin, i.`name`, i.email, i.phone, i.address, i.avt FROM user_account u join infor_user i on u.id=i.id_user WHERE u.isAdmin=1;").mapToBean(UserAccount.class).stream().collect(Collectors.toList())));
     }
 
     public void insertAdmin(String userName, String pass, String fullName, String email, String phone,String address,int status) {
@@ -267,7 +264,7 @@ public class CustomerUserDAO {
     }
     public UserAccount getUserDetail(String id) {
         UserAccount detail = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from infor_user iu inner join user_account uc on iu.id_user = uc.id where id_user = ?")
+            return handle.createQuery("select u.id, u.user_name, u.passMaHoa, u.pass, u.`status`, u.isAdmin, i.`name`, i.email, i.phone, i.address, i.avt from infor_user i inner join user_account u on i.id_user = u.id where id_user = ?")
                     .bind(0, id)
                     .mapToBean(UserAccount.class).first();
         });
@@ -326,6 +323,6 @@ public class CustomerUserDAO {
 
 
     public static void main(String[] args) {
-
+        System.out.println();
     }
 }

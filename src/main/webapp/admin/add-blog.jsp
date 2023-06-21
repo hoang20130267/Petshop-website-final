@@ -74,6 +74,18 @@
             href="bonus/css/skin.min.css"
     />
     <script type="text/javascript" src="<%=request.getContextPath()%>/libraries/ckeditor/ckeditor.js"></script>
+    <style>
+        .input-file::-webkit-file-upload-button {
+            background: #00BFFF;
+            border-radius: 50px;
+            border: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 8px 25px;
+            margin-right: 3px;
+            transition: all 0.3s;
+        }
+    </style>
 </head>
 <%
     if (request.getSession().getAttribute("admin") == null) {
@@ -324,49 +336,49 @@
 
 
                 <h4 class="mb-3">Thêm ảnh</h4>
-                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
-                     id="my-awesome-dropzone" data-dropzone="data-dropzone">
+                    <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable images-container"
+                         id="my-awesome-dropzone" data-dropzone="data-dropzone">
                     <% int i = 0;
                         if (b != null) {
                             if (b.getImage() != null) {%>
-                    <div class="image-container">
-                        <div id="container<%=i%>" class="dz-message text-600"
-                             data-dz-message="data-dz-message">
-                            <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
-                                 style="height:80px;width:80px;">
-                                <img class="img-blog-review dz-image" src="<%=b.getImage()%>">
-                                <div class="control">
-                                    <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
-                                       data-dz-remove="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16px"
-                                             height="16px" viewBox="0 0 24 24" fill="none"
-                                             stroke="currentColor" stroke-width="2"
-                                             stroke-linecap="round" stroke-linejoin="round"
-                                             class="feather feather-x">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </a>
+                        <div class="image-container" style="display: inline-flex">
+                            <div id="container<%=i%>"
+                                 data-dz-message="data-dz-message">
+                                <div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview"
+                                     style="height:80px;width:80px;">
+                                    <img class="img-blog-review dz-image" src="<%=b.getImage()%>">
+                                    <div class="control">
+                                        <a id="remove<%=i%>" class="dz-remove text-400 remove" href=""
+                                           data-dz-remove="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16px"
+                                                 height="16px" viewBox="0 0 24 24" fill="none"
+                                                 stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-x">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <%
                                 i++;
                             }
                         }
                     %>
-                    <div class="image-container">
-                        <div id="container<%=i%>" class="dz-message text-600"
-                             data-dz-message="data-dz-message">
-                            <input type="file" id="image<%=i%>" name="files" class="input-file"
-                                   accept="image/*"/>
-                            <br>
-                            <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png"
-                                 width="40" alt="">
+                        <div class="image-container">
+                            <div id="container<%=i%>" class="dz-message text-600"
+                                 data-dz-message="data-dz-message">
+                                <input type="file" id="image<%=i%>" name="files" class="input-file"
+                                       accept="image/*"/>
+                                <br>
+                                <img class="mt-3 me-2" src="../admin/assets/images/image-icon.png"
+                                     width="40" alt="">
+                            </div>
                         </div>
                     </div>
-                </div>
                 <input type="text" id="deletedFile" value="" style="display: none">
 
                 <% List<BlogCategory> listb = BlogService.getInstance().listBlogCate(); %>
@@ -522,7 +534,9 @@
                     //success
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    $("#container" + id).empty()
+                    $(".image-container").empty();
+                    $(".image-container").css("display", "inline-flex");
+                    $(".image-container").append(`<div id="container` + id + `" data-dz-message="data-dz-message"></div>`)
                     $("#container" + id).prepend(`<div class="border bg-white rounded-3 d-flex flex-center position-relative me-2 mb-2 dz-image-preview" style="height:80px;width:80px;">
                                                 <img class="img-blog-review dz-image" src="http://localhost:8080/Petshop_website_final_war/img/blog/` + name + `">
                                                 <div class="control">
@@ -535,7 +549,6 @@
                                                 </div>
                                             </div>`)
                     $("#my-awesome-dropzone").append(`<div class="image-container">
-
                                         <div id="container` + id + `" class="dz-message text-600" data-dz-message="data-dz-message">
                                             <input type="file" id="image` + id + `" name="files" class="input-file" accept="image/*" />
                                             <br>
@@ -568,14 +581,6 @@
         const dital = CKEDITOR.instances.editor.getData();
         const cate = $("#cate").val();
         const imageLink = $(".img-blog-review").attr("src").substring(57);
-        let imgFile = []
-        $(".img-blog-review").each(function () {
-            let nameFile = $(this).attr("src");
-            if (nameFile.indexOf("\\") != -1)
-                imgFile.push(nameFile.substring(nameFile.lastIndexOf("\\") + 1));
-            else
-                imgFile.push(nameFile.substring(nameFile.lastIndexOf("/") + 1));
-        })
         const removed = $("#deletedFile").val();
         const oldImg = removed.substring(0, removed.length - 1);
         $.ajax({
@@ -587,7 +592,6 @@
                 name: name,
                 image: imageLink,
                 description: descripsion,
-                imgFile: imgFile,
                 dital: dital,
                 cate: cate,
             },

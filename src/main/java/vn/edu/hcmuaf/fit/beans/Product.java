@@ -302,35 +302,6 @@ public class Product implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-
-        if (status != product.status) return false;
-        if (price != product.price) return false;
-        if (promotionalPrice != product.promotionalPrice) return false;
-        if (warranty != product.warranty) return false;
-        if (Promotional != product.Promotional) return false;
-        if (quantityCart != product.quantityCart) return false;
-        if (quantityWishlist != product.quantityWishlist) return false;
-        if (!Objects.equals(productId, product.productId)) return false;
-        if (!Objects.equals(productName, product.productName)) return false;
-        if (!Objects.equals(image, product.image)) return false;
-        if (!Objects.equals(quantity, product.quantity)) return false;
-        if (!Objects.equals(description, product.description)) return false;
-        if (!Objects.equals(dital, product.dital)) return false;
-        if (!Objects.equals(createBy, product.createBy)) return false;
-        if (!Objects.equals(createDate, product.createDate)) return false;
-        if (!Objects.equals(updateBy, product.updateBy)) return false;
-        if (!Objects.equals(updateDate, product.updateDate)) return false;
-        if (!Objects.equals(giong, product.giong)) return false;
-        if (!Objects.equals(mausac, product.mausac)) return false;
-        if (!Objects.equals(cannang, product.cannang)) return false;
-        if (!Objects.equals(sales, product.sales)) return false;
-        return Objects.equals(cate_id, product.cate_id);
-    }
-
-    @Override
     public int hashCode() {
         int result = productId != null ? productId.hashCode() : 0;
         result = 31 * result + (productName != null ? productName.hashCode() : 0);

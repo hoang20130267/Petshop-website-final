@@ -22,14 +22,13 @@ public class DeleteBlog extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String id = request.getParameter("id");
-        System.out.println(id);
         BlogService service = new BlogService();
         LogService logService= new LogService();
         UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa tin tức "+ service.getContent(id).getBlogName());
+        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa tin tức "+ service.getInstance().getContent(id).getBlogName());
         service.deleteBlog(id);
         response.sendRedirect("list-blog.jsp");
-
+        System.out.println(id);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

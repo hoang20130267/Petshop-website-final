@@ -173,7 +173,7 @@
                                          <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
                                      <div id="error" style="text-align: center; color: red"> </div>
-                                     <div class="g-recaptcha" data-sitekey="6LfADqomAAAAACds58TJ9Ztpk4UiSSNdb8V6Y1CN"></div>
+                                     <div class="g-recaptcha" data-sitekey="6LeS6aMlAAAAAA_OljqI0WNcobXDu2tIqLU-JQtK"></div>
 <%--                                                       <a href="#" style="text-decoration: none;">--%>
 <%--                                                         <div class="button_login"> Đăng nhập</div>--%>
 <%--                                                       </a>--%>
@@ -182,9 +182,7 @@
                                      <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
 
                                      <div class="social-login text-center">
-                                         <a href="https://www.facebook.com/dialog/oauth?client_id=184690387905300&redirect_uri=https://redirectmeto.com/http://localhost:8080/Petshop_website_final_war/login-facebook" class="facebook">
-<%--                                     <a href="https://www.facebook.com/dialog/oauth?client_id=1344526122794000&redirect_uri=https://redirectmeto.com/http://34.143.250.88/Petshop_website_final_war/login-facebook--%>
-<%--                                     class="facebook">--%>
+                                         <a href="#" class="facebook">
                                              <span ><i class="fa-brands fa-facebook-f"></i></span>
                                          </a>
                                          <a href="#" class="twitter">
@@ -192,8 +190,6 @@
                                          </a>
                                          <a href="https://accounts.google.com/o/oauth2/auth?scope=profile+email&redirect_uri=http://localhost:8080/Petshop_website_final_war/LoginGoogleHandler&response_type=code
 		   &client_id=863418616412-fi3ia9v25cl6jun5jbmgr4j9m0km6bof.apps.googleusercontent.com&approval_prompt=force" class="google">
-<%--                                             <a href="https://accounts.google.com/o/oauth2/auth?scope=profile+email&redirect_uri=https://redirectmeto.com/http://34.143.250.88/Petshop_website_final_war/LoginGoogleHandler&response_type=code--%>
-<%--		   &client_id=863418616412-fi3ia9v25cl6jun5jbmgr4j9m0km6bof.apps.googleusercontent.com&approval_prompt=force" class="google">--%>
                                              <span> <i class="fa-brands fa-google"></i></span>
                                          </a>
 
@@ -229,21 +225,21 @@
      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <script>
-         // window.onload = function (){
-         //     let isValid = false;
-         //     const form = document.getElementById("form");
-         //     const error = document.getElementById("error");
-         //
-         //     form.addEventListener("submit", function (event){
-         //         event.preventDefault();
-         //         const response = grecaptcha.getResponse();
-         //         if (response){
-         //             form.submit();
-         //         } else {
-         //             error.innerHTML = "Vui lòng xác thực captcha!";
-         //         }
-         //     });
-         // }
+         window.onload = function (){
+             let isValid = false;
+             const form = document.getElementById("form");
+             const error = document.getElementById("error");
+
+             form.addEventListener("submit", function (event){
+                 event.preventDefault();
+                 const response = grecaptcha.getResponse();
+                 if (response){
+                     form.submit();
+                 } else {
+                     error.innerHTML = "Vui lòng xác thực captcha!";
+                 }
+             });
+         }
      </script>
 </body>
 </html>

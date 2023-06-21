@@ -24,7 +24,6 @@ public class DeleteProductController extends HttpServlet {
         logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa sản phẩm thú cưng "+dao.getProductDetail(id).getProductName());
         dao.deleteProduct(id);
         response.sendRedirect("list-products");
-
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

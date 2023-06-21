@@ -36,7 +36,13 @@ public class UpdateInforController extends HttpServlet {
         if (image != "") {
             if (newpass.equals(newpassconfirm)) {
                 new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass, image);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
                 user.setAvt("img/user/" + image);
+                user.setName(fullname);
+                user.setPhone(phone);
+                user.setAddress(address);
+                user.setPass(newpass);
                 request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
                 request.getRequestDispatcher("infor-user.jsp").forward(request, response);
                 removeOldImg(oldImg, request);
@@ -56,6 +62,10 @@ public class UpdateInforController extends HttpServlet {
             new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass);
             UserAccount updateUser = new CustomerUserDAO().getUserDetail(user.getId());
             request.getSession().setAttribute("user",updateUser);
+            updateUser.setName(fullname);
+            updateUser.setPhone(phone);
+            updateUser.setAddress(address);
+            updateUser.setPass(newpass);
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-user.jsp").forward(request, response);
 

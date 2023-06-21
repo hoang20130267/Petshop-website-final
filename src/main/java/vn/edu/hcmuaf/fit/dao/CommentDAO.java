@@ -16,14 +16,14 @@ public class CommentDAO  {
 
     public static List<Comment> getListComment() {
         List<Comment> cmt = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from productcomment pcmt inner join infor_user iu on pcmt.CustomerID = iu.id_user")
+            return handle.createQuery("select pcmt.ID, pcmt.CustomerID, pcmt.Description, pcmt.CommentDate, pcmt.CommentStatus, pcmt.ProductID, pcmt.ParentID, pcmt.vote from productcomment pcmt inner join infor_user iu on pcmt.CustomerID = iu.id_user")
                     .mapToBean(Comment.class).stream().collect(Collectors.toList());
         });
         return cmt;
     }
     public static List<Comment> getListCommentByProductID(String id) {
         List<Comment> cmt = JDBIConnector.get().withHandle(handle -> {
-           return handle.createQuery("select * from productcomment where ProductID = ?")
+           return handle.createQuery("select ID, CustomerID, Description, CommentDate, CommentStatus, ProductID, ParentID, vote from productcomment where ProductID = ?")
                    .bind(0,id)
                    .mapToBean(Comment.class).stream().collect(Collectors.toList());
         });
@@ -31,7 +31,7 @@ public class CommentDAO  {
     }
     public static List<BlogComment> getListCommentByBlogID(String id) {
         List<BlogComment> cmt = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogcomment where BlogID = ?")
+            return handle.createQuery("select ID, CustomerID, Description, CommentDate, CommentStatus, BlogID from blogcomment where BlogID = ?")
                     .bind(0,id)
                     .mapToBean(BlogComment.class).stream().collect(Collectors.toList());
         });
@@ -39,19 +39,19 @@ public class CommentDAO  {
     }
     public static Comment getComment(String id){
         Comment cmt = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from productcomment where ID = ?")
+            return handle.createQuery("select ID, CustomerID, Description, CommentDate, CommentStatus, ProductID, ParentID, vote from productcomment where ID = ?")
                     .bind(0,id)
                     .mapToBean(Comment.class).first();
         });
         return cmt;
     }
     public List<Comment> getComments() {
-        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select * from productcomment")
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("select ID, CustomerID, Description, CommentDate, CommentStatus, ProductID, ParentID, vote from productcomment")
                 .mapToBean(Comment.class).stream().collect(Collectors.toList()));
     }
     public static BlogComment getCommentBlog(String id){
         BlogComment cmt = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from blogcomment where ID = ?")
+            return handle.createQuery("select ID, CustomerID, Description, CommentDate, CommentStatus, BlogID from blogcomment where ID = ?")
                     .bind(0,id)
                     .mapToBean(BlogComment.class).first();
         });
