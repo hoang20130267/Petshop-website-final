@@ -84,10 +84,4 @@ public class SignUpDAO {
         if (emails != null) return true;
         else return false;
     }
-
-
-    public static void main(String[] args) {
-
-        System.out.println(new SignUpDAO().checkUser("huynguyennn.79039@gmail.com","huyne12"));
-    }
 }

@@ -1,12 +1,8 @@
 package vn.edu.hcmuaf.fit.dao;
 
-import com.mysql.cj.xdevapi.Collection;
 import vn.edu.hcmuaf.fit.beans.*;
 import vn.edu.hcmuaf.fit.db.JDBIConnector;
-import vn.edu.hcmuaf.fit.services.ProductService;
 
-import java.awt.datatransfer.FlavorMap;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -69,14 +65,13 @@ public class OrderDAO {
     }
 
     public List<Orders> ordersList (){
-        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders")
+        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT OrderID, OrderDate, `Status`, Delivered, DeliveryDate, CustomerID, Discount, Notice, Price, RecipientName, Email, Phone, Address, idTransport FROM orders")
                 .mapToBean(Orders.class).stream().collect(Collectors.toList()));
         return  list;
     }
 
     public List<OrderDetail> getOrderDetailsById (String id){
-        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT o.idTransport, od.* FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID\n" +
-                        "                WHERE o.OrderID = ?")
+        List<OrderDetail> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT o.idTransport, od.OrderID, od.ProductID, od.ProductName, od.Price, od.Quantity FROM orderdetail od INNER JOIN orders o ON o.OrderID = od.OrderID WHERE o.OrderID = ?")
                 .bind(0,id)
                 .mapToBean(OrderDetail.class).stream().collect(Collectors.toList())
         );
@@ -101,7 +96,7 @@ public class OrderDAO {
     }
 
     public List<Orders> getOrdersByUser(String id){
-        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders WHERE CustomerID=?")
+        List<Orders> list = JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT OrderID, OrderDate, `Status`, Delivered, DeliveryDate, CustomerID, Discount, Notice, Price, RecipientName, Email, Phone, Address, idTransport FROM orders WHERE CustomerID=?")
                 .bind(0,id)
                 .mapToBean(Orders.class).stream().collect(Collectors.toList())
         );
@@ -109,7 +104,7 @@ public class OrderDAO {
     }
 
     public Orders getOrderByIdOrder(String id){
-        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM orders WHERE OrderID=?")
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT OrderID, OrderDate, `Status`, Delivered, DeliveryDate, CustomerID, Discount, Notice, Price, RecipientName, Email, Phone, Address, idTransport FROM orders WHERE OrderID=?")
                 .bind(0,id)
                 .mapToBean(Orders.class).first());
     }
