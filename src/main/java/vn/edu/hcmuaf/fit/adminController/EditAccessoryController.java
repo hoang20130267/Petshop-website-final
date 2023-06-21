@@ -37,17 +37,18 @@ public class EditAccessoryController extends HttpServlet {
         String oldImg = request.getParameter("oldImg");
         String[] imgFile = request.getParameterValues("imgFile[]");
         UserAccount admin = (UserAccount) request.getSession().getAttribute("admin");
+        HttpSession session = request.getSession();
         ProductDAO dao = new ProductDAO();
         String cate = "3";
         System.out.println(pid);
         if (pid.length() < 1) {
-            dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild,status,Promotional,PromotionalPrice, imgFile, size);
+            String id = dao.insertAccessory(admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild,status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm phụ kiện mới");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm phụ kiện mới");
         } else {
             dao.updateAccessory(pid,admin.getId(),pname,pprice,pdescription,detail,pquantity,mausac,cateChild, status,Promotional,PromotionalPrice, imgFile, size);
             removeOldImg(oldImg, request);

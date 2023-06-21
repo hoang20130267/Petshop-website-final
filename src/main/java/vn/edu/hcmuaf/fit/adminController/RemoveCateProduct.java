@@ -22,11 +22,10 @@ public class RemoveCateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("cid");
-        DetailService.getInstance().removeCateProduct(id);
-        response.sendRedirect("list-category.jsp");
-
         LogService logService= new LogService();
         UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
         logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa danh mục tin tức "+DetailService.getInstance().getCateProductById(id).getCatName());
+        DetailService.getInstance().removeCateProduct(id);
+        response.sendRedirect("list-category.jsp");
     }
 }

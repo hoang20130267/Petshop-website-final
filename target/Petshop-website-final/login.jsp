@@ -173,10 +173,10 @@
                                          <span class="ml-auto"><a href="forget.jsp" class="forgot-pass">Quên mật khẩu</a></span>
                                      </div>
                                      <div id="error" style="text-align: center; color: red"> </div>
-<%--                                     <div class="g-recaptcha" data-sitekey="6LeS6aMlAAAAAA_OljqI0WNcobXDu2tIqLU-JQtK"></div>--%>
-                                     <%--                  <a href="#" style="text-decoration: none;">--%>
-                                     <%--                    <div class="button_login"> Đăng nhập</div>--%>
-                                     <%--                  </a>--%>
+                                     <div class="g-recaptcha" data-sitekey="6LeS6aMlAAAAAA_OljqI0WNcobXDu2tIqLU-JQtK"></div>
+<%--                                                       <a href="#" style="text-decoration: none;">--%>
+<%--                                                         <div class="button_login"> Đăng nhập</div>--%>
+<%--                                                       </a>--%>
                                      <input type="submit" value="Đăng nhập" class="btn btn-pill text-white btn-block btn-primary">
 
                                      <span class="d-block text-center my-4 text-muted"> Đăng nhập với:</span>
@@ -225,21 +225,21 @@
      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
      <script>
-         // window.onload = function (){
-         //     let isValid = false;
-         //     const form = document.getElementById("form");
-         //     const error = document.getElementById("error");
-         //
-         //     form.addEventListener("submit", function (event){
-         //         event.preventDefault();
-         //         const response = grecaptcha.getResponse();
-         //         if (response){
-         //             form.submit();
-         //         } else {
-         //             error.innerHTML = "Vui lòng xác thực captcha!";
-         //         }
-         //     });
-         // }
+         window.onload = function (){
+             let isValid = false;
+             const form = document.getElementById("form");
+             const error = document.getElementById("error");
+
+             form.addEventListener("submit", function (event){
+                 event.preventDefault();
+                 const response = grecaptcha.getResponse();
+                 if (response){
+                     form.submit();
+                 } else {
+                     error.innerHTML = "Vui lòng xác thực captcha!";
+                 }
+             });
+         }
      </script>
 </body>
 </html>

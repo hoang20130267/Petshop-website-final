@@ -38,6 +38,12 @@ public class UpdateInforAdminController extends HttpServlet {
         if (image != "") {
             if (newpass.equals(newpassconfirm)) {
                 new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass, image);
+                HttpSession session = request.getSession();
+                session.setAttribute("admin", user);
+                user.setName(fullname);
+                user.setPhone(phone);
+                user.setAddress(address);
+                user.setPass(newpass);
                 user.setAvt("img/user/" + image);
                 request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
                 request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
@@ -58,6 +64,10 @@ public class UpdateInforAdminController extends HttpServlet {
         } else {
             user.setAvt("img/user/"+ image);
             new CustomerUserDAO().updateInforUser(user.getId(), fullname, phone, address, newpass);
+            user.setName(fullname);
+            user.setPhone(phone);
+            user.setAddress(address);
+            user.setPass(newpass);
             request.setAttribute("updateInforSusses", "Cập nhật thông tin thành công!");
             request.getRequestDispatcher("infor-admin.jsp").forward(request, response);
 

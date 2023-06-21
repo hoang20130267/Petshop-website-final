@@ -36,13 +36,13 @@ public class EditBlogController extends HttpServlet {
         BlogDAO dao = new BlogDAO();
 
         if (id.equals("null")) {
-            dao.insertBlog(name, status, image,pdescription,dital,cate,AdminUser.getId());
+            String bid = dao.insertBlog(name, status, image,pdescription,dital,cate,AdminUser.getId());
             removeOldImg(oldImg, request);
             copyImage(request, image);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getContent(id).getBlogName()+" làm tin tức mới");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+bid+" làm tin tức mới");
         } else {
             dao.updateBlog(id,name,status, image,pdescription,dital,cate);
             removeOldImg(oldImg, request);
