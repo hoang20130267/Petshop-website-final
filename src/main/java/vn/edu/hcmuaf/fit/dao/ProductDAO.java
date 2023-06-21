@@ -22,19 +22,19 @@ public class ProductDAO {
 
     public ProductDAO() {
         listProduct = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         listProductDog = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId < 2000")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCountfrom product p where productId < 2000")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         listProductCat = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId < 3000 and productId > 2000")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p where productId < 3000 and productId > 2000")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         listProductAccessory = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId > 3000")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p where productId > 3000")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         listCategory = JDBIConnector.get().withHandle(handle -> {
@@ -42,14 +42,14 @@ public class ProductDAO {
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
         listCategory = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product_category")
+            return handle.createQuery("select CatId,CatName,`Status`,Sort,ParentID,CreateBy,CreateDate,UpdateBy,UpdateDate from product_category")
                     .mapTo(String.class).stream().collect(Collectors.toList());
         });
     }
 
     public List<Product> searchProductByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where ProductName like ?").bind(0, "%" + txtSearch + "%")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p where ProductName like ?").bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
         return list;
@@ -57,7 +57,7 @@ public class ProductDAO {
 
     public List<Product> searchByName(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where (pfc.cate_id = 1 or pfc.cate_id =2) and \n" +
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where (pfc.cate_id = 1 or pfc.cate_id =2) and \n" +
                             "p.ProductName like ?").bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
         });
@@ -66,7 +66,7 @@ public class ProductDAO {
 
     public List<Product> searchByName2(String txtSearch) {
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 and \n" +
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 and \n" +
                             "p.ProductName like ?")
                     .bind(0, "%" + txtSearch + "%")
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -76,7 +76,7 @@ public class ProductDAO {
 
     public static Product getProductById(String id) {
         Product p = JDBIConnector.get().withHandle(handle -> {
-            return handle.createQuery("select * from product where productId = ?")
+            return handle.createQuery("select p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product where productId = ?")
                     .bind(0, id).mapToBean(Product.class).first();
         });
         return p;
@@ -326,7 +326,7 @@ public class ProductDAO {
     }
 
     public List<Product> getFullAdminProduct() {
-        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery(query)
                         .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -335,7 +335,7 @@ public class ProductDAO {
     }
 
     public List<Product> getFullAdminAccessory() {
-        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
                     .mapToBean(Product.class).stream().collect(Collectors.toList());
@@ -346,7 +346,7 @@ public class ProductDAO {
 
     public List<Product> getNext9Product(int amount, String category, String price, String size, String order_by) {
 
-        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id \n" +
                 "WHERE p.`Status` = 1 ";
         if (category != null) {
             if (!category.equals("all")) {
@@ -396,7 +396,7 @@ public class ProductDAO {
 
     public List<Product> getNext6ProductAdmin(int amount) {
 
-        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id != 3 " +
                 "limit ?,6;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
                 return handle.createQuery(query)
@@ -408,7 +408,7 @@ public class ProductDAO {
 
     public List<Product> getNext6AccessoriesAdmin(int amount) {
 
-        String query = "select distinct p.* from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
+        String query = "select distinct p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount from product p INNER JOIN product_from_cate pfc on p.productId = pfc.product_id where pfc.cate_id = 3 " +
                 "limit ?,6;";
         List<Product> list = JDBIConnector.get().withHandle(handle -> {
             return handle.createQuery(query)
@@ -477,7 +477,7 @@ public class ProductDAO {
     }
 
     public List<Product> listProductSale() {
-        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT * FROM product WHERE `Status`=1 AND Promotional = 1")
+        return JDBIConnector.get().withHandle(handle -> handle.createQuery("SELECT p.productId,p.ProductName,p.`Status`,p.Image,p.Price,p.Promotional,p.Quantity,p.Warranty,p.promotional,p.Description,p.Dital,p.CreateBy,p.CreateDate,p.UpdateBy,p.UpdateDate,p.giong,p.mausac,p.cannang,p.size,p.ViewCount FROM product p WHERE `Status`=1 AND Promotional = 1")
                 .mapToBean(Product.class).stream().collect(Collectors.toList()));
     }
 
