@@ -181,7 +181,7 @@ public class BlogDAO {
         else return stringBuilder.toString();
     }
 
-    public static void insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
+    public static String insertBlog(String name, int status, String image, String description, String dital, String cate, String createBy) {
         String id = taoIDBlog();
         String date = java.time.LocalDate.now().toString();
         JDBIConnector.get().withHandle(handle -> {
@@ -201,6 +201,7 @@ public class BlogDAO {
                     .execute();
             return true;
         });
+        return id;
     }
 
     public static void deleteBlog(String id) {

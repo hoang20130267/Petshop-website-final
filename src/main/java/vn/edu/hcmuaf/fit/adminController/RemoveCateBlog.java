@@ -22,11 +22,10 @@ public class RemoveCateBlog extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("cbid");
-        DetailService.getInstance().removeCateBlog(id);
-        response.sendRedirect("list-category.jsp");
-
         LogService logService= new LogService();
         UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
         logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa danh mục tin tức "+DetailService.getInstance().getCateBlogById(id).getCatName());
+        DetailService.getInstance().removeCateBlog(id);
+        response.sendRedirect("list-category.jsp");
     }
 }

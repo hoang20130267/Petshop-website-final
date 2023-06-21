@@ -43,13 +43,13 @@ public class EditProductController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
 
         if (pid.equals("null")) {
-        dao.insertProduct(AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
+            String id = dao.insertProduct(AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);
             copyImage(request, imgFile);
 
             LogService logService= new LogService();
             UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(pid).getProductName()+" làm sản phẩm thú cưng mới");
+            logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã thêm "+dao.getProductDetail(id).getProductName()+" làm sản phẩm thú cưng mới");
         } else {
             dao.updateProduct(pid,AdminUser.getId(),pname,pprice,pdescription,detail,quantity,pgiong,pmausac,pcannang,CateParent,cateChild,status,Promotional,PromotionalPrice, imgFile);
             removeOldImg(oldImg, request);

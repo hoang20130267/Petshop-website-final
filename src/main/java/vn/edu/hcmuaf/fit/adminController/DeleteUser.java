@@ -18,14 +18,13 @@ public class DeleteUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        LogService logService= new LogService();
-        CustomerUserDAO dao = new CustomerUserDAO();
         String id = request.getParameter("idUser");
+        CustomerUserDAO dao = new CustomerUserDAO();
+        LogService logService= new LogService();
         UserAccount userAccount = (UserAccount) request.getSession().getAttribute("admin");
-        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa admin "+dao.getUserDetail(id).getUsername());
+        logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa người dùng "+dao.getUserDetail(id).getUsername());
         dao.deleteUser(id);
-        response.sendRedirect("list-admin.jsp");
-
+        response.sendRedirect("index.jsp");
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -24,7 +24,6 @@ public class DeleteAccessController extends HttpServlet {
         logService.createUserLog(userAccount.getId(), "INFOR", "Admin "+userAccount.getUsername()+" đã xóa sản phẩm phụ kiện "+dao.getProductDetail(id).getProductName());
         dao.deleteProduct(id);
         response.sendRedirect("list-accessory");
-
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
