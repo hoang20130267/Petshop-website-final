@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-<%--    <link rel="stylesheet" href="css/nice-select.css" type="text/css">--%>
+    <%--    <link rel="stylesheet" href="css/nice-select.css" type="text/css">--%>
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
@@ -133,6 +133,7 @@
         .dropdown-toggle.arrow-none:after {
             display: none;
         }
+
         #myTable {
             display: none;
             position: fixed;
@@ -147,10 +148,12 @@
             border: 1px black;
             width: 380px;
         }
+
         #myTable label {
             display: inline-block;
             width: 100px;
         }
+
         .overlayT {
             position: fixed;
             top: 0;
@@ -163,15 +166,18 @@
             z-index: 0;
             transition: opacity 0.5s ease;
         }
+
         .overlayT.show {
             opacity: 1;
             visibility: visible;
         }
+
         select.pdw {
             min-width: 200px;
             height: 30px;
             border-radius: 4px;
         }
+
         .bt1 {
             background-color: #007bff;
             border-radius: 5px;
@@ -338,9 +344,11 @@
                         <div class="checkout__input">
                             <p>Địa chỉ<span>*</span></p>
                             <%if (user.getAddress() == null) {%>
-                            <input type="text" id="address" class="address" name="address" placeholder="Nhập địa chỉ nhận hàng">
+                            <input type="text" id="address" class="address" name="address"
+                                   placeholder="Nhập địa chỉ nhận hàng">
                             <%} else {%>
-                            <input type="text" id="address" placeholder="Nhập địa chỉ nhận hàng" class="address" name="address" value="<%=user.getAddress()%>"readonly>
+                            <input type="text" id="address" placeholder="Nhập địa chỉ nhận hàng" class="address"
+                                   name="address" value="<%=user.getAddress()%>" readonly>
                             <%}%>
                             <div class="bt1" onclick="showTable()" style="margin-top: 10px">Chỉnh sửa địa chỉ</div>
                             <div id="myTable">
@@ -385,10 +393,10 @@
                             <ul>
                                 <%
                                     for (String id : cart.getData().keySet()) {
-                                        if (cart.getData().get(id).getPromotional() ==1 ) {%>
+                                        if (cart.getData().get(id).getPromotional() == 1) {%>
                                 <li><%=cart.getData().get(id).getProductName()%>
                                     <span>
-                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() -(cart.getData().get(id).getPrice() *cart.getData().get(id).getPromotionalPrice()/100)))%>₫
+                                        <%=format.format(cart.getData().get(id).getQuantityCart() * (cart.getData().get(id).getPrice() - (cart.getData().get(id).getPrice() * cart.getData().get(id).getPromotionalPrice() / 100)))%>₫
                                     </span>
                                 </li>
                                 <%} else {%>
@@ -409,7 +417,8 @@
                                 </li>
                             </ul>
                             <div class="checkout__order__total">Tổng tiền
-                                <input value="<%=cart != null ? cart.total() : 0%>" id="totalPrice" style="display: none">
+                                <input value="<%=cart != null ? cart.total() : 0%>" id="totalPrice"
+                                       style="display: none">
                                 <span id="sum"></span></div>
 
                             <p>Kiểm tra lại thông tin đơn hàng và những thông tin tôi đã nhập trước khi đặt hàng.</p>
@@ -420,8 +429,10 @@
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
-                            <div id="errorOrder" style="text-align: center; color: red"> </div>
+                            <div id="errorOrder" style="text-align: center; color: red"></div>
                             <button type="submit" class="site-btn" id="submitck">Mua hàng</button>
+                            <input id="getDistrict" value="" type="text" style="display: none">
+                            <input id="getWard"  value="" type="text" style="display: none" >
                         </div>
                     </div>
                 </div>
@@ -460,7 +471,7 @@
         const error = document.getElementById("errorOrder");
         const getWard = $("#getWard").val();
         const getDistrict = $("#getDistrict").val();
-        if (fullname == "" || phone =="" || address =="" || email=="") {
+        if (fullname == "" || phone == "" || address == "" || email == "") {
             error.innerHTML = "Vui lòng điền và chọn đủ cái thông tin!";
         } else {
             axios.post('http://140.238.54.136/api/auth/login', {
@@ -470,20 +481,21 @@
                 .then(response => {
                     register(response.data.access_token);
                 });
+
             function register(token) {
                 url = "http://140.238.54.136/api/registerTransport"
                 body = {
-                    from_district_id:DISTRICT,
+                    from_district_id: DISTRICT,
                     from_ward_id: WARD,
                     to_district_id: getDistrict,
                     to_ward_id: getWard,
                     height: "100",
                     length: "100",
-                    width:"100",
-                    weight:"100",
+                    width: "100",
+                    weight: "100",
                     token: token
                 }
-                axios.post(url,body).then(response => {
+                axios.post(url, body).then(response => {
                     const idT = response.data.Transport.id;
                     $.ajax({
                         type: 'post',
@@ -497,8 +509,14 @@
                             notice: notice
                         },
                         success: function (data) {
-                            window.location.href="./my-orders.jsp"
-                            alert(data)
+                            if (data.length > 0){
+                                window.location.href = "./my-orders.jsp"
+                                alert("Đã đặt hàng thành công! Mã đơn hàng của bạn là " + data)
+                            } else {
+                                window.location.href = "./shoping-cart.jsp"
+                                alert("Số lượng tồn kho của sản phẩm không đáp ứng đủ!")
+                            }
+
                         }
                     })
                 })
@@ -522,7 +540,7 @@
 
     var callProvince = (access_token) => {
         return axios.get(`http://140.238.54.136/api/province?token=${access_token}`).then((response) => {
-            renderDataProvince(response.data.original.data,"province");
+            renderDataProvince(response.data.original.data, "province");
         });
     }
 
@@ -548,7 +566,7 @@
                     provinceID: $("#province").val()
                 }
             }).then((response) => {
-                renderDataDistrict(response.data.original.data,"district");
+                renderDataDistrict(response.data.original.data, "district");
             });
         }
     });
@@ -574,7 +592,7 @@
                     districtID: $("#district").val()
                 }
             }).then((response) => {
-                renderDataWard(response.data.original.data,"ward");
+                renderDataWard(response.data.original.data, "ward");
             });
         }
         var renderDataWard = (array, select) => {
@@ -591,6 +609,7 @@
         document.getElementById("overlayT").classList.add("show");
 
     }
+
     function hideTable() {
         document.getElementById("myTable").style.display = "none";
         document.getElementById("overlayT").classList.remove("show");
@@ -598,16 +617,16 @@
     }
 
     var soNha = document.getElementById("soNha").value;
+
     function validateInput() {
         if ($("#district").val() != "" && $("#province").val() != "" &&
             $("#ward").val() != "" && $("#soNha").val() != "") {
-            document.getElementById("address").value  = $("#soNha").val() + ", " + $("#ward option:selected").text() +
+            document.getElementById("address").value = $("#soNha").val() + ", " + $("#ward option:selected").text() +
                 ", " + $("#district option:selected").text() + ", " +
                 $("#province option:selected").text();
             login();
             hideTable();
-        }
-        else {
+        } else {
             document.getElementById('error').innerHTML = 'Vui lòng chọn đủ thông tin địa chỉ';
         }
     }
@@ -628,6 +647,7 @@
             })
         }
     }
+
     var checkProvince = (token) => {
         const address_info = $("#address").val();
         let addressParts = address_info.split(", ");
@@ -635,8 +655,8 @@
         axios.get(`http://140.238.54.136/api/province?token=${token}`).then(response => {
             var findDistrict = response.data.original.data.find(obj => getprovince.indexOf(obj.ProvinceName) !== -1)
             var provinceid = findDistrict.ProvinceID;
-            checkDistrict(token,provinceid);
-    })
+            checkDistrict(token, provinceid);
+        })
     }
     var checkDistrict = (token, provinceid) => {
         axios.get(`http://140.238.54.136/api/district?token=${token}`, {
@@ -650,7 +670,7 @@
             var findDistrict = response.data.original.data.find(obj => getdistrict.indexOf(obj.DistrictName) !== -1)
             var districtid = findDistrict.DistrictID;
             $("#getDistrict").val(districtid);
-            checkWard(token,districtid);
+            checkWard(token, districtid);
         })
     }
     var checkWard = (token, districtid) => {
@@ -665,25 +685,25 @@
             var findWard = response.data.original.data.find(obj => getward.indexOf(obj.WardName) !== -1)
             var wardid = findWard.WardCode;
             $("#getWard").val(wardid);
-            fee(token,districtid, wardid);
-            time(token,districtid,wardid);
+            fee(token, districtid, wardid);
+            time(token, districtid, wardid);
         })
     }
     var fee = async (token, districtid, wardid) => {
-        var url=`http://140.238.54.136/api/calculateFee`;
-        var body= {
+        var url = `http://140.238.54.136/api/calculateFee`;
+        var body = {
             token: token,
-            from_district_id:DISTRICT,
+            from_district_id: DISTRICT,
             from_ward_id: WARD,
             to_district_id: districtid,
             to_ward_id: wardid,
             height: "100",
             length: "100",
-            width:"100",
-            weight:"100",
+            width: "100",
+            weight: "100",
         }
 
-        axios.post(url,body).then(response => {
+        axios.post(url, body).then(response => {
             var data = response.data.data;
             var service_fee = parseInt(data[0].service_fee);
             let fee = new Intl.NumberFormat('vi-VN', {
@@ -700,19 +720,19 @@
     }
 
     var time = async (token, districtid, wardid) => {
-        var url=`http://140.238.54.136/api/leadTime`;
-        var body= {
+        var url = `http://140.238.54.136/api/leadTime`;
+        var body = {
             token: token,
-            from_district_id:DISTRICT,
+            from_district_id: DISTRICT,
             from_ward_id: WARD,
             to_district_id: districtid,
             to_ward_id: wardid,
             height: "100",
             length: "100",
-            width:"100",
-            weight:"100",
+            width: "100",
+            weight: "100",
         }
-        axios.post(url,body).then(response => {
+        axios.post(url, body).then(response => {
             var data = response.data.data;
             var formattedDate = data[0].formattedDate;
             var date = new Date(formattedDate);

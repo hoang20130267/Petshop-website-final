@@ -251,7 +251,7 @@ public class BlogDAO {
 
     public static void main(String[] args) {
 //        System.out.println(new BlogDAO().test("0","1"));
-        System.out.println(new BlogDAO().get6Blog(0,"-1"));
+        System.out.println(new BlogDAO().getContent(null));
 //        System.out.println(new BlogDAO().allBlog());
     }
 }

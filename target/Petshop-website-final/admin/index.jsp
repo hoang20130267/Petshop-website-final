@@ -4,6 +4,7 @@
 <%@ page import="vn.edu.hcmuaf.fit.beans.Orders" %>
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.text.NumberFormat" %>
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +40,9 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="assets/css/style.css" id="main-style-link">
 </head>
-<% UserAccount user = (UserAccount) session.getAttribute("user"); %>
+<% UserAccount user = (UserAccount) session.getAttribute("user");
+    NumberFormat format = NumberFormat.getInstance(new Locale("vn", "VN"));
+%>
 <%
     //----------------------Kiểm tra thử đăng nhập hay chưa--------------------//
     if (request.getSession().getAttribute("admin") == null) {
@@ -280,10 +283,7 @@
                     <div class="row-table">
                         <div class="col-sm-6 card-body br">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <i class="fa-duotone fa-users" style="--fa-primary-color: #00bfff; --fa-secondary-color: #00bfff;"></i>
-                                </div>
-                                <div class="col-sm-8 text-md-center">
+                                <div class="text-md-center">
                                     <h5><%=totalCustomer%>
                                     </h5>
                                     <span>Khách hàng</span>
@@ -292,19 +292,15 @@
                         </div>
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8 text-md-center">
-                                    <h5><%=totalRevenue%> Đ</h5>
+                                <div class="text-md-center">
+                                    <h5><%=format.format(totalRevenue)%> ₫</h5>
                                     <span>Doanh thu</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 card-body">
                             <div class="row">
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8 text-md-center">
+                                <div class="text-md-center">
                                     <h5><%=totalProduct%>
                                     </h5>
                                     <span>Sản phẩm</span>
@@ -315,9 +311,7 @@
                     <div class="row-table">
                         <div class="col-sm-6 card-body br">
                             <div class="row">
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8 text-md-center">
+                                <div class="text-md-center">
                                     <h5><%=totalProSold%>
                                     </h5>
                                     <span>SP bán ra</span>
@@ -326,9 +320,7 @@
                         </div>
                         <div class="col-sm-6 d-none d-md-table-cell d-lg-table-cell d-xl-table-cell card-body br">
                             <div class="row">
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8 text-md-center">
+                                <div class="text-md-center">
                                     <h5><%=totalOrder%>
                                     </h5>
                                     <span>Đơn hàng</span>
@@ -337,9 +329,7 @@
                         </div>
                         <div class="col-sm-6 card-body">
                             <div class="row">
-                                <div class="col-sm-4">
-                                </div>
-                                <div class="col-sm-8 text-md-center">
+                                <div class="text-md-center">
                                     <h5><%=totalOrderCancel%>
                                     </h5>
                                     <span>Đơn hủy</span>
