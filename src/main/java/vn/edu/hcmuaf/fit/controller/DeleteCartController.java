@@ -25,13 +25,15 @@ public class DeleteCartController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idP = request.getParameter("idP");
         Cart cart = (Cart) request.getSession().getAttribute("cart");
+
+        LogService logService= new LogService();
+        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
+        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã xóa "+new ProductService().getProductDetail(idP)+" khỏi giỏ hàng");
+
         System.out.println(idP);
         cart.getData().remove(idP);
         request.getSession().setAttribute("cart", cart);
         request.getRequestDispatcher("ajax/cart.jsp").forward(request, response);
 
-        LogService logService= new LogService();
-        UserAccount user = (UserAccount) request.getSession().getAttribute("user");
-        logService.createUserLog(user.getId(), "INFOR", "Người dùng "+user.getUsername()+" đã xóa "+new ProductService().getProductDetail(idP)+" khỏi giỏ hàng");
     }
 }
