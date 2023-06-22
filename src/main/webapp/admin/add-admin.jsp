@@ -492,9 +492,6 @@
         let idAdmin = $("#id").val();
         let table = $("#select-table").val();
         let per = $("#select-per").val();
-        console.log(idAdmin)
-        console.log(table)
-        console.log(per)
         if (table === "none" || per === 0) {
             alert("Vui lòng chọn Bảng và Quyền");
         } else {
